@@ -216,7 +216,9 @@
         "additionalProperties": false,
         "required": [
           "display",
-          "what"
+          "what",
+          "source",
+          "url"
         ],
         "properties": {
           "display": {
@@ -239,6 +241,16 @@
           },
           "note_en": {
             "type": "string"
+          },
+          "amount_local": {
+            "type": "string"
+          },
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
           }
         }
       }

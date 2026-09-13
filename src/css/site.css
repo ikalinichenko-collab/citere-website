@@ -632,3 +632,6 @@ details.schema>summary{display:inline-flex}
 .evd .evc{color:var(--false)}
 .evd .evh{color:var(--mislead)}
 @media(max-width:700px){.evd .evbody .sbs{grid-template-columns:1fr}}
+
+/* The external figure in the headline names its source, next to the number. */
+.herofig{max-width:64ch;margin:10px auto 0}
