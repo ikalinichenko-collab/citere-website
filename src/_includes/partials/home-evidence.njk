@@ -15,8 +15,8 @@
 <section>
   <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
     {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
-  <p class="lead">A market is a country and the language people ask in. Where a run exists, the card says
-    what it found; the rest are on the list and not yet measured.</p>
+  <p class="lead">A market is a country and the language people ask in. Where a run exists the card carries
+    what it found; the rest are queued, and say so.</p>
   <div class="grid4">
   {%- for c in monitoredMarkets %}
     {%- if c.url %}
@@ -25,8 +25,10 @@
         {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
       <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
     {%- else %}
-    <div class="cc soon"><div><span class="flag">{{ c.iso | flag }}</span>
-      <h3>{{ c.name }}</h3><div class="stat">{{ c.language | languageName }} &middot; scheduled, not yet measured</div></div></div>
+    <div class="cc {{ c.iso }} queued"><div><span class="ccflag"><span class="flag">{{ c.iso | flag }}</span><span class="ccchip">queued</span></span>
+      <h3>{{ c.name }}</h3><div class="stat">{{ c.queued }} {{ c.queued | plural("claim", "claims") }} queued &middot;
+        {{ c.botCount }} assistants &middot; {{ c.language | languageName }}</div></div>
+      <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></div>
     {%- endif %}
   {%- endfor %}
   </div>
@@ -37,10 +39,23 @@
 <section>
   <div class="shead"><h2>{{ 'section.latestFindings' | t }}</h2>
     <a href="{{ '/registry/' | url }}">All {{ claims | length }} {{ claims | length | plural("claim", "claims") }} &rarr;</a></div>
-  {%- set tableClaims = claims | take(5) %}
-  {%- set tableCaption = "The most recently updated claims" %}
-  {%- set stackTotalOverride = (claims | first).botsTested %}
-  {% include "partials/claims-table.njk" %}
+  <p class="lead">One card per documented falsehood, most recently updated first. The verdict is ours and
+    the evidence behind it is on the claim's own page: which assistants stated it as fact, under which
+    question, in which market, and what they cited while doing it.</p>
+  <div class="grid3">
+  {%- for item in claims | take(6) %}
+    <a class="fcard" href="{{ item.url | loc(lang) | url }}">
+      {%- set motifClaim = item %}{% include "partials/claim-motif.njk" %}
+      <div class="fbody">
+        <span class="badge {{ item.verdict | verdictClass }}">{{ item.verdict | verdictLabel }}</span>
+        <h3>{{ item.titles[lang] | default(item.title_en) }}</h3>
+        <div class="fmeta">{{ clusters[item.cluster].name_en | default(item.cluster) }}
+          {%- if item.tested %} &middot; {{ item.repeatedBy | length }} of {{ item.botsTested }} assistants repeated it
+          {%- else %} &middot; not yet tested{% endif %}</div>
+      </div>
+    </a>
+  {%- endfor %}
+  </div>
 </section>
 {%- endif %}
 

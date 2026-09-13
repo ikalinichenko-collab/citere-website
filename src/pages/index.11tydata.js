@@ -91,7 +91,12 @@ module.exports = {
           url: m && data.navigation.has.countries ? m.url : null,
           claims: m ? m.claims.length : 0,
           answers: m ? m.answers : 0,
-          bots: m ? m.bots.slice(0, 6).map((b) => b.key) : []
+          // A queued market has no measurement to show, so the card carries the
+          // two things that are true about it: how many claims a run would put
+          // to how many assistants.
+          queued: data.runs.latest ? data.runs.latest.claims_count : 0,
+          botCount: (data.metrics.dimensions.chatbots || []).length,
+          bots: m ? m.bots.slice(0, 6).map((b) => b.key) : (data.metrics.dimensions.chatbots || [])
         };
       });
     },

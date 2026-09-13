@@ -285,6 +285,7 @@ const claims = files
       sourcesIdentified,
       chain,
       splice_label: SPLICES[claim.splice] || null,
+      motif: motif(claim.id),
       headline,
       lede,
       tables,
@@ -317,6 +318,34 @@ const claims = files
       status: claimStatus(actions)
     };
   });
+
+// A motif for the claim card: the same lattice the hero draws, seeded by the
+// claim id so each claim gets its own arrangement and always the same one.
+// Inline SVG, drawn from these points - the site ships no image files
+// (CLAUDE.md §2).
+function motif(id) {
+  let seed = 0;
+  for (const ch of String(id)) seed = (seed * 31 + ch.charCodeAt(0)) % 100000;
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  const points = [];
+  for (let col = 0; col < 6; col += 1) {
+    for (let row = 0; row < 3; row += 1) {
+      if (rand() < 0.16) continue;
+      points.push({
+        x: Math.round(26 + col * 62 + (rand() - 0.5) * 24),
+        y: Math.round(26 + row * 38 + (rand() - 0.5) * 20),
+        r: rand() < 0.2 ? 3.6 : 2
+      });
+    }
+  }
+  const links = [];
+  for (let i = 0; i < points.length - 1; i += 1) {
+    if (rand() < 0.78) links.push([i, i + 1]);
+    const j = Math.floor(rand() * points.length);
+    if (j !== i && rand() < 0.42) links.push([i, j]);
+  }
+  return { points, links };
+}
 
 claims.sort((a, b) => (a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : 0));
 

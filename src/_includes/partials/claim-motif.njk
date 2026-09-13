@@ -1,0 +1,9 @@
+{#- The claim card's graphic: the hero's lattice, seeded by the claim id, tinted
+    by the verdict. Inline SVG only - the site ships no image files
+    (CLAUDE.md §2). -#}
+<svg class="motif m-{{ motifClaim.verdict }}" viewBox="0 0 360 128" role="presentation" focusable="false" aria-hidden="true" preserveAspectRatio="none">
+  <g class="mlink">{% for l in motifClaim.motif.links %}<line
+    x1="{{ motifClaim.motif.points[l[0]].x }}" y1="{{ motifClaim.motif.points[l[0]].y }}"
+    x2="{{ motifClaim.motif.points[l[1]].x }}" y2="{{ motifClaim.motif.points[l[1]].y }}"/>{% endfor %}</g>
+  <g class="mdot">{% for p in motifClaim.motif.points %}<circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.r }}"/>{% endfor %}</g>
+</svg>

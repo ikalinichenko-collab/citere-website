@@ -644,3 +644,37 @@ details.schema>summary{display:inline-flex}
 .cc.soon:before,.cc.soon:after{display:none}
 .cc.soon h3{font-size:17px}
 .cc.soon .stat{color:var(--dimmer);opacity:1}
+
+/* Every market gets a ground, including the ones no run has covered. The
+   mockup defined four; these are the rest, in the same family. */
+.cc.gb:before{background:linear-gradient(150deg,#1b2138,#38406b 60%,#5a5f93)}
+.cc.es:before{background:linear-gradient(150deg,#3a2118,#7a4526 60%,#a8683a)}
+.cc.at:before{background:linear-gradient(150deg,#2c1a1c,#6d3a3f 60%,#96575e)}
+.cc.ua:before{background:linear-gradient(150deg,#152436,#2b4a6b 60%,#4a7396)}
+.cc.it:before{background:linear-gradient(150deg,#15291f,#2f5a41 60%,#4f8062)}
+.cc.cz:before{background:linear-gradient(150deg,#1c2030,#3d4360 60%,#606786)}
+.cc.dk:before{background:linear-gradient(150deg,#2a1a1e,#653640 60%,#8d545e)}
+.cc.no:before{background:linear-gradient(150deg,#161f2e,#334159 60%,#556380)}
+.cc.tr:before{background:linear-gradient(150deg,#301a1c,#70373c 60%,#9a555a)}
+/* A queued market is the same card, dimmed, with the state said out loud. */
+.cc.queued:after{background:rgba(12,18,32,.42)}
+.cc.queued .stat{opacity:.8}
+.cc .ccflag{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ccchip{font-size:10.4px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:3px 7px;border-radius:5px;background:rgba(255,255,255,.16);color:#fff}
+.cc.queued .bots-mini{opacity:.65}
+
+/* Latest findings: one card per claim - the motif, the verdict, the topic. */
+.fcard{display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s}
+.fcard:hover{border-color:var(--line2);box-shadow:0 6px 20px rgba(12,18,32,.07)}
+.fcard .motif{display:block;width:100%;height:104px;background:var(--bg);border-bottom:1px solid var(--line)}
+.fcard .motif .mlink line{stroke:currentColor;stroke-width:1;opacity:.34}
+.fcard .motif .mdot circle{fill:currentColor;opacity:.62}
+.motif.m-false{color:var(--false);background:var(--false-bg)}
+.motif.m-misleading{color:var(--mislead);background:var(--mislead-bg)}
+.motif.m-unsupported{color:var(--unsup);background:var(--unsup-bg)}
+.fcard .fbody{padding:14px 16px 16px}
+.fcard h3{margin:9px 0 6px;font-size:15.5px;line-height:1.34;font-weight:650;letter-spacing:-.012em}
+.fcard .fmeta{font-size:12.4px;color:var(--dim)}
+@media(max-width:900px){.grid3{grid-template-columns:1fr}}
