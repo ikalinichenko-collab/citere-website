@@ -45,14 +45,21 @@
   <div class="grid3">
   {%- for item in claims | take(6) %}
     <a class="fcard" href="{{ item.url | loc(lang) | url }}">
-      {%- set motifClaim = item %}{% include "partials/claim-motif.njk" %}
-      <div class="fbody">
-        <span class="badge {{ item.verdict | verdictClass }}">{{ item.verdict | verdictLabel }}</span>
-        <h3>{{ item.titles[lang] | default(item.title_en) }}</h3>
-        <div class="fmeta">{{ clusters[item.cluster].name_en | default(item.cluster) }}
-          {%- if item.tested %} &middot; {{ item.repeatedBy | length }} of {{ item.botsTested }} assistants repeated it
-          {%- else %} &middot; not yet tested{% endif %}</div>
+      <div class="fhead"><span class="badge {{ item.verdict | verdictClass }}">{{ item.verdict | verdictLabel }}</span>
+        <span class="fclus">{{ clusters[item.cluster].name_en | default(item.cluster) }}</span></div>
+      <h3>{{ item.titles[lang] | default(item.title_en) }}</h3>
+      {%- if item.canonical_debunk %}
+      <p class="ftruth"><b>What is true.</b> {{ item.canonical_debunk | truncate(150, false, "…") }}</p>
+      {%- endif %}
+      {%- if item.tested %}
+      <div class="fstats">
+        <span><b>{{ item.repeatedBy | length }} of {{ item.botsTested }}</b> assistants stated it as fact</span>
+        <span>{% if item.counts.critical %}<b>{{ item.counts.critical }}</b> {{ item.counts.critical | plural("answer", "answers") }} also cited a listed source{% else %}no answer cited a listed source{% endif %}</span>
+        <span><b>{{ item.markets | length }}</b> {{ item.markets | length | plural("market", "markets") }} tested</span>
       </div>
+      {%- else %}
+      <div class="fstats"><span>Catalogued, not yet put to an assistant</span></div>
+      {%- endif %}
     </a>
   {%- endfor %}
   </div>
