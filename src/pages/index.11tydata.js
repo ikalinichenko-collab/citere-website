@@ -36,32 +36,42 @@ module.exports = {
       }
       return cards;
     },
+    // Three summary facts, each one a question a reader arrives with: where is
+    // it worst, which assistant is worst, and what kind of lie gets through.
+    // Every card is one persona and one run, and says so (CM 5.1).
     rankingCards: (data) => {
       const lb = data.benchmarks.leaderboards || {};
+      const run = `${data.benchmarks.marketName}, ${data.benchmarks.label}`;
       const cards = [];
-      if ((lb.chatbot_repeat || []).length) {
-        cards.push({ rows: lb.chatbot_repeat, title: "Chatbots by repeat-rate", sub: "P2 · topical news",
-          idx: true, bar: true, more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
-          moreLabel: "All chatbots" });
-      }
-      if ((lb.most_repeated_claims || []).length) {
-        cards.push({ rows: lb.most_repeated_claims, title: "Most-repeated claims", sub: "all runs, all personas pooled",
-          idx: true, bar: false, more: "/registry/", moreLabel: "Full registry" });
-      }
-      if ((lb.biggest_change || []).length) {
-        cards.push({ rows: lb.biggest_change, title: "Before / after", sub: "P2 · after we reported",
-          idx: false, bar: false, more: "/methodology/", moreLabel: "How we measure change" });
-      }
-      const contamination = (data.benchmarks.contamination_by_persona || []).map((r) => ({
-        key: r.persona, label: `${r.persona} · ${{ P1: "verification", P2: "topical news", P3: "leading question", P4: "hostile request" }[r.persona]}`,
-        value: r.rate, persona: r.persona
-      }));
-      if (contamination.length) {
-        const max = contamination.reduce((m, r) => Math.max(m, r.value), 0);
+      if ((lb.market_repeat || []).length) {
         cards.push({
-          rows: contamination.map((r) => ({ ...r, width: Math.max(2, Math.round((r.value / max) * 100)) })),
-          title: "Where contamination enters", sub: "by question type",
-          idx: true, bar: true, more: "/methodology/", moreLabel: "Why this matters"
+          rows: lb.market_repeat, flag: true, idx: true, bar: true,
+          title: "Countries where the claims get through",
+          sub: "P2 · news question",
+          note: "Share of answers that stated a documented false claim as fact, each country in its own latest run.",
+          more: data.navigation.has.countries ? "/countries/" : "/benchmarks/",
+          moreLabel: "All countries"
+        });
+      }
+      if ((lb.chatbot_repeat || []).length) {
+        cards.push({
+          rows: lb.chatbot_repeat.map((row) => ({ ...row, chatbot: row.key })), idx: true, bar: true,
+          title: "Assistants that repeat it most often",
+          sub: "P2 · news question",
+          note: `Same questions, same day, put to every assistant. How often each one answered with the false claim — ${run}.`,
+          more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
+          moreLabel: "All assistants"
+        });
+      }
+      if ((lb.splice_repeat || []).length) {
+        cards.push({
+          rows: lb.splice_repeat.map((row) => ({ ...row, label: row.short || row.label })),
+          idx: false, bar: true,
+          title: "The kind of lie that gets through",
+          sub: "P2 · news question",
+          note: `How the false claim is attached to the truth. An invention gets refuted; a real event with one fact changed gets repeated — ${run}.`,
+          more: data.navigation.has.registry ? "/registry/" : "/methodology/",
+          moreLabel: "Claims by type"
         });
       }
       return cards;

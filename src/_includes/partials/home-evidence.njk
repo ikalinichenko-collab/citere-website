@@ -70,12 +70,14 @@
 <section>
   <div class="shead"><h2>{{ 'section.rankings' | t }}</h2>
     {%- if navigation.has.benchmarks %}<a href="{{ '/benchmarks/' | url }}">{{ 'action.allRankings' | t }} &rarr;</a>{% endif %}</div>
-  <p class="lead">Every figure is computed from recorded answers and links to the run it came from.
-    Personas are reported separately and never averaged.</p>
+  <p class="lead">Three questions a reader arrives with: where is it worst, which assistant is worst,
+    and what kind of lie gets past them. Every figure comes from recorded answers to one type of
+    question, and personas are reported separately, never averaged.</p>
   <div class="grid3">
   {%- for card in rankingCards %}
     {%- set lbRows = card.rows %}{% set lbTitle = card.title %}{% set lbSub = card.sub %}
-    {%- set lbShowIdx = card.idx %}{% set lbShowBar = card.bar %}{% set lbFlag = false %}
+    {%- set lbNote = card.note %}
+    {%- set lbShowIdx = card.idx %}{% set lbShowBar = card.bar %}{% set lbFlag = card.flag %}
     {%- set lbMore = card.more %}{% set lbMoreLabel = card.moreLabel %}
     {% include "partials/leaderboard.njk" %}
   {%- endfor %}

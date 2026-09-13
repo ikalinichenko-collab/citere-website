@@ -3,6 +3,7 @@
     measured under, so no rate is rendered without one (CLAUDE.md 10). -#}
 <div class="rank">
   <h3>{{ lbTitle }} <span>{{ lbSub }}</span></h3>
+  {%- if lbNote %}<p class="rnote">{{ lbNote }}</p>{% endif %}
   {%- for row in lbRows | take(5) %}
   <div class="row"{% if row.persona %} data-persona="{{ row.persona }}"{% endif %}>
     {%- if lbShowIdx %}<span class="idx">{{ loop.index }}</span>{% endif %}

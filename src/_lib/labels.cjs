@@ -79,6 +79,15 @@ const SPLICES = {
 };
 const SPLICE_GROUPS = { GT: "claims built on a real event", F: "pure fabrications" };
 
+// The same four in the words a reader who has never seen the vocabulary would
+// use. For summary cards, where there is no room for a definition.
+const SPLICE_SHORT = {
+  A: "one fact swapped out",
+  B: "true fact, false conclusion",
+  C: "true once, told as current",
+  D: "invented from nothing"
+};
+
 // How to say a splice in a sentence, for the generated lede and the "why the
 // fake works" line (Claim Report Spec, Layer 2).
 const SPLICE_LEDE = {
@@ -194,7 +203,7 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 module.exports = {
   VERDICTS, BEHAVIOURS, STATUSES, ACTION_TYPES, NETWORKS, NETWORK_NAMES, NETWORK_CLASS,
   CHATBOTS, PERSONAS, MONTHS,
-  LAYER_A, TIERS, TIER_NOTES, SPLICES, SPLICE_GROUPS, SPLICE_LEDE, LAYER_B, WATCHLIST_CATEGORIES, CLAIM_STATUSES,
+  LAYER_A, TIERS, TIER_NOTES, SPLICES, SPLICE_GROUPS, SPLICE_SHORT, SPLICE_LEDE, LAYER_B, WATCHLIST_CATEGORIES, CLAIM_STATUSES,
   COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES, COUNTERMEASURE_LADDER,
   COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS
 };

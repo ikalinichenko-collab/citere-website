@@ -6,7 +6,7 @@
 // The Benchmarks page itself is not yet specified (CLAUDE_CODE_BRIEF §4). What
 // exists here is the shell plus the two things the brief says it will absorb:
 // the grain-of-truth split and the coverage matrix.
-const { CHATBOTS, MONTHS } = require("../_lib/labels.cjs");
+const { CHATBOTS, MONTHS, SPLICES, SPLICE_SHORT } = require("../_lib/labels.cjs");
 const clusters = require("./clusters.js");
 const metrics = require("./metrics.js");
 const runs = require("./runs.js");
@@ -78,6 +78,28 @@ const leaderboards = {
     .map((r) => ({ key: r.value, label: r.value, value: r.counts.repeat, n: r.n }))
     .sort((a, b) => b.value - a.value).slice(0, 6), null)
 };
+
+// Markets set side by side at one question type. Comparing markets is allowed;
+// merging them is not, and each row is its own market's current run.
+leaderboards.market_repeat = board(
+  Object.values(runs.current || {})
+    .map((run) => {
+      const cell = metrics.poolOf({ run: run.key, persona: PERSONA, is_live: false });
+      return cell.repeat_rate && { key: run.country, label: safeRegion(run.country),
+        value: cell.repeat_rate.rate, n: cell.repeat_rate.n, ci: cell.repeat_rate.ci,
+        low_n: cell.repeat_rate.low_n };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.value - a.value), PERSONA);
+
+// How the lie is attached to the truth (Entity Model Part II). This is the
+// split that separates a fabrication from a distorted real event.
+leaderboards.splice_repeat = board(
+  metrics.group({ ...where, persona: PERSONA }, "splice")
+    .filter((r) => r.value && r.repeat_rate)
+    .map((r) => ({ key: r.value, label: `${r.value} — ${SPLICES[r.value]}`,
+                   short: `${r.value} · ${SPLICE_SHORT[r.value]}`,
+                   value: r.repeat_rate.rate, n: r.repeat_rate.n })), PERSONA);
 
 const heatmapRows = (metrics.dimensions.chatbots || []).map((chatbot) => ({
   chatbot,
