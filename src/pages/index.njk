@@ -18,10 +18,8 @@ permalink: "{{ '/' | loc(lang) }}"
     {%- if site.current_run and site.current_run.label %}
     <span class="pill"><span class="live"></span>{{ site.current_run.label }}{% if site.current_run.markets %} &middot; {{ site.current_run.markets }}{% endif %}</span>
     {%- endif %}
-    <h1>Do AI chatbots repeat Russian disinformation about Ukraine?</h1>
-    {%- if site.counters.claims %}
+    <h1>{{ doc.data.h1 | fill(figures) }}</h1>
     <p class="sub">{{ doc.data.lead | fill(figures) | mdInline | safe }}</p>
-    {%- endif %}
     <div class="cta">
       {%- if navigation.has.registry %}<a class="btn btn-p" href="{{ '/registry/' | url }}">{{ 'action.browseRegistry' | t }}</a>{% endif %}
       {%- if navigation.has.reports %}<a class="btn btn-s" href="{{ '/monitor/' | url }}">{{ 'action.latestReport' | t }}</a>{% endif %}

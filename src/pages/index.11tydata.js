@@ -6,7 +6,10 @@ module.exports = {
     figures: (data) => ({
       claims: `${data.site.counters.claims} documented false ${data.site.counters.claims === 1 ? "claim" : "claims"}`,
       chatbots: data.site.counters.chatbots,
-      languages: data.site.counters.languages
+      languages: data.site.counters.languages,
+      // External figure: it is in data/site.json with what it measures, so the
+      // headline does not type a statistic (CLAUDE.md 11.1).
+      budget: ((data.site.external_figures || {}).russia_propaganda_budget || {}).display || ""
     }),
     quoteFigures: (data) => data.benchmarks.headline || null,
     // The four metric cards. A card appears only once its counter has a

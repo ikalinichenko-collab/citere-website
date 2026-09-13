@@ -1,8 +1,9 @@
 ---
+h1: We detect, attribute and remediate Russia's {{ budget }} propaganda.
 lead: >
-  **Sometimes — and we measure exactly when.** We track {{ claims }} across
-  {{ chatbots }} public AI assistants in {{ languages }} languages, report every case to the platform,
-  and re-measure four weeks later.
+  Citere protects enterprises and governments from Russian narrative attacks inside every major LLM by
+  detecting when a model repeats a Kremlin narrative, attributing it to the network that seeded it, and
+  remediating it.
 ---
 
 ## The audience is the model {#band}

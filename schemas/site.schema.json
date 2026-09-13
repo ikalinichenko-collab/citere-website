@@ -207,6 +207,41 @@
     },
     "judge_version": {
       "type": "string"
+    },
+    "external_figures": {
+      "type": "object",
+      "description": "Figures Citere did not measure. Each carries what it is and where it came from; a template never types one.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "display",
+          "what"
+        ],
+        "properties": {
+          "display": {
+            "type": "string"
+          },
+          "what": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "note_en": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
