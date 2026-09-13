@@ -6,11 +6,13 @@ lead: >
   remediating it.
 ---
 
-## The audience is the model {#band}
+## This is our country they are answering about {#band}
 
-Russian influence networks no longer write only for people. The Pravda network alone publishes millions of articles a year across hundreds of near-empty websites in dozens of languages. Almost nobody reads them. They exist to be indexed, retrieved and quoted by AI systems.
+Russia does not only bomb us. It writes. The Pravda network alone publishes millions of articles a year across hundreds of near-empty websites in dozens of languages. Almost nobody reads them. They were never written for people. They were written to be indexed, retrieved and quoted by machines.
 
-When a chatbot answers a question about Ukraine it often searches the live web first. If a watchlisted site is in the results, the false claim can surface in the answer — in the calm, neutral voice people trust. That answer has no share button, no feed and no moderator.
+It works. Ask a chatbot about Ukraine and it often searches the live web first. If a listed site sits in those results, the false claim comes back in a calm, neutral voice — the voice people now trust more than any newspaper. A civil servant in Berlin, a student in Lyon, a donor in Ohio: same question, same lie. There is no share button to report, no feed to correct, no moderator to appeal to.
+
+We are Ukrainians, and this is our country being described to the world by a machine. So we do the only thing that works against a lie: we prove it is one. Which assistant said it, in which language, on which day, and which site it cited. We send that to the platforms and publish every line of it here, for anyone to check or contradict. Each claim we get corrected is one fewer answer that turns a Russian talking point into a fact about our home.
 
 ## Detect {#step-detect}
 
