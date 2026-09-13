@@ -186,7 +186,7 @@ for (const cluster of metrics.dimensions.clusters || []) {
 module.exports = {
   label, marketName, reference, personas, issues,
   responses: pooled.n,
-  stripCaption: `${PERSONA} · news-style · ${marketName}, ${label}`,
+  stripCaption: `news question (${PERSONA}) · ${marketName}, ${label}`,
   headline: headlineGrain && {
     run_label: `${marketName}, ${label}`,
     persona: PERSONA,

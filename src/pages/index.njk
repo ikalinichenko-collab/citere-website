@@ -53,6 +53,8 @@ permalink: "{{ '/' | loc(lang) }}"
 
 <section>
   <div class="shead"><h2>{{ 'section.howItWorks' | t }}</h2><a href="{{ '/methodology/' | url }}">Methodology &rarr;</a></div>
+  <p class="lead">Six steps, from the first question we put to an assistant to the re-measurement four
+    weeks later.</p>
   <div class="steps">
   {%- for step in ['detect','trace','publish','report','confirm','remeasure'] %}
     <div class="st"><div class="i">{{ loop.index }}</div>
@@ -64,6 +66,8 @@ permalink: "{{ '/' | loc(lang) }}"
 
 <section>
   <div class="shead"><h2>{{ 'section.whyTrust' | t }}</h2></div>
+  <p class="lead">Every figure here traces back to the answer it came from. Every statement about a
+    platform traces back to the message we sent it, and the reply.</p>
   <div class="grid4">
   {%- for item in trustCards %}
     <div class="t"><h3>{{ doc.sections[item.key].title }}</h3>

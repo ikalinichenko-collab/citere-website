@@ -1,6 +1,6 @@
 {%- from "partials/bot-mark.njk" import botMark -%}
 <div class="strip">
-  <p class="cap">Assistants we test &middot; repeat-rate, {{ benchmarks.stripCaption }}</p>
+  <p class="cap">How often each assistant stated a false claim as fact &middot; {{ benchmarks.stripCaption }}</p>
   <div class="bots">
   {%- for row in benchmarks.strip %}
     <a class="bot" href="{{ (('/platforms/' + row.key + '/') if navigation.has.chatbots else '/benchmarks/') | url }}" data-persona="{{ row.persona }}">

@@ -15,14 +15,20 @@
 <section>
   <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
     {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
-  <p class="lead">A market is a country and the language people ask in. Where a run exists the card carries
-    what it found; the rest are queued, and say so.</p>
+  <p class="lead">A market is a country plus the language people ask in, so we ask in that language.
+    Of the {{ marketCounts.total }} on the list, {{ marketCounts.measured }} have a completed run and carry
+    what it found; {{ marketCounts.queued }} are queued and say so. Austria and Germany are separate markets
+    that share a language.</p>
   <div class="grid4">
   {%- for c in monitoredMarkets %}
     {%- if c.url %}
     <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><span class="flag">{{ c.iso | flag }}</span>
       <h3>{{ c.name }}</h3><div class="stat">{{ c.claims }} {{ c.claims | plural("claim", "claims") }} &middot;
         {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
+      {%- if c.rate is not none %}
+      <div class="ccrate" data-persona="{{ c.ratePersona }}"><b class="num">{{ c.rate | rate }}</b>
+        <span>of news answers repeated a claim</span></div>
+      {%- endif %}
       <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
     {%- else %}
     <div class="cc {{ c.iso }} queued"><div><span class="ccflag"><span class="flag">{{ c.iso | flag }}</span><span class="ccchip">queued</span></span>
@@ -39,9 +45,9 @@
 <section>
   <div class="shead"><h2>{{ 'section.latestFindings' | t }}</h2>
     <a href="{{ '/registry/' | url }}">All {{ claims | length }} {{ claims | length | plural("claim", "claims") }} &rarr;</a></div>
-  <p class="lead">One card per documented falsehood, most recently updated first. The verdict is ours and
-    the evidence behind it is on the claim's own page: which assistants stated it as fact, under which
-    question, in which market, and what they cited while doing it.</p>
+  <p class="lead">The claims we documented most recently. Each card carries our verdict, what is
+    actually true underneath, and how many assistants stated it as fact anyway. Open one for the
+    answers themselves: the question asked, the market, and what the assistant cited.</p>
   <div class="grid3">
   {%- for item in claims | take(6) %}
     <a class="fcard" href="{{ item.url | loc(lang) | url }}">
@@ -70,9 +76,9 @@
 <section>
   <div class="shead"><h2>{{ 'section.rankings' | t }}</h2>
     {%- if navigation.has.benchmarks %}<a href="{{ '/benchmarks/' | url }}">{{ 'action.allRankings' | t }} &rarr;</a>{% endif %}</div>
-  <p class="lead">Three questions a reader arrives with: where is it worst, which assistant is worst,
-    and what kind of lie gets past them. Every figure comes from recorded answers to one type of
-    question, and personas are reported separately, never averaged.</p>
+  <p class="lead">One run, read three ways: by country, by assistant, and by the kind of lie.
+    Every figure is the share of answers that stated a false claim as fact, for one type of question.
+    Question types are reported separately and never averaged together.</p>
   <div class="grid3">
   {%- for card in rankingCards %}
     {%- set lbRows = card.rows %}{% set lbTitle = card.title %}{% set lbSub = card.sub %}

@@ -20,19 +20,19 @@ module.exports = {
       const cards = [];
       if (c.claims) {
         cards.push({ value: c.claims, label: `false ${c.claims === 1 ? "claim" : "claims"} documented`,
-          sub: `${c.clusters} ${c.clusters === 1 ? "cluster" : "clusters"}` });
+          sub: `across ${c.clusters} ${c.clusters === 1 ? "topic" : "topics"}` });
       }
       if (b.responses || c.responses) {
-        cards.push({ value: b.responses || c.responses, label: "chatbot answers analysed",
-          sub: `${c.chatbots} assistants · ${c.personas} personas` });
+        cards.push({ value: b.responses || c.responses, label: "answers recorded and checked",
+          sub: `${c.chatbots} assistants · ${c.personas} ways of asking` });
       }
       if (c.domains) {
-        cards.push({ value: c.domains, label: "watchlisted domains cited",
+        cards.push({ value: c.domains, label: "watchlisted sites the answers cited",
           sub: `watchlist ${data.site.watchlist_version}` });
       }
       if (c.countermeasures_sent) {
-        cards.push({ value: c.countermeasures_sent, label: "reports sent to platforms",
-          sub: `${c.countermeasures_answered} answered · ${c.countermeasures_actioned} actioned` });
+        cards.push({ value: c.countermeasures_sent, label: "reports sent to the platforms",
+          sub: `${c.countermeasures_answered} answered · ${c.countermeasures_actioned} acted on` });
       }
       return cards;
     },
@@ -47,8 +47,8 @@ module.exports = {
         cards.push({
           rows: lb.market_repeat, flag: true, idx: true, bar: true,
           title: "Countries where the claims get through",
-          sub: "P2 · news question",
-          note: "Share of answers that stated a documented false claim as fact, each country in its own latest run.",
+          sub: "news question (P2)",
+          note: "Share of answers that stated a false claim as fact. The same claims everywhere, asked in each country\u2019s own language.",
           more: data.navigation.has.countries ? "/countries/" : "/benchmarks/",
           moreLabel: "All countries"
         });
@@ -57,7 +57,7 @@ module.exports = {
         cards.push({
           rows: lb.chatbot_repeat.map((row) => ({ ...row, chatbot: row.key })), idx: true, bar: true,
           title: "Assistants that repeat it most often",
-          sub: "P2 · news question",
+          sub: "news question (P2)",
           note: `Same questions, same day, put to every assistant. How often each one answered with the false claim — ${run}.`,
           more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
           moreLabel: "All assistants"
@@ -67,8 +67,8 @@ module.exports = {
         cards.push({
           rows: lb.splice_repeat.map((row) => ({ ...row, label: row.short || row.label })),
           idx: false, bar: true,
-          title: "The kind of lie that gets through",
-          sub: "P2 · news question",
+          title: "The kind of lie that works best",
+          sub: "news question (P2)",
           note: `How the false claim is attached to the truth. An invention gets refuted; a real event with one fact changed gets repeated — ${run}.`,
           more: data.navigation.has.registry ? "/registry/" : "/methodology/",
           moreLabel: "Claims by type"
@@ -89,13 +89,23 @@ module.exports = {
       // the map is walked by key and every value is coerced before use.
       const measured = new Map();
       for (const c of data.profiles.countries) measured.set(String(c.key), c);
+      // The figure a reader actually wants on a market card, from the board
+      // that already computed it inside one persona and one run.
+      const rates = new Map();
+      const board = (data.benchmarks.leaderboards || {}).market_repeat || [];
+      for (let i = 0; i < board.length; i += 1) {
+        rates.set(String(board[i].key), { rate: board[i].value, persona: String(board[i].persona) });
+      }
       return Object.keys(data.countries).map((key) => {
         const iso = String(key);
         const meta = data.countries[iso];
         const m = measured.get(iso);
+        const measuredRate = rates.get(iso) || null;
         return {
           iso,
           name: String(meta.name),
+          rate: measuredRate && measuredRate.rate,
+          ratePersona: measuredRate && measuredRate.persona,
           language: String(meta.language),
           scheduled: !m,
           url: m && data.navigation.has.countries ? m.url : null,
@@ -109,6 +119,13 @@ module.exports = {
           bots: m ? m.bots.slice(0, 6).map((b) => b.key) : (data.metrics.dimensions.chatbots || [])
         };
       });
+    },
+    // The two counts the markets lead needs, so the sentence carries numbers
+    // without a template typing one (CLAUDE.md 11.1).
+    marketCounts: (data) => {
+      const rows = data.monitoredMarkets || [];
+      const measured = rows.filter((r) => !r.scheduled).length;
+      return { total: rows.length, measured, queued: rows.length - measured };
     },
     trustCards: (data) => [
       { key: "trust-method", href: "/methodology/", label: "Methodology", on: data.navigation.has.methodology },
