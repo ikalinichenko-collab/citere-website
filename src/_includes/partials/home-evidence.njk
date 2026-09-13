@@ -11,6 +11,28 @@
 {% include "partials/metric-cards.njk" %}
 {%- endif %}
 
+{%- if monitoredMarkets | length %}
+<section>
+  <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
+    {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
+  <p class="lead">A market is a country and the language people ask in. Where a run exists, the card says
+    what it found; the rest are on the list and not yet measured.</p>
+  <div class="grid4">
+  {%- for c in monitoredMarkets %}
+    {%- if c.url %}
+    <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><span class="flag">{{ c.iso | flag }}</span>
+      <h3>{{ c.name }}</h3><div class="stat">{{ c.claims }} {{ c.claims | plural("claim", "claims") }} &middot;
+        {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
+      <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
+    {%- else %}
+    <div class="cc soon"><div><span class="flag">{{ c.iso | flag }}</span>
+      <h3>{{ c.name }}</h3><div class="stat">{{ c.language | languageName }} &middot; scheduled, not yet measured</div></div></div>
+    {%- endif %}
+  {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
 {%- if claims | length %}
 <section>
   <div class="shead"><h2>{{ 'section.latestFindings' | t }}</h2>
@@ -36,21 +58,5 @@
     {% include "partials/leaderboard.njk" %}
   {%- endfor %}
   </div>
-</section>
-{%- endif %}
-
-{%- if countryCards | length %}
-<section>
-  <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
-    {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
-  {%- if countryCards | length %}
-  <div class="grid4">
-  {%- for c in countryCards %}
-    <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><div class="rank-n">#{{ loop.index }} by repeat-rate</div><span class="flag">{{ c.iso | flag }}</span>
-      <h3>{{ c.name }}</h3><div class="stat">{{ c.claims }} {{ c.claims | plural("claim", "claims") }} &middot; {{ c.answers }} answers &middot; {{ c.languages | languageName }}</div></div>
-      <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
-  {%- endfor %}
-  </div>
-  {%- endif %}
 </section>
 {%- endif %}

@@ -166,6 +166,22 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 {%- endfor %}
 </div>
 
+{%- if profiles.scheduled | length %}
+<h2 style="margin:30px 0 4px">On the list, not yet measured</h2>
+<p class="note" style="margin:0 0 14px">Markets we monitor but have not put a run through. They have no
+  page yet, because there would be nothing on it.</p>
+<div class="panel"><table>
+  <caption class="visually-hidden">Markets scheduled for a run</caption>
+  <thead><tr><th scope="col">Market</th><th scope="col">Language</th><th scope="col">Status</th></tr></thead>
+  <tbody>
+  {%- for row in profiles.scheduled %}
+    <tr><th scope="row" style="font-weight:400">{{ row.iso | flag }} {{ row.name }}</th>
+      <td style="color:var(--dim)">{{ row.language | languageName }}</td>
+      <td style="color:var(--dimmer)">scheduled</td></tr>
+  {%- endfor %}
+  </tbody></table></div>
+{%- endif %}
+
 <div class="exports" style="margin:18px 0 44px">
   <a href="{{ '/countries/full/' | url }}">The full analytical view</a>
   {%- if datasets.has['registry-csv'] %}<span>&middot;</span><a href="{{ '/registry.csv' | url }}">{{ 'action.downloadCsv' | t }}</a>{% endif %}

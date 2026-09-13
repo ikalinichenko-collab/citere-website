@@ -144,6 +144,7 @@ const countries = marketKeys.map((market) => {
     // score for the country (Countries Index Business Logic §2).
     confirmed: bots.filter((b) => b.repeat_rate.ci && b.repeat_rate.ci[0] > 0 && !b.repeat_rate.low_n).length,
     critical: metrics.poolOf({ run: info.run.key, is_live: false }).tiers.critical,
+    answers: metrics.poolOf({ run: info.run.key, is_live: false }).n,
     bots,
     worst: bots[0] || null,
     claims: claims.filter((c) => c.markets.includes(market))
@@ -216,8 +217,14 @@ const grain = countries.map((country) => ({
   ...(metrics.grainDifferential({ run: country.run.key, persona: HEADLINE, is_live: false }) || {})
 })).filter((row) => row.grain && row.fabrication);
 
+// Markets on the monitoring list that no run has covered. They have no page:
+// there would be nothing on it.
+const scheduled = Object.entries(countriesData)
+  .filter(([iso, meta]) => meta.status === "scheduled" && !marketKeys.some((m) => m.startsWith(`${iso}-`)))
+  .map(([iso, meta]) => ({ iso, name: meta.name, language: meta.language }));
+
 module.exports = {
-  chatbots, countries, matrix, persona: HEADLINE,
+  chatbots, countries, matrix, persona: HEADLINE, scheduled,
   headlineGap, perBot, langPairs, silence, grain,
   localMirrors: sources.filter((s) => s.markets.length === 1 && s.citedCount),
   criticalTotal: countries.reduce((n, c) => n + c.critical, 0)

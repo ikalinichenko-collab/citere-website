@@ -70,16 +70,31 @@ module.exports = {
     // Benchmarks. It is not navigation, so the homepage no longer offers it as
     // a section (CLAUDE_CODE_BRIEF §1 "Remove entirely").
     // The four market cards, straight from the country profiles.
-    countryCards: (data) =>
-      (data.navigation.has.countries ? data.profiles.countries : []).slice(0, 4).map((c) => ({
-        iso: c.key,
-        name: c.name,
-        url: c.url,
-        claims: c.claims.length,
-        answers: c.n,
-        languages: c.language,
-        bots: c.bots
-      })),
+    // Every market on the monitoring list, in the order data/countries.json
+    // sets. A measured market shows what the run found and links to its page;
+    // a scheduled one says so and links nowhere, because there is no page to
+    // link to yet.
+    monitoredMarkets: (data) => {
+      // Values reach eleventyComputed proxy-wrapped for dependency tracking, so
+      // the map is walked by key and every value is coerced before use.
+      const measured = new Map();
+      for (const c of data.profiles.countries) measured.set(String(c.key), c);
+      return Object.keys(data.countries).map((key) => {
+        const iso = String(key);
+        const meta = data.countries[iso];
+        const m = measured.get(iso);
+        return {
+          iso,
+          name: String(meta.name),
+          language: String(meta.language),
+          scheduled: !m,
+          url: m && data.navigation.has.countries ? m.url : null,
+          claims: m ? m.claims.length : 0,
+          answers: m ? m.answers : 0,
+          bots: m ? m.bots.slice(0, 6).map((b) => b.key) : []
+        };
+      });
+    },
     trustCards: (data) => [
       { key: "trust-method", href: "/methodology/", label: "Methodology", on: data.navigation.has.methodology },
       { key: "trust-data", href: "/data/", label: "Data", on: data.navigation.has.data },

@@ -818,10 +818,26 @@ dump("sources.json", {
     } for domain, network, lang, label, first_seen, note in WATCHLIST],
 })
 
-dump("countries.json", {"demo": True, "countries": {
-    country: {"name": name, "language": language, "partners": partners, "note_en": note}
-    for country, language, name, weight, partners, note in MARKETS
-}})
+# Markets on the monitoring list that no run has covered yet. They appear on the
+# site as scheduled and have no page, because there is nothing to put on one.
+SCHEDULED_MARKETS = [
+    ("gb", "en", "United Kingdom"), ("pl", "pl", "Poland"), ("es", "es", "Spain"),
+    ("it", "it", "Italy"), ("cz", "cs", "Czechia"), ("dk", "da", "Denmark"),
+    ("no", "no", "Norway"), ("tr", "tr", "Turkey"),
+]
+ORDER = ["us", "de", "gb", "fr", "pl", "es", "at", "ua", "it", "cz", "dk", "no", "tr"]
+measured = {c: (n, l, p, note) for c, l, n, w, p, note in MARKETS}
+scheduled = {c: (n, l) for c, l, n in SCHEDULED_MARKETS}
+countries = {}
+for iso in ORDER:
+    if iso in measured:
+        name, language, partners, note = measured[iso]
+        countries[iso] = {"name": name, "language": language, "status": "measured",
+                          "partners": partners, "note_en": note}
+    else:
+        name, language = scheduled[iso]
+        countries[iso] = {"name": name, "language": language, "status": "scheduled", "partners": []}
+dump("countries.json", {"demo": True, "countries": countries})
 
 dump("platforms.json", {"demo": True, "platforms": {
     key: {"name": name, "company": company, "initials": initials,

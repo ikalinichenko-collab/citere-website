@@ -18,7 +18,8 @@
         "type": "object",
         "required": [
           "name",
-          "language"
+          "language",
+          "status"
         ],
         "additionalProperties": false,
         "properties": {
@@ -40,6 +41,13 @@
           },
           "note_uk": {
             "type": "string"
+          },
+          "status": {
+            "enum": [
+              "measured",
+              "scheduled"
+            ],
+            "description": "measured: a run exists and the market has its own page. scheduled: on the monitoring list, not yet measured."
           }
         }
       }

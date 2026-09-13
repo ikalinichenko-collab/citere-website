@@ -635,3 +635,12 @@ details.schema>summary{display:inline-flex}
 
 /* The external figure in the headline names its source, next to the number. */
 .herofig{max-width:64ch;margin:10px auto 0}
+
+/* Market cards beyond the four the mockup styled: a default ground for a
+   measured market, and a flat card for one that is on the list but has no run
+   behind it yet. */
+.cc:before{background:linear-gradient(150deg,#1d2430,#39424f 60%,#59636f)}
+.cc.soon{color:var(--ink);background:var(--card);border:1px solid var(--line);min-height:auto;padding:16px 18px}
+.cc.soon:before,.cc.soon:after{display:none}
+.cc.soon h3{font-size:17px}
+.cc.soon .stat{color:var(--dimmer);opacity:1}

@@ -4,6 +4,7 @@
     "us": {
       "name": "United States",
       "language": "en",
+      "status": "measured",
       "partners": [
         "EU DisinfoLab",
         "NewsGuard"
@@ -13,15 +14,44 @@
     "de": {
       "name": "Germany",
       "language": "de",
+      "status": "measured",
       "partners": [
         "Correctiv",
         "EUvsDisinfo"
       ],
       "note_en": "Worst market in the cluster, and the one with its own German-language mirror."
     },
+    "gb": {
+      "name": "United Kingdom",
+      "language": "en",
+      "status": "scheduled",
+      "partners": []
+    },
+    "fr": {
+      "name": "France",
+      "language": "fr",
+      "status": "measured",
+      "partners": [
+        "Viginum"
+      ],
+      "note_en": "French-language mirror active, but citation volume is lower than in German."
+    },
+    "pl": {
+      "name": "Poland",
+      "language": "pl",
+      "status": "scheduled",
+      "partners": []
+    },
+    "es": {
+      "name": "Spain",
+      "language": "es",
+      "status": "scheduled",
+      "partners": []
+    },
     "at": {
       "name": "Austria",
       "language": "de",
+      "status": "measured",
       "partners": [
         "APA-Faktencheck"
       ],
@@ -30,19 +60,42 @@
     "ua": {
       "name": "Ukraine",
       "language": "uk",
+      "status": "measured",
       "partners": [
         "Centre for Countering Disinformation (RNBO)",
         "VoxCheck"
       ],
       "note_en": "Cleanest market in the cluster; local coverage of the underlying cases is dense."
     },
-    "fr": {
-      "name": "France",
-      "language": "fr",
-      "partners": [
-        "Viginum"
-      ],
-      "note_en": "French-language mirror active, but citation volume is lower than in German."
+    "it": {
+      "name": "Italy",
+      "language": "it",
+      "status": "scheduled",
+      "partners": []
+    },
+    "cz": {
+      "name": "Czechia",
+      "language": "cs",
+      "status": "scheduled",
+      "partners": []
+    },
+    "dk": {
+      "name": "Denmark",
+      "language": "da",
+      "status": "scheduled",
+      "partners": []
+    },
+    "no": {
+      "name": "Norway",
+      "language": "no",
+      "status": "scheduled",
+      "partners": []
+    },
+    "tr": {
+      "name": "Turkey",
+      "language": "tr",
+      "status": "scheduled",
+      "partners": []
     }
   }
 }
