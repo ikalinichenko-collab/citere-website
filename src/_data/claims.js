@@ -11,7 +11,7 @@ const path = require("node:path");
 const { ROOT } = require("../_lib/markdown.cjs");
 const metrics = require("./metrics.js");
 const { normaliseDomain } = require("../_lib/metrics.cjs");
-const { CHATBOTS, SPLICES, SPLICE_LEDE, COUNTERMEASURE_LADDER } = require("../_lib/labels.cjs");
+const { CHATBOTS, SPLICES, SPLICE_LEDE, NETWORK_NAMES, COUNTERMEASURE_LADDER } = require("../_lib/labels.cjs");
 const runs = require("./runs.js");
 const countermeasures = require("./countermeasures.js");
 
@@ -280,6 +280,42 @@ const claims = files
         : clean.length ? `${listOf(clean.map((b) => b.name))} did not repeat it at all.` : ""
     ].filter(Boolean) : [];
 
+    // The brief under the headline: three things a reader wants before any
+    // table — what is actually true, how the claim was pushed, and what the
+    // assistants did with it. Every sentence is built from the record.
+    const fmt = (iso) => {
+      const d = new Date(`${iso}T00:00:00Z`);
+      return `${d.getUTCDate()} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    };
+    const originParts = [];
+    if (claim.origin && claim.origin.first_seen) {
+      originParts.push(`First seen ${fmt(claim.origin.first_seen)}` +
+        (claim.origin.network ? ` on the ${NETWORK_NAMES[claim.origin.network] || claim.origin.network} network` : "") +
+        (distributed.length
+          ? `, then carried by ${distributed.length} ${distributed.length === 1 ? "site" : "sites"} on our watchlist` : "") + ".");
+    }
+    if (sourcesIdentified.injection) {
+      originParts.push(`${sourcesIdentified.injection === distributed.length && distributed.length > 1 ? "All" : sourcesIdentified.injection} of ` +
+        `${sourcesIdentified.injection === distributed.length && distributed.length > 1 ? "them" : "those sites"} ` +
+        `${sourcesIdentified.injection === 1 ? "was" : "were"} later cited by an assistant answering about it.`);
+    }
+    if (claim.origin && (claim.origin.attribution || []).length) {
+      originParts.push(`Attributed by ${listOf(claim.origin.attribution.map((a) => a.org))}.`);
+    }
+    const marketCount = [...new Set(grid.map((c) => c.market))].length;
+    const assistantParts = grid.length ? [
+      headline ? `${headline}.` : "",
+      fromMemory.length && withCritical.length
+        ? `${listOf(fromMemory.map((b) => b.name))} repeated it too, with no source attached.` : "",
+      clean.length ? `${listOf(clean.map((b) => b.name))} did not repeat it.` : "",
+      `In all, ${all.counts.repeat} of ${all.n} answers across ${marketCount} ${marketCount === 1 ? "country" : "countries"} stated it as fact.`
+    ].filter(Boolean) : ["Catalogued, and not yet put to an assistant. The measurement sections appear once it is included in a run."];
+    const brief = {
+      truth: claim.canonical_debunk || null,
+      origin: originParts.join(" ") || null,
+      assistants: assistantParts.join(" ")
+    };
+
     return {
       ...claim,
       raw: claim,
@@ -306,6 +342,7 @@ const claims = files
       lede,
       tables,
       marketSummary,
+      brief,
       cleansing,
       liveCells: cells.filter((c) => c.is_live),
       pooled: all,

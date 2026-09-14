@@ -8,41 +8,43 @@ wrap: wrap-narrow
     come from, what are the numbers, what have we done. -#}
 <div class="claimdoc">
 
-{# ------------------------------------------------------ Layer 1 #}
-<div class="phead">
-  <div class="tiles" style="margin-bottom:12px">
-    <span class="tile">{{ claim.id }}</span>
+{# ------------------------------------------------------ the claim, and the brief #}
+<div class="phead chead">
+  <div class="tiles">
+    <span class="badge {{ claim.verdict | verdictClass }} bigbadge">{{ claim.verdict | verdictLabel }}</span>
     <a class="tile" href="{{ ('/registry/cluster/' + claim.cluster + '/') | url }}">{{ clusters[claim.cluster].name_en | default(claim.cluster) }}</a>
     {%- if claim.splice %}<a class="tile" href="{{ ('/registry/splice/' + claim.splice + '/') | url }}">Splice {{ claim.splice }} &middot; {{ claim.splice_label }}</a>{% endif %}
-    {%- if claim.status_field %}<span class="tile">{{ claim.status_field }}</span>{% endif %}
-    {%- if claim.status %}<span class="tile">{{ claim.status.label }}</span>{% endif %}
   </div>
-  {%- if claim.headline %}
-  <h1 style="font-size:29px;line-height:1.24;max-width:34ch">{{ claim.headline }}</h1>
-  <p class="plead" style="max-width:66ch">{% for sentence in claim.lede %}{{ sentence }} {% endfor %}</p>
-  <p class="note" style="margin-top:2px">The claim, as it circulates:
-    &ldquo;{{ claim.titles[lang] | default(claim.title_en) }}&rdquo;</p>
-  {%- else %}
-  <h1 style="font-size:29px;line-height:1.24;max-width:34ch">&ldquo;{{ claim.titles[lang] | default(claim.title_en) }}&rdquo;</h1>
-  <p class="plead" style="max-width:66ch">Catalogued, and not yet put to any assistant. The verdict and the
-    evidence behind it are below; the measurement sections appear once this claim is included in a run.</p>
+  <h1 class="ctitle">&ldquo;{{ claim.titles[lang] | default(claim.title_en) }}&rdquo;</h1>
+  <p class="cmeta">{{ claim.id }}
+    <span>&middot;</span> Verdict <time datetime="{{ claim.verdict_date | isoDate }}">{{ claim.verdict_date | displayDate }}</time>
+    <span>&middot;</span> Updated <time datetime="{{ claim.updated | isoDate }}">{{ claim.updated | displayDate }}</time>
+    {%- if claim.status_field %} <span>&middot;</span> {{ claim.status_field }}{% endif %}
+    {%- if claim.status %} <span>&middot;</span> {{ claim.status.label }}{% endif %}</p>
+</div>
+
+{#- The brief: what a reader wants before any table. Built from the record in
+    claims.js, never typed here. -#}
+<div class="brief">
+  {%- if claim.brief.truth %}
+  <div class="brow"><div class="blab">What is true</div><p>{{ claim.brief.truth }}</p></div>
   {%- endif %}
-  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;font-size:13px;color:var(--dimmer)">
-    <span class="badge {{ claim.verdict | verdictClass }}" style="font-size:12px;padding:5px 11px">{{ claim.verdict | verdictLabel }}</span>
-    <span>Verdict issued <time datetime="{{ claim.verdict_date | isoDate }}">{{ claim.verdict_date | displayDate }}</time></span><span>&middot;</span>
-    <span>Updated <time datetime="{{ claim.updated | isoDate }}">{{ claim.updated | displayDate }}</time></span></div>
+  {%- if claim.brief.origin %}
+  <div class="brow"><div class="blab">How it was pushed</div><p>{{ claim.brief.origin | defangCopy }}</p></div>
+  {%- endif %}
+  <div class="brow"><div class="blab">What the assistants did</div><p>{{ claim.brief.assistants }}</p></div>
 </div>
 
 {%- if claim.tested %}
-<div class="metrics" style="grid-template-columns:repeat(3,1fr);margin:0 0 26px">
-  <div class="m"><div class="n num">{{ claim.botsTested }}</div><div class="l">assistants tested</div></div>
-  <div class="m"><div class="n num">{{ claim.counts.observations }}</div><div class="l">answers, {{ claim.markets | length }} markets</div></div>
-  <div class="m"><div class="n num">{{ claim.counts.repeated }}</div><div class="l">repeated the claim</div></div>
-  <div class="m"><div class="n num" style="color:var(--false)">{{ claim.counts.critical }}</div><div class="l">critical</div></div>
-  <div class="m"><div class="n num"><a href="#sources-identified" style="color:inherit">{{ claim.sourcesIdentified.traced | length + claim.sourcesIdentified.found | length }}</a></div>
-    <div class="l">disinformation sources identified</div></div>
-  <div class="m"><div class="n num"><a href="#what-we-did" style="color:inherit">{{ claim.counts.actions }}</a></div>
-    <div class="l">countermeasures taken</div></div>
+<div class="metrics cmetrics">
+  <div class="m"><div class="n num">{{ claim.counts.observations }}</div><div class="l">answers recorded</div>
+    <div class="s">{{ claim.botsTested }} assistants &middot; {{ claim.markets | length }} countries</div></div>
+  <div class="m"><div class="n num">{{ claim.counts.repeated }}</div><div class="l">stated it as fact</div>
+    <div class="s">across every question type</div></div>
+  <div class="m"><div class="n num" style="color:var(--false)">{{ claim.counts.critical }}</div><div class="l">critical</div>
+    <div class="s">repeated it and cited a listed source</div></div>
+  <div class="m"><div class="n num"><a href="#what-we-did" style="color:inherit">{{ claim.counts.actions }}</a></div><div class="l">countermeasures taken</div>
+    <div class="s">{{ claim.sourcesIdentified.traced | length + claim.sourcesIdentified.found | length }} sources identified</div></div>
 </div>
 {%- endif %}
 
@@ -63,8 +65,8 @@ wrap: wrap-narrow
 {# ---------------------------------------- 1. why the claim is false #}
 
 {# ------------------------------------------------------ Layer 2 #}
-<h2 id="why-this-is-false" style="margin:0 0 6px">Why this is false</h2>
-<p class="note" style="margin:0 0 14px">What the claim says, what is actually true, and the evidence for
+<h2 id="why-this-is-false">Why this is false</h2>
+<p class="note">What the claim says, what is actually true, and the evidence for
   each point. Everything below this section is about how assistants handled it.</p>
 
 <div class="prose" style="max-width:none">
@@ -135,8 +137,8 @@ wrap: wrap-narrow
 {# ---------------------------------------- 2. what kind of lie it is #}
 
 {%- if claim.splice %}
-<h2 id="kind-of-lie" style="margin:36px 0 6px">The kind of lie: splice {{ claim.splice }} &mdash; {{ claim.splice_label }}</h2>
-<p class="note" style="margin:0 0 14px">Every claim in the registry is classified by how the lie is attached to the truth. This one is splice {{ claim.splice }}, and assistants handle each kind differently: an outright invention usually gets refuted, a real event with one fact changed usually does not.</p>
+<h2 id="kind-of-lie">The kind of lie: splice {{ claim.splice }} &mdash; {{ claim.splice_label }}</h2>
+<p class="note">Every claim in the registry is classified by how the lie is attached to the truth. This one is splice {{ claim.splice }}, and assistants handle each kind differently: an outright invention usually gets refuted, a real event with one fact changed usually does not.</p>
 <div class="panel" style="padding:16px 18px">
   <div class="tiles" style="margin-bottom:10px">
     <a class="tile" href="{{ ('/registry/splice/' + claim.splice + '/') | url }}">Splice {{ claim.splice }} &middot;
@@ -156,8 +158,8 @@ wrap: wrap-narrow
 {# ---------------------------------------- 3. what the assistants did #}
 
 {%- if claim.tested %}
-<h2 id="what-the-chatbots-did" style="margin:36px 0 6px">What the assistants did with it</h2>
-<p class="note" style="margin:0 0 14px">Each assistant's behaviour on this claim in plain terms, worst
+<h2 id="what-the-chatbots-did">What the assistants did with it</h2>
+<p class="note">Each assistant's behaviour on this claim in plain terms, worst
   first. Counts only in this section: the rates, with their intervals, are further down.</p>
 {%- for bot in claim.botBlocks %}
 <div class="panel botblock {% if bot.critical %}b-crit{% elif bot.repeat %}b-rep{% else %}b-clean{% endif %}">
@@ -196,8 +198,8 @@ wrap: wrap-narrow
 {%- endif %}
 
 {%- if claim.incidents | length %}
-<h2 id="evidence" style="margin:36px 0 6px">The answers themselves, one by one</h2>
-<p class="note" style="margin:0 0 6px">Every answer in which an assistant stated the claim as fact:
+<h2 id="evidence">The answers themselves, one by one</h2>
+<p class="note">Every answer in which an assistant stated the claim as fact:
   the question asked, what the assistant said, and what is actually true. Critical first &mdash; those
   are the answers that also cited a listed source. Showing all
   {{ claim.incidentCounts.critical }} critical and
@@ -251,8 +253,8 @@ wrap: wrap-narrow
 {# ---------------------------------------- 4. where, and which assistant #}
 
 {%- if claim.marketSummary | length %}
-<h2 id="by-market" style="margin:36px 0 6px">Where it was repeated &mdash; by country and language</h2>
-<p class="note" style="margin:0 0 14px">The same claim, put to the same assistants in each market, in that market&rsquo;s own language. Counts pool across assistants; the rate beside them is one question type, one market, one run, because that is the only shape a rate can have.</p>
+<h2 id="by-market">Where it was repeated &mdash; by country and language</h2>
+<p class="note">The same claim, put to the same assistants in each market, in that market&rsquo;s own language. Counts pool across assistants; the rate beside them is one question type, one market, one run, because that is the only shape a rate can have.</p>
 <div class="panel"><table class="mkts">
   <caption class="visually-hidden">Answers, repeats and critical incidents on this claim by market</caption>
   <thead><tr><th scope="col">Market</th><th scope="col">Language</th><th scope="col" class="num">Answers</th>
@@ -277,27 +279,27 @@ wrap: wrap-narrow
 {%- endif %}
 
 {%- if claim.tested %}
-<h2 id="results-by-bot" style="margin:36px 0 6px">Which assistant repeated it</h2>
-<p class="note" style="margin:0 0 14px">One row per assistant, one column per question type, inside one market and one run. Cells below n = 20 are greyed: at claim level this says which way a difference points, not that it is established.</p>
+<h2 id="results-by-bot">Which assistant repeated it</h2>
+<p class="note">One row per assistant, one column per question type, inside one market and one run. Cells below n = 20 are greyed: at claim level this says which way a difference points, not that it is established.</p>
 {% include "partials/observations-table.njk" %}
 
 <h3 class="ssub" id="a-b-matrix" style="margin-top:26px">Every answer, by what it did and what it cited</h3>
-<p class="note" style="margin:0 0 14px">Every answer placed by two things at once: what the assistant did
+<p class="note">Every answer placed by two things at once: what the assistant did
   with the claim, and whether it cited a listed source. The top-right cell is the one that matters.</p>
 <div class="panel"><table>
   <caption class="visually-hidden">Answers by what the assistant did and whether it cited a listed source</caption>
   <thead><tr><th scope="col"></th><th scope="col" class="num">Source clean</th><th scope="col" class="num">Listed source cited</th></tr></thead>
   <tbody>
-    <tr><th scope="row">REPEAT</th>
+    <tr><th scope="row">REPEAT <small>stated it as fact</small></th>
       <td class="num"><b style="color:var(--mislead)">HIGH &middot; {{ claim.pooled.abx.repeat.clean }}</b></td>
       <td class="num"><b style="color:var(--false)">CRITICAL &middot; {{ claim.pooled.abx.repeat.listed }}</b></td></tr>
-    <tr><th scope="row">U_context</th>
+    <tr><th scope="row">U_context <small>repeated it, hedged</small></th>
       <td class="num">{{ claim.pooled.abx.u_context.clean }}</td>
       <td class="num"><b>REVIEW &middot; {{ claim.pooled.abx.u_context.listed }}</b></td></tr>
-    <tr><th scope="row">REFUTE</th>
+    <tr><th scope="row">REFUTE <small>corrected it</small></th>
       <td class="num">{{ claim.pooled.abx.refute.clean }}</td>
       <td class="num">LOW &middot; {{ claim.pooled.abx.refute.listed }}</td></tr>
-    <tr><th scope="row">DODGE</th>
+    <tr><th scope="row">DODGE <small>avoided the question</small></th>
       <td class="num">{{ claim.pooled.abx.dodge.clean }}</td>
       <td class="num">{{ claim.pooled.abx.dodge.listed }}</td></tr>
   </tbody></table></div>
@@ -307,34 +309,11 @@ wrap: wrap-narrow
   <b>CRITICAL</b> repeated the claim and cited a listed source. <b>HIGH</b> repeated it from the model's
   own memory, with no listed source. <b>REVIEW</b> hedged, but pulled a listed source into the answer.</p>
 
-{%- if claim.liveComparison | length %}
-<h3 class="ssub" id="live-vs-grid" style="margin-top:26px">A check on our own wording: live questions against our grid</h3>
-<p class="note" style="margin:0 0 14px">A check on our own method: the same claim asked in the words people
-  actually use, set against our designed questions. If the two disagree, our questions are shaping the
-  result. The two are reported side by side and never pooled.</p>
-{%- for block in claim.liveComparison %}
-<div class="panel"><table>
-  <caption class="visually-hidden">Repeat rate on live formulations against the constructed grid, {{ block.run.country | countryName }}</caption>
-  <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th><th scope="col" class="num">Grid ({{ 'P2' }})</th>
-    <th scope="col" class="num">Live</th><th scope="col">Agreement</th></tr></thead>
-  <tbody>
-  {%- for row in block.rows %}
-    <tr data-persona="P2">
-      <th scope="row" style="font-weight:400">{{ row.chatbot | botName }}</th>
-      <td class="num"><span class="cellstat{% if row.grid.low_n %} lown{% endif %}">{{ row.grid.rate | rate }}<small>{{ row.grid.ci | ciLabel }} &middot; n={{ row.grid.n }}</small></span></td>
-      <td class="num"><span class="cellstat{% if row.live.low_n %} lown{% endif %}">{{ row.live.rate | rate }}<small>{{ row.live.ci | ciLabel }} &middot; n={{ row.live.n }}</small></span></td>
-      <td style="color:var(--dim);font-size:12.5px">{% if row.agree and row.agree.significant %}<b style="color:var(--false)">they differ</b>{% else %}agrees directionally &middot; low n{% endif %}</td></tr>
-  {%- endfor %}
-  </tbody></table></div>
-{%- endfor %}
-<p class="note">At these sample sizes the live intervals are wide, so this section can neither confirm nor
-  rule out an artefact of our own wording. It is reported as it stands.</p>
-{%- endif %}
 {%- endif %}
 
 {%- if claim.sourcesIdentified.traced | length or claim.sourcesIdentified.found | length %}
-<h2 id="sources-identified" style="margin:36px 0 6px">Which sites fed it</h2>
-<p class="note" style="margin:0 0 14px">{{ claim.sourcesIdentified.traced | length + claim.sourcesIdentified.found | length }}
+<h2 id="sources-identified">Which sites fed it</h2>
+<p class="note">{{ claim.sourcesIdentified.traced | length + claim.sourcesIdentified.found | length }}
   sources have been identified on this claim: {{ claim.sourcesIdentified.traced | length }} traced from where
   it first appeared, {{ claim.sourcesIdentified.found | length }} found because an assistant cited them while
   answering about it. {{ claim.sourcesIdentified.injection }} did both &mdash; that is the line from a
@@ -378,8 +357,8 @@ wrap: wrap-narrow
 
 {# ---------------------------------------- 5. what we did about it #}
 
-<h2 id="what-we-did" style="margin:36px 0 6px">What we did about it</h2>
-<p class="note" style="margin:0 0 14px">The full ladder &mdash; what has been tried, what it unlocked and
+<h2 id="what-we-did">What we did about it</h2>
+<p class="note">The full ladder &mdash; what has been tried, what it unlocked and
   what is still blocked &mdash; is in this claim's <a href="{{ claim.escalationUrl | url }}">escalation report</a>.</p>
 {%- if claim.countermeasures | length %}
 {% include "partials/actions-table.njk" %}
@@ -389,7 +368,7 @@ wrap: wrap-narrow
 
 {%- if claim.cleansing | length %}
 <h3 class="ssub" id="what-changed">{{ 'claim.whatChanged' | t }}</h3>
-<p class="note" style="margin:0 0 14px">Where a market has been measured twice under the same grid, what
+<p class="note">Where a market has been measured twice under the same grid, what
   the second run found beside the first.</p>
 {% include "partials/before-after-table.njk" %}
 {%- elif claim.tested %}
@@ -402,13 +381,13 @@ wrap: wrap-narrow
 
 {%- if claim.tested %}
 <div class="appx">
-<h2 id="detail" style="margin:36px 0 6px">The record behind this page</h2>
-<p class="note" style="margin:0 0 14px">Everything the page above is built from: the claim card the judge compares answers against, what this page cannot tell you, and how the measurement was made.</p>
+<h2 id="detail">The record behind this page</h2>
+<p class="note">Everything the page above is built from: the claim card the judge compares answers against, what this page cannot tell you, and how the measurement was made.</p>
 {%- endif %}
 
 {%- if claim.tested %}
 <h3 class="ssub" id="claim-card" style="margin-top:26px">The claim card the judge compares answers against</h3>
-<p class="note" style="margin:0 0 14px">The reference record the judge compares every answer against.
+<p class="note">The reference record the judge compares every answer against.
   Rendered from the claim's own entry, unedited.</p>
 <div class="panel" style="padding:16px 18px">
   {%- if claim.false_claim %}
@@ -449,7 +428,7 @@ wrap: wrap-narrow
 
 {%- if claim.limitations %}
 <h3 class="ssub" id="limitations" style="margin-top:26px">What this page cannot tell you</h3>
-<p class="note" style="margin:0 0 14px">Generated from the run itself, not written by hand.</p>
+<p class="note">Generated from the run itself, not written by hand.</p>
 <div class="panel" style="padding:16px 18px">
   <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.7">
     <li><b>Judge validation {{ claim.limitations.judge.status }}.</b> Until agreement between the judge and
@@ -492,15 +471,41 @@ wrap: wrap-narrow
   <p>The repeat rate divides by substantive answers, with refusals removed; the contamination rate and the
     verdict distribution divide by all valid answers. Every share carries a Wilson 95% interval, cells under
     n = {{ metrics.lowN }} are flagged, and no figure is ever aggregated across question types, markets or
-    runs. Versions of the catalog, prompt grid, judge and watchlist are frozen per run and printed at the
-    top of this page.</p>
+    runs. Versions of the catalog, prompt grid, judge and watchlist are frozen per run and printed in the
+    record above.</p>
 </div>
+{%- endif %}
+
+{%- if claim.tested %}
+{%- if claim.liveComparison | length %}
+<h3 class="ssub" id="live-vs-grid" style="margin-top:26px">A check on our own wording: live questions against our grid</h3>
+<p class="note">A check on our own method: the same claim asked in the words people
+  actually use, set against our designed questions. If the two disagree, our questions are shaping the
+  result. The two are reported side by side and never pooled.</p>
+{%- for block in claim.liveComparison %}
+<div class="panel"><table>
+  <caption class="visually-hidden">Repeat rate on live formulations against the constructed grid, {{ block.run.country | countryName }}</caption>
+  <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th><th scope="col" class="num">Grid ({{ 'P2' }})</th>
+    <th scope="col" class="num">Live</th><th scope="col">Agreement</th></tr></thead>
+  <tbody>
+  {%- for row in block.rows %}
+    <tr data-persona="P2">
+      <th scope="row" style="font-weight:400">{{ row.chatbot | botName }}</th>
+      <td class="num"><span class="cellstat{% if row.grid.low_n %} lown{% endif %}">{{ row.grid.rate | rate }}<small>{{ row.grid.ci | ciLabel }} &middot; n={{ row.grid.n }}</small></span></td>
+      <td class="num"><span class="cellstat{% if row.live.low_n %} lown{% endif %}">{{ row.live.rate | rate }}<small>{{ row.live.ci | ciLabel }} &middot; n={{ row.live.n }}</small></span></td>
+      <td style="color:var(--dim);font-size:12.5px">{% if row.agree and row.agree.significant %}<b style="color:var(--false)">they differ</b>{% else %}agrees directionally &middot; low n{% endif %}</td></tr>
+  {%- endfor %}
+  </tbody></table></div>
+{%- endfor %}
+<p class="note">At these sample sizes the live intervals are wide, so this section can neither confirm nor
+  rule out an artefact of our own wording. It is reported as it stands.</p>
+{%- endif %}
 {%- endif %}
 
 {%- if claim.tested %}</div>{% endif %}
 
 {%- if claim.changelog | length %}
-<h2 id="changelog" style="margin:36px 0 12px">{{ 'claim.changelog' | t }}</h2>
+<h2 id="changelog">{{ 'claim.changelog' | t }}</h2>
 <div class="panel"><table>
   <caption class="visually-hidden">What changed on this page, and when</caption>
   <tbody>

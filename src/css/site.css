@@ -700,6 +700,30 @@ details.schema>summary{display:inline-flex}
 .claimdoc .prose p,.claimdoc .prose li{font-size:15px;line-height:1.72;max-width:82ch}
 .claimdoc .prose h3{margin-top:26px}
 
+/* the head: the claim is the title; the brief under it says what is true, how
+   the claim was pushed and what the assistants did, before any table */
+.claimdoc .chead .tiles{margin-bottom:14px;align-items:center}
+.claimdoc .bigbadge{font-size:12px;padding:6px 12px;border-radius:999px}
+.claimdoc .ctitle{font-size:31px;line-height:1.22;letter-spacing:-.028em;max-width:30ch;margin:0 0 10px}
+.claimdoc .cmeta{margin:0;font-size:13px;color:var(--dimmer)}
+.claimdoc .cmeta span{margin:0 4px;color:var(--line2)}
+.claimdoc .brief{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);margin:22px 0 20px}
+.claimdoc .brow{display:grid;grid-template-columns:168px 1fr;gap:14px 22px;padding:16px 20px;
+  border-bottom:1px solid var(--line2)}
+.claimdoc .brow:last-child{border-bottom:0}
+.claimdoc .blab{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dimmer);padding-top:4px}
+.claimdoc .brow p{margin:0;font-size:15px;line-height:1.62;max-width:72ch}
+.claimdoc .cmetrics{margin:0 0 22px}
+.claimdoc .cmetrics .m .s{margin-top:4px}
+@media(max-width:700px){.claimdoc .ctitle{font-size:24px}
+  .claimdoc .brow{grid-template-columns:1fr;gap:6px;padding:14px 16px}.claimdoc .blab{padding-top:0}}
+
+/* section leads and small print, now that the template no longer sets margins inline */
+.claimdoc .note{margin:10px 0 14px}
+.claimdoc h2+.note{margin-top:0}
+
 /* the contents list, as a card rather than a loose row of links */
 .claimdoc .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;
   padding:13px 17px;gap:9px 18px!important;box-shadow:var(--shadow)}
@@ -730,6 +754,9 @@ details.schema>summary{display:inline-flex}
   font-weight:580;color:var(--ink)}
 .claimdoc table.mkts th[scope=row] small{display:block;margin-top:3px;font-size:11px;font-weight:500;
   letter-spacing:.06em;text-transform:uppercase}
+
+.claimdoc th[scope=row] small{display:block;margin-top:3px;font-size:11.4px;font-weight:500;
+  letter-spacing:0;text-transform:none;color:var(--dimmer)}
 
 /* the record behind the page: reference material, set back from the findings */
 .claimdoc .appx{margin-top:50px;padding:4px 26px 26px;background:#eef0f4;border:1px solid var(--line);

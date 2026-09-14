@@ -242,7 +242,7 @@ for (const file of htmlFiles) {
     const reviews = (html.match(/"@type":"ClaimReview"/g) || []).length;
     if (reviews !== 1) err(page, `${reviews} ClaimReview blocks, expected exactly 1`);
 
-    const badge = (html.match(/class="badge b-[fmu]"[^>]*>([^<]+)</) || [])[1];
+    const badge = (html.match(/class="badge b-[fmu](?: [^"]*)?"[^>]*>([^<]+)</) || [])[1];
     const expectedBadge = labels.VERDICTS[claim.verdict];
     if (!badge) err(page, "no verdict badge");
     else if (badge.trim() !== expectedBadge) {
