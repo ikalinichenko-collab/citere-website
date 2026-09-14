@@ -684,3 +684,63 @@ details.schema>summary{display:inline-flex}
   border-top:1px solid var(--line);font-size:12.4px;color:var(--dim)}
 .fcard .fstats b{color:var(--ink);font-variant-numeric:tabular-nums}
 @media(max-width:900px){.grid3{grid-template-columns:1fr}}
+
+/* ---------- the claim report ----------------------------------------------
+   Scoped to .claimdoc: this page is long and dense, so its sections need to
+   read as chapters rather than as one continuous grey column. Nothing here
+   touches any other page. */
+.claimdoc{counter-reset:sec}
+.claimdoc h2{counter-increment:sec;margin:54px 0 8px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:23px;line-height:1.28;letter-spacing:-.022em}
+.claimdoc h2:before{content:counter(sec,decimal-leading-zero);display:block;margin-bottom:8px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--dimmer)}
+.claimdoc h2+.note{margin:0 0 18px;font-size:13.4px;line-height:1.6;color:var(--dim);max-width:80ch}
+.claimdoc h3.ssub{font-size:13.6px;font-weight:660;color:var(--ink);margin:26px 0 10px;letter-spacing:0}
+.claimdoc .panel{margin-bottom:14px}
+.claimdoc .prose p,.claimdoc .prose li{font-size:15px;line-height:1.72;max-width:82ch}
+.claimdoc .prose h3{margin-top:26px}
+
+/* the contents list, as a card rather than a loose row of links */
+.claimdoc .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:13px 17px;gap:9px 18px!important;box-shadow:var(--shadow)}
+.claimdoc .toc a{color:var(--dim)}
+.claimdoc .toc a:hover{color:var(--accent)}
+
+/* one block per assistant: the edge says what was found there */
+.claimdoc .botblock{padding:15px 18px;margin-bottom:10px;border-left:4px solid var(--line2)}
+.claimdoc .botblock.b-crit{border-left-color:var(--false)}
+.claimdoc .botblock.b-rep{border-left-color:var(--mislead)}
+.claimdoc .botblock.b-clean{border-left-color:var(--ok)}
+
+/* one table per market: name the market, then show it */
+.claimdoc h3.mkt{margin:24px 0 8px;font-size:14.5px;font-weight:680;letter-spacing:-.01em;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:9px}
+.claimdoc h3.mkt span{font-size:12.2px;font-weight:500;color:var(--dimmer);letter-spacing:0}
+/* every cell on a claim page is below n, so the grey ground carries no signal
+   on its own: the reading is zero against not-zero */
+.claimdoc table.observations .cellstat{color:var(--dimmer)}
+.claimdoc table.observations .cellstat.hasval{color:var(--ink);font-weight:640}
+.claimdoc table.observations .cellstat.hasval small{color:var(--dim)}
+
+/* a row header holding a sentence or a place name is not a column label: the
+   uppercase treatment belongs to the header row only */
+.claimdoc table.debunk th[scope=row]{text-transform:none;letter-spacing:0;font-size:13.8px;
+  line-height:1.5;font-weight:500;padding-right:24px}
+.claimdoc table.mkts th[scope=row]{text-transform:none;letter-spacing:0;font-size:14.4px;
+  font-weight:580;color:var(--ink)}
+.claimdoc table.mkts th[scope=row] small{display:block;margin-top:3px;font-size:11px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase}
+
+/* the record behind the page: reference material, set back from the findings */
+.claimdoc .appx{margin-top:50px;padding:4px 26px 26px;background:#eef0f4;border:1px solid var(--line);
+  border-radius:16px}
+.claimdoc .appx h2{border-top:0;margin-top:26px}
+/* the appendix ground is darker than the page, so its small print steps up a
+   shade to keep 4.5:1 */
+.claimdoc .appx .note{color:var(--dim)}
+.claimdoc .appx .panel{box-shadow:none}
+/* the inline column count on the claim tiles has to yield on a phone */
+@media(max-width:980px){.claimdoc .metrics{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:520px){.claimdoc .metrics{grid-template-columns:1fr!important}}
+@media(max-width:700px){.claimdoc .appx{padding:4px 16px 18px}
+  .claimdoc h2{font-size:20.5px;margin-top:42px}}

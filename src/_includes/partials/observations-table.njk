@@ -8,8 +8,8 @@
   are never merged. Every figure carries its 95% interval and the number of answers behind it. Cells
   built on fewer than {{ metrics.lowN }} answers are greyed: they are shown, but they settle nothing.</p>
 {%- for table in claim.tables %}
-<h3 class="ssub">{{ table.run.country | countryName }} &middot; {{ table.run.language | languageName }}
-  <span style="color:var(--dimmer);font-weight:400">&middot; <time datetime="{{ table.run.collected_at | isoDate }}">{{ table.run.collected_at | shortDate }}</time></span></h3>
+<h3 class="mkt">{{ table.run.country | countryName }}
+  <span>{{ table.run.language | languageName }} &middot; <time datetime="{{ table.run.collected_at | isoDate }}">{{ table.run.collected_at | shortDate }}</time></span></h3>
 <div class="panel"><table class="observations">
   <caption class="visually-hidden">Repeat rate by assistant and question type in {{ table.run.country | countryName }}, each cell with its confidence interval and sample size</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
@@ -21,7 +21,7 @@
       {%- for entry in row.cells %}
       <td class="num" data-persona="{{ entry.persona }}">
         {%- if entry.cell and entry.cell.repeat_rate.n %}
-        <span class="cellstat{% if entry.cell.repeat_rate.low_n %} lown{% endif %}">{{ entry.cell.repeat_rate.rate | rate }}
+        <span class="cellstat{% if entry.cell.repeat_rate.low_n %} lown{% endif %}{% if entry.cell.repeat_rate.rate %} hasval{% endif %}">{{ entry.cell.repeat_rate.rate | rate }}
           <small>{{ entry.cell.repeat_rate.ci | ciLabel }} &middot; n={{ entry.cell.repeat_rate.n }}</small></span>
         {%- else %}<span class="cellstat lown">&mdash;<small>no substantive answers</small></span>{% endif %}
       </td>

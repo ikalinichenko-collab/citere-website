@@ -6,6 +6,7 @@ wrap: wrap-narrow
 {#- Claim Report, three layers, in the order of Citere_Claim_Report_Spec.md:
     why is this false, what did the chatbots do with it, show me, where did it
     come from, what are the numbers, what have we done. -#}
+<div class="claimdoc">
 
 {# ------------------------------------------------------ Layer 1 #}
 <div class="phead">
@@ -33,7 +34,7 @@ wrap: wrap-narrow
 </div>
 
 {%- if claim.tested %}
-<div class="metrics" style="grid-template-columns:repeat(6,1fr);margin:0 0 26px">
+<div class="metrics" style="grid-template-columns:repeat(3,1fr);margin:0 0 26px">
   <div class="m"><div class="n num">{{ claim.botsTested }}</div><div class="l">assistants tested</div></div>
   <div class="m"><div class="n num">{{ claim.counts.observations }}</div><div class="l">answers, {{ claim.markets | length }} markets</div></div>
   <div class="m"><div class="n num">{{ claim.counts.repeated }}</div><div class="l">repeated the claim</div></div>
@@ -81,7 +82,7 @@ wrap: wrap-narrow
 
   {%- if claim.debunk_argument | length %}
   </div>
-  <div class="panel"><table>
+  <div class="panel"><table class="debunk">
     <caption class="visually-hidden">What the claim asserts, what is true instead, and the evidence for each</caption>
     <thead><tr><th scope="col" style="width:36%">The claim says</th><th scope="col">What is true</th><th scope="col" style="width:22%">Evidence</th></tr></thead>
     <tbody>
@@ -118,7 +119,7 @@ wrap: wrap-narrow
 
 
 {%- if claim.confirmations | length %}
-<h2 id="who-else-has-checked-this" style="margin:36px 0 12px">{{ 'claim.whoElse' | t }}</h2>
+<h3 class="ssub" id="who-else-has-checked-this">{{ 'claim.whoElse' | t }}</h3>
 <div class="panel"><table>
   <caption class="visually-hidden">Independent organisations that reached the same conclusion</caption>
   <thead><tr><th scope="col">{{ 'col.organisation' | t }}</th><th scope="col">{{ 'col.finding' | t }}</th><th scope="col">{{ 'col.date' | t }}</th></tr></thead>
@@ -159,7 +160,7 @@ wrap: wrap-narrow
 <p class="note" style="margin:0 0 14px">Each assistant's behaviour on this claim in plain terms, worst
   first. Counts only in this section: the rates, with their intervals, are further down.</p>
 {%- for bot in claim.botBlocks %}
-<div class="panel" style="padding:16px 18px;margin-bottom:12px;border-left:4px solid var({{ '--false' if bot.tone == 'bad' else '--ok' }})">
+<div class="panel botblock {% if bot.critical %}b-crit{% elif bot.repeat %}b-rep{% else %}b-clean{% endif %}">
   <div style="display:flex;align-items:center;gap:9px;margin-bottom:6px">
     {{ botMark(logos, bot.key, "sm", true) }}
     <b>{{ bot.name }} &mdash; {{ bot.repeat }} {{ bot.repeat | plural("repeat", "repeats") }} out of {{ bot.n }} answers{% if bot.critical %}, {{ bot.critical }} with a listed source cited{% endif %}</b>
@@ -252,7 +253,7 @@ wrap: wrap-narrow
 {%- if claim.marketSummary | length %}
 <h2 id="by-market" style="margin:36px 0 6px">Where it was repeated &mdash; by country and language</h2>
 <p class="note" style="margin:0 0 14px">The same claim, put to the same assistants in each market, in that market&rsquo;s own language. Counts pool across assistants; the rate beside them is one question type, one market, one run, because that is the only shape a rate can have.</p>
-<div class="panel"><table>
+<div class="panel"><table class="mkts">
   <caption class="visually-hidden">Answers, repeats and critical incidents on this claim by market</caption>
   <thead><tr><th scope="col">Market</th><th scope="col">Language</th><th scope="col" class="num">Answers</th>
     <th scope="col" class="num">Repeated</th><th scope="col" class="num">Critical</th>
@@ -400,6 +401,7 @@ wrap: wrap-narrow
 {# ---------------------------------------- the record behind the page #}
 
 {%- if claim.tested %}
+<div class="appx">
 <h2 id="detail" style="margin:36px 0 6px">The record behind this page</h2>
 <p class="note" style="margin:0 0 14px">Everything the page above is built from: the claim card the judge compares answers against, what this page cannot tell you, and how the measurement was made.</p>
 {%- endif %}
@@ -495,6 +497,8 @@ wrap: wrap-narrow
 </div>
 {%- endif %}
 
+{%- if claim.tested %}</div>{% endif %}
+
 {%- if claim.changelog | length %}
 <h2 id="changelog" style="margin:36px 0 12px">{{ 'claim.changelog' | t }}</h2>
 <div class="panel"><table>
@@ -512,4 +516,5 @@ wrap: wrap-narrow
   <a href="{{ ('/registry/' + claim.slug + '.json') | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>
   <a href="{{ ('/registry/' + claim.slug + '.md') | url }}">{{ 'claim.getMarkdown' | t }}</a>
   {%- if navigation.has.data %}<span>&middot;</span><a href="{{ '/data/#cite' | url }}">{{ 'claim.cite' | t }}</a>{% endif %}
+</div>
 </div>
