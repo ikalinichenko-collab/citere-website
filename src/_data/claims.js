@@ -64,6 +64,21 @@ const claims = files
       }))
     }));
 
+    // Where it was repeated: one row per market, on that market's current run.
+    // Counts pool across assistants, which is allowed; the rate beside them is
+    // one persona, one market, one run, which is the only shape a rate has
+    // (CM §5.1).
+    const marketSummary = currentRuns.map((key) => {
+      const run = runs.byKey[key];
+      const inRun = metrics.pool(grid.filter((c) => c.run === key));
+      const p2 = metrics.poolOf({ claim: claim.id, run: key, persona: "P2", is_live: false });
+      return {
+        market: run.market, country: run.country, language: run.language, run,
+        n: inRun.n, repeat: inRun.counts.repeat, critical: inRun.tiers.critical,
+        contaminated: inRun.contaminated, rate: p2.repeat_rate, persona: "P2"
+      };
+    }).sort((a, b) => b.repeat - a.repeat || a.market.localeCompare(b.market));
+
     // CM §7: observed change after escalation, in the markets where a second
     // comparable run exists. Never "effect of escalation".
     const cleansing = [];
@@ -92,9 +107,10 @@ const claims = files
     const allIncidents = metrics.incidents.filter((i) => i.claim === claim.id);
     const criticalIncidents = allIncidents.filter((i) => i.tier === "critical");
     const highIncidents = allIncidents.filter((i) => i.tier === "high");
-    // Every CRITICAL is shown; HIGH fills up to twenty blocks in total and never
-    // more than six (the spec caps HIGH at ten, and the page has a budget).
-    const highShown = Math.max(0, Math.min(6, 20 - criticalIncidents.length));
+    // Every CRITICAL is shown; HIGH fills up to seventeen blocks in total and
+    // never more than five (the spec caps HIGH at ten, and the page has a
+    // 100 KB budget it now spends on the per-market table as well).
+    const highShown = Math.max(0, Math.min(5, 17 - criticalIncidents.length));
     const incidents = [...criticalIncidents, ...highIncidents.slice(0, highShown)];
 
     // ---------------------------------------------------------- Layer 2
@@ -285,9 +301,11 @@ const claims = files
       sourcesIdentified,
       chain,
       splice_label: SPLICES[claim.splice] || null,
+      splice_lede: SPLICE_LEDE[claim.splice] || null,
       headline,
       lede,
       tables,
+      marketSummary,
       cleansing,
       liveCells: cells.filter((c) => c.is_live),
       pooled: all,

@@ -39,10 +39,11 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 
 {% include "partials/registry-filters.njk" %}
 
-{%- set tableClaims = registryClaims %}
-{%- set tableCaption = "Every documented claim, worst first by critical incidents" %}
-{%- set tableFoot = "Showing all " + (claims | length) + " " + (claims | length | plural("claim", "claims")) %}
-{% include "partials/registry-table.njk" %}
+{%- set cardClaims = registryClaims %}{% set cardMeta = true %}
+{%- set cardHeading = "All " + (claims | length) + " claims, worst first" %}
+{% include "partials/claim-cards.njk" %}
+<p class="note">Worst first by critical incidents. A count is a count: a rate needs one persona, one market and one run, and those live
+  on each claim's own page.</p>
 
 <div class="exports">
   {%- if datasets.has['registry-json'] %}<a href="{{ '/registry.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>{% endif %}

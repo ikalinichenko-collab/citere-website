@@ -16,10 +16,9 @@ permalink: "{{ entry.url }}"
 {%- set activeFacet = facet %}
 {% include "partials/registry-filters.njk" %}
 
-{%- set tableClaims = facet.claims %}
-{%- set tableCaption = "Claims in this view, most recently updated first" %}
-{%- set sortedByUpdated = true %}
-{% include "partials/registry-table.njk" %}
+{%- set cardClaims = facet.claims %}{% set cardMeta = true %}
+{%- set cardHeading = (facet.claims | length) + " " + (facet.claims | length | plural("claim", "claims")) + " in this view" %}
+{% include "partials/claim-cards.njk" %}
 
 <div class="exports">
   <a href="{{ '/registry/' | url }}">All {{ claims | length }} {{ claims | length | plural("claim", "claims") }} in the registry</a>
