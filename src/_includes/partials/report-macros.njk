@@ -1,0 +1,94 @@
+{#- Macros for the published Claim Report. The site is a pure renderer: these
+    only shape the frozen payload into HTML, they compute nothing about findings
+    beyond deriving RR/CR and the Wilson interval the app itself derives. Every
+    domain is defanged and never linked (CLAUDE.md 5.3). -#}
+
+{%- set PERSONA_ORDER = ["P1_neutral","P2_topical","P3_leading","P4_malicious"] -%}
+{%- set PERSONA_NAME = { "P1_neutral":"P1 Neutral","P2_topical":"P2 Topical","P3_leading":"P3 Leading","P4_malicious":"P4 Malicious" } -%}
+{%- set PERSONA_CODE = { "P1_neutral":"P1","P2_topical":"P2","P3_leading":"P3","P4_malicious":"P4" } -%}
+
+{%- macro persona(key) -%}{{ PERSONA_NAME[key] | default(key | default("—")) }}{%- endmacro -%}
+{%- macro pcode(key) -%}{{ PERSONA_CODE[key] | default("P1") }}{%- endmacro -%}
+
+{#- Is a string domain-shaped (no spaces, has a dot)? Used to decide defang vs
+    plain text for surface objects and chain nodes. -#}
+{%- macro isDomain(s) -%}{% if s and (" " not in s) and ("." in s) and ("/" not in s) and ("@" not in s) %}1{% endif %}{%- endmacro -%}
+
+{#- A KPI tile. -#}
+{% macro kpi(value, label, crit, href) %}
+<div class="rd-kpi"><b class="{{ 'crit' if crit }}">{{ value }}</b><span>{% if href %}<a href="{{ href }}">{{ label }}</a>{% else %}{{ label }}{% endif %}</span></div>
+{% endmacro %}
+
+{#- A grain-fact / debunk source: a full URL, a bare domain (defanged, never
+    linked), or plain text. Domains are never live. -#}
+{% macro sourceRef(source) %}
+{%- if not source %}—
+{%- elif ("http://" in source) or ("https://" in source) %}{{ source | defangCopy | safe }}
+{%- elif isDomain(source) | trim %}{{ source | defang }}
+{%- else %}{{ source | defangCopy | safe }}{% endif %}
+{% endmacro %}
+
+{#- A debunk-source label: prefer a name, else the URL, defanged, never linked. -#}
+{% macro sourceLabel(name, url) %}
+{%- if name %}{{ name | defangCopy | safe }}
+{%- elif url and (("http://" in url) or ("https://" in url)) %}{{ url | defangCopy | safe }}
+{%- elif url %}{{ url | defang }}
+{%- else %}—{% endif %}
+{% endmacro %}
+
+{#- A stacked-bar segment. -#}
+{% macro bar(cls, part, total) %}<i class="{{ cls }}" style="width:{{ (part / total * 100) if total else 0 }}%"></i>{% endmacro %}
+
+{#- Repeat-Rate / Contamination-Rate grid: bot × persona, one table per market.
+    Each rate cell carries its persona (CLAUDE.md 10 / rule 6). -#}
+{% macro rateGrid(cells, kind) %}
+{%- if not cells | length %}<div class="rd-empty">No responses yet.</div>
+{%- else %}
+  {%- set markets = [] %}{% for c in cells %}{% set mk = c.market | default("—") %}{% if mk not in markets %}{% set markets = (markets.push(mk), markets) %}{% endif %}{% endfor %}
+  {%- set bots = [] %}{% for c in cells %}{% if c.model not in bots %}{% set bots = (bots.push(c.model), bots) %}{% endif %}{% endfor %}
+  {%- for m in markets %}
+  <h4>{{ m }}</h4>
+  <table><caption class="visually-hidden">{{ "Repeat Rate" if kind == "rr" else "Contamination Rate" }} by bot and persona in {{ m }}</caption>
+    <thead><tr><th scope="col">Bot</th>{% for pk in PERSONA_ORDER %}<th scope="col" class="num">{{ PERSONA_NAME[pk] }}</th>{% endfor %}</tr></thead>
+    <tbody>
+    {%- for b in bots %}
+      <tr><td>{{ b }}</td>
+      {%- for pk in PERSONA_ORDER %}
+        {%- set c = null %}
+        {%- for x in cells %}{% if x.model == b and x.persona == pk and (x.market | default("—")) == m %}{% set c = x %}{% endif %}{% endfor %}
+        {%- if not c %}<td class="num rd-dim" data-persona="{{ PERSONA_CODE[pk] }}">—</td>
+        {%- else %}
+          {%- set k = c.repeat if kind == "rr" else c.contaminated %}
+          {%- set n = c.substantive if kind == "rr" else c.valid %}
+          {%- if not n %}<td class="num rd-dim" data-persona="{{ PERSONA_CODE[pk] }}">n=0</td>
+          {%- else %}
+          <td class="num {{ 'low' if n < 20 }}" data-persona="{{ PERSONA_CODE[pk] }}">{{ k | pctOf(n) }}<small>{{ (k | wilson(n)) | ciLabel }} · n={{ n }}</small></td>
+          {%- endif %}
+        {%- endif %}
+      {%- endfor %}
+      </tr>
+    {%- endfor %}
+    </tbody>
+  </table>
+  {%- endfor %}
+{%- endif %}
+{% endmacro %}
+
+{#- Trend table per market×language group. Δ is printed as a point figure, not a
+    pp token, so it needs no per-figure caveat; the section still carries both
+    mandatory caveats (see the template). -#}
+{% macro trend(points) %}
+{%- set groups = [] %}
+{%- for pt in points %}{% set key = (pt.market | default("—")) + " · " + (pt.language | default("")) %}{% if key not in groups %}{% set groups = (groups.push(key), groups) %}{% endif %}{% endfor %}
+{%- for key in groups %}
+  <h4>{{ key }}</h4>
+  <table><caption class="visually-hidden">Repeat and contamination rates per run for {{ key }}</caption>
+    <thead><tr><th scope="col">Run</th><th scope="col">Date</th><th scope="col" class="num">n</th><th scope="col" class="num">Repeat rate</th><th scope="col" class="num">Contamination</th></tr></thead>
+    <tbody>
+    {%- for pt in points %}{% if ((pt.market | default("—")) + " · " + (pt.language | default(""))) == key %}
+      <tr><td>{{ pt.runKey }}</td><td>{% if pt.date %}<time datetime="{{ pt.date }}">{{ pt.date | displayDate }}</time>{% else %}—{% endif %}</td><td class="num">{{ pt.substantive }}</td><td class="num">{{ pt.repeat | pctOf(pt.substantive) }}</td><td class="num">{{ pt.contaminated | pctOf(pt.valid) }}</td></tr>
+    {%- endif %}{% endfor %}
+    </tbody>
+  </table>
+{%- endfor %}
+{% endmacro %}

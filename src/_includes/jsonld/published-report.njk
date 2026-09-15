@@ -1,0 +1,48 @@
+{#- One ClaimReview + one Article for a published Claim Report. The app owns the
+    verdict; these reports are all FALSE (ratingValue 1 of 5). Appearances are the
+    runs the claim was measured in, not individual answers. -#}
+{%- set ratingValues = { "false": 1, "misleading": 2, "unsupported": 3 } -%}
+{%- set appearances = [] -%}
+{%- for rk in (p.meta.runKeys | default([])) -%}
+{%- set appearances = (appearances.push({
+  "@type": "CreativeWork",
+  "name": "AI-assistant answers recorded in run " + rk
+}), appearances) -%}
+{%- endfor -%}
+{%- set jsonldReview = {
+  "@context": "https://schema.org",
+  "@type": "ClaimReview",
+  "url": site.url + page.url,
+  "claimReviewed": report.label,
+  "datePublished": articlePublished,
+  "dateModified": articleModified,
+  "inLanguage": lang | default("en"),
+  "author": { "@type": "Organization", "name": site.org.name, "url": site.url },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": ratingValues[report.verdict] | default(1),
+    "alternateName": report.verdict | verdictLabel,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "itemReviewed": {
+    "@type": "Claim",
+    "name": report.label,
+    "appearance": appearances
+  }
+} -%}
+<script type="application/ld+json">{{ jsonldReview | compact | jsonld | safe }}</script>
+{%- set jsonldArticle = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": articleHeadline,
+  "url": site.url + page.url,
+  "datePublished": articlePublished,
+  "dateModified": articleModified,
+  "inLanguage": lang | default("en"),
+  "author": { "@type": "Organization", "name": site.org.name, "url": site.url },
+  "publisher": { "@type": "Organization", "name": site.org.name, "url": site.url },
+  "isAccessibleForFree": true,
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+} -%}
+<script type="application/ld+json">{{ jsonldArticle | compact | jsonld | safe }}</script>

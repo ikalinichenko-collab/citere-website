@@ -21,7 +21,7 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 </div>
 
 <div class="metrics" style="grid-template-columns:repeat(5,1fr);margin:0 0 26px">
-{%- for tile in registryTiles %}
+{%- for tile in publishedTiles %}
   <div class="m"><div class="n num"{% if tile.tone == "bad" %} style="color:var(--false)"{% endif %}>{{ tile.value }}</div>
     <div class="l">{{ tile.label }}</div></div>
 {%- endfor %}
@@ -37,13 +37,30 @@ permalink: "{{ '/registry/' | loc(lang) }}"
     Counts, not rates: a rate needs one persona, one market and one run.</div>
 </div>
 
-{% include "partials/registry-filters.njk" %}
-
-{%- set cardClaims = registryClaims %}{% set cardMeta = true %}
-{%- set cardHeading = "All " + (claims | length) + " claims, worst first" %}
-{% include "partials/claim-cards.njk" %}
-<p class="note">Worst first by critical incidents. A count is a count: a rate needs one persona, one market and one run, and those live
-  on each claim's own page.</p>
+{%- if publishedReports | length %}
+<h2 style="margin:26px 0 12px">All {{ publishedReports | length }} published reports, worst first</h2>
+<div class="grid3">
+{%- for r in publishedReports %}
+  <a class="fcard" href="{{ ('/registry/' + r.slug + '/') | loc(lang) | url }}">
+    <div class="fhead"><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span>
+      <span class="fclus">{{ r.clusterName }}</span></div>
+    <h3>{{ r.label }}</h3>
+    <div class="fmeta">
+      {%- if r.splice %}<span class="splicebadge">{{ r.splice }}</span>{% endif %}
+      <span class="fmlab">{{ r.claimKey }}</span>
+    </div>
+    <div class="fstats">
+      <span><b>{{ r.strip.repeatedFake }} of {{ r.strip.answers }}</b> answers stated it as fact</span>
+      <span>{% if r.strip.critical %}<b>{{ r.strip.critical }}</b> {{ r.strip.critical | plural("answer", "answers") }} also cited a listed source{% else %}no answer cited a listed source{% endif %}</span>
+      <span><b>{{ r.strip.countries }}</b> {{ r.strip.countries | plural("market", "markets") }} tested &middot; {{ r.strip.botsTested }} assistants</span>
+    </div>
+  </a>
+{%- endfor %}
+</div>
+<p class="note">Worst first by critical incidents. A count is a count: a rate needs one persona, one market and one run, and those live on each report's own page.</p>
+{%- else %}
+<div class="howread" style="margin-top:26px"><div class="hr"><b>Registry</b>No claim reports have been published yet. Reports appear here once the monitoring pipeline freezes and publishes them.</div></div>
+{%- endif %}
 
 <div class="exports">
   {%- if datasets.has['registry-json'] %}<a href="{{ '/registry.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>{% endif %}

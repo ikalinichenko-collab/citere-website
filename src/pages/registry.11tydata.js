@@ -1,4 +1,5 @@
 const MONTHS = require("../_lib/labels.cjs").MONTHS;
+const published = require("../_data/published.js");
 const displayDate = (iso) => {
   const [y, m, d] = String(iso).slice(0, 10).split("-");
   return `${Number(d)} ${MONTHS[Number(m) - 1]} ${y}`;
@@ -10,24 +11,21 @@ module.exports = {
       claims: `${data.claims.length} ${data.claims.length === 1 ? "claim" : "claims"}`,
       updated: displayDate(data.site.last_update)
     }),
-    collectionItems: (data) => data.claims.map((c) => ({ url: c.url, title: c.title_en })),
-    // Brief §4: sorted by critical desc, then repeats desc.
-    registryClaims: (data) =>
-      [...data.claims].sort((a, b) =>
-        b.counts.critical - a.counts.critical ||
-        b.counts.repeated - a.counts.repeated ||
-        String(a.id).localeCompare(String(b.id))),
-    // Five tiles, all counts: nothing here is a rate, so nothing needs a
-    // persona attached.
-    registryTiles: (data) => {
-      const claims = data.claims;
-      const tested = claims.filter((c) => c.tested);
+    // The index now lists the published Claim Reports the app has frozen for the
+    // site. Empty-safe: no feed → publishedReports is [] and the page shows its
+    // empty state.
+    publishedReports: () => published.index,
+    // Count tiles only — nothing here is a rate, so nothing needs a persona.
+    publishedTiles: () => {
+      const idx = published.index;
+      const sum = (field) => idx.reduce((n, r) => n + ((r.strip && r.strip[field]) || 0), 0);
+      const clusters = new Set(idx.map((r) => r.clusterName)).size;
       return [
-        { value: new Set(claims.map((c) => String(c.cluster))).size, label: "clusters" },
-        { value: claims.length, label: "claims catalogued" },
-        { value: tested.length, label: "tested in at least one market" },
-        { value: tested.reduce((n, c) => n + c.counts.critical, 0), label: "critical incidents", tone: "bad" },
-        { value: data.metrics.dimensions.markets.length, label: "markets with a run" }
+        { value: clusters, label: clusters === 1 ? "cluster" : "clusters" },
+        { value: idx.length, label: "claims published" },
+        { value: sum("critical"), label: "critical incidents", tone: "bad" },
+        { value: sum("sourcesIdentified"), label: "sources identified" },
+        { value: sum("answers"), label: "answers examined" }
       ];
     },
     dataset: (data) => ({

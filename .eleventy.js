@@ -144,6 +144,21 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("spliceLabel", (v) => SPLICES[String(v)] || v);
   eleventyConfig.addFilter("rate", (v) => (v === null || v === undefined ? "n/a" : `${Math.round(v * 1000) / 10}%`));
+  // Wilson 95% interval as [lo, hi] (z = 1.96), or null when n = 0. Pairs with
+  // the ciLabel filter for display. The published Claim Report renders its
+  // rate cells with this, matching the app's in-preview arithmetic.
+  eleventyConfig.addFilter("wilson", (k, n) => {
+    const K = Number(k), N = Number(n);
+    if (!N) return null;
+    const z = 1.96, p = K / N, d = 1 + (z * z) / N;
+    const c = (p + (z * z) / (2 * N)) / d;
+    const h = (z / d) * Math.sqrt((p * (1 - p)) / N + (z * z) / (4 * N * N));
+    return [c - h, c + h];
+  });
+  eleventyConfig.addFilter("pctOf", (k, n) => {
+    const N = Number(n);
+    return N ? `${Math.round((Number(k) / N) * 1000) / 10}%` : "n/a";
+  });
   // A Wilson interval as the reference builds print it: "29-48", whole points.
   eleventyConfig.addFilter("ciLabel", (ci) =>
     Array.isArray(ci) ? `${Math.round(ci[0] * 100)}\u2013${Math.round(ci[1] * 100)}` : "");

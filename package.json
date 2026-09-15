@@ -10,14 +10,15 @@
   "scripts": {
     "metrics": "node scripts/build-metrics.mjs",
     "validate": "node scripts/validate.mjs",
-    "build": "rm -rf _site && eleventy",
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/clean.mjs && eleventy",
     "check": "node scripts/check.mjs",
     "serve": "eleventy --serve",
     "import": "node scripts/import-citere.mjs",
     "all": "npm run validate && npm run build && npm run check && npm run lighthouse",
-    "build:pages": "PATH_PREFIX=/citere-site/ CANONICAL_URL=https://vit-koval.github.io/citere-site rm -rf _site && PATH_PREFIX=/citere-site/ CANONICAL_URL=https://vit-koval.github.io/citere-site eleventy",
-    "check:pages": "PATH_PREFIX=/citere-site/ CANONICAL_URL=https://vit-koval.github.io/citere-site node scripts/check.mjs",
-    "lighthouse": "PATH_PREFIX=/ CANONICAL_URL=https://vit-koval.github.io/citere-site eleventy --output=_site-lighthouse && lhci autorun --config=lighthouserc.json"
+    "build:pages": "node scripts/clean.mjs && node scripts/with-env.mjs PATH_PREFIX=/citere-site/ CANONICAL_URL=https://vit-koval.github.io/citere-site -- eleventy",
+    "check:pages": "node scripts/with-env.mjs PATH_PREFIX=/citere-site/ CANONICAL_URL=https://vit-koval.github.io/citere-site -- node scripts/check.mjs",
+    "lighthouse": "node scripts/with-env.mjs PATH_PREFIX=/ CANONICAL_URL=https://vit-koval.github.io/citere-site -- eleventy --output=_site-lighthouse && lhci autorun --config=lighthouserc.json"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",

@@ -1,6 +1,10 @@
-# CLAUDE.md — Citere public website
+# CLAUDE.md
 
-This file is the master instruction set for building and maintaining the Citere website. Read it fully before touching anything.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
+**Citere public website.** This file is the master instruction set for building and maintaining the Citere website. Read it fully before touching anything.
 
 **The approved design already exists.** `design-mockup/` contains a complete, approved 21-page static mockup with a single stylesheet. It is the visual and structural source of truth: match it. Do not redesign, do not substitute a component library, do not "improve" the layout. Your job is to turn that mockup into a data-driven Eleventy site.
 
@@ -68,44 +72,49 @@ No commercial section. No services page. No pricing. Do not add them.
 ```
 /
 ├── CLAUDE.md
-├── design-mockup/                 # APPROVED DESIGN — reference only, not built or deployed
+├── design-mockup/                 # APPROVED DESIGN — reference only; git-ignored from the build
 ├── docs/
 │   ├── spec-pages.md
-│   └── content.md
-├── .eleventy.js
+│   ├── content.md
+│   └── citere-spec/               # governing brief (CLAUDE_CODE_BRIEF.md) + normative specs + HTML prototypes
+├── .eleventy.js                   # filters, transforms, passthrough — the glue between data/ and templates
 ├── package.json
 ├── CNAME
 ├── .github/workflows/deploy.yml
-├── data/                          # SOURCE OF TRUTH FOR ALL NUMBERS — exported from Citere, never hand-edited
-│   ├── claims/                    # one JSON per claim: C1-003.json
-│   ├── observations/              # one CSV per run
-│   ├── sources.json
-│   ├── platforms.json
-│   ├── countries.json
-│   ├── clusters.json
-│   ├── escalations.json
-│   ├── reports.json
-│   └── site.json
+├── data/                          # SOURCE OF TRUTH FOR ALL NUMBERS — machine-written, never hand-edited
+│   ├── claims/{id}.json           # one per claim (19 today: C1-001 … C5-…)
+│   ├── observations/{run}.csv     # raw responses, one CSV per run×market (6 today)
+│   ├── runs.json                  # source run table: grid shape, frozen versions
+│   ├── metrics.json               # DERIVED (~4 MB) — rebuilt by build-metrics.mjs; do NOT hand-edit
+│   ├── sources.json  platforms.json  countries.json  clusters.json
+│   ├── countermeasures.json  reports.json  citation-drift.json
+│   ├── logos.json                 # bot brand marks (see README.md for the install note)
+│   └── site.json                  # org data, version stamps, demo flag; counters recomputed at build
 ├── content/                       # HUMAN-WRITTEN PROSE (Markdown)
-│   ├── en/ (index, methodology, about, mission, manifesto, press, terms, privacy, data,
-│   │        claims/{id}.md, reports/{slug}.md)
-│   └── uk/ (same tree)
+│   └── en/                        # index, methodology, about, …, claims/{id}.md, reports/{slug}.md
+│                                  # uk/ mirror is planned in this doc but NOT yet present
 ├── src/
-│   ├── _includes/layouts/         # base, claim, report, platform, country, source, page, benchmark
-│   ├── _includes/partials/        # head, nav, footer, verdict-badge, observations-table,
-│   │                              # actions-table, before-after-table, heatmap, abx-matrix,
-│   │                              # dumbbell, funnel, stacked-verdicts, leaderboard, cite
-│   ├── _includes/jsonld/
-│   ├── _data/
-│   ├── css/site.css               # ported from design-mockup/styles.css
-│   ├── pages/
-│   ├── generators/                # claim pages, facet pages, platform/country/source pages
-│   └── machine/                   # robots.txt, llms.txt, llms-full.txt, sitemaps, feeds, exports
-├── scripts/ (import-citere.mjs, validate.mjs, check.mjs, guards.json)
-└── schemas/
+│   ├── _data/                     # ~25 .js files that derive every figure from data/ at build time
+│   ├── _lib/                      # .cjs helpers: metrics.cjs, labels.cjs, markdown.cjs, crumbs.cjs, meta.cjs
+│   ├── _includes/layouts/         # base, claim, country, platform, report, page
+│   ├── _includes/partials/        # ~34 data-driven components (leaderboard, heatmap, abx-matrix, …)
+│   ├── _includes/jsonld/          # Organization, WebSite, ClaimReview, Dataset, …
+│   ├── assets/css/                # site CSS ported from design-mockup/styles.css
+│   ├── assets/logos/              # bot logo files (monogram fallback renders when empty)
+│   ├── pages/                     # the fixed pages (home, methodology, registry hub, …)
+│   ├── generators/                # paginated builders: claim, facet, platform, country, source pages
+│   └── machine/                   # robots, llms(.txt/-full), sitemaps, feeds, CSV/JSON/STIX exports
+├── scripts/
+│   ├── build-metrics.mjs          # observations + claims → runs.json + metrics.json
+│   ├── validate.mjs               # JSON-schema gate; also fails if metrics.json is stale
+│   ├── check.mjs                  # pre-publish checks against the built _site/
+│   ├── import-citere.mjs          # the only sanctioned way numbers enter the repo
+│   └── guards.json                # P4 prompt fragments that must never reach output
+├── schemas/                       # 11 JSON Schemas (claim, metrics, runs, sources, …)
+└── seed-data/generate_grid.py     # generates the demo observation grid
 ```
 
-**Rule:** `data/` is machine-written. `content/` is prose. Templates join them. Never type a number into a template or Markdown file.
+**Rule:** `data/` is machine-written (`metrics.json` is derived — rebuild it, never edit it). `content/` is prose. Templates and `src/_data/*.js` join them. Never type a number into a template or Markdown file.
 
 ---
 
@@ -198,8 +207,10 @@ Enumerations (exact lowercase strings in data; display casing in templates):
 
 Claim prose lives in `content/{lang}/claims/{id}.md` with front matter `id:` and H2 sections `## Verdict`, `## What is true`, `## Where the claim comes from`. The template merges by `id`.
 
-### 5.2 `data/benchmarks.json`
-Precomputed by the import script so no page does arithmetic at build time:
+### 5.2 `data/benchmarks.json` — REMOVED (historical)
+This precomputed file no longer exists. `src/_data/benchmarks.js` now derives every benchmark figure from `metrics.json` inside one run at build time (see the "Benchmarks is a shell" note at the top of this file). The shape below is kept only to document what those figures mean; there is no schema for it and nothing reads it.
+
+Historical shape, precomputed so no page did arithmetic at build time:
 ```json
 {
   "run":"run-2026-09","label":"September 2026","date":"2026-09-12",
@@ -225,7 +236,8 @@ Precomputed by the import script so no page does arithmetic at build time:
 ### 5.3 Other files
 - `data/sources.json` — `{domain, slug, network, first_seen, attribution[], cited_in[], citations, complaints[], article_evidence[]}`. Render domains defanged (`example[.]com`), never as links.
 - `data/platforms.json` — per-bot metadata and per-run aggregates **per persona**. Never store or render a persona-averaged number.
-- `data/escalations.json` — flat array, public part only. Must never contain correspondence text.
+- `data/countermeasures.json` — the public countermeasures log (escalations were folded into this; `/escalations/` is now a redirect stub). Flat, public part only. Must never contain `submission_content`, `proof`, `target_contact`, `confirmed_by`, or any correspondence text — the schema forbids them and `check.mjs` fails if they reach the build.
+- `data/citation-drift.json` — the external citation-drift baseline read by the between-run delta caveats (CM §7.6).
 - `data/site.json` — org data, contacts, counters, `used_by[]`, watchlist/methodology versions. Counters are recomputed at build; stored values are not trusted.
 
 ---
@@ -283,14 +295,22 @@ Homepage block order: hero (with side meshes) → bot strip → 4 metric cards �
 
 ```
 npm install
-npm run validate     # JSON schema validation of /data
-npm run build        # eleventy → _site/
-npm run check        # pre-publish checks → §10
+npm run serve        # eleventy --serve → http://localhost:8080 (PATH_PREFIX defaults to /). Use this for local dev.
+npm run metrics      # rebuild data/runs.json + data/metrics.json from data/observations/ + data/claims/
+npm run validate     # JSON-schema validation of data/; ALSO fails if metrics.json is stale vs a fresh rebuild
+npm run clean        # remove _site/ (cross-platform)
+npm run build        # clean + eleventy → _site/
+npm run check        # pre-publish checks against _site/ → §10 (build first)
 npm run lighthouse   # builds into _site-lighthouse/, never touches _site/
-npm run serve
+npm run all          # validate → build → check → lighthouse (the full local gate)
+npm run build:pages  # build with the GitHub Pages PATH_PREFIX/CANONICAL_URL (subpath deploy)
 ```
 
-`deploy.yml`: push to `main` → Node 20 → `npm ci` → validate → build (with `PATH_PREFIX` from repo variable) → check → lighthouse → deploy `_site/`. Any failing step blocks deploy.
+**Cross-platform:** every script runs on Windows (PowerShell/cmd), macOS, and Linux. There is no `rm -rf` or `VAR=val` bash-ism in `package.json` — cleaning goes through `scripts/clean.mjs` and env vars go through `scripts/with-env.mjs` (a tiny zero-dependency `cross-env`). Do not reintroduce shell-specific syntax into `scripts`; extend those two helpers instead, so CI (`npm ci`, no extra deps) and Windows stay in sync.
+
+Two env vars drive URLs: `PATH_PREFIX` (base path — `/` locally and on the custom domain, `/citere-site/` on the Pages preview) and `CANONICAL_URL` (host for canonical/hreflang/JSON-LD). Every internal href goes through Eleventy's `url`/`prefixLinks` filters. While `data/site.json` carries `demo:true`, `check.mjs` refuses to build demo figures under the production host.
+
+`deploy.yml`: push to `main` (or PR) → Node 20 → `npm ci` → validate → build (with `PATH_PREFIX`/`CANONICAL_URL` from repo variables) → check → lighthouse → deploy `_site/`. Any failing step blocks deploy. CI does not run `metrics` separately — `validate` re-derives and fails on drift, so commit a fresh `metrics.json`.
 
 `scripts/import-citere.mjs`: takes a Citere export directory, validates against `schemas/`, recomputes `benchmarks.json` and `site.json.counters`, writes into `data/`, refuses to overwrite a claim whose `updated` is newer than the import, prints a diff summary. This is the only sanctioned way numbers enter the repo.
 

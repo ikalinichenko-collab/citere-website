@@ -14,4 +14,7 @@ eleventyExcludeFromCollections: true
 {%- for facet in facets %}
   <url><loc>{{ site.url }}{{ facet.url | loc('uk') }}</loc><lastmod>{{ facet.updated | isoDate }}</lastmod></url>
 {%- endfor %}
+{%- for report in published.list %}
+  <url><loc>{{ site.url }}{{ ('/registry/' + report.slug + '/') | loc('uk') }}</loc><lastmod>{{ report.publishedAt | isoDate }}</lastmod></url>
+{%- endfor %}
 </urlset>

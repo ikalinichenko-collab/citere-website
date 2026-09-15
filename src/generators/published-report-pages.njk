@@ -1,0 +1,331 @@
+---
+layout: layouts/base.njk
+wrap: report-wrap
+schemas:
+  - published-report
+pagination:
+  data: published.entries
+  size: 1
+  alias: entry
+permalink: "{{ entry.url }}"
+---
+{%- import "partials/report-macros.njk" as R -%}
+{%- set s = p.strip -%}
+<article class="report-doc">
+
+{# ---------------------------------------------------------------- header #}
+<div class="rd-crumb">Registry / {{ p.clusterName | default(report.clusterName) }} / {{ p.claimKey | default(report.claimKey) }}</div>
+<div class="rd-hdr">
+  <div class="rd-hdr-main">
+    <h1>{{ analyst.headline | default(report.label) }}</h1>
+    {%- if analyst.ledeContext %}<p class="rd-lede">{{ analyst.ledeContext | defangCopy | safe }}</p>{% endif %}
+    <div class="rd-tags">
+      <span class="badge {{ report.verdict | verdictClass }}">{{ report.verdict | verdictLabel }}</span>
+      {%- for t in (p.tags | default([])) %}<span class="rd-tag">{{ t }}</span>{% endfor %}
+    </div>
+  </div>
+  <aside class="rd-meta">
+    <b>Countries:</b> {{ p.meta.countries | length }} — {{ p.meta.countries | join(", ") | default("—") }}<br>
+    <b>Runs:</b> {{ p.meta.runKeys | join(" · ") | default("—") }}<br>
+    <b>Bots:</b> {{ p.meta.bots | join(", ") | default("—") }}<br>
+    <b>Per run:</b> {{ p.meta.perRun | default("—") }}<br>
+    <b>Versions:</b> judge {{ p.meta.versions.judge | default("—") }} · blacklist {{ p.meta.versions.watchlist | default("—") }}<br>
+    <b>Judge validation:</b> {{ p.meta.judgeValidation | default("—") }}<br>
+    <b>Published:</b> <time datetime="{{ articlePublished }}">{{ articlePublished | displayDate }}</time>
+  </aside>
+</div>
+
+{# ------------------------------------------------------------ six-tile strip #}
+<div class="rd-kpis">
+  {{ R.kpi(s.botsTested, "chatbots tested") }}
+  {{ R.kpi(s.answers, "answers, " + s.countries + " countries") }}
+  {{ R.kpi(s.repeatedFake, "repeated the fake") }}
+  {{ R.kpi(s.critical, "critical: repeated + cited a listed source", true) }}
+  {{ R.kpi(s.sourcesIdentified, "disinformation sources identified", false, "#sources") }}
+  {{ R.kpi(s.countermeasuresTaken, "countermeasures taken", false, "#countermeasures") }}
+</div>
+
+{# --------------------------------------------------------------------- TOC #}
+<nav class="rd-toc" aria-label="Report sections">
+  <a href="#why">Why this is false</a>
+  <a href="#bots">What the chatbots did</a>
+  <a href="#evidence">Evidence</a>
+  <a href="#card">Claim card</a>
+  <a href="#sources">Sources</a>
+  <a href="#results">Results by bot</a>
+  <a href="#axb">A×B</a>
+  <a href="#live">Live</a>
+  <a href="#trend">Trend</a>
+  <a href="#countermeasures">Countermeasures</a>
+  <a href="#limitations">Limitations</a>
+  <a href="#method">Method</a>
+</nav>
+
+{# -------------------------------------------------------- why this is false #}
+<section id="why" class="rd-sec">
+  <h2>Why this is false</h2>
+  {%- if p.whyFalse.realEvent %}<p>{{ p.whyFalse.realEvent | defangCopy | safe }}</p>{% else %}<div class="rd-empty">Grain of truth not filled on the claim card.</div>{% endif %}
+  {%- if p.whyFalse.grainFacts | length %}
+  <div class="rd-sub">What is really true</div>
+  <table><caption class="visually-hidden">Checkable facts behind the claim, with sources</caption>
+    <thead><tr><th scope="col">Fact</th><th scope="col" style="width:30%">Source</th></tr></thead>
+    <tbody>{% for g in p.whyFalse.grainFacts %}<tr><td>{{ g.fact | defangCopy | safe }}</td><td>{{ R.sourceRef(g.source) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- endif %}
+  {%- if p.whyFalse.debunkArgument | length %}
+  <table><caption class="visually-hidden">What the fake asserts against what is true</caption>
+    <thead><tr><th scope="col" style="width:38%">The fake says</th><th scope="col">What is true</th><th scope="col" style="width:22%">Evidence</th></tr></thead>
+    <tbody>{% for d in p.whyFalse.debunkArgument %}<tr><td class="rd-crit">{{ d.assertion | defangCopy | safe }}</td><td>{{ d.refutation | defangCopy | safe }}</td><td>{{ R.sourceRef(d.source) }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- else %}<div class="rd-empty">No debunk argument recorded.</div>{% endif %}
+  {%- if p.whyFalse.whyItWorks %}<p>{{ p.whyFalse.whyItWorks | defangCopy | safe }}</p>{% endif %}
+  {%- if p.whyFalse.chain | length %}
+  <div class="rd-sub">How it moved</div>
+  <div class="rd-chain">{% for n in p.whyFalse.chain %}<span class="rd-node{% if n.injection %} inj{% endif %}">{{ n.node | defang if R.isDomain(n.node) else n.node }}{% if n.date %}<small>{{ n.date }}</small>{% endif %}</span>{% if not loop.last %}<span class="rd-arrow">→</span>{% endif %}{% endfor %}</div>
+  {%- endif %}
+</section>
+
+{# ----------------------------------------------------- what the chatbots did #}
+<section id="bots" class="rd-sec">
+  <h2>What the chatbots did with it</h2>
+  <p>We asked {{ s.botsTested }} chatbots about this claim{% if p.meta.countries | length %} in {{ p.meta.countries | length }} {{ "country" if p.meta.countries | length == 1 else "countries" }}{% endif %}, phrasing the question four ways: as someone who knows nothing, as someone following the news, as someone who already believes the fake, and as someone asking the bot to write it up. Every answer was checked for whether the bot repeated the fake and where it said it got its information.</p>
+  {%- if p.botBehaviour | length %}
+    {%- for b in p.botBehaviour %}
+    <div class="rd-ev {{ 'crit' if b.repeats else 'ok' }}">
+      <div class="rd-who"><b>{{ b.model }}</b> — {{ b.repeats }} repeats out of {{ b.answers }} answers, {{ b.criticalCited }} with a listed source</div>
+      <p>{{ b.pattern | defangCopy | safe }}</p>
+      {%- for x in b.exchanges %}
+      <div class="rd-xq"><b>Question:</b> {{ x.question | defangCopy | safe }}</div>
+      <div class="rd-sbs">
+        <div class="bot"><small>{{ b.model }}{% if x.market %} · {{ x.market }}{% endif %}{% if x.persona %} · {{ R.persona(x.persona) }}{% endif %}</small>{{ x.botSaid | defangCopy | safe }}</div>
+        <div class="fact"><small>What is true</small>{{ x.whatIsTrue | defangCopy | safe }}</div>
+      </div>
+      {%- if x.sources | length %}<div class="rd-cited"><b>Cited:</b> {% for so in x.sources %}{% if not loop.first %}, {% endif %}{{ so.domain | defang }}{% endfor %}</div>{% endif %}
+      {%- endfor %}
+    </div>
+    {%- endfor %}
+  {%- else %}<div class="rd-empty">No judged responses yet.</div>{% endif %}
+  {%- if p.whatThisShows %}
+  <h3>What this shows</h3>
+  <p>{{ p.whatThisShows.injectionLine | defangCopy | safe }}</p>
+  {%- if p.whatThisShows.failureModes %}<p>{{ p.whatThisShows.failureModes | defangCopy | safe }}</p>{% endif %}
+  {%- endif %}
+</section>
+
+{# ------------------------------------------------------------------ evidence #}
+<section id="evidence" class="rd-sec">
+  <h2>Evidence — all flagged answers</h2>
+  {%- if p.evidence | length %}
+    {%- for e in p.evidence %}
+    <div class="rd-ev {{ 'crit' if e.tier == 'CRITICAL' else 'hi' }}" data-synthetic="true">
+      <div class="rd-who"><b>{{ e.model }}</b>{% if e.market %} · {{ e.market }}{% endif %}{% if e.persona %} · {{ R.persona(e.persona) }}{% endif %}{% if e.date %} · <time datetime="{{ e.date }}">{{ e.date | displayDate }}</time>{% endif %} · repeat {{ e.repeatN }} · {{ e.tier }}{% if e.reviewStatus == "human-verified" %} · human-verified ✓{% elif e.reviewStatus == "human-corrected" %} · human-corrected ✎{% endif %}</div>
+      <div><b>Question:</b> {{ e.question | defangCopy | safe }}</div>
+      <div class="rd-sbs">
+        <div class="bot"><small>What the bot said</small>{{ e.botSaid | defangCopy | safe }}</div>
+        <div class="fact"><small>What is true</small>{{ e.whatIsTrue | defangCopy | safe }}</div>
+      </div>
+      {%- if e.judgeRationale %}<div><b>Judge:</b> {{ e.judgeRationale | defangCopy | safe }}</div>{% endif %}
+      {%- if e.sources | length %}<div class="rd-cited"><b>Cited:</b> {% for so in e.sources %}{% if not loop.first %}, {% endif %}{{ so.domain | defang }}{% endfor %}</div>{% endif %}
+    </div>
+    {%- endfor %}
+    <p class="rd-notice" data-notice="synthetic-quotes">Quoted answers are excerpts of what an assistant returned; response text shown on this page is presented for evidence and trimmed to the sentence carrying the claim.</p>
+  {%- else %}<div class="rd-empty">No answers reached the CRITICAL or HIGH tier.</div>{% endif %}
+</section>
+
+{# ---------------------------------------------------------------- claim card #}
+<section id="card" class="rd-sec">
+  <h2>The claim card</h2>
+  <h3>False claim</h3>
+  <div class="rd-quote">{{ p.claimCard.falseClaim | defangCopy | safe if p.claimCard.falseClaim else "—" }}</div>
+  <h3>Grain of truth</h3>
+  <p>{{ p.claimCard.grainOfTruth | defangCopy | safe if p.claimCard.grainOfTruth else "—" }}</p>
+  <h3>Canonical debunk</h3>
+  <p>{{ p.claimCard.canonicalDebunk | defangCopy | safe if p.claimCard.canonicalDebunk else "—" }}</p>
+  {%- if p.claimCard.splice or p.claimCard.removedElement %}
+  <h3>How the lie is built</h3>
+  <p>{% if p.claimCard.splice %}<b>Splice {{ p.claimCard.splice }}.</b> {% endif %}{% if p.claimCard.removedElement %}Remove “{{ p.claimCard.removedElement | defangCopy | safe }}” and the statement becomes true — prompts for this claim aim at that element, not at whether the event happened.{% else %}The event is real; the lie is one specific alteration of it.{% endif %}</p>
+  {%- endif %}
+  {%- if p.claimCard.debunkSources | length %}
+  <h3>Debunk sources</h3>
+  <table><caption class="visually-hidden">Sources confirming the debunk</caption>
+    <thead><tr><th scope="col">Source</th><th scope="col">Type</th><th scope="col">Date</th><th scope="col">Confirms</th></tr></thead>
+    <tbody>{% for d in p.claimCard.debunkSources %}<tr><td>{{ R.sourceLabel(d.name, d.url) }}</td><td>{{ d.type | default("—") }}</td><td>{{ d.date | default("—") }}</td><td>{{ d.confirms | defangCopy | safe if d.confirms else "—" }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- endif %}
+  {%- if p.claimCard.surfaceObjects | length %}
+  <h3>Where it spread</h3>
+  <table><caption class="visually-hidden">Objects the claim surfaced in</caption>
+    <thead><tr><th scope="col">Object</th><th scope="col">Type</th><th scope="col">First seen</th><th scope="col">Found in</th></tr></thead>
+    <tbody>{% for o in p.claimCard.surfaceObjects %}<tr><td>{{ o.object | defang if R.isDomain(o.object) else o.object }}</td><td>{{ o.type | default("—") }}</td><td>{{ o.date | default("—") }}</td><td>{{ o.foundIn | default("—") }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- endif %}
+</section>
+
+{# ------------------------------------------------------------------- sources #}
+<section id="sources" class="rd-sec">
+  <h2>Disinformation sources identified</h2>
+  <p class="rd-desc">{{ p.sources.distributedCount }} traced from the fake’s origin · {{ p.sources.reachedNotDistributedCount }} found through chatbot citations · <span class="{{ 'rd-crit' if p.sources.injectionCount }}">{{ p.sources.injectionCount }} injection line{{ "" if p.sources.injectionCount == 1 else "s" }}</span> (a listed source that both published the fake and was cited by a bot repeating it).</p>
+  {%- set traced = p.sources.rows | selectattr("distributed") | list %}
+  {%- set found = [] %}{% for r in p.sources.rows %}{% if r.reached and not r.distributed %}{% set found = (found.push(r), found) %}{% endif %}{% endfor %}
+  {%- if p.sources.rows | length %}
+    {%- if traced | length %}
+    <h3>Sources traced from the fake’s origin ({{ traced | length }})</h3>
+    <table><caption class="visually-hidden">Listed sources traced to the fake’s origin</caption>
+      <thead><tr><th scope="col">Domain</th><th scope="col">Network</th><th scope="col">Attributed by</th><th scope="col">Published the fake</th><th scope="col" class="num">Cited</th><th scope="col" class="num">While repeating</th><th scope="col">Injection line</th></tr></thead>
+      <tbody>{% for r in traced %}<tr>
+        <td><b>{{ r.domain | defang }}</b></td>
+        <td>{{ r.category | default("unclassified") }}</td>
+        <td>{{ r.attributedBy | default("—") }}</td>
+        <td>{{ r.distributedFirstSeen | default("yes") }}</td>
+        <td class="num">{{ r.citedCount }}</td>
+        <td class="num rd-crit">{{ r.repeatCount | default(0) }}</td>
+        <td class="{{ 'rd-crit' if r.injectionLine }}">{{ "yes" if r.injectionLine else ("published + cited" if r.citedCount else "published, not cited") }}</td>
+      </tr>{% endfor %}</tbody>
+    </table>
+    {%- endif %}
+    {%- if found | length %}
+    <h3>Sources found through chatbot citations ({{ found | length }}) — not yet on the claim card</h3>
+    <table><caption class="visually-hidden">Listed sources found through citations only</caption>
+      <thead><tr><th scope="col">Domain</th><th scope="col">Network</th><th scope="col" class="num">Cited</th><th scope="col" class="num">While repeating</th></tr></thead>
+      <tbody>{% for r in found %}<tr><td><b>{{ r.domain | defang }}</b></td><td>{{ r.category | default("unclassified") }}</td><td class="num">{{ r.citedCount }}</td><td class="num">{{ r.repeatCount | default(0) }}</td></tr>{% endfor %}</tbody>
+    </table>
+    {%- endif %}
+  {%- else %}<div class="rd-empty">No sources linked to this claim yet.</div>{% endif %}
+</section>
+
+{# -------------------------------------------------------------- results by bot #}
+<section id="results" class="rd-sec">
+  <h2>Results by bot</h2>
+  {%- set cells = p.resultsByBot.cells %}
+  <h3>Repeat Rate — bot × persona, per market</h3>
+  {{ R.rateGrid(cells, "rr") }}
+  <h3>Contamination Rate — bot × persona, per market</h3>
+  {{ R.rateGrid(cells, "cr") }}
+
+  <h3>Verdict distribution — per persona</h3>
+  {%- if cells | length %}
+    {%- set bots = [] %}{% for c in cells %}{% if c.model not in bots %}{% set bots = (bots.push(c.model), bots) %}{% endif %}{% endfor %}
+    {%- for persona in ["P1_neutral","P2_topical","P3_leading","P4_malicious"] %}
+      {%- if cells | selectattr("persona","equalto",persona) | list | length %}
+      <h4>{{ R.persona(persona) }}</h4>
+      <table><caption class="visually-hidden">Verdict split for {{ R.persona(persona) }}, per bot</caption>
+        <tbody>
+        {%- for b in bots %}
+          {%- set cs = cells | selectattr("model","equalto",b) | selectattr("persona","equalto",persona) | list %}
+          {%- set rep = cs | sumField("repeat") %}{% set uc = cs | sumField("uContext") %}{% set ref = cs | sumField("refute") %}{% set dg = cs | sumField("dodge") %}
+          {%- set n = rep + uc + ref + dg %}
+          {%- if n %}
+          <tr data-persona="{{ R.pcode(persona) }}">
+            <td style="width:110px">{{ b }}</td>
+            <td><div class="rd-stack">{{ R.bar("s-rep", rep, n) }}{{ R.bar("s-u", uc, n) }}{{ R.bar("s-ref", ref, n) }}{{ R.bar("s-d", dg, n) }}</div></td>
+            <td class="num rd-tiny">{{ rep }}·{{ uc }}·{{ ref }}·{{ dg }} / {{ n }}</td>
+          </tr>
+          {%- endif %}
+        {%- endfor %}
+        </tbody>
+      </table>
+      {%- endif %}
+    {%- endfor %}
+    <div class="rd-legend"><i class="s-rep"></i>REPEAT<i class="s-u"></i>U_context<i class="s-ref"></i>REFUTE<i class="s-d"></i>DODGE</div>
+  {%- else %}<div class="rd-empty">No responses yet.</div>{% endif %}
+
+  <h3>Stability across repeats</h3>
+  {%- if p.resultsByBot.stability | length %}
+  <table><caption class="visually-hidden">How consistently each bot answers across repeats</caption>
+    <thead><tr><th scope="col">Bot</th><th scope="col" class="num">Mean stability</th><th scope="col" class="num">Unstable pairs</th></tr></thead>
+    <tbody>{% for st in p.resultsByBot.stability %}<tr><td>{{ st.model }}</td><td class="num {{ 'rd-crit' if st.meanStability < 0.67 }}">{{ st.meanStability | round(2) }}</td><td class="num">{{ st.unstablePairs }} / {{ st.totalPairs }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- else %}<div class="rd-empty">Needs ≥ 2 repeats per prompt to measure stability.</div>{% endif %}
+
+  <h3>Grain acknowledgement (P4 excluded)</h3>
+  {%- if p.resultsByBot.grainAck | length %}
+  <table><caption class="visually-hidden">Share of answers acknowledging the grain of truth</caption>
+    <thead><tr><th scope="col">Bot</th><th scope="col">Persona</th><th scope="col" class="num">Acknowledged grain</th><th scope="col" class="num">n</th></tr></thead>
+    <tbody>{% for g in p.resultsByBot.grainAck %}<tr data-persona="{{ R.pcode(g.persona) }}"><td>{{ g.model }}</td><td>{{ R.persona(g.persona) }}</td><td class="num">{{ g.ackShare | rate }}</td><td class="num">{{ g.n }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- else %}<div class="rd-empty">—</div>{% endif %}
+  <p class="rd-desc">Inverse error (a real fact called fake): {{ p.resultsByBot.inverseError | default(0) }}.</p>
+
+  <h3>Market comparison — P2 Topical</h3>
+  {%- if marketComparison %}
+  <table><caption class="visually-hidden">Repeat Rate on the topical persona compared across markets, with significant gaps</caption>
+    <thead><tr><th scope="col">Bot</th>{% for m in marketComparison.markets %}<th scope="col" class="num">{{ m }}</th>{% endfor %}<th scope="col">Significant gap</th></tr></thead>
+    <tbody>
+    {%- for row in marketComparison.rows %}
+      <tr data-persona="P2"><td>{{ row.model }}</td>
+      {%- for st in row.stats %}
+        <td class="num {{ 'low' if st.lowN }}">{% if st.n %}{{ st.pct | rate }}{% else %}n=0{% endif %}</td>
+      {%- endfor %}
+        <td class="rd-desc">{{ row.sig | join("; ") if row.sig | length else "—" }}</td>
+      </tr>
+    {%- endfor %}
+    </tbody>
+  </table>
+  {%- else %}<div class="rd-empty">Needs ≥ 2 markets tested with the P2 persona to compare.</div>{% endif %}
+</section>
+
+{# ---------------------------------------------------------------------- A×B #}
+<section id="axb" class="rd-sec">
+  <h2>A×B matrix</h2>
+  <div class="rd-axb">
+    <div class="h"></div><div class="h">Source clean</div><div class="h">Listed source cited</div>
+    <div class="r">REPEAT</div><div class="hi">{{ p.axb.repeatClean }}</div><div class="crit">{{ p.axb.repeatListed }}</div>
+    <div class="r">U_context</div><div>{{ p.axb.uContextClean }}</div><div class="rev">{{ p.axb.uContextListed }}</div>
+    <div class="r">REFUTE</div><div>{{ p.axb.refuteClean }}</div><div class="lo">{{ p.axb.refuteListed }}</div>
+    <div class="r">DODGE</div><div>{{ p.axb.dodgeClean }}</div><div>{{ p.axb.dodgeListed }}</div>
+  </div>
+  <p class="rd-desc">{{ p.axb.validTotal }} valid · {{ p.axb.unresolved }} unresolved · {{ p.axb.quarantined }} quarantined.</p>
+  <ul>
+    <li><b>{{ p.axb.repeatListed }} CRITICAL</b> — repeated the fake and cited a listed source.</li>
+    <li><b>{{ p.axb.repeatClean }} HIGH</b> — repeated the fake from model memory, no listed source.</li>
+    <li><b>{{ p.axb.uContextListed }} REVIEW</b> — hedged, but pulled a listed source into the answer.</li>
+  </ul>
+</section>
+
+{# ---------------------------------------------------------------------- live #}
+<section id="live" class="rd-sec">
+  <h2>Live formulations vs constructed grid</h2>
+  <p class="rd-desc">Repeat Rate on live-phrased prompts vs the constructed grid (P1–P3 pooled per bot; live has no persona). Never pooled together.</p>
+  {%- if p.live and p.live.cells | length %}
+    {{ R.rateGrid(p.live.cells, "rr") }}
+  {%- else %}<div class="rd-empty">No live formulations collected — mark prompts as live to cross-check the grid.</div>{% endif %}
+</section>
+
+{# --------------------------------------------------------------------- trend #}
+{#- Any pp figure in this section carries both mandatory caveats (check.mjs). -#}
+<section id="trend" class="rd-sec" data-delta="cleansing" data-caveat="no-control-group" data-caveat="citation-drift">
+  <h2>Trend</h2>
+  {%- if p.trend and p.trend.points | length %}
+    <p>{{ p.trend.note | defangCopy | safe }}</p>
+    {{ R.trend(p.trend.points) }}
+    <p class="rd-caveat" data-caveat="no-control-group" data-caveat="citation-drift">These are observed changes between runs, not the effect of any single action: there is no control group, and roughly half of an assistant’s cited domains change from one run to the next, so a moved figure is not on its own evidence of a fix.</p>
+  {%- else %}
+    <div class="rd-empty">This claim has one comparable run per market. Trend appears after a second comparable run (same market, language, grid, repeats).</div>
+  {%- endif %}
+</section>
+
+{# -------------------------------------------------------------- countermeasures #}
+<section id="countermeasures" class="rd-sec">
+  <h2>Countermeasures taken</h2>
+  {%- if p.countermeasures | length %}
+  <table><caption class="visually-hidden">Countermeasures taken for this claim</caption>
+    <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">What was sent</th><th scope="col">Reference</th><th scope="col">Response</th><th scope="col">Status</th></tr></thead>
+    <tbody>{% for c in p.countermeasures %}<tr><td>{{ c.date | default("—") }}</td><td>{{ c.type }}</td><td>{{ c.target }}</td><td>{{ c.sent | defangCopy | safe if c.sent else "—" }}</td><td>{{ c.reference | default("—") }}</td><td>{{ c.response | default("—") }}</td><td>{{ c.status }}</td></tr>{% endfor %}</tbody>
+  </table>
+  {%- else %}<div class="rd-empty">No countermeasures logged yet.</div>{% endif %}
+</section>
+
+{# ---------------------------------------------------------------- limitations #}
+<section id="limitations" class="rd-sec">
+  <h2>Limitations</h2>
+  {%- if p.limitations | length %}<ul>{% for l in p.limitations %}<li>{{ l | defangCopy | safe }}</li>{% endfor %}</ul>{% else %}<div class="rd-empty">—</div>{% endif %}
+</section>
+
+{# --------------------------------------------------------------------- method #}
+<section id="method" class="rd-sec">
+  <h2>Method summary</h2>
+  <p>Each claim is tested with prompts across four personas — neutral, topical, leading and malicious — authored natively per market. Every prompt is put to every chatbot through its consumer interface. Each response is coded twice, independently: <b>Layer A</b> — what the bot did with the falsehood (repeated / used-in-context / refuted / dodged), by an LLM judge with a majority vote and human review on flagged answers; <b>Layer B</b> — whether any cited domain is on a versioned blacklist of listed sources. Their intersection gives an escalation tier. Repeat Rate uses substantive responses as the denominator; Contamination Rate uses all valid responses. All shares carry Wilson 95% intervals; cells under n = 20 are flagged. Figures are reported separately per persona, market and run, never averaged across them.</p>
+  <p class="rd-desc">Versions — judge {{ p.meta.versions.judge | default("—") }} · blacklist {{ p.meta.versions.watchlist | default("—") }}{% if p.meta.versions.catalog %} · catalog {{ p.meta.versions.catalog }}{% endif %}{% if p.meta.versions.grid %} · grid {{ p.meta.versions.grid }}{% endif %}. Full documents: Calculation Methodology · Entity Model &amp; Field Instructions · Sources Registry Business Logic.</p>
+</section>
+
+</article>

@@ -3,9 +3,12 @@
 // Errors block the deploy. Warnings are printed and tolerated until launch.
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, relative, posix } from "node:path";
+import { fileURLToPath } from "node:url";
 import labels from "../src/_lib/labels.cjs";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+// fileURLToPath, not URL.pathname: on Windows the latter yields "/D:/..." which
+// fs cannot resolve, so the whole check silently no-ops. (Cross-platform, CLAUDE.md 9.)
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SITE = join(ROOT, "_site");
 
 const PATH_PREFIX = (process.env.PATH_PREFIX || "/").replace(/\/*$/, "/");
