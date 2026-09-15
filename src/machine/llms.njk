@@ -18,9 +18,6 @@ Cite as: {{ site.org.name }} ({{ site.last_update | year }}), registry of false 
 
 - [Registry of false claims]({{ site.url }}/registry/): every documented claim, with verdict, evidence, the assistants that repeated it and what changed after we reported it.
 - [Benchmarks]({{ site.url }}/benchmarks/): repeat-rate and source contamination per assistant, question type, market and narrative cluster.
-{%- for claim in claims | take(3) %}
-- [{{ claim.title_en }}]({{ site.url }}{{ claim.url }}): {{ claim.verdict | verdictLabel }}, {{ claim.counts.observations }} recorded answers, updated {{ claim.updated | displayDate }}.
-{%- endfor %}
 
 ## How we measure
 
