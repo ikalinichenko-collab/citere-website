@@ -14,26 +14,27 @@ permalink: "{{ entry.url }}"
 <article class="report-doc">
 
 {# ---------------------------------------------------------------- header #}
-<div class="rd-crumb">Registry / {{ p.clusterName | default(report.clusterName) }} / {{ p.claimKey | default(report.claimKey) }}</div>
 <div class="rd-hdr">
   <div class="rd-hdr-main">
-    <h1>{{ analyst.headline | default(report.label) }}</h1>
-    {%- if analyst.ledeContext %}<p class="rd-lede">{{ analyst.ledeContext | defangCopy | safe }}</p>{% endif %}
     <div class="rd-tags">
       <span class="badge {{ report.verdict | verdictClass }}">{{ report.verdict | verdictLabel }}</span>
-      {%- for t in (p.tags | default([])) %}<span class="rd-tag">{{ t }}</span>{% endfor %}
+      {%- if report.clusterName %}<a class="tile" href="{{ ('/registry/cluster/' + (report.clusterName | slugify) + '/') | loc(lang) | url }}">{{ report.clusterName }}</a>{% endif %}
+      {%- if report.splice %}<a class="tile" href="{{ ('/registry/splice/' + (report.splice | slugify) + '/') | loc(lang) | url }}">Splice {{ report.splice }}</a>{% endif %}
     </div>
+    <h1>{{ analyst.headline | default(report.label) }}</h1>
+    <p class="rd-ids">{{ report.claimKey }}{% if p.claimStatus %} &middot; {{ p.claimStatus }}{% endif %}</p>
+    {%- if analyst.ledeContext %}<p class="rd-lede">{{ analyst.ledeContext | defangCopy | safe }}</p>{% endif %}
   </div>
-  <aside class="rd-meta">
-    <b>Countries:</b> {{ p.meta.countries | length }} — {{ p.meta.countries | join(", ") | default("—") }}<br>
-    <b>Runs:</b> {{ p.meta.runKeys | join(" · ") | default("—") }}<br>
-    <b>Bots:</b> {{ p.meta.bots | join(", ") | default("—") }}<br>
-    <b>Per run:</b> {{ p.meta.perRun | default("—") }}<br>
-    <b>Versions:</b> judge {{ p.meta.versions.judge | default("—") }} · blacklist {{ p.meta.versions.watchlist | default("—") }}<br>
-    <b>Judge validation:</b> {{ p.meta.judgeValidation | default("—") }}<br>
-    <b>Published:</b> <time datetime="{{ articlePublished }}">{{ articlePublished | displayDate }}</time>
-  </aside>
 </div>
+
+{# ------------------------------------------------------------------- the brief #}
+{%- if brief.truth or brief.pushed or brief.assistants %}
+<section class="rd-brief">
+  {%- if brief.truth %}<div class="brow"><div class="blab">What is true</div><p>{{ brief.truth | defangCopy | safe }}</p></div>{% endif %}
+  {%- if brief.pushed %}<div class="brow"><div class="blab">How it was pushed</div><p>{{ brief.pushed | defangCopy | safe }}</p></div>{% endif %}
+  {%- if brief.assistants %}<div class="brow"><div class="blab">What the assistants did</div><p>{{ brief.assistants }}</p></div>{% endif %}
+</section>
+{%- endif %}
 
 {# ------------------------------------------------------------ six-tile strip #}
 <div class="rd-kpis">

@@ -4,6 +4,58 @@
 // paginated data is published.entries (built in src/_data/published.js).
 const { home, crumb } = require("../_lib/crumbs.cjs");
 const { fitTitle, fitDescription, listOf } = require("../_lib/meta.cjs");
+const { MONTHS } = require("../_lib/labels.cjs");
+
+// The app's web-model slugs → display names for the brief prose.
+const MODEL_LABEL = {
+  "gpt-web": "ChatGPT", "gemini-web": "Gemini", "claude-web": "Claude",
+  "perplexity-web": "Perplexity", "grok-web": "Grok", "google-ai": "Google AI",
+  "copilot-web": "Copilot", "deepseek-web": "DeepSeek"
+};
+const modelLabel = (m) => MODEL_LABEL[m] || String(m || "").replace(/-web$/, "").replace(/^\w/, (c) => c.toUpperCase());
+const briefDate = (iso) => {
+  const [y, mo, d] = String(iso || "").slice(0, 10).split("-");
+  return y && mo && d ? `${Number(d)} ${MONTHS[Number(mo) - 1]} ${y}` : String(iso || "");
+};
+
+// The three-paragraph "brief" under the title (Claim Report Spec). Generated from
+// the frozen payload — nothing recomputed. Any paragraph with no data is "" and
+// the template drops it.
+function buildBrief(report) {
+  const p = report.payload || {};
+  const cc = p.claimCard || {};
+  const s = p.strip || {};
+  const o = p.origin || {};
+  const sources = p.sources || {};
+  const bots = p.botBehaviour || [];
+
+  const truth = cc.grainOfTruth || (p.whyFalse && p.whyFalse.realEvent) || "";
+
+  const pushed = [];
+  if (o.firstSeen || o.network) {
+    pushed.push(`First seen${o.firstSeen ? ` ${briefDate(o.firstSeen)}` : ""}${o.network ? ` on the ${o.network}` : ""}.`);
+  }
+  const dist = sources.distributedCount || 0;
+  if (dist) {
+    pushed.push(`Carried by ${dist} ${dist === 1 ? "site" : "sites"} on our watchlist${sources.injectionCount ? ", later cited by an assistant answering about it" : ""}.`);
+  }
+  const attributed = [...new Set((sources.rows || []).map((r) => r.attributedBy).filter(Boolean))];
+  if (attributed.length) pushed.push(`Attributed by ${listOf(attributed)}.`);
+
+  const stated = bots.filter((b) => (b.criticalCited || 0) > 0).map((b) => modelLabel(b.model));
+  const memory = bots.filter((b) => (b.repeats || 0) > 0 && (b.criticalCited || 0) === 0).map((b) => modelLabel(b.model));
+  const asst = [];
+  if (stated.length) asst.push(`${listOf(stated)} stated this as fact and cited a source that had carried it in the same answer.`);
+  if (memory.length) asst.push(`${listOf(memory)} repeated it too, with no source attached.`);
+  const countries = `${s.countries || 0} ${(s.countries || 0) === 1 ? "country" : "countries"}`;
+  if (s.answers) {
+    asst.push(s.repeatedFake
+      ? `In all, ${s.repeatedFake} of ${s.answers} answers across ${countries} stated it as fact.`
+      : `None of ${s.answers} answers across ${countries} stated it as fact.`);
+  }
+
+  return { truth, pushed: pushed.join(" "), assistants: asst.join(" ") };
+}
 
 // A crawler-safe count sentence for the meta description, built from the strip.
 function descFor(report) {
@@ -65,6 +117,7 @@ module.exports = {
     marketComparison: (data) => marketComparison(data.entry.report),
     lang: (data) => data.entry.lang,
     report: (data) => data.entry.report,
+    brief: (data) => buildBrief(data.entry.report),
     p: (data) => data.entry.report.payload || {},
     analyst: (data) => data.entry.report.analyst || {},
     title: (data) => fitTitle(`“${data.entry.report.label}” — Citere`),

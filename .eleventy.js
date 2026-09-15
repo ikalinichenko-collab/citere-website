@@ -1,4 +1,4 @@
-const { md: markdown } = require("./src/_lib/markdown.cjs");
+const { md: markdown, slugify } = require("./src/_lib/markdown.cjs");
 const ui = require("./src/_data/ui.js");
 const {
   VERDICTS, BEHAVIOURS, STATUSES, ACTION_TYPES, NETWORKS, NETWORK_NAMES, NETWORK_CLASS,
@@ -84,6 +84,10 @@ module.exports = function (eleventyConfig) {
     const [y, m] = String(value || "").split("-");
     return m ? `${MONTHS[Number(m) - 1]}` : String(value);
   });
+
+  // Stable kebab slug (shared with src/_data/published.js facet grouping), so a
+  // report badge link, a Registry filter chip and a facet page permalink match.
+  eleventyConfig.addFilter("slugify", (s) => slugify(String(s || "")));
 
   // ---- watchlisted domains: printed, never linked, never live ------------
   eleventyConfig.addFilter("defang", (domain) => String(domain || "").replace(/\./g, "[.]"));

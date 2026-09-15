@@ -15,6 +15,7 @@ pagination:
 permalink: "{{ '/registry/' | loc(lang) }}"
 ---
 {%- set doc = copy.en.registry -%}
+{%- import "partials/report-cards.njk" as rc -%}
 <div class="phead">
   <h1>{{ doc.data.h1 }}</h1>
   <p class="plead">{{ doc.data.lead | fill(figures) | mdInline | safe }}</p>
@@ -38,25 +39,11 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 </div>
 
 {%- if publishedReports | length %}
+{%- if published.facets.clusters | length or published.facets.splices | length %}
+{{ rc.filters(published.facets, lang, "") }}
+{%- endif %}
 <h2 style="margin:26px 0 12px">All {{ publishedReports | length }} published reports, worst first</h2>
-<div class="grid3">
-{%- for r in publishedReports %}
-  <a class="fcard" href="{{ ('/registry/' + r.slug + '/') | loc(lang) | url }}">
-    <div class="fhead"><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span>
-      <span class="fclus">{{ r.clusterName }}</span></div>
-    <h3>{{ r.label }}</h3>
-    <div class="fmeta">
-      {%- if r.splice %}<span class="splicebadge">{{ r.splice }}</span>{% endif %}
-      <span class="fmlab">{{ r.claimKey }}</span>
-    </div>
-    <div class="fstats">
-      <span><b>{{ r.strip.repeatedFake }} of {{ r.strip.answers }}</b> answers stated it as fact</span>
-      <span>{% if r.strip.critical %}<b>{{ r.strip.critical }}</b> {{ r.strip.critical | plural("answer", "answers") }} also cited a listed source{% else %}no answer cited a listed source{% endif %}</span>
-      <span><b>{{ r.strip.countries }}</b> {{ r.strip.countries | plural("market", "markets") }} tested &middot; {{ r.strip.botsTested }} assistants</span>
-    </div>
-  </a>
-{%- endfor %}
-</div>
+{{ rc.cards(publishedReports, lang) }}
 <p class="note">Worst first by critical incidents. A count is a count: a rate needs one persona, one market and one run, and those live on each report's own page.</p>
 {%- else %}
 <div class="howread" style="margin-top:26px"><div class="hr"><b>Registry</b>No claim reports have been published yet. Reports appear here once the monitoring pipeline freezes and publishes them.</div></div>

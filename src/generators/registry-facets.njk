@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+navKey: registry
+schemas:
+  - collectionpage
+pagination:
+  data: published.facetEntries
+  size: 1
+  alias: facet
+permalink: "{{ facet.url }}"
+---
+{%- import "partials/report-cards.njk" as rc -%}
+<div class="phead">
+  <h1>{{ facetH1 }}</h1>
+  <p class="plead">{{ facetLede }}</p>
+</div>
+
+{{ rc.filters(published.facets, lang, facet.kind + ":" + facet.slug) }}
+
+<h2 style="margin:26px 0 12px">{{ facet.reports | length }} {{ facet.reports | length | plural("report", "reports") }}, worst first</h2>
+{{ rc.cards(facet.reports, lang) }}
+
+<div class="exports">
+  <a href="{{ '/registry/' | loc(lang) | url }}">All published reports</a>
+</div>

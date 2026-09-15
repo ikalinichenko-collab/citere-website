@@ -11,10 +11,10 @@ eleventyExcludeFromCollections: true
   <url><loc>{{ site.url }}{{ claim.url | loc('uk') }}</loc><lastmod>{{ claim.updated | isoDate }}</lastmod></url>
   <url><loc>{{ site.url }}{{ claim.escalationUrl | loc('uk') }}</loc><lastmod>{{ claim.updated | isoDate }}</lastmod></url>
 {%- endfor %}
-{%- for facet in facets %}
-  <url><loc>{{ site.url }}{{ facet.url | loc('uk') }}</loc><lastmod>{{ facet.updated | isoDate }}</lastmod></url>
-{%- endfor %}
 {%- for report in published.list %}
   <url><loc>{{ site.url }}{{ ('/registry/' + report.slug + '/') | loc('uk') }}</loc><lastmod>{{ report.publishedAt | isoDate }}</lastmod></url>
 {%- endfor %}
+{%- for f in published.facetEntries %}{% if f.lang == "uk" %}
+  <url><loc>{{ site.url }}{{ f.url }}</loc></url>
+{%- endif %}{% endfor %}
 </urlset>

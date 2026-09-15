@@ -1,0 +1,53 @@
+{#- Published Claim Report cards + the Registry filter bar. Shared by the Registry
+    index and the /registry/{cluster,splice}/{slug}/ facet pages so the card and
+    the chip look identical everywhere. -#}
+
+{% macro cards(reports, lang) %}
+<div class="grid3">
+{%- for r in reports %}
+  <a class="fcard" href="{{ ('/registry/' + r.slug + '/') | loc(lang) | url }}">
+    <div class="fhead"><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span>
+      <span class="fclus">{{ r.clusterName }}</span></div>
+    <h3>{{ r.label }}</h3>
+    <div class="fmeta">
+      {%- if r.splice %}<span class="splicebadge">{{ r.splice }}</span>{% endif %}
+      <span class="fmlab">{{ r.claimKey }}</span>
+    </div>
+    <div class="fstats">
+      <span><b>{{ r.strip.repeatedFake }} of {{ r.strip.answers }}</b> answers stated it as fact</span>
+      <span>{% if r.strip.critical %}<b>{{ r.strip.critical }}</b> {{ r.strip.critical | plural("answer", "answers") }} also cited a listed source{% else %}no answer cited a listed source{% endif %}</span>
+      <span><b>{{ r.strip.countries }}</b> {{ r.strip.countries | plural("market", "markets") }} tested &middot; {{ r.strip.botsTested }} assistants</span>
+    </div>
+  </a>
+{%- endfor %}
+</div>
+{% endmacro %}
+
+{#- Filter dropdowns. Native <details> — no client JS (CLAUDE.md 2); every option
+    is a real static URL. `active` is "" on the index, "cluster:<slug>" /
+    "splice:<slug>" on a facet page (marks the current option). -#}
+{% macro filters(facets, lang, active) %}
+<div class="rfilters">
+  <a class="tile{{ ' on' if not active }}" href="{{ '/registry/' | loc(lang) | url }}">All reports</a>
+  {%- if facets.clusters | length %}
+  <details class="rdrop"{{ ' open' if active and active.split(':')[0] == 'cluster' }}>
+    <summary class="tile">Topic <span aria-hidden="true">▾</span></summary>
+    <div class="rdrop-menu">
+      {%- for c in facets.clusters %}
+      <a href="{{ ('/registry/cluster/' + c.slug + '/') | loc(lang) | url }}"{{ ' aria-current="page"' if active == ('cluster:' + c.slug) }}>{{ c.label }} <b>{{ c.reports | length }}</b></a>
+      {%- endfor %}
+    </div>
+  </details>
+  {%- endif %}
+  {%- if facets.splices | length %}
+  <details class="rdrop"{{ ' open' if active and active.split(':')[0] == 'splice' }}>
+    <summary class="tile">Splice <span aria-hidden="true">▾</span></summary>
+    <div class="rdrop-menu">
+      {%- for s in facets.splices %}
+      <a href="{{ ('/registry/splice/' + s.slug + '/') | loc(lang) | url }}"{{ ' aria-current="page"' if active == ('splice:' + s.slug) }}>{{ s.label }} <b>{{ s.reports | length }}</b></a>
+      {%- endfor %}
+    </div>
+  </details>
+  {%- endif %}
+</div>
+{% endmacro %}

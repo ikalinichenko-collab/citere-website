@@ -8,10 +8,10 @@ eleventyExcludeFromCollections: true
   <url><loc>{{ site.url }}{{ claim.url }}</loc><lastmod>{{ claim.updated | isoDate }}</lastmod></url>
   <url><loc>{{ site.url }}{{ claim.escalationUrl }}</loc><lastmod>{{ claim.updated | isoDate }}</lastmod></url>
 {%- endfor %}
-{%- for facet in facets %}
-  <url><loc>{{ site.url }}{{ facet.url }}</loc><lastmod>{{ facet.updated | isoDate }}</lastmod></url>
-{%- endfor %}
 {%- for report in published.list %}
   <url><loc>{{ site.url }}/registry/{{ report.slug }}/</loc><lastmod>{{ report.publishedAt | isoDate }}</lastmod></url>
 {%- endfor %}
+{%- for f in published.facetEntries %}{% if f.lang == "en" %}
+  <url><loc>{{ site.url }}{{ f.url }}</loc></url>
+{%- endif %}{% endfor %}
 </urlset>

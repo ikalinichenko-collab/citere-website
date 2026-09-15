@@ -12,8 +12,8 @@ wrap: wrap-narrow
 <div class="phead chead">
   <div class="tiles">
     <span class="badge {{ claim.verdict | verdictClass }} bigbadge">{{ claim.verdict | verdictLabel }}</span>
-    <a class="tile" href="{{ ('/registry/cluster/' + claim.cluster + '/') | url }}">{{ clusters[claim.cluster].name_en | default(claim.cluster) }}</a>
-    {%- if claim.splice %}<a class="tile" href="{{ ('/registry/splice/' + claim.splice + '/') | url }}">Splice {{ claim.splice }} &middot; {{ claim.splice_label }}</a>{% endif %}
+    <span class="tile">{{ clusters[claim.cluster].name_en | default(claim.cluster) }}</span>
+    {%- if claim.splice %}<span class="tile">Splice {{ claim.splice }} &middot; {{ claim.splice_label }}</span>{% endif %}
   </div>
   <h1 class="ctitle">&ldquo;{{ claim.titles[lang] | default(claim.title_en) }}&rdquo;</h1>
   <p class="cmeta">{{ claim.id }}
@@ -141,8 +141,7 @@ wrap: wrap-narrow
 <p class="note">Every claim in the registry is classified by how the lie is attached to the truth. This one is splice {{ claim.splice }}, and assistants handle each kind differently: an outright invention usually gets refuted, a real event with one fact changed usually does not.</p>
 <div class="panel" style="padding:16px 18px">
   <div class="tiles" style="margin-bottom:10px">
-    <a class="tile" href="{{ ('/registry/splice/' + claim.splice + '/') | url }}">Splice {{ claim.splice }} &middot;
-      {{ claim.splice_label }} &rarr;</a>
+    <span class="tile">Splice {{ claim.splice }} &middot; {{ claim.splice_label }}</span>
   </div>
   <p style="margin:0 0 10px;font-size:13.5px">The claim {{ claim.splice_lede }}</p>
   <p style="margin:0 0 10px;font-size:13.5px">{% if claim.splice == "D" %}Nothing in it happened. It
