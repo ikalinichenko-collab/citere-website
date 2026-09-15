@@ -1,38 +1,62 @@
 // The homepage blocks fill in as their data lands: the strip, metric cards,
 // findings table, rankings, case study and markets grid each render only when
 // the data behind them exists (CLAUDE.md 6, 11.6).
+// Real homepage totals, summed from the published Claim Report feed (variant
+// B-full: the app is the source of truth). claims/clusters/responses come from
+// the index summaries; the distinct assistants and markets come from each
+// report's frozen meta. Empty feed → zeros, and the cards below hide themselves.
+function realTotals(data) {
+  const index = (data.published && data.published.index) || [];
+  const reports = (data.published && data.published.reports) || {};
+  const sum = (field) => index.reduce((n, it) => n + (Number((it.strip || {})[field]) || 0), 0);
+  const bots = new Set();
+  const markets = new Set();
+  for (const rep of Object.values(reports)) {
+    const meta = (rep.payload && rep.payload.meta) || {};
+    for (const b of meta.bots || []) bots.add(String(b));
+    for (const m of meta.countries || []) markets.add(String(m));
+  }
+  return {
+    claims: index.length,
+    clusters: new Set(index.map((it) => String(it.clusterName))).size,
+    responses: sum("answers"),
+    critical: sum("critical"),
+    // Fall back to the widest per-report count if the full reports are not loaded.
+    bots: bots.size || index.reduce((m, it) => Math.max(m, Number((it.strip || {}).botsTested) || 0), 0),
+    markets: markets.size || index.reduce((m, it) => Math.max(m, Number((it.strip || {}).countries) || 0), 0),
+    personas: 4
+  };
+}
+
 module.exports = {
   eleventyComputed: {
-    figures: (data) => ({
-      claims: `${data.site.counters.claims} documented false ${data.site.counters.claims === 1 ? "claim" : "claims"}`,
-      chatbots: data.site.counters.chatbots,
-      languages: data.site.counters.languages,
-      // External figure: it is in data/site.json with what it measures, so the
-      // headline does not type a statistic (CLAUDE.md 11.1).
-      budget: ((data.site.external_figures || {}).russia_propaganda_budget || {}).display || ""
-    }),
+    figures: (data) => {
+      const r = realTotals(data);
+      return {
+        claims: `${r.claims} documented false ${r.claims === 1 ? "claim" : "claims"}`,
+        chatbots: r.bots,
+        // Languages are not carried on the report feed yet; still from site config.
+        languages: data.site.counters.languages,
+        // External figure: it is in data/site.json with what it measures, so the
+        // headline does not type a statistic (CLAUDE.md 11.1).
+        budget: ((data.site.external_figures || {}).russia_propaganda_budget || {}).display || ""
+      };
+    },
     quoteFigures: (data) => data.benchmarks.headline || null,
-    // The four metric cards. A card appears only once its counter has a
-    // source: domains and reports arrive with sources and countermeasures.
+    // Metric cards from real published totals. Each appears only when it has a
+    // number. The watchlisted-domains and reports-sent cards return in Wave 2,
+    // once the app exports the sources registry and the countermeasures log —
+    // hidden now rather than showing demo figures next to the real ones.
     metricCards: (data) => {
-      const c = data.site.counters;
-      const b = data.benchmarks;
+      const r = realTotals(data);
       const cards = [];
-      if (c.claims) {
-        cards.push({ value: c.claims, label: `false ${c.claims === 1 ? "claim" : "claims"} documented`,
-          sub: `across ${c.clusters} ${c.clusters === 1 ? "topic" : "topics"}` });
+      if (r.claims) {
+        cards.push({ value: r.claims, label: `false ${r.claims === 1 ? "claim" : "claims"} documented`,
+          sub: `across ${r.clusters} ${r.clusters === 1 ? "topic" : "topics"}` });
       }
-      if (b.responses || c.responses) {
-        cards.push({ value: b.responses || c.responses, label: "answers recorded and checked",
-          sub: `${c.chatbots} assistants · ${c.personas} ways of asking` });
-      }
-      if (c.domains) {
-        cards.push({ value: c.domains, label: "watchlisted sites the answers cited",
-          sub: `watchlist ${data.site.watchlist_version}` });
-      }
-      if (c.countermeasures_sent) {
-        cards.push({ value: c.countermeasures_sent, label: "reports sent to the platforms",
-          sub: `${c.countermeasures_answered} answered · ${c.countermeasures_actioned} acted on` });
+      if (r.responses) {
+        cards.push({ value: r.responses, label: "answers recorded and checked",
+          sub: `${r.bots} assistants · ${r.personas} ways of asking` });
       }
       return cards;
     },
