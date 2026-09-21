@@ -26,7 +26,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
   <thead><tr><th scope="col">Market</th><th scope="col" class="num">Claims</th><th scope="col" class="num">Answers</th>
     <th scope="col">Runs</th><th scope="col">Grid</th><th scope="col">Comparable with</th></tr></thead>
   <tbody>
-  {%- for c in profiles.countries %}
+  {%- for c in countriesReport.countries %}
     {%- set pooled = metrics.poolOf({ "run": c.run.key, "is_live": false }) %}
     <tr><th scope="row" style="font-weight:400">{{ c.key | flag }} {{ c.name }}</th>
       <td class="num">{{ c.run.claims_count }}</td>
@@ -42,11 +42,11 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Repeat rate per assistant and market at {{ persona }}</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in profiles.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
-  {%- for bot in profiles.chatbots %}
+  {%- for bot in countriesReport.chatbots %}
     <tr data-persona="{{ persona }}"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in profiles.countries %}
+      {%- for c in countriesReport.countries %}
       {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": persona, "is_live": false }) %}
       <td class="num"><span class="cellstat{% if cell.repeat_rate.low_n %} lown{% endif %}">{{ cell.repeat_rate.rate | rate }}<small>{{ cell.repeat_rate.ci | ciLabel }} &middot; n={{ cell.repeat_rate.n }}</small></span></td>
       {%- endfor %}</tr>
@@ -60,11 +60,11 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Refusal rate per assistant and market at the neutral question</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in profiles.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
-  {%- for bot in profiles.chatbots %}
+  {%- for bot in countriesReport.chatbots %}
     <tr data-persona="P1"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in profiles.countries %}
+      {%- for c in countriesReport.countries %}
       {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": "P1", "is_live": false }) %}
       <td class="num"><span class="cellstat">{{ cell.dodge_rate.rate | rate }}<small>n={{ cell.dodge_rate.n }}</small></span></td>
       {%- endfor %}</tr>
@@ -77,12 +77,12 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Share of answers citing anything, per assistant and market</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in profiles.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
-  {%- for bot in profiles.chatbots %}
-    <tr data-persona="{{ profiles.persona }}"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in profiles.countries %}
-      {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": profiles.persona, "is_live": false }) %}
+  {%- for bot in countriesReport.chatbots %}
+    <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
+      {%- for c in countriesReport.countries %}
+      {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": countriesReport.persona, "is_live": false }) %}
       <td class="num"><span class="cellstat">{{ cell.retrieval_rate.rate | rate }}<small>listed: {{ cell.contamination_rate.rate | rate }}</small></span></td>
       {%- endfor %}</tr>
   {%- endfor %}
@@ -94,14 +94,14 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Repeats per claim and market</caption>
   <thead><tr><th scope="col">{{ 'col.claim' | t }}</th><th scope="col">Splice</th>
-    {%- for c in profiles.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
   {%- for claim in claims %}{% if claim.tested %}
     <tr><th scope="row" style="font-weight:400" class="cl"><a href="{{ claim.url | url }}">{{ claim.id }}</a>
         <small>{{ claim.label }}</small></th>
       <td><span class="splicebadge sp-{{ claim.splice }}">{{ claim.splice }}</span></td>
-      {%- for c in profiles.countries %}
-      {%- set cell = metrics.poolOf({ "claim": claim.id, "run": c.run.key, "persona": profiles.persona, "is_live": false }) %}
+      {%- for c in countriesReport.countries %}
+      {%- set cell = metrics.poolOf({ "claim": claim.id, "run": c.run.key, "persona": countriesReport.persona, "is_live": false }) %}
       <td class="num">{% if cell.counts.repeat %}<b>{{ cell.counts.repeat }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
       {%- endfor %}</tr>
   {%- endif %}{% endfor %}
@@ -113,14 +113,14 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Citations per market for each listed domain</caption>
   <thead><tr><th scope="col">{{ 'col.domain' | t }}</th><th scope="col">Locality</th>
-    {%- for c in profiles.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}
     <th scope="col" class="num">Total</th></tr></thead>
   <tbody>
   {%- for s in sources %}{% if s.citedCount %}
     <tr><th scope="row" style="font-weight:400"><a href="{{ s.url | url }}"><span class="domain">{{ s.defanged }}</span></a></th>
       <td style="font-size:12.5px;{% if s.markets | length == 1 %}color:var(--false);font-weight:600{% else %}color:var(--dim){% endif %}">
         {%- if s.markets | length == 1 %}local to {{ s.markets[0] | upper }}{% elif s.markets | length >= 3 %}global{% else %}regional{% endif %}</td>
-      {%- for c in profiles.countries %}<td class="num">{{ s.byMarket[c.market] | default(0) }}</td>{% endfor %}
+      {%- for c in countriesReport.countries %}<td class="num">{{ s.byMarket[c.market] | default(0) }}</td>{% endfor %}
       <td class="num"><b>{{ s.citedCount }}</b></td></tr>
   {%- endif %}{% endfor %}
   </tbody></table></div>
@@ -131,8 +131,8 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
   <thead><tr><th scope="col">Market</th><th scope="col" class="num">Real event underneath</th>
     <th scope="col" class="num">Pure fabrication</th><th scope="col">Difference</th></tr></thead>
   <tbody>
-  {%- for row in profiles.grain %}
-    <tr data-persona="{{ profiles.persona }}"><th scope="row" style="font-weight:400">{{ row.country.name }}</th>
+  {%- for row in countriesReport.grain %}
+    <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ row.country.name }}</th>
       <td class="num"><span class="cellstat">{{ row.grain.rate | rate }}<small>{{ row.grain.ci | ciLabel }} &middot; n={{ row.grain.n }}</small></span></td>
       <td class="num"><span class="cellstat">{{ row.fabrication.rate | rate }}<small>{{ row.fabrication.ci | ciLabel }} &middot; n={{ row.fabrication.n }}</small></span></td>
       <td style="color:var(--dim);font-size:12.5px">{{ "significant" if row.significant else "not significant" }}</td></tr>
@@ -148,7 +148,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
     {%- for t in countermeasures.types %}{% if t.count %}<th scope="col" class="num">{{ t.label }}</th>{% endif %}{% endfor %}
     <th scope="col">Targets</th></tr></thead>
   <tbody>
-  {%- for c in profiles.countries %}
+  {%- for c in countriesReport.countries %}
     {%- set rows = countermeasures.actions | whereEq('market', c.market) %}
     <tr><th scope="row" style="font-weight:400">{{ c.name }}</th>
       {%- for t in countermeasures.types %}{% if t.count %}

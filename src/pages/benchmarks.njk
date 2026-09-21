@@ -42,7 +42,7 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
 
 <h2 id="grain" style="margin:30px 0 6px">The grain-of-truth split</h2>
 <p class="note" style="margin:0 0 14px">Claims built on a real event against claims invented outright, by
-  question type, in {{ benchmarks.marketName }} in {{ benchmarks.label }}. The split runs on how the lie is
+  question type, {{ benchmarks.claimScopeNote }}. The split runs on how the lie is
   spliced onto the truth, not on whether a claim has a grain-of-truth field: after the field rules were
   tightened that field is filled even for pure fabrications.</p>
 <div class="panel"><table>
@@ -60,7 +60,7 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
   </tbody></table></div>
 
 <h2 id="abx" style="margin:30px 0 6px">A&times;B matrix</h2>
-<p class="note" style="margin:0 0 14px">Every answer in {{ benchmarks.marketName }}, {{ benchmarks.label }},
+<p class="note" style="margin:0 0 14px">Every answer {{ benchmarks.claimScopeNote }},
   placed by what the assistant did and whether it cited a listed source.</p>
 {% include "partials/abx-matrix.njk" %}
 

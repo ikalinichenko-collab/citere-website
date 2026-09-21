@@ -19,7 +19,7 @@ wrap: wrap-narrow
   <tbody>
   {%- for row in profile.bots %}
     <tr data-persona="{{ profile.persona }}">
-      <td class="cl"><span class="markcell">{{ botMark(logos, row.key, "sm", true) }}<a href="{{ row.url | url }}">{{ row.name }}</a></span></td>
+      <td class="cl"><span class="markcell">{{ botMark(logos, row.key, "sm", true) }}{% if row.url %}<a href="{{ row.url | url }}">{{ row.name }}</a>{% else %}{{ row.name }}{% endif %}</span></td>
       <td class="num"><span class="cellstat{% if row.repeat_rate.low_n %} lown{% endif %}">{{ row.repeat_rate.rate | rate }}<small>{{ row.repeat_rate.ci | ciLabel }} &middot; n={{ row.repeat_rate.n }}</small></span></td>
       <td class="num"><span class="cellstat{% if row.contamination_rate.low_n %} lown{% endif %}">{{ row.contamination_rate.rate | rate }}<small>n={{ row.contamination_rate.n }}</small></span></td>
       <td class="num"><span class="cellstat">{{ row.dodge_rate.rate | rate }}<small>n={{ row.dodge_rate.n }}</small></span></td>
@@ -33,9 +33,20 @@ wrap: wrap-narrow
 
 {%- if profile.claims | length %}
 <h2 id="claims" style="margin:36px 0 12px">Claims recorded in {{ profile.name }}</h2>
-{%- set tableClaims = profile.claims %}
-{%- set tableCaption = "Documented claims recorded in answers served to this market" %}
-{% include "partials/claims-table.njk" %}
+<div class="panel"><table>
+  <caption class="visually-hidden">Published claim reports recorded in answers served to this market</caption>
+  <thead><tr><th scope="col">Claim</th><th scope="col">Verdict</th><th scope="col" class="num">Answers</th>
+    <th scope="col" class="num">Repeated</th><th scope="col" class="num">Critical</th></tr></thead>
+  <tbody>
+  {%- for r in profile.claims %}
+    <tr><th scope="row" style="font-weight:400"><a href="{{ ('/registry/' + r.slug + '/') | url }}">{{ r.label }}</a>
+      <span style="color:var(--dimmer)">{{ r.claimKey }}</span></th>
+      <td><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span></td>
+      <td class="num">{{ r.strip.answers }}</td>
+      <td class="num">{{ r.strip.repeatedFake }}</td>
+      <td class="num">{% if r.strip.critical %}<b style="color:var(--false)">{{ r.strip.critical }}</b>{% else %}0{% endif %}</td></tr>
+  {%- endfor %}
+  </tbody></table></div>
 {%- endif %}
 
 {%- if profile.partners | length %}

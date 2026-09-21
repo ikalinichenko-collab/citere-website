@@ -127,41 +127,41 @@ module.exports = {
     // sets. A measured market shows what the run found and links to its page;
     // a scheduled one says so and links nowhere, because there is no page to
     // link to yet.
+    // Market cards, from the published-report country feed (countriesReport): a
+    // measured market shows its worst assistant's headline rate and links to its
+    // page; a scheduled one (on the monitoring list, no published run) says so.
     monitoredMarkets: (data) => {
-      // Values reach eleventyComputed proxy-wrapped for dependency tracking, so
-      // the map is walked by key and every value is coerced before use.
-      const measured = new Map();
-      for (const c of data.profiles.countries) measured.set(String(c.key), c);
-      // The figure a reader actually wants on a market card, from the board
-      // that already computed it inside one persona and one run.
-      const rates = new Map();
-      const board = (data.benchmarks.leaderboards || {}).market_repeat || [];
-      for (let i = 0; i < board.length; i += 1) {
-        rates.set(String(board[i].key), { rate: board[i].value, persona: String(board[i].persona) });
-      }
-      return Object.keys(data.countries).map((key) => {
-        const iso = String(key);
-        const meta = data.countries[iso];
-        const m = measured.get(iso);
-        const measuredRate = rates.get(iso) || null;
-        return {
-          iso,
-          name: String(meta.name),
-          rate: measuredRate && measuredRate.rate,
-          ratePersona: measuredRate && measuredRate.persona,
-          language: String(meta.language),
-          scheduled: !m,
-          url: m && data.navigation.has.countries ? m.url : null,
-          claims: m ? m.claims.length : 0,
-          answers: m ? m.answers : 0,
-          // A queued market has no measurement to show, so the card carries the
-          // two things that are true about it: how many claims a run would put
-          // to how many assistants.
-          queued: data.runs.latest ? data.runs.latest.claims_count : 0,
-          botCount: (data.metrics.dimensions.chatbots || []).length,
-          bots: m ? m.bots.slice(0, 6).map((b) => b.key) : (data.metrics.dimensions.chatbots || [])
-        };
-      });
+      const cr = data.countriesReport || {};
+      const allBots = (cr.chatbots || []).slice(0, 6).map((b) => String(b.key));
+      const measured = (cr.countries || []).map((c) => ({
+        iso: String(c.key),
+        name: String(c.name),
+        rate: c.worst && c.worst.repeat_rate ? c.worst.repeat_rate.rate : null,
+        ratePersona: c.persona,
+        language: String(c.language || ""),
+        scheduled: false,
+        url: data.navigation.has.countries ? c.url : null,
+        claims: (c.claims || []).length,
+        answers: c.answers,
+        queued: 0,
+        botCount: (c.bots || []).length,
+        bots: (c.bots || []).slice(0, 6).map((b) => String(b.key)),
+      }));
+      const scheduled = (cr.scheduled || []).map((s) => ({
+        iso: String(s.iso),
+        name: String(s.name),
+        rate: null,
+        ratePersona: null,
+        language: String(s.language || ""),
+        scheduled: true,
+        url: null,
+        claims: 0,
+        answers: 0,
+        queued: 0,
+        botCount: allBots.length,
+        bots: allBots,
+      }));
+      return [...measured, ...scheduled];
     },
     // The two counts the markets lead needs, so the sentence carries numbers
     // without a template typing one (CLAUDE.md 11.1).

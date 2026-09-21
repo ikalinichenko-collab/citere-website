@@ -8,6 +8,7 @@ const sourceFacets = require("./sourceFacets.js");
 const countermeasureFacets = require("./countermeasureFacets.js");
 const benchmarks = require("./benchmarks.js");
 const profiles = require("./profiles.js");
+const countriesReport = require("./countriesReport.js");
 const reports = require("./reports.js");
 
 const expand = (items, urlOf) =>
@@ -27,6 +28,6 @@ module.exports = {
   // no detail page is generated.
   benchmarkIssues: expand(benchmarks.issues.filter((i) => i.hasDetail), (i) => i.url),
   chatbots: expand(profiles.chatbots, (p) => p.url),
-  countries: expand(profiles.countries, (p) => p.url),
+  countries: expand(countriesReport.countries, (p) => p.url),
   reports: expand(reports, (r) => r.url)
 };
