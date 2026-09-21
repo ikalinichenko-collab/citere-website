@@ -38,7 +38,8 @@ const MAIN = [
   entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
   entry("sources", "Sources", "/sources/", P.sources),
   entry("countermeasures", "Countermeasures", "/countermeasures/", P.countermeasures),
-  entry("methodology", "Methodology", "/methodology/", P.methodology)
+  entry("methodology", "Methodology", "/methodology/", P.methodology),
+  entry("about", "About", "/about/", P.about)
 ];
 
 const FOOTER = [

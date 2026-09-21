@@ -2,6 +2,13 @@
 layout: layouts/base.njk
 wrap: wrap-narrow
 ---
+{%- if langSwitch %}
+<nav class="langswitch" aria-label="Language">
+  {%- for code in build.languages %}
+  <a href="{{ basePath | loc(code) | url }}"{% if code == lang %} class="on" aria-current="true"{% endif %} lang="{{ code }}">{{ "English" if code == "en" else "Українська" }}</a>
+  {%- endfor %}
+</nav>
+{%- endif %}
 <div class="phead"><h1>{{ h1 }}</h1>
   <p class="plead">{{ doc.data.lead | mdInline | safe }}</p></div>
 {{ content | safe }}

@@ -6,7 +6,11 @@ module.exports = {
     translationMissing: (data) => {
       const lang = data.lang || "en";
       if (lang === "en") return false;
-      return !(data.copy && data.copy[lang]);
+      // Per prose page: translated when copy[lang][pageKey] exists. Non-prose
+      // (generated) pages have no pageKey and carry no notice.
+      const key = data.docName || data.pageKey;
+      if (!key) return false;
+      return !(data.copy && data.copy[lang] && data.copy[lang][key]);
     },
     basePath: (data) => {
       const url = (data.page && data.page.url) || "/";

@@ -8,5 +8,13 @@ module.exports = {
     ...loadDir("content/en"),
     claims: loadDir("content/en/claims"),
     reports: loadDir("content/en/reports")
+  },
+  // Ukrainian prose. loadDir returns {} for any tree that does not exist yet, so
+  // a page with no uk/{pageKey}.md falls back to English (pages.11tydata.js)
+  // under the translation notice (src/src.11tydata.js).
+  uk: {
+    ...loadDir("content/uk"),
+    claims: loadDir("content/uk/claims"),
+    reports: loadDir("content/uk/reports")
   }
 };
