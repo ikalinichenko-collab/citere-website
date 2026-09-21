@@ -10,6 +10,7 @@ pagination:
 permalink: "{{ entry.url }}"
 ---
 {%- import "partials/report-macros.njk" as R -%}
+{%- from "partials/bot-mark.njk" import botMark -%}
 {%- set s = p.strip -%}
 {%- set cc = p.claimCard -%}
 <article class="report-doc">
@@ -71,7 +72,7 @@ permalink: "{{ entry.url }}"
     {%- else %}
       {%- for b in heroBots %}
       <div class="brow">
-        <div class="bname"><span class="bm">{{ b.mark }}</span><span>{{ b.label }}</span></div>
+        <div class="bname">{{ botMark(logos, b.slug, "sm") }}<span>{{ b.label }}</span></div>
         <div class="btrack"><div class="bfill" style="width:{{ b.fillPct | round(1) }}%"></div><div class="bsrc" style="width:{{ b.srcPct | round(1) }}%"></div></div>
         <div class="bval"><b>{{ b.pct }}%</b><span>{{ b.repeats }} of {{ b.answers }}{% if b.criticalCited %} · {{ b.criticalCited }} sourced{% endif %}</span></div>
       </div>
@@ -172,7 +173,7 @@ permalink: "{{ entry.url }}"
   <div class="botcards">
     {%- for b in botCards %}
     <div class="bc {{ 'crit' if b.crit }}">
-      <div class="bname"><span class="bm">{{ b.mark }}</span>{{ b.label }}</div>
+      <div class="bname">{{ botMark(logos, b.slug, "sm") }}{{ b.label }}</div>
       <b class="n">{{ b.repeats }}</b>
       <div class="of">{% if b.criticalCited %}repeats of {{ b.answers }} · {{ b.criticalCited }} sourced{% else %}repeats of {{ b.answers }} answers{% endif %}</div>
       <div class="how {{ 'crit' if b.crit }}">{{ b.how | defangCopy | safe }}</div>
@@ -200,7 +201,7 @@ permalink: "{{ entry.url }}"
       {%- if loop.index == 4 and p.evidence | length > 3 %}<details class="ev-more"><summary>Show all {{ p.evidence | length }} flagged answers</summary>{% endif %}
       <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}" data-synthetic="true">
         <div class="meta">
-          <span class="who"><span class="bm">{{ R.botMark(e.model) }}</span>{{ R.botLabel(e.model) }}</span>
+          <span class="who">{{ botMark(logos, R.botSlug(e.model), "sm") }}{{ R.botLabel(e.model) }}</span>
           {%- set em = [] %}{% if e.market %}{% set em = (em.push(e.market), em) %}{% endif %}{% if e.persona %}{% set em = (em.push(R.personaPhrase(e.persona)), em) %}{% endif %}
           {%- if em | length %}<span>{{ em | join(" · ") }}</span>{% endif %}
           {%- if e.date %}<span><time datetime="{{ e.date }}">{{ e.date | displayDate }}</time></span>{% endif %}

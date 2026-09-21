@@ -24,7 +24,7 @@ permalink: "{{ '/' | loc(lang) }}"
       {%- if navigation.has.registry %}<a class="btn btn-p" href="{{ '/registry/' | url }}">{{ 'action.browseRegistry' | t }}</a>{% endif %}
       {%- if navigation.has.reports %}<a class="btn btn-s" href="{{ '/monitor/' | url }}">{{ 'action.latestReport' | t }}</a>{% endif %}
     </div>
-    <p class="stamp">Updated <time datetime="{{ site.last_update | isoDate }}">{{ site.last_update | displayDate }}</time> &middot; Open data, CC BY 4.0 &middot;
+    <p class="stamp">Updated <time datetime="{{ lastUpdate | isoDate }}">{{ lastUpdate | displayDate }}</time> &middot; Open data, CC BY 4.0 &middot;
       <a href="{{ '/methodology/' | url }}">How we measure</a></p>
   </div>
 </div>

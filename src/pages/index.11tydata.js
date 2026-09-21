@@ -43,6 +43,16 @@ module.exports = {
       };
     },
     quoteFigures: (data) => data.benchmarks.headline || null,
+    // The "Updated" stamp: the newest published-report date, not the static
+    // site.json value. Falls back to site.last_update when the feed is empty.
+    lastUpdate: (data) => {
+      const newest = ((data.published && data.published.index) || [])
+        .map((r) => r.publishedAt)
+        .filter(Boolean)
+        .sort()
+        .pop();
+      return newest ? String(newest).slice(0, 10) : data.site.last_update;
+    },
     // "Latest findings" — the published Claim Reports, newest first, top 6. Same
     // feed and card as the Registry (report-cards.njk), so the homepage and the
     // Registry never disagree on the claim count. Empty feed → [] and the block

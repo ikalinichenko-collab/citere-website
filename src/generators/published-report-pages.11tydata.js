@@ -28,8 +28,16 @@ const MODEL_MARK = {
   "perplexity-web": "PX", "google-ai": "G", "grok-web": "Gr",
   "copilot-web": "Co", "deepseek-web": "DS"
 };
+// The app's web-model ids → the site's logo/platform slugs (data/logos.json),
+// so the report page reuses the real brand marks with a monogram fallback.
+const MODEL_SLUG = {
+  "gpt-web": "chatgpt", "gemini-web": "gemini", "claude-web": "claude",
+  "perplexity-web": "perplexity", "grok-web": "grok", "google-ai": "google-ai",
+  "copilot-web": "copilot", "deepseek-web": "deepseek"
+};
 const modelLabel = (m) => MODEL_LABEL[m] || String(m || "").replace(/-web$/, "").replace(/^\w/, (c) => c.toUpperCase());
 const modelMark = (m) => MODEL_MARK[m] || (modelLabel(m).replace(/[^A-Za-z]/g, "").slice(0, 2) || "?");
+const modelSlug = (m) => MODEL_SLUG[m] || String(m || "");
 
 const briefDate = (iso) => {
   const [y, mo, d] = String(iso || "").slice(0, 10).split("-");
@@ -121,6 +129,7 @@ function heroBots(p) {
   return bb.map((b) => ({
     label: modelLabel(b.model),
     mark: modelMark(b.model),
+    slug: modelSlug(b.model),
     rate: b.rate,
     pct: Math.round(b.rate * 100),
     repeats: b.repeats || 0,
@@ -176,6 +185,7 @@ function botCards(p, analyst) {
     .map((b) => ({
       label: modelLabel(b.model),
       mark: modelMark(b.model),
+      slug: modelSlug(b.model),
       repeats: b.repeats || 0,
       answers: b.answers || 0,
       criticalCited: b.criticalCited || 0,

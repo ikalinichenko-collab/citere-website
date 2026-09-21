@@ -15,8 +15,12 @@
 {%- set BOT_LABEL = {"gpt-web":"ChatGPT","gemini-web":"Gemini","claude-web":"Claude","perplexity-web":"Perplexity","google-ai":"Google AI Overviews","grok-web":"Grok","copilot-web":"Copilot","deepseek-web":"DeepSeek"} -%}
 {%- set BOT_MARK = {"gpt-web":"C","gemini-web":"Ge","claude-web":"Cl","perplexity-web":"PX","google-ai":"G","grok-web":"Gr","copilot-web":"Co","deepseek-web":"DS"} -%}
 {%- set PERSONA_PHRASE = {"P1_neutral":"neutral question","P2_topical":"topical question","P3_leading":"leading question","P4_malicious":"malicious request"} -%}
+{#- The app's web-model ids → the site's logo/platform slugs, so the report page
+    reuses the real brand marks (bot-mark.njk) with a monogram fallback. -#}
+{%- set BOT_SLUG = {"gpt-web":"chatgpt","gemini-web":"gemini","claude-web":"claude","perplexity-web":"perplexity","grok-web":"grok","google-ai":"google-ai","copilot-web":"copilot","deepseek-web":"deepseek"} -%}
 {%- macro botLabel(m) -%}{{ BOT_LABEL[m] | default(m) }}{%- endmacro -%}
 {%- macro botMark(m) -%}{{ BOT_MARK[m] | default("?") }}{%- endmacro -%}
+{%- macro botSlug(m) -%}{{ BOT_SLUG[m] | default(m) }}{%- endmacro -%}
 {%- macro personaPhrase(key) -%}{{ PERSONA_PHRASE[key] | default(key) }}{%- endmacro -%}
 
 {#- Is a string domain-shaped (no spaces, has a dot)? Used to decide defang vs
