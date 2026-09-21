@@ -35,7 +35,7 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
     <tr><th scope="row" style="font-weight:400"><a href="{{ issue.url | url }}">{{ issue.monthLabel }}</a></th>
       <td style="color:var(--dim)">{{ issue.clusterName }}</td>
       <td class="num">{{ issue.markets | length }}</td>
-      <td class="num">{{ issue.claims | length }}</td>
+      <td class="num">{{ issue.claimsCount }}</td>
       <td class="num">{{ issue.responses }}</td></tr>
   {%- endfor %}
   </tbody></table></div>
@@ -70,6 +70,6 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
 {% include "partials/funnel.njk" %}
 
 <div class="exports" style="margin:26px 0 44px">
-  {%- if datasets.has['registry-csv'] %}<a href="{{ '/registry.csv' | url }}">Every metric cell as CSV</a><span>&middot;</span>{% endif %}
+  {%- if benchmarks.issues | length %}<a href="{{ '/registry/reports.csv' | url }}">Every metric cell as CSV</a><span>&middot;</span>{% endif %}
   <a href="{{ '/countries/full/' | url }}">The full market breakdown</a><span>&middot;</span>
   <a href="{{ '/data/' | url }}">All exports</a></div>

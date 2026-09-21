@@ -6,36 +6,34 @@ pagination:
 layout: layouts/base.njk
 permalink: "{{ entry.url }}"
 ---
+{#- One benchmark issue = one cluster over one month, built from the app's run
+    feed (data/benchmarks.json). Runs are compared side by side, never merged.
+    Every figure is one persona, one market, one run. -#}
 <div class="phead">
   <div class="tiles" style="margin-bottom:12px"><span class="tile">{{ issue.clusterName }}</span>
     <span class="tile">{{ issue.monthLabel }}</span></div>
   <h1>{{ issue.clusterName }} &mdash; {{ issue.monthLabel }}</h1>
   <p class="plead" style="max-width:72ch">One benchmark issue is one cluster over one month.
-    {{ issue.claims | length }} claims put to {{ issue.runs[0].models | length }} assistants in
+    {{ issue.claimsCount }} {{ issue.claimsCount | plural("claim", "claims") }} put to the assistants in
     {{ issue.markets | length }} {{ issue.markets | length | plural("market", "markets") }},
     {{ issue.responses }} valid answers. Markets are set side by side and never merged.</p>
 </div>
-
-<div class="callout">The full benchmark issue is not specified yet. What is published here is the coverage
-  of this issue and the two figure sets that are settled &mdash; the escalation matrix and the
-  grain-of-truth split &mdash; with links to the pages that own the rest.</div>
 
 <h2 id="coverage" style="margin:30px 0 6px">Coverage</h2>
 <div class="panel"><table>
   <caption class="visually-hidden">Runs in this issue, with their scope and frozen versions</caption>
   <thead><tr><th scope="col">Run</th><th scope="col">Market</th><th scope="col">Collected</th>
     <th scope="col" class="num">Claims</th><th scope="col" class="num">Answers</th>
-    <th scope="col">Grid</th><th scope="col">Judge validation</th></tr></thead>
+    <th scope="col">Judge</th><th scope="col">Validation</th></tr></thead>
   <tbody>
   {%- for run in issue.runs %}
-    <tr><th scope="row" style="font-weight:400">{{ run.run_id }}</th>
-      <td><a href="{{ ('/countries/' + run.country + '/') | url }}">{{ run.country | countryName }}</a>
-        <span style="color:var(--dimmer)">{{ run.language | upper }}</span></td>
-      <td class="num" style="color:var(--dimmer)"><time datetime="{{ run.collected_at | isoDate }}">{{ run.collected_at | shortDate }}</time></td>
-      <td class="num">{{ run.claims_count }}</td>
-      <td class="num">{{ run.valid }}</td>
-      <td style="color:var(--dim)">{{ run.versions.grid }}</td>
-      <td style="color:var(--dim);font-size:12.5px">{{ run.judge_validation.status }}</td></tr>
+    <tr><th scope="row" style="font-weight:400">{{ run.key }}</th>
+      <td>{{ run.market | countryName }} <span style="color:var(--dimmer)">{{ run.language | upper }}</span></td>
+      <td class="num" style="color:var(--dimmer)"><time datetime="{{ run.collectedAt | isoDate }}">{{ run.collectedAt | shortDate }}</time></td>
+      <td class="num">{{ run.claimsCount }}</td>
+      <td class="num">{{ (run.ingest.valid) if run.ingest else "—" }}</td>
+      <td style="color:var(--dim)">{{ (run.versions.judgePrompt) if run.versions else "—" }}</td>
+      <td style="color:var(--dim);font-size:12.5px">{{ run.validation }}</td></tr>
   {%- endfor %}
   </tbody></table></div>
 
@@ -49,13 +47,12 @@ permalink: "{{ entry.url }}"
     <th scope="col" class="num">REVIEW</th><th scope="col" class="num">LOW</th></tr></thead>
   <tbody>
   {%- for run in issue.runs %}
-  {%- set cell = metrics.poolOf({ "run": run.key, "cluster": issue.cluster, "is_live": false }) %}
-    <tr><th scope="row" style="font-weight:400">{{ run.country | countryName }}</th>
-      <td class="num">{{ cell.n }}</td>
-      <td class="num"><b style="color:var(--false)">{{ cell.tiers.critical }}</b></td>
-      <td class="num">{{ cell.tiers.high }}</td>
-      <td class="num">{{ cell.tiers.review }}</td>
-      <td class="num">{{ cell.tiers.low }}</td></tr>
+    <tr><th scope="row" style="font-weight:400">{{ run.market | countryName }}</th>
+      <td class="num">{{ (run.ingest.valid) if run.ingest else "—" }}</td>
+      <td class="num"><b style="color:var(--false)">{{ run.tiers.critical }}</b></td>
+      <td class="num">{{ run.tiers.high }}</td>
+      <td class="num">{{ run.tiers.review }}</td>
+      <td class="num">{{ run.tiers.low }}</td></tr>
   {%- endfor %}
   </tbody></table></div>
 
@@ -67,25 +64,33 @@ permalink: "{{ entry.url }}"
   <thead><tr><th scope="col">Market</th><th scope="col" class="num">Real event underneath</th>
     <th scope="col" class="num">Invented outright</th><th scope="col">Difference</th></tr></thead>
   <tbody>
-  {%- for run in issue.runs %}
-  {%- set d = metrics.grainDifferential({ "run": run.key, "cluster": issue.cluster, "persona": "P2", "is_live": false }) %}
-  {%- if d %}
-    <tr data-persona="P2"><th scope="row" style="font-weight:400">{{ run.country | countryName }}</th>
-      <td class="num"><span class="cellstat{% if d.grain.low_n %} lown{% endif %}">{{ d.grain.rate | rate }}<small>{{ d.grain.ci | ciLabel }} &middot; n={{ d.grain.n }}</small></span></td>
-      <td class="num"><span class="cellstat{% if d.fabrication.low_n %} lown{% endif %}">{{ d.fabrication.rate | rate }}<small>{{ d.fabrication.ci | ciLabel }} &middot; n={{ d.fabrication.n }}</small></span></td>
-      <td style="color:var(--dim);font-size:12.5px">{{ "significant" if d.significant else "not significant" }}</td></tr>
-  {%- endif %}
-  {%- endfor %}
+  {%- for run in issue.runs %}{% if run.grainP2 %}
+    <tr data-persona="P2"><th scope="row" style="font-weight:400">{{ run.market | countryName }}</th>
+      <td class="num">{% if run.grainP2.grain %}{{ run.grainP2.grain.rate | rate }}<small>n={{ run.grainP2.grain.n }}</small>{% else %}—{% endif %}</td>
+      <td class="num">{% if run.grainP2.fabrication %}{{ run.grainP2.fabrication.rate | rate }}<small>n={{ run.grainP2.fabrication.n }}</small>{% else %}—{% endif %}</td>
+      <td style="color:var(--dim);font-size:12.5px">{{ "significant" if run.grainP2.significant else "not significant" }}</td></tr>
+  {%- endif %}{% endfor %}
   </tbody></table></div>
 
 <h2 id="claims" style="margin:30px 0 6px">Claims in this issue</h2>
-{%- set tableClaims = [] %}
-{%- for claim in claims %}{% if claim.id in issue.claims %}{% set tableClaims = (tableClaims.push(claim), tableClaims) %}{% endif %}{% endfor %}
-{%- set tableCaption = "Claims tested in this issue" %}
-{%- set tableFoot = false %}
-{% include "partials/registry-table.njk" %}
+{%- set clusterReports = [] %}
+{%- for r in published.index %}{% if (r.clusterName | slugify) == issue.clusterSlug %}{% set clusterReports = (clusterReports.push(r), clusterReports) %}{% endif %}{% endfor %}
+{%- if clusterReports | length %}
+<div class="panel"><table>
+  <caption class="visually-hidden">Published claim reports in this cluster</caption>
+  <thead><tr><th scope="col">Claim</th><th scope="col">Verdict</th><th scope="col" class="num">Answers</th><th scope="col" class="num">Repeated</th><th scope="col" class="num">Critical</th></tr></thead>
+  <tbody>
+  {%- for r in clusterReports %}
+    <tr><th scope="row" style="font-weight:400"><a href="{{ ('/registry/' + r.slug + '/') | url }}">{{ r.label }}</a> <span style="color:var(--dimmer)">{{ r.claimKey }}</span></th>
+      <td><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span></td>
+      <td class="num">{{ r.strip.answers }}</td>
+      <td class="num">{{ r.strip.repeatedFake }}</td>
+      <td class="num">{% if r.strip.critical %}<b style="color:var(--false)">{{ r.strip.critical }}</b>{% else %}0{% endif %}</td></tr>
+  {%- endfor %}
+  </tbody></table></div>
+{%- else %}<div class="callout">No published claim reports in this cluster yet.</div>{% endif %}
 
 <div class="exports" style="margin:26px 0 44px">
   <a href="{{ '/benchmarks/' | url }}">All issues</a><span>&middot;</span>
-  <a href="{{ '/countries/full/' | url }}">The full market breakdown</a>
+  <a href="{{ ('/registry/cluster/' + issue.clusterSlug + '/') | url }}">This cluster in the Registry</a>
 </div>

@@ -10,7 +10,7 @@ module.exports = {
       const i = data.entry.item;
       return fitDescription(
         [
-          `${i.claims.length} claims of the ${i.clusterName} cluster, put to the assistants in ${i.markets.length} markets during ${i.monthLabel}.`,
+          `${i.claimsCount} claims of the ${i.clusterName} cluster, put to the assistants in ${i.markets.length} markets during ${i.monthLabel}.`,
           `${i.responses} valid answers, compared market by market and never merged.`,
           "Coverage, the grain-of-truth split and the escalation matrix for this issue.",
           "Open data under CC BY 4.0."

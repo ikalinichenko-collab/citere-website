@@ -22,7 +22,10 @@ module.exports = {
   sources: expand(sources, (s) => s.url),
   sourceFacets: expand(sourceFacets, (f) => f.url),
   countermeasureFacets: expand(countermeasureFacets, (f) => f.url),
-  benchmarkIssues: expand(benchmarks.issues, (i) => i.url),
+  // Issue detail pages exist only when the app's run feed backs them (variant 2);
+  // in the claim-report fallback, issues link to the Registry cluster facet and
+  // no detail page is generated.
+  benchmarkIssues: expand(benchmarks.issues.filter((i) => i.hasDetail), (i) => i.url),
   chatbots: expand(profiles.chatbots, (p) => p.url),
   countries: expand(profiles.countries, (p) => p.url),
   reports: expand(reports, (r) => r.url)
