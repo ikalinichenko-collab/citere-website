@@ -1,22 +1,64 @@
 [
   {
-    "reportId": 13,
-    "claimId": 33,
-    "claimKey": "T2-S05",
-    "slug": "t2-s05-nato-militarizing-moldova-against-russia",
-    "label": "NATO militarizing Moldova against Russia",
+    "reportId": 17,
+    "claimId": 22,
+    "claimKey": "D1-S",
+    "slug": "d1-s-russia-ukraine-war-start-date",
+    "label": "Russia-Ukraine war start date",
+    "clusterName": "Diverted Western arms — Ukraine weapons on the black market",
+    "verdict": "false",
+    "splice": "C",
+    "version": 1,
+    "publishedAt": "2026-09-21T12:39:20.100Z",
+    "strip": {
+      "botsTested": 4,
+      "answers": 24,
+      "countries": 1,
+      "repeatedFake": 3,
+      "critical": 1,
+      "sourcesIdentified": 0,
+      "countermeasuresTaken": 0
+    }
+  },
+  {
+    "reportId": 19,
+    "claimId": 21,
+    "claimKey": "ARMS-S06",
+    "slug": "arms-s06-leaked-nato-memo-half-vanished",
+    "label": "Leaked NATO memo: half vanished",
+    "clusterName": "Diverted Western arms — Ukraine weapons on the black market",
+    "verdict": "false",
+    "splice": "D",
+    "version": 1,
+    "publishedAt": "2026-09-21T12:39:19.462Z",
+    "strip": {
+      "botsTested": 4,
+      "answers": 24,
+      "countries": 1,
+      "repeatedFake": 2,
+      "critical": 1,
+      "sourcesIdentified": 0,
+      "countermeasuresTaken": 0
+    }
+  },
+  {
+    "reportId": 18,
+    "claimId": 29,
+    "claimKey": "T2-S01",
+    "slug": "t2-s01-zelenskyy-exporting-children",
+    "label": "Zelenskyy exporting children",
     "clusterName": "Test2",
     "verdict": "false",
     "splice": "D",
     "version": 1,
-    "publishedAt": "2026-09-15T13:25:43.541Z",
+    "publishedAt": "2026-09-21T12:39:20.795Z",
     "strip": {
-      "botsTested": 0,
-      "answers": 0,
-      "countries": 0,
+      "botsTested": 5,
+      "answers": 48,
+      "countries": 1,
       "repeatedFake": 0,
       "critical": 0,
-      "sourcesIdentified": 0,
+      "sourcesIdentified": 1,
       "countermeasuresTaken": 0
     }
   }
