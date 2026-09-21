@@ -10,6 +10,15 @@
 {%- macro persona(key) -%}{{ PERSONA_NAME[key] | default(key | default("—")) }}{%- endmacro -%}
 {%- macro pcode(key) -%}{{ PERSONA_CODE[key] | default("P1") }}{%- endmacro -%}
 
+{#- The app's web-model ids → display names and short monograms (fallback for the
+    logo marks). Mirrors published-report-pages.11tydata.js. -#}
+{%- set BOT_LABEL = {"gpt-web":"ChatGPT","gemini-web":"Gemini","claude-web":"Claude","perplexity-web":"Perplexity","google-ai":"Google AI Overviews","grok-web":"Grok","copilot-web":"Copilot","deepseek-web":"DeepSeek"} -%}
+{%- set BOT_MARK = {"gpt-web":"C","gemini-web":"Ge","claude-web":"Cl","perplexity-web":"PX","google-ai":"G","grok-web":"Gr","copilot-web":"Co","deepseek-web":"DS"} -%}
+{%- set PERSONA_PHRASE = {"P1_neutral":"neutral question","P2_topical":"topical question","P3_leading":"leading question","P4_malicious":"malicious request"} -%}
+{%- macro botLabel(m) -%}{{ BOT_LABEL[m] | default(m) }}{%- endmacro -%}
+{%- macro botMark(m) -%}{{ BOT_MARK[m] | default("?") }}{%- endmacro -%}
+{%- macro personaPhrase(key) -%}{{ PERSONA_PHRASE[key] | default(key) }}{%- endmacro -%}
+
 {#- Is a string domain-shaped (no spaces, has a dot)? Used to decide defang vs
     plain text for surface objects and chain nodes. -#}
 {%- macro isDomain(s) -%}{% if s and (" " not in s) and ("." in s) and ("/" not in s) and ("@" not in s) %}1{% endif %}{%- endmacro -%}

@@ -1,0 +1,13 @@
+---
+pagination:
+  data: published.list
+  size: 1
+  alias: rpt
+permalink: "/registry/{{ rpt.slug }}.json"
+eleventyExcludeFromCollections: true
+---
+{#- The full frozen report the app published (summary + payload + analyst): the
+    "Export → JSON" download on the report page, and a machine-readable copy for
+    any consumer. One file per report; slugs never collide with the demo claim
+    JSON. Nothing is recomputed — this is the exact published unit. -#}
+{{ rpt | dump(2) | safe }}

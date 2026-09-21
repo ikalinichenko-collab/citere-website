@@ -1,0 +1,21 @@
+---
+pagination:
+  data: published.list
+  size: 1
+  alias: rpt
+permalink: "/registry/{{ rpt.slug }}.csv"
+eleventyExcludeFromCollections: true
+---
+{#- The "Export → CSV" download: one row per bot × persona × market cell, with
+    Repeat Rate and Contamination Rate as decimals and the low-n flag. Figures
+    come straight from the frozen payload cells (the app derived them); nothing
+    is recomputed or pooled here. -#}
+{%- set cells = (rpt.payload.resultsByBot.cells) if rpt.payload and rpt.payload.resultsByBot else [] -%}
+{%- set rows = ["claim_key,bot,persona,market,repeat,substantive,repeat_rate,contaminated,valid,contamination_rate,low_n"] -%}
+{%- for c in cells -%}
+  {%- set rr = (c.repeat / c.substantive) if c.substantive else "" -%}
+  {%- set cr = (c.contaminated / c.valid) if c.valid else "" -%}
+  {%- set row = [rpt.claimKey | csvCell, c.model | csvCell, c.persona | csvCell, (c.market or "") | csvCell, c.repeat, c.substantive, rr, c.contaminated, c.valid, cr, (1 if c.substantive < 20 else 0)] -%}
+  {%- set rows = (rows.push(row | join(",")), rows) -%}
+{%- endfor -%}
+{{ rows | join("\n") | safe }}

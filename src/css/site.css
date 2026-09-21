@@ -680,6 +680,7 @@ details.schema>summary{display:inline-flex}
 .fcard .ftruth b{color:var(--ink);font-weight:650}
 .fcard .fmeta{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:11.6px;color:var(--dim)}
 .fcard .fmeta .fmlab{margin-right:2px}
+.fcard .fmeta .fmdate{margin-left:auto;color:var(--dimmer)}
 .fcard .fstats{display:flex;flex-direction:column;gap:3px;margin-top:auto;padding-top:6px;
   border-top:1px solid var(--line);font-size:12.4px;color:var(--dim)}
 .fcard .fstats b{color:var(--ink);font-variant-numeric:tabular-nums}
@@ -877,3 +878,169 @@ details.schema>summary{display:inline-flex}
 
 /* Report brief (What is true / How it was pushed / What the assistants did) */
 .report-doc .rd-brief{margin:20px 0 4px}
+
+/* ---- Claim Report v2 — report-page-mockup_1.html layout ---------------------
+   The mockup-shaped narrative layout (hero card, KPI strip, bot cards, evidence
+   pairs, source panels, distribution flow), ported from the app preview
+   (artifacts/citere/src/pages/disinfo/report-preview.css.ts) and scoped under
+   .report-doc. Reuses the site tokens and the --rd-* tints declared above; the
+   older rd-* helpers (rd-empty/rd-desc/rd-crit/rd-stack/rd-axb/…) still back the
+   Data appendix and are kept. */
+.report-doc h1.claimq{font-size:clamp(23px,2.4vw,31px);line-height:1.15;letter-spacing:-.02em;font-weight:650;margin:0 0 16px;color:var(--ink);max-width:none}
+.report-doc .claimq::before{content:"\201C";color:var(--false)}.report-doc .claimq::after{content:"\201D";color:var(--false)}
+.report-doc section.flat{background:none;border:0;box-shadow:none;padding:0;margin:30px 0 8px}
+.report-doc section.flat>h2{font-size:22px;font-weight:650;letter-spacing:-.02em;margin:0 0 12px}
+/* hero card */
+.report-doc .hero-card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-md);display:grid;grid-template-columns:1.1fr .9fr;margin:6px 0 20px}
+.report-doc .hero-l{padding:26px 30px 24px;border-right:1px solid var(--line);border-radius:16px 0 0 16px}
+.report-doc .hero-r{padding:22px 26px 20px;background:#fafbfc;border-radius:0 16px 16px 0}
+.report-doc .klass{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--dim);background:#eef0f3;padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.report-doc .klass .kdot{width:7px;height:7px;border-radius:50%;background:var(--false)}
+.report-doc .finding{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px}
+.report-doc .finding .badge{flex:none;margin-top:2px}
+.report-doc .finding .badge.b-f{color:var(--false);background:var(--false-bg)}
+.report-doc .finding p{margin:0;font-size:15px;line-height:1.5;color:var(--dim);max-width:none}
+.report-doc .finding p b{color:var(--ink)}
+.report-doc .truth{background:var(--ok-bg);border-radius:10px;padding:14px 16px;border-left:3px solid var(--ok)}
+.report-doc .truth .lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ok);margin-bottom:5px}
+.report-doc .truth p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);max-width:none}
+.report-doc .truth .src{font-size:12px;color:var(--dimmer);margin-top:6px}
+.report-doc .tools{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.report-doc .tools a{font-size:12.5px;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--card)}
+.report-doc .tools a:hover{border-color:var(--dimmer);color:var(--ink)}
+.report-doc .tools .ref{font-size:12px;color:var(--dimmer);margin-left:auto}
+/* Share / Cite / Export — native <details> popovers, no JS */
+.report-doc .tools details.toolpop{position:relative}
+.report-doc .tools details.toolpop>summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--card)}
+.report-doc .tools details.toolpop>summary::-webkit-details-marker{display:none}
+.report-doc .tools details.toolpop>summary::after{content:" ▾";color:var(--dimmer)}
+.report-doc .tools details.toolpop>summary:hover{border-color:var(--dimmer);color:var(--ink)}
+.report-doc .tools details.toolpop[open]>summary{border-color:var(--dimmer);color:var(--ink)}
+.report-doc .tools details.toolpop .pop{position:absolute;z-index:40;top:calc(100% + 6px);left:0;min-width:250px;max-width:340px;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow-md);padding:8px}
+.report-doc .tools .pop a{display:block;padding:7px 10px;border-radius:7px;font-size:13px;color:var(--ink);font-weight:500}
+.report-doc .tools .pop a:hover{background:var(--bg)}
+.report-doc .tools .pop .popurl,.report-doc .tools .pop .cite{font-size:12px;color:var(--dim);padding:6px 10px;word-break:break-word;line-height:1.55}
+.report-doc .tools .pop .cite i{font-style:italic}
+.report-doc .hero-r h3{font-size:15px;font-weight:650;margin:0 0 2px}
+.report-doc .hero-r .ssub{margin:0 0 12px;font-size:12.5px;color:var(--dim);max-width:none}
+.report-doc .brow{display:grid;grid-template-columns:150px 1fr 92px;gap:12px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.report-doc .bname{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600}
+.report-doc .bm{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;font-size:10px;font-weight:700;flex:none}
+.report-doc .btrack{position:relative;height:16px;background:var(--line);border-radius:8px;overflow:hidden}
+.report-doc .bfill{position:absolute;inset:0 auto 0 0;background:#a4adba;border-radius:8px}
+.report-doc .bsrc{position:absolute;inset:0 auto 0 0;background:var(--false);border-radius:8px}
+.report-doc .bval{font-size:11.5px;color:var(--dimmer);line-height:1.2;text-align:right}
+.report-doc .bval b{display:block;font-size:15px;color:var(--ink)}
+.report-doc .hero-r .legend{display:flex;gap:16px;font-size:12px;color:var(--dimmer);margin-top:12px}
+.report-doc .hero-r .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.report-doc .insight{margin-top:14px;padding:10px 12px;border-radius:8px;background:var(--false-bg);font-size:13px;color:#7a1f16;line-height:1.45}
+.report-doc .insight b{color:#5e1811}
+/* KPI strip */
+.report-doc .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:0 0 22px}
+.report-doc .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.report-doc .kpi b{font-size:24px;letter-spacing:-.02em;display:block;line-height:1.1;font-weight:650;font-variant-numeric:tabular-nums}
+.report-doc .kpi b.bad{color:var(--false)}.report-doc .kpi b.mute{color:var(--dimmer)}
+.report-doc .kpi span{color:var(--dimmer);font-size:12px}
+.report-doc .kpi a{color:inherit;text-decoration:none}.report-doc .kpi a:hover{text-decoration:underline}
+/* summary / response panels */
+.report-doc section.summary-sec{background:none;border:0;box-shadow:none;padding:0;margin-bottom:16px}
+.report-doc .summary{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.report-doc .summary .pnl{background:var(--card);border:1px dashed var(--line2);border-radius:12px;padding:18px 20px}
+.report-doc .summary .lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--dimmer);margin-bottom:6px}
+.report-doc .summary .pnl p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--ink);max-width:none}
+.report-doc .summary .pnl p:last-child{margin-bottom:0}
+/* sticky section nav */
+.report-doc .secnav{position:sticky;top:57px;z-index:10;background:var(--bg);display:flex;gap:18px;overflow-x:auto;padding:10px 0;margin:6px 0 8px;border-bottom:1px solid var(--line);font-size:13px}
+.report-doc .secnav a{color:var(--dim);white-space:nowrap;font-weight:500}
+.report-doc .secnav a:hover{color:var(--ink)}
+/* why this is false */
+.report-doc .grain{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-top:4px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.report-doc .grain .ic{width:34px;height:34px;border-radius:9px;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;font-weight:800;font-size:16px}
+.report-doc .grain .lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ok)}
+.report-doc .grain p{margin:3px 0 0;font-size:14.5px;max-width:none;color:var(--ink)}
+.report-doc .grainlist{margin:8px 0 0;padding-left:18px;font-size:13px;color:var(--dim);max-width:none}
+.report-doc .grainlist li{margin:3px 0}
+.report-doc .debunk{display:grid;grid-template-columns:1fr 1.15fr .7fr;margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.report-doc .debunk .hd{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--dimmer);padding:12px 18px;border-bottom:1px solid var(--line);background:#fafbfc}
+.report-doc .debunk .hd.f{color:var(--false)}.report-doc .debunk .hd.t{color:var(--ok)}
+.report-doc .debunk .cell{padding:15px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);font-size:14px;line-height:1.5}
+.report-doc .debunk .cell.f{color:#7a1f16;font-weight:500}
+.report-doc .debunk .cell.e{font-size:13px;color:var(--dimmer)}
+.report-doc .debunk .cell:nth-child(3n){border-right:0}
+.report-doc .howbuilt{margin-top:14px;display:grid;grid-template-columns:.85fr 1.15fr;gap:16px}
+.report-doc .pnl{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.report-doc .pnl h3{margin:0 0 6px;font-size:15px;color:var(--ink)}
+.report-doc .pnl p{margin:0 0 8px;font-size:14px;color:var(--dim);line-height:1.5;max-width:none}
+.report-doc .pnl p:last-child{margin-bottom:0}.report-doc .pnl p b{color:var(--ink)}
+.report-doc .pnl .ssub{font-size:12.5px;margin:0 0 12px;color:var(--dimmer)}
+.report-doc .splice{display:flex;align-items:center;gap:10px;margin:2px 0 8px}
+.report-doc .splice .sl{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--false);background:var(--false-bg);padding:3px 8px;border-radius:5px}
+.report-doc .splice b{font-size:14.5px;color:var(--ink)}
+.report-doc .sdef{color:var(--dim)}
+.report-doc .flow{display:flex;align-items:stretch;margin-top:6px;flex-wrap:wrap}
+.report-doc .fs{position:relative;flex:1;min-width:120px;padding-right:26px}
+.report-doc .fs .card{background:#fafbfc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;height:100%}
+.report-doc .fs:not(:last-child)::after{content:"";position:absolute;right:7px;top:50%;width:11px;height:11px;border-top:2px solid #c3c9d3;border-right:2px solid #c3c9d3;transform:translateY(-50%) rotate(45deg)}
+.report-doc .fs .d{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dimmer)}
+.report-doc .fs .ttl{font-weight:650;font-size:13.5px;margin:3px 0}
+.report-doc .fs.src .ttl{color:var(--false);font-family:ui-monospace,Menlo,monospace;font-size:12.5px;word-break:break-word}
+.report-doc .fs p{margin:0;font-size:12px}
+/* what the chatbots did */
+.report-doc .intro{font-size:15px;color:var(--dim);max-width:74ch;margin:0 0 4px}
+.report-doc .botcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:20px}
+.report-doc .bc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;border-top:3px solid #c3c9d3}
+.report-doc .bc.crit{border-top-color:var(--false)}
+.report-doc .bc .bname{margin-bottom:8px}
+.report-doc .bc b.n{font-size:24px;letter-spacing:-.02em;display:block;line-height:1;font-variant-numeric:tabular-nums}
+.report-doc .bc .of{font-size:12px;color:var(--dimmer);margin:3px 0 8px}
+.report-doc .bc .how{font-size:12.5px;line-height:1.4;color:var(--dim)}
+.report-doc .bc .how.crit{color:#7a1f16}
+.report-doc .shows{margin-top:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 18px;font-size:14.5px;line-height:1.5}
+.report-doc .shows p{margin:0 0 6px;max-width:none}.report-doc .shows p:last-child{margin-bottom:0}
+.report-doc .shows p b{color:var(--ink)}
+/* evidence rows */
+.report-doc .evrow{background:var(--card);border:1px solid var(--line);border-left:3px solid #c3c9d3;border-radius:10px;padding:14px 18px;margin-top:10px}
+.report-doc .evrow.crit{border-left-color:var(--false)}
+.report-doc .evrow .meta{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--dimmer);margin-bottom:8px;flex-wrap:wrap}
+.report-doc .evrow .meta .who{display:flex;align-items:center;gap:7px;font-weight:600;color:var(--ink)}
+.report-doc .evrow .tier{font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:4px;background:var(--line2);color:var(--dim)}
+.report-doc .evrow.crit .tier{background:var(--false-bg);color:var(--false)}
+.report-doc .evrow .hv{color:var(--ok)}
+.report-doc .evrow .q{font-size:14px;margin-bottom:10px;color:var(--ink)}
+.report-doc .evrow .q b{color:var(--dimmer);font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-right:6px}
+.report-doc .pair{display:grid;grid-template-columns:1.2fr .8fr;gap:10px}
+.report-doc .pair .bx{border-radius:8px;padding:10px 12px;font-size:13.5px;line-height:1.5}
+.report-doc .pair .said{background:var(--false-bg)}.report-doc .pair .tru{background:var(--ok-bg)}
+.report-doc .pair .lbl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px;color:var(--dimmer)}
+.report-doc .evrow .foot{font-size:12.5px;color:var(--dimmer);margin-top:8px;line-height:1.5}
+.report-doc .evrow .foot b{color:var(--dim)}
+.report-doc .evrow .foot .domain{color:var(--false);font-weight:600}
+.report-doc details.ev-more{margin-top:10px}
+.report-doc details.ev-more>summary{cursor:pointer;list-style:none;font-size:13.5px;font-weight:600;color:var(--accent);padding:8px 0}
+.report-doc details.ev-more>summary::-webkit-details-marker{display:none}
+.report-doc details.ev-more[open]>summary{color:var(--dim)}
+/* sources panels + reference table */
+.report-doc .srcgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.report-doc table.t2{width:100%;border-collapse:collapse;font-size:13.5px;margin:0}
+.report-doc table.t2 th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dimmer);font-weight:600;padding:8px;border-bottom:1px solid var(--line);background:none}
+.report-doc table.t2 td{padding:9px 8px;border-bottom:1px solid var(--line2);vertical-align:top;background:none}
+.report-doc table.t2 td.domain{font-family:ui-monospace,Menlo,monospace;font-size:12.5px}
+.report-doc table.t2 td.num,.report-doc table.t2 th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.report-doc .net{font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--line2);color:var(--dim)}
+/* collapsible reference blocks (claim card, appendix) */
+.report-doc details.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:10px}
+.report-doc details.sec>summary{cursor:pointer;padding:15px 20px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;list-style:none;color:var(--ink)}
+.report-doc details.sec>summary::-webkit-details-marker{display:none}
+.report-doc details.sec>summary span{font-weight:400;font-size:13px;color:var(--dimmer);margin-left:auto;margin-right:14px}
+.report-doc details.sec>summary::after{content:"+";font-size:20px;color:var(--dimmer);line-height:1}
+.report-doc details.sec[open]>summary::after{content:"\2013"}
+.report-doc details.sec>summary:hover{background:#fafbfc;border-radius:12px}
+.report-doc details.sec .body{padding:0 20px 18px;font-size:14px;color:var(--dim);line-height:1.55}
+.report-doc .runmeta{font-size:12px;color:var(--dimmer);margin-top:34px;line-height:1.7}
+.report-doc .runmeta b{color:var(--dim)}
+@media(max-width:820px){
+  .report-doc .hero-card,.report-doc .kpis,.report-doc .summary,.report-doc .howbuilt,.report-doc .debunk,.report-doc .pair,.report-doc .srcgrid{grid-template-columns:1fr}
+  .report-doc .hero-l{border-right:0;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0}
+  .report-doc .hero-r{border-radius:0 0 16px 16px}
+  .report-doc .debunk .cell{border-right:0}
+}
