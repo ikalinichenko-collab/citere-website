@@ -1,4 +1,5 @@
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- import "partials/report-cards.njk" as rc -%}
 {#- Homepage evidence blocks. Each renders only when its data exists, so the
     page fills in as claims and benchmarks land rather than showing a
     placeholder (CLAUDE.md 11.6). -#}
@@ -41,15 +42,14 @@
 </section>
 {%- endif %}
 
-{%- if claims | length %}
+{%- if published.index | length %}
 <section>
   <div class="shead"><h2>{{ 'section.latestFindings' | t }}</h2>
-    <a href="{{ '/registry/' | url }}">All {{ claims | length }} {{ claims | length | plural("claim", "claims") }} &rarr;</a></div>
+    <a href="{{ '/registry/' | url }}">All {{ published.index | length }} {{ published.index | length | plural("claim", "claims") }} &rarr;</a></div>
   <p class="lead">The claims we documented most recently. Each card carries our verdict, what is
     actually true underneath, and how many assistants stated it as fact anyway. Open one for the
     answers themselves: the question asked, the market, and what the assistant cited.</p>
-  {%- set cardClaims = claims | take(6) %}{% set cardMeta = false %}
-  {% include "partials/claim-cards.njk" %}
+  {{ rc.cards(latestReports, lang) }}
 </section>
 {%- endif %}
 

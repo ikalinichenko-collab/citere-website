@@ -12,6 +12,7 @@
     <div class="fmeta">
       {%- if r.splice %}<span class="splicebadge">{{ r.splice }}</span>{% endif %}
       <span class="fmlab">{{ r.claimKey }}</span>
+      {%- if r.publishedAt %}<span class="fmdate">Published <time datetime="{{ r.publishedAt }}">{{ r.publishedAt | displayDate }}</time></span>{% endif %}
     </div>
     <div class="fstats">
       <span><b>{{ r.strip.repeatedFake }} of {{ r.strip.answers }}</b> answers stated it as fact</span>

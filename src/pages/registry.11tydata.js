@@ -7,10 +7,20 @@ const displayDate = (iso) => {
 
 module.exports = {
   eleventyComputed: {
-    figures: (data) => ({
-      claims: `${data.claims.length} ${data.claims.length === 1 ? "claim" : "claims"}`,
-      updated: displayDate(data.site.last_update)
-    }),
+    // Driven by the published Claim Report feed, not the demo seed: the count is
+    // the number of published reports, and "updated" is the newest publish date.
+    figures: () => {
+      const idx = published.index;
+      const newest = idx
+        .map((r) => r.publishedAt)
+        .filter(Boolean)
+        .sort()
+        .pop();
+      return {
+        claims: `${idx.length} ${idx.length === 1 ? "claim" : "claims"}`,
+        updated: newest ? displayDate(newest) : "—"
+      };
+    },
     // The index now lists the published Claim Reports the app has frozen for the
     // site. Empty-safe: no feed → publishedReports is [] and the page shows its
     // empty state.
@@ -28,13 +38,16 @@ module.exports = {
         { value: sum("answers"), label: "answers examined" }
       ];
     },
-    dataset: (data) => ({
+    dataset: () => ({
       name: "Citere claim registry",
       description:
         "Documented false claims about Ukraine found in public AI chatbot answers, with per-cell metrics, countermeasures and re-measurements.",
       keywords: ["disinformation", "AI chatbots", "Ukraine", "fact-checking", "Russian influence operations"],
+      // Countries covered by the published reports, read from their frozen payloads.
       spatialCoverage:
-        [...new Set(data.claims.flatMap((c) => c.countries))].map((c) => c.toUpperCase()).join(", ") || undefined
+        [...new Set(
+          Object.values(published.reports).flatMap((r) => ((r.payload && r.payload.meta && r.payload.meta.countries) || []))
+        )].map((c) => String(c).toUpperCase()).join(", ") || undefined
     })
   }
 };

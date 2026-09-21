@@ -1,0 +1,19 @@
+---
+permalink: /registry/reports.csv
+eleventyExcludeFromCollections: true
+---
+{#- Every published report's per-cell figures in one file: one row per
+    report × bot × persona × market, Repeat/Contamination Rate as decimals and the
+    low-n flag. Straight from the frozen payload cells; nothing recomputed or
+    pooled. The registry page links here as its "Download CSV". -#}
+{%- set rows = ["claim_key,slug,bot,persona,market,repeat,substantive,repeat_rate,contaminated,valid,contamination_rate,low_n"] -%}
+{%- for rpt in published.list -%}
+  {%- set cells = (rpt.payload.resultsByBot.cells) if rpt.payload and rpt.payload.resultsByBot else [] -%}
+  {%- for c in cells -%}
+    {%- set rr = (c.repeat / c.substantive) if c.substantive else "" -%}
+    {%- set cr = (c.contaminated / c.valid) if c.valid else "" -%}
+    {%- set row = [rpt.claimKey | csvCell, rpt.slug | csvCell, c.model | csvCell, c.persona | csvCell, (c.market or "") | csvCell, c.repeat, c.substantive, rr, c.contaminated, c.valid, cr, (1 if c.substantive < 20 else 0)] -%}
+    {%- set rows = (rows.push(row | join(",")), rows) -%}
+  {%- endfor -%}
+{%- endfor -%}
+{{ rows | join("\n") | safe }}

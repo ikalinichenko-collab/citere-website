@@ -1,0 +1,8 @@
+---
+permalink: /registry/reports.json
+eleventyExcludeFromCollections: true
+---
+{#- The published-report registry as data: the same worst-first index the
+    /registry/ page lists (summary per report). The full per-report payload is at
+    /registry/{slug}.json. Empty-safe: no feed → []. -#}
+{{ published.index | dump(2) | safe }}

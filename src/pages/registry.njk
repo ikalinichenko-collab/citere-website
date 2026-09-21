@@ -50,8 +50,8 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 {%- endif %}
 
 <div class="exports">
-  {%- if datasets.has['registry-json'] %}<a href="{{ '/registry.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>{% endif %}
-  {%- if datasets.has['registry-csv'] %}<a href="{{ '/registry.csv' | url }}">{{ 'action.downloadCsv' | t }}</a><span>&middot;</span>{% endif %}
+  {%- if publishedReports | length %}<a href="{{ '/registry/reports.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>
+  <a href="{{ '/registry/reports.csv' | url }}">{{ 'action.downloadCsv' | t }}</a><span>&middot;</span>{% endif %}
   {%- if navigation.has.rss %}<a href="{{ '/feed.xml' | url }}">RSS</a><span>&middot;</span>{% endif %}
   <a href="{{ '/data/#cite' | url }}">{{ 'action.citeRegistry' | t }}</a>
 </div>

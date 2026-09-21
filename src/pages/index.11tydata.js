@@ -43,6 +43,15 @@ module.exports = {
       };
     },
     quoteFigures: (data) => data.benchmarks.headline || null,
+    // "Latest findings" — the published Claim Reports, newest first, top 6. Same
+    // feed and card as the Registry (report-cards.njk), so the homepage and the
+    // Registry never disagree on the claim count. Empty feed → [] and the block
+    // hides itself.
+    latestReports: (data) => {
+      const idx = ((data.published && data.published.index) || []).slice();
+      idx.sort((a, b) => String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")));
+      return idx.slice(0, 6);
+    },
     // Metric cards from real published totals. Each appears only when it has a
     // number. The watchlisted-domains and reports-sent cards return in Wave 2,
     // once the app exports the sources registry and the countermeasures log —
