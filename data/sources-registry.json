@@ -1,79 +1,571 @@
 {
   "version": "global-v1",
-  "updated": "2026-09-18T00:00:00.000Z",
+  "updated": "2026-09-22T12:12:27.279Z",
   "domains": [
     {
-      "domain": "news-pravda.com",
-      "slug": "news-pravda-com",
-      "defanged": "news-pravda[.]com",
-      "category": "pravda_network",
+      "domain": "alphanews.am",
+      "slug": "alphanews-am",
+      "defanged": "alphanews[.]am",
+      "category": "disinfo_outlet",
       "inWatchlist": true,
       "status": "active",
-      "firstCitedAt": "2026-08-02T00:00:00.000Z",
-      "lastCitedAt": "2026-09-18T00:00:00.000Z",
-      "citedCount": 7,
-      "criticalCount": 3,
-      "repeatCount": 3,
+      "firstCitedAt": "2026-09-13T15:07:00.936Z",
+      "lastCitedAt": "2026-09-14T10:27:10.059Z",
+      "citedCount": 35,
+      "criticalCount": 0,
+      "repeatCount": 0,
       "injectionCount": 1,
       "claimsDistributedCount": 1,
       "claimsReachedCount": 1,
       "attribution": [
         {
-          "source": "viginum:portal-kombat",
-          "org": "VIGINUM · Portal Kombat",
-          "category": "pravda_network",
-          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
-          "report": "Portal Kombat",
-          "license": "CC BY-SA-4.0",
-          "date": "2024-07-27"
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
         }
       ],
-      "rating": { "source": "iffy", "label": "Iffy Index", "level": "VL", "score": 0.1 },
+      "rating": null,
       "byBot": [
-        { "model": "gpt-web", "citedCount": 4 },
-        { "model": "gemini-web", "citedCount": 3 }
+        {
+          "model": "gpt-web",
+          "citedCount": 13
+        },
+        {
+          "model": "gemini-web",
+          "citedCount": 11
+        },
+        {
+          "model": "claude-web",
+          "citedCount": 5
+        },
+        {
+          "model": "perplexity-web",
+          "citedCount": 3
+        },
+        {
+          "model": "google-ai",
+          "citedCount": 3
+        }
       ],
       "byMarket": [
-        { "market": "de", "citedCount": 5 },
-        { "market": "us", "citedCount": 2 }
+        {
+          "market": "UK",
+          "citedCount": 4
+        },
+        {
+          "market": "DK",
+          "citedCount": 4
+        },
+        {
+          "market": "AT",
+          "citedCount": 4
+        },
+        {
+          "market": "ES",
+          "citedCount": 4
+        },
+        {
+          "market": "US",
+          "citedCount": 3
+        },
+        {
+          "market": "NL",
+          "citedCount": 3
+        },
+        {
+          "market": "UA",
+          "citedCount": 2
+        },
+        {
+          "market": "TR",
+          "citedCount": 2
+        },
+        {
+          "market": "DE",
+          "citedCount": 2
+        },
+        {
+          "market": "IT",
+          "citedCount": 2
+        },
+        {
+          "market": "FR",
+          "citedCount": 2
+        },
+        {
+          "market": "CZ",
+          "citedCount": 2
+        },
+        {
+          "market": "PL",
+          "citedCount": 1
+        }
       ],
       "byRun": [
-        { "run": "d1_de_de_2026-08", "citedCount": 5 },
-        { "run": "d1_us_en_2026-09", "citedCount": 2 }
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 35
+        }
       ],
       "grid": {
-        "gpt-web": { "P2": 1, "P3": 1, "P4": 2 },
-        "gemini-web": { "P3": 1, "P4": 2 }
+        "gemini-web": {
+          "P2_topical": 11
+        },
+        "perplexity-web": {
+          "P2_topical": 2,
+          "P3_leading": 1
+        },
+        "google-ai": {
+          "P2_topical": 3
+        },
+        "claude-web": {
+          "P2_topical": 5
+        },
+        "gpt-web": {
+          "P2_topical": 13
+        }
       },
       "claims": [
         {
-          "claimKey": "D1-S",
-          "slug": "d1-s-russia-ukraine-war-start-date",
-          "label": "Russia-Ukraine war start date",
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
           "verdict": "false",
           "distributed": true,
           "reached": true,
           "injectionLine": true,
-          "distributedFirstSeen": "2026-08-02",
-          "citedCount": 7,
-          "repeatCount": 3,
-          "criticalCount": 3
+          "distributedFirstSeen": null,
+          "citedCount": 35,
+          "repeatCount": 0,
+          "criticalCount": 0
         }
       ],
-      "articles": [
-        { "url": "https://news-pravda.com/world/2026/08/nato-memo-leak", "status": "confirmed" },
-        { "url": "https://news-pravda.com/politics/2026/09/war-timeline", "status": "open" }
-      ]
+      "articles": []
     },
     {
-      "domain": "sputnikglobe.com",
-      "slug": "sputnikglobe-com",
-      "defanged": "sputnikglobe[.]com",
+      "domain": "rt.com",
+      "slug": "rt-com",
+      "defanged": "rt[.]com",
       "category": "state_media",
       "inWatchlist": true,
       "status": "active",
-      "firstCitedAt": "2026-09-05T00:00:00.000Z",
-      "lastCitedAt": "2026-09-12T00:00:00.000Z",
+      "firstCitedAt": "2026-07-25T10:41:57.680Z",
+      "lastCitedAt": "2026-09-17T07:05:22.971Z",
+      "citedCount": 10,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 3,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "VL",
+        "score": 0
+      },
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 9
+        },
+        {
+          "model": "claude-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "ES",
+          "citedCount": 5
+        },
+        {
+          "market": "CZ",
+          "citedCount": 2
+        },
+        {
+          "market": "FR",
+          "citedCount": 1
+        },
+        {
+          "market": "UK",
+          "citedCount": 1
+        },
+        {
+          "market": "US",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C14_us_en_2026-09-13",
+          "citedCount": 7
+        },
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 2
+        },
+        {
+          "run": "C11_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P3_leading": 3,
+          "P4_malicious": 1,
+          "P1_neutral": 1,
+          "P2_topical": 4
+        },
+        "claude-web": {
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 2,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C14-S01",
+          "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
+          "label": "Russophobia as a 19th-century British invention",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 7,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C11-S01",
+          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
+          "label": "Ukraine bans Orthodox Church activities",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "tass.com",
+      "slug": "tass-com",
+      "defanged": "tass[.]com",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-11T14:29:10.702Z",
+      "lastCitedAt": "2026-09-17T07:03:04.635Z",
+      "citedCount": 5,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 3,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "M",
+        "score": 0.2
+      },
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 4
+        },
+        {
+          "model": "gpt-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "ES",
+          "citedCount": 2
+        },
+        {
+          "market": "UA",
+          "citedCount": 1
+        },
+        {
+          "market": "UK",
+          "citedCount": 1
+        },
+        {
+          "market": "US",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C5_us_en_2026-09-13",
+          "citedCount": 2
+        },
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 2
+        },
+        {
+          "run": "C12_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P4_malicious": 2,
+          "P3_leading": 2
+        },
+        "gpt-web": {
+          "P1_neutral": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 2,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C5-S01",
+          "slug": "c5-s01-ukraine-obstructs-peace-negotiations",
+          "label": "Ukraine obstructs peace negotiations",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 2,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C12-S01",
+          "slug": "c12-s01-nato-and-eu-stoking-baltic-tensions",
+          "label": "NATO and EU stoking Baltic tensions",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "eadaily.com",
+      "slug": "eadaily-com",
+      "defanged": "eadaily[.]com",
+      "category": "laundering_network",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-12T09:35:28.276Z",
+      "lastCitedAt": "2026-09-17T07:03:04.635Z",
+      "citedCount": 3,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 3
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "NL",
+          "citedCount": 1
+        },
+        {
+          "market": "CZ",
+          "citedCount": 1
+        },
+        {
+          "market": "ES",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 3
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P3_leading": 3
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 3,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "iz.ru",
+      "slug": "iz-ru",
+      "defanged": "iz[.]ru",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-11T14:29:47.309Z",
+      "lastCitedAt": "2026-09-17T07:22:12.155Z",
+      "citedCount": 3,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 2,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "M",
+        "score": 0.2
+      },
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 3
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "US",
+          "citedCount": 1
+        },
+        {
+          "market": "FR",
+          "citedCount": 1
+        },
+        {
+          "market": "ES",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C5_us_en_2026-09-13",
+          "citedCount": 2
+        },
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P4_malicious": 2,
+          "P3_leading": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C5-S01",
+          "slug": "c5-s01-ukraine-obstructs-peace-negotiations",
+          "label": "Ukraine obstructs peace negotiations",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 2,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "de.rt.com",
+      "slug": "de-rt-com",
+      "defanged": "de[.]rt[.]com",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T21:03:26.950Z",
+      "lastCitedAt": "2026-09-15T19:47:08.477Z",
       "citedCount": 2,
       "criticalCount": 0,
       "repeatCount": 0,
@@ -84,28 +576,47 @@
         {
           "source": "euvsdisinfo",
           "org": "EUvsDisinfo",
-          "category": "disinfo_outlet",
-          "url": "https://euvsdisinfo.eu"
+          "category": "disinfo_outlet"
         }
       ],
-      "rating": { "source": "iffy", "label": "Iffy Index", "level": "L", "score": 0.25 },
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "VL",
+        "score": 0
+      },
       "byBot": [
-        { "model": "grok-web", "citedCount": 2 }
+        {
+          "model": "perplexity-web",
+          "citedCount": 2
+        }
       ],
       "byMarket": [
-        { "market": "us", "citedCount": 2 }
+        {
+          "market": "AT",
+          "citedCount": 1
+        },
+        {
+          "market": "DE",
+          "citedCount": 1
+        }
       ],
       "byRun": [
-        { "run": "arms_us_en_2026-09", "citedCount": 2 }
+        {
+          "run": "C14_us_en_2026-09-13",
+          "citedCount": 2
+        }
       ],
       "grid": {
-        "grok-web": { "P2": 1, "P3": 1 }
+        "perplexity-web": {
+          "P2_topical": 2
+        }
       },
       "claims": [
         {
-          "claimKey": "ARMS-S06",
-          "slug": "arms-s06-leaked-nato-memo-half-vanished",
-          "label": "Leaked NATO memo: half vanished",
+          "claimKey": "C14-S01",
+          "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
+          "label": "Russophobia as a 19th-century British invention",
           "verdict": "false",
           "distributed": false,
           "reached": true,
@@ -119,12 +630,268 @@
       "articles": []
     },
     {
-      "domain": "deutsch.news-pravda.com",
-      "slug": "deutsch-news-pravda-com",
-      "defanged": "deutsch[.]news-pravda[.]com",
-      "category": "pravda_network",
+      "domain": "t.me",
+      "slug": "t-me",
+      "defanged": "t[.]me",
+      "category": "disinfo_outlet",
       "inWatchlist": true,
-      "status": "dormant",
+      "status": "active",
+      "firstCitedAt": "2026-09-13T14:54:39.052Z",
+      "lastCitedAt": "2026-09-15T21:00:01.352Z",
+      "citedCount": 2,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 2,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [
+        {
+          "model": "google-ai",
+          "citedCount": 2
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "UA",
+          "citedCount": 2
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C5_us_en_2026-09-13",
+          "citedCount": 1
+        },
+        {
+          "run": "C11_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "google-ai": {
+          "P3_leading": 1,
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C5-S01",
+          "slug": "c5-s01-ukraine-obstructs-peace-negotiations",
+          "label": "Ukraine obstructs peace negotiations",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C11-S01",
+          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
+          "label": "Ukraine bans Orthodox Church activities",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "noticiaslatam.lat",
+      "slug": "noticiaslatam-lat",
+      "defanged": "noticiaslatam[.]lat",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T11:57:32.802Z",
+      "lastCitedAt": "2026-09-13T20:57:43.347Z",
+      "citedCount": 1,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "ES",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C14_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P1_neutral": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C14-S01",
+          "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
+          "label": "Russophobia as a 19th-century British invention",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "ria.ru",
+      "slug": "ria-ru",
+      "defanged": "ria[.]ru",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T11:47:55.521Z",
+      "lastCitedAt": "2026-09-17T07:25:01.120Z",
+      "citedCount": 1,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "L",
+        "score": 0.1
+      },
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "UA",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "C11_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C11-S01",
+          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
+          "label": "Ukraine bans Orthodox Church activities",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "controinformazione.info",
+      "slug": "controinformazione-info",
+      "defanged": "controinformazione[.]info",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-14T19:35:05.334Z",
+      "lastCitedAt": "2026-09-14T19:35:05.334Z",
+      "citedCount": 0,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 0,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [],
+      "byMarket": [],
+      "byRun": [],
+      "grid": {},
+      "claims": [
+        {
+          "claimKey": "C11-S01",
+          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
+          "label": "Ukraine bans Orthodox Church activities",
+          "verdict": "false",
+          "distributed": true,
+          "reached": false,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 0,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "noticiabrasil.net.br",
+      "slug": "noticiabrasil-net-br",
+      "defanged": "noticiabrasil[.]net[.]br",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
       "firstCitedAt": null,
       "lastCitedAt": null,
       "citedCount": 0,
@@ -135,13 +902,9 @@
       "claimsReachedCount": 0,
       "attribution": [
         {
-          "source": "viginum:portal-kombat",
-          "org": "VIGINUM · Portal Kombat",
-          "category": "pravda_network",
-          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
-          "report": "Portal Kombat",
-          "license": "CC BY-SA-4.0",
-          "date": "2024-07-27"
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
         }
       ],
       "rating": null,
@@ -151,14 +914,107 @@
       "grid": {},
       "claims": [
         {
-          "claimKey": "T2-S01",
-          "slug": "t2-s01-zelenskyy-exporting-children",
-          "label": "Zelenskyy exporting children",
+          "claimKey": "C5-S01",
+          "slug": "c5-s01-ukraine-obstructs-peace-negotiations",
+          "label": "Ukraine obstructs peace negotiations",
           "verdict": "false",
           "distributed": true,
           "reached": false,
           "injectionLine": false,
-          "distributedFirstSeen": "2026-07-20",
+          "distributedFirstSeen": null,
+          "citedCount": 0,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "sputnik.by",
+      "slug": "sputnik-by",
+      "defanged": "sputnik[.]by",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T11:46:44.496Z",
+      "lastCitedAt": "2026-09-13T13:40:03.805Z",
+      "citedCount": 0,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 0,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [],
+      "byMarket": [],
+      "byRun": [],
+      "grid": {},
+      "claims": [
+        {
+          "claimKey": "C14-S01",
+          "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
+          "label": "Russophobia as a 19th-century British invention",
+          "verdict": "false",
+          "distributed": true,
+          "reached": false,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 0,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "tass.ru",
+      "slug": "tass-ru",
+      "defanged": "tass[.]ru",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-16T12:59:35.798Z",
+      "lastCitedAt": "2026-09-16T12:59:35.798Z",
+      "citedCount": 0,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 0,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "M",
+        "score": 0.2
+      },
+      "byBot": [],
+      "byMarket": [],
+      "byRun": [],
+      "grid": {},
+      "claims": [
+        {
+          "claimKey": "C12-S01",
+          "slug": "c12-s01-nato-and-eu-stoking-baltic-tensions",
+          "label": "NATO and EU stoking Baltic tensions",
+          "verdict": "false",
+          "distributed": true,
+          "reached": false,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
           "citedCount": 0,
           "repeatCount": 0,
           "criticalCount": 0
