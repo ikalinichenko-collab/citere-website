@@ -126,14 +126,26 @@ for (const file of htmlFiles) {
   const h1s = html.match(/<h1[\s>]/gi) || [];
   if (h1s.length !== 1) err(page, `${h1s.length} <h1> elements, expected exactly 1`);
 
+  // Measure the VISIBLE length: HTML-escaped chars (a quote in the claim label
+  // is &quot; in the markup, 6 bytes) count as one character to a reader and to
+  // search engines, so decode entities before the length check — otherwise a
+  // legitimately-short title with a quote in it fails at the escaped byte count.
+  const decode = (s) =>
+    String(s)
+      .replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&#0*39;/g, "'")
+      .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ")
+      .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+      .replace(/&amp;/g, "&");
   const title = (html.match(/<title>([\s\S]*?)<\/title>/i) || [])[1];
+  const titleLen = title ? decode(title).trim().length : 0;
   if (!title) err(page, "no <title>");
-  else if (title.trim().length > 65) err(page, `<title> is ${title.trim().length} chars, max 65`);
+  else if (titleLen > 65) err(page, `<title> is ${titleLen} chars, max 65`);
 
   const desc = (html.match(/<meta\s+name="description"\s+content="([^"]*)"/i) || [])[1];
+  const descLen = desc ? decode(desc).length : 0;
   if (!desc) err(page, "no meta description");
-  else if (desc.length < 120 || desc.length > 160) {
-    err(page, `meta description is ${desc.length} chars, must be 120-160`);
+  else if (descLen < 120 || descLen > 160) {
+    err(page, `meta description is ${descLen} chars, must be 120-160`);
   }
 
   if (!/<link\s+rel="canonical"/i.test(html)) err(page, "no canonical link");
