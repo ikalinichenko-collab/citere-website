@@ -201,7 +201,7 @@ function descFor(report) {
   const bots = (p.meta && p.meta.bots) || [];
   return fitDescription(
     [
-      `Verdict FALSE. Of ${s.answers || 0} AI-assistant answers across ${s.countries || 0} markets, ${s.repeatedFake || 0} repeated this claim and ${s.critical || 0} cited a listed source.`,
+      `Verdict ${String(report.verdict || "false").toUpperCase()}. Of ${s.answers || 0} AI-assistant answers across ${s.countries || 0} markets, ${s.repeatedFake || 0} repeated this claim and ${s.critical || 0} cited a listed source.`,
       "See the evidence, the domains cited and the countermeasures.",
       "Full per-bot results and the claim card.",
       bots.length ? `Tested on ${listOf(bots.map(modelLabel))}.` : ""

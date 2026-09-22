@@ -1,6 +1,6 @@
 {#- One ClaimReview + one Article for a published Claim Report. The app owns the
-    verdict; these reports are all FALSE (ratingValue 1 of 5). Appearances are the
-    runs the claim was measured in, not individual answers. -#}
+    verdict (false/misleading/unsupported → ratingValue 1/2/3 of 5). Appearances
+    are the runs the claim was measured in, not individual answers. -#}
 {%- set ratingValues = { "false": 1, "misleading": 2, "unsupported": 3 } -%}
 {%- set appearances = [] -%}
 {%- for rk in (p.meta.runKeys | default([])) -%}
