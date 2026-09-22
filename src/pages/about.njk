@@ -1,9 +1,9 @@
 ---
-layout: layouts/page.njk
+layout: layouts/base.njk
+wrap: wrap-narrow
 pageKey: about
 navKey: about
 crumbKey: crumb.about
-langSwitch: true
 title: "About Citere"
 description: "Citere is a Ukrainian research company testing public AI chatbots for Russian disinformation about Ukraine, and working to get what it finds corrected."
 pagination:
@@ -12,3 +12,27 @@ pagination:
   size: 1
 permalink: "{{ '/about/' | loc(lang) }}"
 ---
+{#- Bilingual About. The site chrome (nav, footer, breadcrumbs) stays in the
+    page's own language; only the About body switches between English and
+    Ukrainian, via a CSS-only :target toggle — no JavaScript, both texts ship in
+    the DOM so crawlers see both. The two #en/#uk targets precede the body so the
+    ~ sibling rules in site.css can flip it. Exactly one <h1> (two inner spans),
+    so the pre-publish one-h1 check still passes. -#}
+{%- set en = copy.en.about -%}
+{%- set uk = copy.uk.about or copy.en.about -%}
+<i id="en" class="lang-target" aria-hidden="true"></i><i id="uk" class="lang-target" aria-hidden="true"></i>
+<nav class="langswitch" aria-label="Language / Мова">
+  <a href="#en" class="ls-en" lang="en">English</a>
+  <a href="#uk" class="ls-uk" lang="uk">Українська</a>
+</nav>
+<div class="phead">
+  <h1><span class="lg-en">{{ en.data.h1 }}</span><span class="lg-uk" lang="uk">{{ uk.data.h1 }}</span></h1>
+  <p class="plead"><span class="lg-en">{{ en.data.lead | mdInline | safe }}</span><span class="lg-uk" lang="uk">{{ uk.data.lead | mdInline | safe }}</span></p>
+</div>
+<div class="prose prose-en">
+{{ en.html | fill(figures | default({})) | prefixLinks | defangCopy | safe }}
+</div>
+<div class="prose prose-uk" lang="uk">
+{{ uk.html | fill(figures | default({})) | prefixLinks | defangCopy | safe }}
+</div>
+<div style="height:40px"></div>

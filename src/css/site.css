@@ -1013,3 +1013,15 @@ details.schema>summary{display:inline-flex}
   border-radius:999px;padding:4px 12px;background:var(--card);box-shadow:var(--shadow)}
 .langswitch a:hover{border-color:var(--dimmer);color:var(--ink)}
 .langswitch a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* Bilingual About: CSS-only language toggle. Chrome never changes; only the
+   About body switches. English shows by default; #uk:target flips it. The
+   targets precede .langswitch/.phead/.prose-* as siblings so ~ can reach them. */
+.lang-target{display:block;height:0;overflow:hidden;scroll-margin-top:90px}
+.lg-uk,.prose-uk{display:none}
+.langswitch .ls-en{background:var(--ink);color:#fff;border-color:var(--ink)}
+#uk:target ~ .langswitch .ls-en{background:var(--card);color:var(--dim);border-color:var(--line)}
+#uk:target ~ .langswitch .ls-uk{background:var(--ink);color:#fff;border-color:var(--ink)}
+#uk:target ~ .phead .lg-en{display:none}
+#uk:target ~ .phead .lg-uk{display:inline}
+#uk:target ~ .prose-en{display:none}
+#uk:target ~ .prose-uk{display:block}

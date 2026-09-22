@@ -15,6 +15,7 @@ permalink: "{{ '/monitor/' | loc(lang) }}"
 <div class="phead"><h1>{{ doc.data.h1 }}</h1>
   <p class="plead">{{ doc.data.lead | mdInline | safe }}</p></div>
 
+{%- if reports | length and not site.isDemo %}
 <div class="grid3">
 {%- for r in reports %}
   <div class="rank"><h3>{{ r.period | default(r.date | displayDate) }} <span>{% for c in r.countries %}{{ c | upper }}{% if not loop.last %} &middot; {% endif %}{% endfor %}</span></h3>
@@ -26,4 +27,11 @@ permalink: "{{ '/monitor/' | loc(lang) }}"
     <a class="more" href="{{ r.url | url }}">{{ 'action.readReport' | t }} &rarr;</a></div>
 {%- endfor %}
 </div>
+{%- else %}
+<div class="callout" style="margin:8px 0 0">
+  <b>Monthly monitor reports are on the way.</b>
+  The first monthly report will be published here once a full monitoring cycle completes.
+  In the meantime, every finding to date is in the <a href="{{ '/registry/' | url }}">claim registry</a>.
+</div>
+{%- endif %}
 <div style="height:44px"></div>
