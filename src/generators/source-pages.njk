@@ -13,16 +13,17 @@ permalink: "{{ entry.url }}"
     <b>{{ source.network | networkName }}</b> network
     {%- if source.attribution | length %}, publicly attributed by
     {% for a in source.attribution %}{% if a.url %}<a href="{{ a.url }}" style="color:var(--accent);font-weight:600">{{ a.org }}</a>{% else %}{{ a.org }}{% endif %}
-    ({{ a.date | displayDate }}){% if not loop.last %} and {% endif %}{% endfor %}{% endif %}.
-    We first observed it cited in a chatbot answer on
-    <time datetime="{{ source.first_seen | isoDate }}">{{ source.first_seen | displayDate }}</time>.
+    {% if a.date %}({{ a.date | displayDate }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}{% endif %}.
+    {%- if source.first_seen %} We first observed it cited in a chatbot answer on
+    <time datetime="{{ source.first_seen | isoDate }}">{{ source.first_seen | displayDate }}</time>.{% endif %}
     {%- if source.note_en %} {{ source.note_en | defangCopy }}{% endif %}</p></div>
 
 <div class="tiles" style="margin:-8px 0 20px">
-  <span class="tile">{{ source.category | replace("_", " ") }}</span>
-  <span class="tile">{{ source.language | upper }}</span>
-  <span class="tile">on the watchlist since {{ source.first_seen | monthLabel }}</span>
+  {%- if source.category %}<span class="tile">{{ source.category | replace("_", " ") }}</span>{% endif %}
+  {%- if source.language %}<span class="tile">{{ source.language | upper }}</span>{% endif %}
+  {%- if source.first_seen %}<span class="tile">first cited {{ source.first_seen | monthLabel }}</span>{% endif %}
   <span class="tile">{{ source.status }}</span>
+  {%- if source.rating %}<span class="tile" title="Third-party credibility rating (Iffy Index), advisory only">{{ source.rating.label }}{% if source.rating.level %} &middot; {{ source.rating.level }}{% endif %}</span>{% endif %}
 </div>
 
 <div class="metrics" style="grid-template-columns:repeat(5,1fr);margin:0 0 34px">

@@ -12,7 +12,7 @@ module.exports = {
       runs: data.runs.all[0] || null,
       cells: data.metrics.cells[0] || null,
       registry: (() => {
-        const s = data.sources.find((x) => x.citedCount) || data.sources[0];
+        const s = data.publishedSources.find((x) => x.citedCount) || data.publishedSources[0];
         return s ? {
           domain: s.domain, category: s.category, network: s.network, language: s.language,
           attributed_by: (s.attribution || []).map((a) => a.org),

@@ -29,9 +29,9 @@ permalink: "{{ '/sources/' | loc(lang) }}"
 {%- endfor %}
 </div>
 
-{%- set tableSources = sources %}
-{%- set tableCaption = "Watchlisted domains, most cited first" %}
-{%- set tableFoot = "All " + (sources | length) + " domains on the watchlist" %}
+{%- set tableSources = publishedSources %}
+{%- set tableCaption = "Identified domains, most cited first" %}
+{%- set tableFoot = "All " + (publishedSources | length) + " domains identified in published claims" %}
 {% include "partials/sources-table.njk" %}
 
 {%- if articleEvidence | length %}

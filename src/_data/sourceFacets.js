@@ -2,7 +2,7 @@
 // JavaScript, so every combination the spec lists (SR §10.1) that is worth
 // having is also a page. Claim, cluster and persona filters are not generated -
 // that breakdown lives on the domain page itself, where it belongs.
-const sources = require("./sources.js");
+const sources = require("./publishedSources.js");
 const { NETWORK_NAMES, CHATBOTS, WATCHLIST_CATEGORIES } = require("../_lib/labels.cjs");
 
 const TYPES = [

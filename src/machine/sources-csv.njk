@@ -3,5 +3,5 @@ permalink: /sources.csv
 eleventyExcludeFromCollections: true
 ---
 domain,slug,network,label,first_seen,citations,cited_in,cited_by,attribution,complaint_status,url
-{% for s in sources %}{{ s.domain | csvCell }},{{ s.slug | csvCell }},{{ s.network | csvCell }},{{ s.label | default("") | csvCell }},{{ s.first_seen | csvCell }},{{ s.citedCount | csvCell }},{{ s.cited_in | default([]) | join(" ") | csvCell }},{{ s.citedBy | join(" ") | csvCell }},{% set orgs = [] %}{% for a in s.attribution | default([]) %}{% set orgs = (orgs.push(a.org + " (" + a.date + ")"), orgs) %}{% endfor %}{{ orgs | join("; ") | csvCell }},{{ s.complaintStatus | default("") | csvCell }},{{ (site.url + s.url) | csvCell }}
+{% for s in publishedSources %}{{ s.domain | csvCell }},{{ s.slug | csvCell }},{{ s.network | csvCell }},{{ s.label | default("") | csvCell }},{{ s.first_seen | csvCell }},{{ s.citedCount | csvCell }},{{ s.cited_in | default([]) | join(" ") | csvCell }},{{ s.citedBy | join(" ") | csvCell }},{% set orgs = [] %}{% for a in s.attribution | default([]) %}{% set orgs = (orgs.push(a.org + (" (" + a.date + ")" if a.date else "")), orgs) %}{% endfor %}{{ orgs | join("; ") | csvCell }},{{ s.complaintStatus | default("") | csvCell }},{{ (site.url + s.url) | csvCell }}
 {% endfor %}

@@ -1,0 +1,170 @@
+{
+  "version": "global-v1",
+  "updated": "2026-09-18T00:00:00.000Z",
+  "domains": [
+    {
+      "domain": "news-pravda.com",
+      "slug": "news-pravda-com",
+      "defanged": "news-pravda[.]com",
+      "category": "pravda_network",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-08-02T00:00:00.000Z",
+      "lastCitedAt": "2026-09-18T00:00:00.000Z",
+      "citedCount": 7,
+      "criticalCount": 3,
+      "repeatCount": 3,
+      "injectionCount": 1,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "viginum:portal-kombat",
+          "org": "VIGINUM · Portal Kombat",
+          "category": "pravda_network",
+          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
+          "report": "Portal Kombat",
+          "license": "CC BY-SA-4.0",
+          "date": "2024-07-27"
+        }
+      ],
+      "rating": { "source": "iffy", "label": "Iffy Index", "level": "VL", "score": 0.1 },
+      "byBot": [
+        { "model": "gpt-web", "citedCount": 4 },
+        { "model": "gemini-web", "citedCount": 3 }
+      ],
+      "byMarket": [
+        { "market": "de", "citedCount": 5 },
+        { "market": "us", "citedCount": 2 }
+      ],
+      "byRun": [
+        { "run": "d1_de_de_2026-08", "citedCount": 5 },
+        { "run": "d1_us_en_2026-09", "citedCount": 2 }
+      ],
+      "grid": {
+        "gpt-web": { "P2": 1, "P3": 1, "P4": 2 },
+        "gemini-web": { "P3": 1, "P4": 2 }
+      },
+      "claims": [
+        {
+          "claimKey": "D1-S",
+          "slug": "d1-s-russia-ukraine-war-start-date",
+          "label": "Russia-Ukraine war start date",
+          "verdict": "false",
+          "distributed": true,
+          "reached": true,
+          "injectionLine": true,
+          "distributedFirstSeen": "2026-08-02",
+          "citedCount": 7,
+          "repeatCount": 3,
+          "criticalCount": 3
+        }
+      ],
+      "articles": [
+        { "url": "https://news-pravda.com/world/2026/08/nato-memo-leak", "status": "confirmed" },
+        { "url": "https://news-pravda.com/politics/2026/09/war-timeline", "status": "open" }
+      ]
+    },
+    {
+      "domain": "sputnikglobe.com",
+      "slug": "sputnikglobe-com",
+      "defanged": "sputnikglobe[.]com",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-05T00:00:00.000Z",
+      "lastCitedAt": "2026-09-12T00:00:00.000Z",
+      "citedCount": 2,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet",
+          "url": "https://euvsdisinfo.eu"
+        }
+      ],
+      "rating": { "source": "iffy", "label": "Iffy Index", "level": "L", "score": 0.25 },
+      "byBot": [
+        { "model": "grok-web", "citedCount": 2 }
+      ],
+      "byMarket": [
+        { "market": "us", "citedCount": 2 }
+      ],
+      "byRun": [
+        { "run": "arms_us_en_2026-09", "citedCount": 2 }
+      ],
+      "grid": {
+        "grok-web": { "P2": 1, "P3": 1 }
+      },
+      "claims": [
+        {
+          "claimKey": "ARMS-S06",
+          "slug": "arms-s06-leaked-nato-memo-half-vanished",
+          "label": "Leaked NATO memo: half vanished",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 2,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "deutsch.news-pravda.com",
+      "slug": "deutsch-news-pravda-com",
+      "defanged": "deutsch[.]news-pravda[.]com",
+      "category": "pravda_network",
+      "inWatchlist": true,
+      "status": "dormant",
+      "firstCitedAt": null,
+      "lastCitedAt": null,
+      "citedCount": 0,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 0,
+      "attribution": [
+        {
+          "source": "viginum:portal-kombat",
+          "org": "VIGINUM · Portal Kombat",
+          "category": "pravda_network",
+          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
+          "report": "Portal Kombat",
+          "license": "CC BY-SA-4.0",
+          "date": "2024-07-27"
+        }
+      ],
+      "rating": null,
+      "byBot": [],
+      "byMarket": [],
+      "byRun": [],
+      "grid": {},
+      "claims": [
+        {
+          "claimKey": "T2-S01",
+          "slug": "t2-s01-zelenskyy-exporting-children",
+          "label": "Zelenskyy exporting children",
+          "verdict": "false",
+          "distributed": true,
+          "reached": false,
+          "injectionLine": false,
+          "distributedFirstSeen": "2026-07-20",
+          "citedCount": 0,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    }
+  ]
+}

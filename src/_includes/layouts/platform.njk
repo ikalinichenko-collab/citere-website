@@ -135,7 +135,7 @@ wrap: wrap-narrow
     <th scope="col" class="num">Cited by this assistant</th><th scope="col" class="num">Critical incidents</th></tr></thead>
   <tbody>
   {%- for row in profile.cited %}
-    <tr><th scope="row" style="font-weight:400"><a href="{{ row.source.url | url }}"><span class="domain">{{ row.source.defanged }}</span></a></th>
+    <tr><th scope="row" style="font-weight:400"><span class="domain">{{ row.source.defanged }}</span></th>
       <td><span class="netchip {{ row.source.network | networkClass }}">{{ row.source.network | networkLabel }}</span></td>
       <td class="num">{{ row.cited }}</td>
       <td class="num">{% if row.source.criticalCount %}<b style="color:var(--false)">{{ row.source.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td></tr>

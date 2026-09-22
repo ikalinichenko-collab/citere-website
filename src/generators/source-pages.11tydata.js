@@ -12,9 +12,11 @@ module.exports = {
       const s = data.source;
       return fitDescription(
         [
-          `${s.defanged} is on the Citere watchlist as part of the ${NETWORK_NAMES[s.network] || s.network} network.`,
-          `Cited ${s.citedCount} times in recorded chatbot answers since ${s.first_seen}.`,
-          "Attribution, the claims involved and the complaints we filed.",
+          `${s.defanged} was identified in the Citere sources registry as part of the ${NETWORK_NAMES[s.network] || s.network} network.`,
+          s.citedCount
+            ? `Cited ${s.citedCount} times in recorded chatbot answers${s.first_seen ? ` since ${s.first_seen}` : ""}.`
+            : "Recorded as distributing a claim, not yet observed cited in a chatbot answer.",
+          "Attribution, the claims involved and the evidence we logged.",
           "Open data under CC BY 4.0."
         ],
         s.url

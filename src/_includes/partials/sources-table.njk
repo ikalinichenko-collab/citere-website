@@ -24,7 +24,7 @@
       <td class="num">{{ s.claimsReached | length }}</td>
       <td class="num">{% if s.injectionCount %}<b style="color:var(--false)">{{ s.injectionCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
       <td class="num">{% if s.criticalCount %}<b style="color:var(--false)">{{ s.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
-      <td class="num" style="color:var(--dimmer)">{% if s.citedCount %}<time datetime="{{ sources.lastRun | isoDate }}">{{ sources.lastRun | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
+      <td class="num" style="color:var(--dimmer)">{% if s.citedCount and s.lastCitedAt %}<time datetime="{{ s.lastCitedAt | isoDate }}">{{ s.lastCitedAt | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
     </tr>
   {%- endfor %}
   </tbody></table>

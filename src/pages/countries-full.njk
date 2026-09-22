@@ -116,7 +116,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
     {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}
     <th scope="col" class="num">Total</th></tr></thead>
   <tbody>
-  {%- for s in sources %}{% if s.citedCount %}
+  {%- for s in publishedSources %}{% if s.citedCount %}
     <tr><th scope="row" style="font-weight:400"><a href="{{ s.url | url }}"><span class="domain">{{ s.defanged }}</span></a></th>
       <td style="font-size:12.5px;{% if s.markets | length == 1 %}color:var(--false);font-weight:600{% else %}color:var(--dim){% endif %}">
         {%- if s.markets | length == 1 %}local to {{ s.markets[0] | upper }}{% elif s.markets | length >= 3 %}global{% else %}regional{% endif %}</td>
