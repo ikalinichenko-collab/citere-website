@@ -3,6 +3,19 @@
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+{#- Social preview. A page is an Article when it carries a ClaimReview/Article
+    schema (claim reports, monitor reports); everything else is a website. No
+    og:image — the site ships no images (CLAUDE.md §2), so a text summary card.
+    Twitter/X falls back to the og: tags, so no twitter:title/description here. -#}
+{%- set ogType = "website" %}
+{%- if schemas and ("published-report" in schemas or "article" in schemas or "report" in schemas) %}{% set ogType = "article" %}{% endif %}
+<meta property="og:type" content="{{ ogType }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:site_name" content="{{ site.org.name }}">
+<meta property="og:locale" content="{{ 'uk_UA' if (lang | default('en')) == 'uk' else 'en_US' }}">
+<meta name="twitter:card" content="summary">
 {%- for code in build.languages %}
 <link rel="alternate" hreflang="{{ code }}" href="{{ site.url }}{{ basePath | loc(code) }}">
 {%- endfor %}

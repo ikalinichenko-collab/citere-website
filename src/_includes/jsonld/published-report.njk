@@ -46,3 +46,31 @@
   "license": "https://creativecommons.org/licenses/by/4.0/"
 } -%}
 <script type="application/ld+json">{{ jsonldArticle | compact | jsonld | safe }}</script>
+{#- Dataset for the report's measurement data (CLAUDE.md §7). distribution points
+    at the two static exports this report already generates (published-report-json
+    /csv → /registry/{slug}.json|.csv). Absolute URLs follow the canonical pattern:
+    site.url already carries the path prefix, so the path is appended prefix-less
+    (never the `| url` filter, which would prepend the prefix a second time). The
+    nested array is assembled with push (not an inline literal) — the same pattern
+    the ClaimReview appearances use, which Nunjucks renders reliably here. -#}
+{%- set spatial = "" -%}
+{%- if p.meta and p.meta.countries and p.meta.countries.length -%}{%- set spatial = p.meta.countries | join(", ") -%}{%- endif -%}
+{%- set distribution = [] -%}
+{%- set distribution = (distribution.push({ "@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": site.url + "/registry/" + report.slug + ".json" }), distribution) -%}
+{%- set distribution = (distribution.push({ "@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": site.url + "/registry/" + report.slug + ".csv" }), distribution) -%}
+{%- set jsonldDataset = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": (articleHeadline or report.label) + " — measurement data",
+  "description": "Per-assistant, per-persona, per-market results behind this claim report: repeat and contamination counts with Wilson intervals, and the sources cited.",
+  "url": site.url + page.url,
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "creator": { "@type": "Organization", "name": site.org.name, "url": site.url },
+  "isAccessibleForFree": true,
+  "datePublished": articlePublished,
+  "dateModified": articleModified,
+  "temporalCoverage": articlePublished,
+  "spatialCoverage": spatial,
+  "distribution": distribution
+} -%}
+<script type="application/ld+json">{{ jsonldDataset | compact | jsonld | safe }}</script>
