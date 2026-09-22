@@ -197,8 +197,14 @@ permalink: "{{ entry.url }}"
   <p class="intro">Every answer in which a chatbot stated the fake as fact. Critical first.</p>
   {%- if not p.evidence | length %}<div class="rd-empty">No answers reached the CRITICAL or HIGH tier.</div>
   {%- else %}
+    {#- Bounded render: evidence is sorted worst-first (CRITICAL, then HIGH), so
+        the most severe answers show on the page and the full, unbounded set stays
+        in the machine export. This keeps the page weight bounded no matter how
+        many answers a busy claim flags (CLAUDE.md: bounded HTML, full data in the
+        export). -#}
+    {%- set EV_MAX = 24 %}
     {%- for e in p.evidence %}
-      {%- if loop.index == 4 and p.evidence | length > 3 %}<details class="ev-more"><summary>Show all {{ p.evidence | length }} flagged answers</summary>{% endif %}
+      {%- if loop.index <= EV_MAX %}
       <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}" data-synthetic="true">
         <div class="meta">
           <span class="who">{{ botMark(logos, R.botSlug(e.model), "sm") }}{{ R.botLabel(e.model) }}</span>
@@ -221,8 +227,12 @@ permalink: "{{ entry.url }}"
         </div>
         {%- endif %}
       </div>
-      {%- if loop.last and p.evidence | length > 3 %}</details>{% endif %}
+      {%- endif %}
     {%- endfor %}
+    {%- if p.evidence | length > EV_MAX %}
+    <p class="rd-notice">Showing the {{ EV_MAX }} most severe of {{ p.evidence | length }} flagged answers. The full set is in the
+      <a href="{{ ('/registry/' + report.slug + '.json') | url }}">report data</a> (<a href="{{ ('/registry/' + report.slug + '.csv') | url }}">CSV</a>).</p>
+    {%- endif %}
     <p class="rd-notice" data-notice="synthetic-quotes">Quoted answers are excerpts of what an assistant returned, trimmed to the sentence carrying the claim.</p>
   {%- endif %}
 </section>
