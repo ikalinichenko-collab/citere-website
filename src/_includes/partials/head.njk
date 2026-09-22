@@ -24,7 +24,7 @@
 <link rel="alternate" type="application/rss+xml" title="{{ site.org.name }}" href="{{ '/feed.xml' | url }}">
 {%- endif %}
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="{{ '/css/site.css' | url }}">
+<link rel="stylesheet" href="{{ '/css/site.css' | url }}{% if assets.cssV %}?v={{ assets.cssV }}{% endif %}">
 {% include "jsonld/organization.njk" %}
 {% include "jsonld/website.njk" %}
 {% include "jsonld/breadcrumblist.njk" %}
