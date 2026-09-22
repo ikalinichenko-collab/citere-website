@@ -146,12 +146,14 @@ for (const file of htmlFiles) {
   // bounded by the run's FINITE grid (≤5 markets × 8 bots × 4 personas), not by
   // how busy a claim is. 160 KB covers a full grid at that ceiling; the HTML is
   // text (no images/JS) so it gzips to a fraction and stays Lighthouse-green.
-  // /countries/full is the "every figure" aggregate; it grows with the number of
-  // published reports, so its 100 is a stopgap — it needs the same bounded-render
-  // treatment (top-N + link to the CSV) as the archive grows.
+  // /countries/full is the "every figure" aggregate. Its finite-grid tables
+  // (persona × bot × market) are bounded by the run design; the two parts that
+  // grew with the archive — the claim × market matrix and the source-locality
+  // table — are now bounded-rendered (top-N + link to the CSV), so the page is
+  // capped for good. 120 covers the fixed grid plus those bounded tables.
   const isClaimReport = /^(?:\/[a-z]{2})?\/registry\/[^/]+\/index\.html$/.test(page);
   const isFullBreakdown = /^(?:\/[a-z]{2})?\/countries\/full\/index\.html$/.test(page);
-  const limit = isClaimReport ? 160 : isFullBreakdown ? 100 : 60;
+  const limit = isClaimReport ? 160 : isFullBreakdown ? 120 : 60;
   if (bytes > limit * 1024) err(page, `${Math.round(bytes / 1024)} KB of HTML, max ${limit} KB`);
 
   const scripts = html.match(/<script[^>]*>/gi) || [];

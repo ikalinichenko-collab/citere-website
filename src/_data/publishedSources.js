@@ -120,6 +120,10 @@ const registry = feed.domains
   .sort((a, b) => b.injectionCount - a.injectionCount || b.citedCount - a.citedCount || a.domain.localeCompare(b.domain));
 
 module.exports = registry;
+// Domains actually cited at least once, worst-first — the set the locality table
+// and any "cited sources" view iterate. Bounded rendering slices this; the full
+// set stays in sources.csv.
+module.exports.cited = registry.filter((s) => s.citedCount > 0);
 module.exports.version = feed.version;
 module.exports.updated = feed.updated;
 module.exports.lastRun = feed.updated;

@@ -96,7 +96,8 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
   <thead><tr><th scope="col">{{ 'col.claim' | t }}</th><th scope="col">Splice</th>
     {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
-  {%- for claim in claims %}{% if claim.tested %}
+  {%- set testedClaims = claims | whereEq('tested', true) %}
+  {%- for claim in testedClaims | take(25) %}
     <tr><th scope="row" style="font-weight:400" class="cl"><a href="{{ claim.url | url }}">{{ claim.id }}</a>
         <small>{{ claim.label }}</small></th>
       <td><span class="splicebadge sp-{{ claim.splice }}">{{ claim.splice }}</span></td>
@@ -104,8 +105,12 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
       {%- set cell = metrics.poolOf({ "claim": claim.id, "run": c.run.key, "persona": countriesReport.persona, "is_live": false }) %}
       <td class="num">{% if cell.counts.repeat %}<b>{{ cell.counts.repeat }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
       {%- endfor %}</tr>
-  {%- endif %}{% endfor %}
-  </tbody></table></div>
+  {%- endfor %}
+  </tbody></table>
+  {%- if testedClaims | length > 25 %}
+  <div class="summary-line" style="border-top:1px solid var(--line2)">Showing 25 of {{ testedClaims | length }} claims, worst first. Every claim × market cell is in
+    {% if datasets.has['registry-csv'] %}<a href="{{ '/registry.csv' | url }}">the metric-cells CSV</a>{% else %}the metric-cells CSV{% endif %}.</div>
+  {%- endif %}</div>
 
 <h2 id="locality" style="margin:30px 0 6px">Which listed sources are local</h2>
 <p class="note" style="margin:0 0 14px">A domain is local to a market when every recorded citation of it
@@ -116,14 +121,18 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
     {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}
     <th scope="col" class="num">Total</th></tr></thead>
   <tbody>
-  {%- for s in publishedSources %}{% if s.citedCount %}
+  {%- for s in publishedSources.cited | take(25) %}
     <tr><th scope="row" style="font-weight:400"><a href="{{ s.url | url }}"><span class="domain">{{ s.defanged }}</span></a></th>
       <td style="font-size:12.5px;{% if s.markets | length == 1 %}color:var(--false);font-weight:600{% else %}color:var(--dim){% endif %}">
         {%- if s.markets | length == 1 %}local to {{ s.markets[0] | upper }}{% elif s.markets | length >= 3 %}global{% else %}regional{% endif %}</td>
       {%- for c in countriesReport.countries %}<td class="num">{{ s.byMarket[c.market] | default(0) }}</td>{% endfor %}
       <td class="num"><b>{{ s.citedCount }}</b></td></tr>
-  {%- endif %}{% endfor %}
-  </tbody></table></div>
+  {%- endfor %}
+  </tbody></table>
+  {%- if publishedSources.cited | length > 25 %}
+  <div class="summary-line" style="border-top:1px solid var(--line2)">Showing 25 of {{ publishedSources.cited | length }} cited domains, most-cited first. The full list is in
+    {% if datasets.has['sources-csv'] %}<a href="{{ '/sources.csv' | url }}">the sources CSV</a>{% else %}the sources CSV{% endif %}.</div>
+  {%- endif %}</div>
 
 <h2 id="grain" style="margin:30px 0 6px">Grain-of-truth split by market</h2>
 <div class="panel"><table>
