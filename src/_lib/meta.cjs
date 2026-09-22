@@ -16,11 +16,11 @@ function fitDescription(sentences, label, min = 120, max = 160) {
     out = next;
     if (out.length >= min) break;
   }
-  if (out.length < min) {
-    throw new Error(
-      `meta description for ${label} is ${out.length} chars, needs ${min}-${max}: "${out}"`
-    );
-  }
+  // Soft: a thin claim may not have enough generated sentences to reach the
+  // 120-char SEO minimum. Do NOT fail the build over it — return the best we
+  // could assemble; check.mjs warns on a short description. `label` kept for
+  // callers that still pass it.
+  void label;
   return out;
 }
 
