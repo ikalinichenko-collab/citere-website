@@ -103,6 +103,7 @@ wrap: wrap-narrow
 <p class="note vlegend"><i class="s-rep"></i>repeated <i class="s-ctx"></i>hedged
   <i class="s-ref"></i>refuted <i class="s-dod"></i>refused</p>
 
+{%- if profile.hasRetrieval %}
 <h2 id="retrieval" style="margin:36px 0 6px">Searching, and what it found</h2>
 <p class="note" style="margin:0 0 14px">How often this assistant cited anything at all, and how often what
   it cited included a listed source. Contamination concentrates on news-style questions rather than hostile
@@ -124,6 +125,7 @@ wrap: wrap-narrow
   {%- endfor %}
   {%- endfor %}
   </tbody></table></div>
+{%- endif %}
 
 {%- if profile.cited | length %}
 <h2 id="sources" style="margin:36px 0 6px">Sources it cites</h2>

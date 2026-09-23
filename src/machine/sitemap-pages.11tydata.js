@@ -4,12 +4,12 @@ module.exports = {
     sitemapPages: (data) => {
       const d = data.site.last_update;
       const entries = [
-        "/", "/registry/", "/benchmarks/", "/monitor/", "/platforms/", "/countries/",
+        "/", "/registry/", "/benchmarks/", "/monitor/", "/countries/",
         "/sources/", "/countermeasures/", "/countries/full/", "/methodology/", "/data/", "/about/",
         "/mission/", "/manifesto/", "/press/", "/terms/", "/privacy/"
       ].map((url) => ({ url, lastmod: d }));
       for (const r of data.reports) entries.push({ url: r.url, lastmod: r.date });
-      for (const p of data.profiles.chatbots) entries.push({ url: p.url, lastmod: d });
+      for (const p of data.platformsReport.chatbots) entries.push({ url: p.url, lastmod: d });
       for (const p of data.countriesReport.countries) entries.push({ url: p.url, lastmod: d });
       for (const s of data.publishedSources) entries.push({ url: s.url, lastmod: d });
       for (const f of data.sourceFacets) entries.push({ url: f.url, lastmod: d });

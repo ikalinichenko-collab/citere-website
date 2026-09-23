@@ -30,7 +30,7 @@ module.exports = {
     }),
     breadcrumbTrail: (data) => [
       home(data.entry.lang),
-      crumb(data.entry.lang, "crumb.chatbots", "/platforms/"),
+      crumb(data.entry.lang, "crumb.benchmarks", "/benchmarks/"),
       { title: crumbLabel(data), url: String(data.entry.item.url || data.entry.url) }
     ]
   }

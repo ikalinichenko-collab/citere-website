@@ -13,15 +13,45 @@ pagination:
   size: 1
 permalink: "{{ '/benchmarks/' | loc(lang) }}"
 ---
+{%- from "partials/bot-mark.njk" import botMark -%}
 {%- set doc = copy.en.benchmarks -%}
 <div class="phead"><h1>{{ doc.data.h1 }}</h1>
   <p class="plead">{{ doc.data.lead | mdInline | safe }}</p></div>
 
-<div class="callout"><b>This page is a shell.</b> A benchmark is one cluster over one month, and the full
-  issue is not specified yet. What is published below is the figure set that is settled: the coverage of
-  each issue, the grain-of-truth split, and the A&times;B matrix. Everything per-assistant and per-market
-  lives on the pages that own it &mdash; each assistant, each market, and each claim &mdash; and is
-  reached from the issue below.</div>
+<h2 id="chatbots" style="margin:30px 0 6px">Chatbot benchmark</h2>
+<p class="note" style="margin:0 0 14px">Each assistant at its worst market on the P2 topical-news persona,
+  with the market named &mdash; markets are compared, never merged, and personas are never averaged. Select
+  a row for the assistant's full per-market breakdown.</p>
+<div class="panel"><table>
+  <caption class="visually-hidden">Assistants ranked by their worst market on the P2 topical-news persona</caption>
+  <thead><tr><th scope="col">#</th><th scope="col">{{ 'col.chatbot' | t }}</th><th scope="col">{{ 'col.company' | t }}</th>
+    <th scope="col">Worst market</th><th scope="col">{{ 'col.repeatRate' | t }}</th><th scope="col">{{ 'col.contamination' | t }}</th>
+    <th scope="col">{{ 'col.claimsRepeated' | t }}</th><th scope="col">{{ 'col.countermeasures' | t }}</th></tr></thead>
+  <tbody>
+  {%- for bot in platformsReport.chatbots %}
+    <tr data-persona="{{ bot.persona }}">
+      <td class="num" style="color:var(--dimmer)">{{ loop.index }}</td>
+      <td class="cl"><span class="markcell">{{ botMark(logos, bot.key, "sm", true) }}<a href="{{ bot.url | url }}">{{ bot.name }}</a></span></td>
+      <td style="color:var(--dim)">{{ bot.company }}</td>
+      <td>{% if bot.worst %}{{ bot.worst.name }} <span style="color:var(--dimmer)">{{ bot.worst.language | upper }}</span>{% else %}<span style="color:var(--dimmer)">no answers yet</span>{% endif %}</td>
+      <td>{% if bot.worst %}<span class="cellstat{% if bot.worst.headline.repeat_rate.low_n %} lown{% endif %}">{{ bot.worst.headline.repeat_rate.rate | rate }}<small>{{ bot.worst.headline.repeat_rate.ci | ciLabel }} &middot; n={{ bot.worst.headline.repeat_rate.n }}</small></span>{% else %}&mdash;{% endif %}</td>
+      <td>{% if bot.worst %}<span class="cellstat{% if bot.worst.headline.contamination_rate.low_n %} lown{% endif %}">{{ bot.worst.headline.contamination_rate.rate | rate }}<small>{{ bot.worst.headline.contamination_rate.ci | ciLabel }} &middot; n={{ bot.worst.headline.contamination_rate.n }}</small></span>{% else %}&mdash;{% endif %}</td>
+      <td class="num">{{ bot.claimsRepeated }}</td>
+      <td class="num">{{ bot.countermeasures | length }}</td>
+    </tr>
+  {%- endfor %}
+  </tbody></table></div>
+<p class="note" style="margin-top:10px">Both figures are the P2 topical-news persona in the market where the
+  assistant does worst, with the market named. Contamination is the share of answers that cited a watchlisted
+  domain; the two measure different failures and do not move together. Coverage is still thin: a cell below
+  n={{ metrics.lowN }} is greyed as low-confidence and shown for transparency, not asserted. We test the
+  public consumer interface, not the API. Countermeasures are not yet carried in the published feed and
+  show as zero.</p>
+
+<div class="callout" style="margin-top:26px"><b>The rest of this page is a shell.</b> A benchmark issue is one
+  cluster over one month, and the full issue is not specified yet. What is settled below is the coverage of
+  each issue, the grain-of-truth split, and the A&times;B matrix. Everything per-market lives on the pages
+  that own it &mdash; each market and each claim.</div>
 
 <h2 id="issues" style="margin:30px 0 6px">Issues</h2>
 <p class="note" style="margin:0 0 14px">One issue per cluster per month. An issue holds every run of that

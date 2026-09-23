@@ -7,7 +7,7 @@ const sources = require("./publishedSources.js");
 const sourceFacets = require("./sourceFacets.js");
 const countermeasureFacets = require("./countermeasureFacets.js");
 const benchmarks = require("./benchmarks.js");
-const profiles = require("./profiles.js");
+const platformsReport = require("./platformsReport.js");
 const countriesReport = require("./countriesReport.js");
 const reports = require("./reports.js");
 
@@ -27,7 +27,7 @@ module.exports = {
   // in the claim-report fallback, issues link to the Registry cluster facet and
   // no detail page is generated.
   benchmarkIssues: expand(benchmarks.issues.filter((i) => i.hasDetail), (i) => i.url),
-  chatbots: expand(profiles.chatbots, (p) => p.url),
+  chatbots: expand(platformsReport.chatbots, (p) => p.url),
   countries: expand(countriesReport.countries, (p) => p.url),
   reports: expand(reports, (r) => r.url)
 };
