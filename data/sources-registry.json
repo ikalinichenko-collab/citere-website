@@ -1,6 +1,6 @@
 {
   "version": "global-v1",
-  "updated": "2026-09-22T13:14:43.317Z",
+  "updated": "2026-09-24T06:04:25.160Z",
   "domains": [
     {
       "domain": "alphanews.am",
@@ -614,7 +614,7 @@
       "inWatchlist": true,
       "status": "active",
       "firstCitedAt": "2026-07-25T10:41:57.680Z",
-      "lastCitedAt": "2026-09-17T07:05:22.971Z",
+      "lastCitedAt": "2026-09-22T18:48:34.473Z",
       "citedCount": 15,
       "criticalCount": 0,
       "repeatCount": 0,
@@ -774,6 +774,142 @@
       "articles": []
     },
     {
+      "domain": "gazeta.ru",
+      "slug": "gazeta-ru",
+      "defanged": "gazeta[.]ru",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T15:20:08.415Z",
+      "lastCitedAt": "2026-09-17T07:22:12.155Z",
+      "citedCount": 9,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 3,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "M",
+        "score": 0.2
+      },
+      "byBot": [
+        {
+          "model": "grok-web",
+          "citedCount": 5
+        },
+        {
+          "model": "perplexity-web",
+          "citedCount": 4
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "CZ",
+          "citedCount": 3
+        },
+        {
+          "market": "DK",
+          "citedCount": 1
+        },
+        {
+          "market": "UA",
+          "citedCount": 1
+        },
+        {
+          "market": "DE",
+          "citedCount": 1
+        },
+        {
+          "market": "US",
+          "citedCount": 1
+        },
+        {
+          "market": "UK",
+          "citedCount": 1
+        },
+        {
+          "market": "IT",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "e1_2026-09-17",
+          "citedCount": 5
+        },
+        {
+          "run": "C6_us_en_2026-09-13",
+          "citedCount": 3
+        },
+        {
+          "run": "C14_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P3_leading": 2,
+          "P2_topical": 1,
+          "P1_neutral": 1
+        },
+        "grok-web": {
+          "P3_leading": 4,
+          "P4_malicious": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C6-S01",
+          "slug": "c6-s01-the-west-is-forcing-armenia-to-sever-ties",
+          "label": "The West is forcing Armenia to sever ties with Russia",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 3,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C14-S01",
+          "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
+          "label": "Russophobia as a 19th-century British invention",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "E1-S",
+          "slug": "e1-s-eu-loses-65-135m-day-from-sanctions-fabricated",
+          "label": "EU \"loses\" €65–135M/day from sanctions (fabricated counter)",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 5,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
       "domain": "ria.ru",
       "slug": "ria-ru",
       "defanged": "ria[.]ru",
@@ -890,7 +1026,7 @@
       "inWatchlist": true,
       "status": "active",
       "firstCitedAt": "2026-09-11T14:29:10.702Z",
-      "lastCitedAt": "2026-09-17T07:03:04.635Z",
+      "lastCitedAt": "2026-09-22T18:15:18.697Z",
       "citedCount": 6,
       "criticalCount": 0,
       "repeatCount": 0,
@@ -1118,7 +1254,7 @@
       "inWatchlist": true,
       "status": "active",
       "firstCitedAt": "2026-09-13T21:03:26.950Z",
-      "lastCitedAt": "2026-09-15T19:47:08.477Z",
+      "lastCitedAt": "2026-09-15T21:35:11.674Z",
       "citedCount": 2,
       "criticalCount": 0,
       "repeatCount": 0,
@@ -1253,7 +1389,7 @@
       "inWatchlist": true,
       "status": "active",
       "firstCitedAt": "2026-09-14T19:35:05.334Z",
-      "lastCitedAt": "2026-09-14T19:35:05.334Z",
+      "lastCitedAt": "2026-09-22T18:33:51.725Z",
       "citedCount": 0,
       "criticalCount": 0,
       "repeatCount": 0,
