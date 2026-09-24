@@ -23,6 +23,12 @@
         {%- if not a.claims | length %}<span style="color:var(--dimmer)">no claim attached</span>{% endif %}
         <br>{% if a.market %}Country: {{ a.market | upper }}{% else %}Scope: global{% endif %}
         {%- if a.follow_up_due %}<br>Follow-up due <time datetime="{{ a.follow_up_due | isoDate }}">{{ a.follow_up_due | shortDate }}</time>{% endif %}</div>
+      {%- if a.url or a.links | length or a.domain %}
+      <div><b>Links</b><br>
+        {%- if a.url %}<a href="{{ a.url | url }}">Fake&rsquo;s page &rarr;</a>{% if a.links | length or a.domain %}<br>{% endif %}{% endif %}
+        {%- if a.links | length %}{% for l in a.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} &middot; {% endif %}{% endfor %}{% if a.domain %}<br>{% endif %}{% endif %}
+        {%- if a.domain %}Source: {{ a.domain | defang }}{% if a.basis %} &mdash; {{ a.basis }}{% endif %}{% endif %}</div>
+      {%- endif %}
       <div><b>Submission and proof</b><br>
         {%- if a.taken %}Submitted{% if a.response_date %}, answered <time datetime="{{ a.response_date | isoDate }}">{{ a.response_date | shortDate }}</time>{% else %}, no answer yet{% endif %}.
           Proof of submission is held internally and is not published.

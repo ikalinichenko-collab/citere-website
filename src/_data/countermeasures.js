@@ -62,6 +62,11 @@ function normalise(action, index) {
     follow_up_due: followUp,
     evidence_package_id: action.evidence_package_id || null,
     url: action.url || "",
+    // Public detail from the Escalation Actions forms: ① social posts, ⑤ the
+    // complained-about source and grounds. Not submission content — safe to show.
+    links: Array.isArray(action.links) ? action.links : null,
+    domain: action.domain || null,
+    basis: action.basis || null,
     // Default true: a row is public unless the export says otherwise.
     public: action.public !== false,
     legacy: { type: action.type, status: action.status }

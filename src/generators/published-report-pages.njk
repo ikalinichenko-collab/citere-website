@@ -295,7 +295,20 @@ permalink: "{{ entry.url }}"
   {%- else %}
   <table><caption class="visually-hidden">Countermeasures taken for this claim</caption>
     <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">What was sent</th><th scope="col">Reference</th><th scope="col">Response</th><th scope="col">Status</th></tr></thead>
-    <tbody>{% for c in p.countermeasures %}<tr><td>{{ c.date | default("—") }}</td><td>{{ c.type }}</td><td>{{ c.target }}</td><td>{{ c.sent | defangCopy | safe if c.sent else "—" }}</td><td>{{ c.reference | default("—") }}</td><td>{{ c.response | default("—") }}</td><td>{{ c.status }}</td></tr>{% endfor %}</tbody>
+    <tbody>{% for c in p.countermeasures %}<tr>
+      <td>{{ c.date | default("—") }}</td>
+      <td>{{ c.type | cmTypeLabel }}{% if c.kind == "remeasurement" %} <small>re-measurement</small>{% endif %}</td>
+      <td>{{ c.target }}</td>
+      <td>
+        {%- if c.sent %}{{ c.sent | defangCopy | safe }}{% endif %}
+        {%- if c.domain %} {{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
+        {%- if c.links | length %} {% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
+        {%- if not c.sent and not c.domain and not (c.links | length) %}—{% endif %}
+      </td>
+      <td>{{ c.reference | default("—") }}</td>
+      <td>{{ c.response | default("—") }}</td>
+      <td>{{ c.status | cmStatusLabel }}{% if c.followUpDue %}<small>re-check {{ c.followUpDue | shortDate }}</small>{% endif %}</td>
+    </tr>{% endfor %}</tbody>
   </table>
   {%- endif %}
 </section>
@@ -418,7 +431,7 @@ permalink: "{{ entry.url }}"
 
   {# ---- live + trend ---- #}
   <details class="sec">
-    <summary>Live cross-check and trend <span>{{ "" if p.live or p.trend else "not yet available" }}</span></summary>
+    <summary>Live cross-check and trend <span>{{ "" if p.live or p.trend or p.cleansing else "not yet available" }}</span></summary>
     {#- Trend prints between-run figures; both mandatory caveats live in this scope. -#}
     <div class="body" data-delta="cleansing" data-caveat="no-control-group" data-caveat="citation-drift">
       <h3>Live formulations vs constructed grid</h3>
@@ -430,6 +443,21 @@ permalink: "{{ entry.url }}"
         {{ R.trend(p.trend.points) }}
         <p class="rd-caveat" data-caveat="no-control-group" data-caveat="citation-drift">These are observed changes between runs, not the effect of any single action: there is no control group, and roughly half of an assistant’s cited domains change from one run to the next, so a moved figure is not on its own evidence of a fix.</p>
       {%- else %}<div class="rd-empty">This claim has one comparable run per market. Trend appears after a second comparable run (same market, language, grid, repeats).</div>{% endif %}
+      {%- if p.cleansing and (p.cleansing.before or p.cleansing.after) %}
+      <h3>Observed change after escalation</h3>
+      <p class="rd-desc">Repeat and contamination rate {% if p.cleansing.bot %}for {{ p.cleansing.bot | botName }}{% else %}pooled across bots{% endif %}, before and after the disclosure to {{ p.cleansing.target | defangCopy }}{% if p.cleansing.escalationDate %} (<time datetime="{{ p.cleansing.escalationDate | isoDate }}">{{ p.cleansing.escalationDate | shortDate }}</time>){% endif %}. This is the change observed after the disclosure, not its effect: there is no control group, and roughly half an assistant's cited domains change from one run to the next.</p>
+      {%- if p.cleansing.before and p.cleansing.after %}
+      <table><caption class="visually-hidden">Repeat and contamination rate before and after the disclosure</caption>
+        <thead><tr><th scope="col"></th><th scope="col" class="num">Before</th><th scope="col" class="num">After</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" style="font-weight:400">Repeat rate</th><td class="num">{{ p.cleansing.before.repeat | pctOf(p.cleansing.before.substantive) }}</td><td class="num">{{ p.cleansing.after.repeat | pctOf(p.cleansing.after.substantive) }}</td></tr>
+          <tr><th scope="row" style="font-weight:400">Contamination</th><td class="num">{{ p.cleansing.before.contaminated | pctOf(p.cleansing.before.valid) }}</td><td class="num">{{ p.cleansing.after.contaminated | pctOf(p.cleansing.after.valid) }}</td></tr>
+          <tr><th scope="row" style="font-weight:400">CRITICAL</th><td class="num">{{ p.cleansing.before.critical }}</td><td class="num">{{ p.cleansing.after.critical }}</td></tr>
+        </tbody></table>
+      {%- elif p.cleansing.scheduledDate %}
+      <div class="rd-empty">Re-measurement scheduled for <time datetime="{{ p.cleansing.scheduledDate | isoDate }}">{{ p.cleansing.scheduledDate | shortDate }}</time> — the observed change appears once it lands.</div>
+      {%- endif %}
+      {%- endif %}
     </div>
   </details>
 </section>

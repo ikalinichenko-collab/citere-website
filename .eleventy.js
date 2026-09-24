@@ -2,7 +2,8 @@ const { md: markdown, slugify } = require("./src/_lib/markdown.cjs");
 const ui = require("./src/_data/ui.js");
 const {
   VERDICTS, BEHAVIOURS, STATUSES, ACTION_TYPES, NETWORKS, NETWORK_NAMES, NETWORK_CLASS,
-  CHATBOTS, PERSONAS, MONTHS, SPLICES
+  CHATBOTS, PERSONAS, MONTHS, SPLICES,
+  COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES
 } = require("./src/_lib/labels.cjs");
 
 // Comment strip + whitespace collapse only. Deliberately conservative: nothing
@@ -101,6 +102,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("behaviourLabel", (v) => BEHAVIOURS[v] || String(v || "").toUpperCase());
   eleventyConfig.addFilter("statusLabel", (v) => STATUSES[v] || v);
   eleventyConfig.addFilter("actionTypeLabel", (v) => ACTION_TYPES[v] || v);
+  // Countermeasure catalogue labels (the app sends catalogue keys; the report
+  // table renders their human labels, matching the /countermeasures log).
+  eleventyConfig.addFilter("cmTypeLabel", (v) => (COUNTERMEASURE_TYPES[v] || {}).label || v);
+  eleventyConfig.addFilter("cmStatusLabel", (v) => (COUNTERMEASURE_STATUSES[v] || {}).label || v);
   eleventyConfig.addFilter("networkLabel", (v) => NETWORKS[v] || v);
   eleventyConfig.addFilter("networkName", (v) => NETWORK_NAMES[v] || v);
   eleventyConfig.addFilter("networkCount", function (net) {
