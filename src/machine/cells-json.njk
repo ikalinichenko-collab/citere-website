@@ -2,7 +2,4 @@
 permalink: /cells.json
 eleventyExcludeFromCollections: true
 ---
-{#- The published unit: one aggregated cell per bot x claim x persona x market
-    x run, with counts and Wilson bounds. Individual responses are not
-    published (brief §4, "/data"). -#}
-{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"low_n":{{ metrics.lowN }},"count":{{ metrics.cells | length }},"cells":{{ metrics.cells | dump | safe }}}
+{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"low_n":{{ publishedCells.low_n }},"count":{{ publishedCells.count }},"cells":{{ publishedCells.cells | dump | safe }}}

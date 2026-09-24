@@ -2,11 +2,14 @@
 // JSON Schema validation for everything under /data. Run before every build.
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import { files as metricsFiles } from "./build-metrics.mjs";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+// fileURLToPath, not URL.pathname: on Windows the latter yields "/D:/..." which
+// fs cannot resolve (same fix as scripts/check.mjs).
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const ajv = new Ajv({ allErrors: true, strict: false });
 addFormats(ajv);
 

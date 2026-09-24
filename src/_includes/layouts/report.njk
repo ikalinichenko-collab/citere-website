@@ -7,7 +7,7 @@ wrap: wrap-narrow
   <p class="plead">{{ report.n_responses }} responses from {{ report.chatbots | length }} public AI
     assistants, tested in {% for c in report.countries %}{{ c | countryName }}{% if loop.revindex0 == 1 %} and {% elif not loop.last %}, {% endif %}{% endfor %}
     across {{ report.languages | length }} languages{% if report.period %} between {{ report.period }}{% endif %},
-    against {{ claims | length }} documented false claims about Ukraine.</p></div>
+    against {{ published.index | length }} documented false claims about Ukraine.</p></div>
 
 <div class="prose" style="max-width:none">
   <h2 id="key-findings">{{ 'section.keyFindings' | t }}</h2>
@@ -27,13 +27,14 @@ wrap: wrap-narrow
     {%- for p in benchmarks.personas %}<th scope="col">{{ p }}</th>{% endfor %}
     <th scope="col">{{ 'col.contamination' | t }}</th></tr></thead>
   <tbody>
-  {%- for bot in profiles.chatbots %}
+  {%- for bot in platformsReport.chatbots %}
     <tr><td class="cl"><span class="markcell">{{ botMark(logos, bot.key, "sm", true) }}{{ bot.name }}</span></td>
       {%- for p in benchmarks.personas %}
-      {%- set cell = bot.byPersona | whereEq('persona', p) | first %}
-      <td class="num" data-persona="{{ p }}">{% if cell %}{{ cell.repeat_rate | rate }}{% else %}&mdash;{% endif %}</td>
+      {%- set cell = null %}
+      {%- for m in bot.markets %}{% if m.headline and m.headline.persona == p %}{% set cell = m.headline %}{% endif %}{% endfor %}
+      <td class="num" data-persona="{{ p }}">{% if cell %}{{ cell.repeat_rate.rate | rate }}{% else %}&mdash;{% endif %}</td>
       {%- endfor %}
-      <td class="num">{{ bot.contaminationRate | rate }}</td></tr>
+      <td class="num">{% if bot.worst %}{{ bot.worst.headline.contamination_rate.rate | rate }}{% else %}&mdash;{% endif %}</td></tr>
   {%- endfor %}
   </tbody></table></div>
 <p class="note">Columns are personas, reported separately and never averaged into a single score.

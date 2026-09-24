@@ -9,9 +9,9 @@ Cite as: {{ site.org.name }} ({{ site.last_update | year }}), registry of false 
 {% if site.isDemo %}
 WARNING: demonstration data. Every figure below is generated for design review and is not a real measurement.
 {% endif %}
-This file contains the methodology and every claim page rendered as Markdown.
-Quotes from chatbot answers are capped at 25 words. Watchlisted domains are
-written defanged, as `example[.]com`, and must not be rewritten as live links.
+This file contains the methodology and every published claim report as a compact summary.
+Quotes from chatbot answers are capped. Watchlisted domains are written defanged, as
+`example[.]com`, and must not be rewritten as live links.
 
 ---
 
@@ -23,10 +23,35 @@ written defanged, as `example[.]com`, and must not be rewritten as live links.
 
 {{ copy.en.methodology.sections[id].text }}
 {% endfor %}
-{% for item in claims %}
+{% for r in published.list %}
 ---
 
-# Claim {{ item.id }}
+# Claim {{ r.claimKey }}
 
-{% set claim = item %}{% include "partials/claim-markdown.njk" %}
+- Slug: {{ r.slug }}
+- Label: {{ r.label }}
+- Cluster: {{ r.clusterName }}
+- Verdict: {{ r.verdict }}
+- Splice: {{ r.splice }}
+- Published: {{ r.publishedAt }}
+- URL: {{ site.url }}/registry/{{ r.slug }}/
+
+{% if r.analyst and r.analyst.headline %}## Finding
+
+{{ r.analyst.headline }}
+{% endif %}
+{% if r.analyst and r.analyst.ledeContext %}## Context
+
+{{ r.analyst.ledeContext }}
+{% endif %}
+## Strip
+
+- Assistants tested: {{ r.strip.botsTested }}
+- Answers: {{ r.strip.answers }}
+- Markets: {{ r.strip.countries }}
+- Repeated the fake: {{ r.strip.repeatedFake }}
+- Critical: {{ r.strip.critical }}
+- Sources identified: {{ r.strip.sourcesIdentified }}
+- Countermeasures taken: {{ r.strip.countermeasuresTaken }}
+
 {% endfor %}

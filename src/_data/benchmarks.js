@@ -10,8 +10,7 @@
 // sum across claims and bots (CM §5.8). Trend comes from each report's own
 // per-run points (claims with ≥2 comparable runs); everything else from cells.
 const published = require("./published.js");
-const profiles = require("./profiles.js");
-const { MONTHS, SPLICES, SPLICE_SHORT } = require("../_lib/labels.cjs");
+const { MONTHS, SPLICES, SPLICE_SHORT, CHATBOTS } = require("../_lib/labels.cjs");
 const { slugify } = require("../_lib/markdown.cjs");
 
 const MODEL_LABEL = {
@@ -27,7 +26,7 @@ const PLATFORM_SLUG = {
   "deepseek-web": "deepseek", "google-ai": "google-ai"
 };
 const pslug = (m) => PLATFORM_SLUG[m] || String(m || "");
-const PLATFORMS = new Set((profiles.chatbots || []).map((p) => String(p.key)));
+const PLATFORMS = new Set([...Object.keys(CHATBOTS), "google-ai"]);
 const region = new Intl.DisplayNames(["en"], { type: "region" });
 const safeRegion = (v) => { try { return region.of(String(v).toUpperCase()) || v; } catch { return v; } };
 const monthOf = (iso) => `${MONTHS[Number(String(iso).slice(5, 7)) - 1]} ${String(iso).slice(0, 4)}`;

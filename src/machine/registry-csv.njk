@@ -2,9 +2,15 @@
 permalink: /registry.csv
 eleventyExcludeFromCollections: true
 ---
-{#- The published unit is the metric cell, not the answer: individual responses
-    are never published, only the aggregate (brief §4 "/data"). One row per
-    bot x claim x persona x market x run. -#}
-claim_id,slug,cluster,verdict,splice,run_id,country,language,market,chatbot,persona,is_live,n,substantive,repeat,u_context,refute,dodge,contaminated,critical,repeat_rate,rr_ci_low,rr_ci_high,low_n,contamination_rate,url
-{% for cell in metrics.cells %}{% set claim = claims | whereEq('id', cell.claim) | first %}{{ cell.claim | csvCell }},{{ claim.slug | csvCell }},{{ cell.cluster | csvCell }},{{ claim.verdict | csvCell }},{{ cell.splice | default("") | csvCell }},{{ cell.run | csvCell }},{{ cell.country | csvCell }},{{ cell.language | csvCell }},{{ cell.market | csvCell }},{{ cell.chatbot | csvCell }},{{ cell.persona | csvCell }},{{ cell.is_live | csvCell }},{{ cell.n | csvCell }},{{ cell.substantive | csvCell }},{{ cell.counts.repeat | csvCell }},{{ cell.counts.u_context | csvCell }},{{ cell.counts.refute | csvCell }},{{ cell.counts.dodge | csvCell }},{{ cell.contaminated | csvCell }},{{ cell.tiers.critical | csvCell }},{{ cell.repeat_rate.rate | csvCell }},{{ (cell.repeat_rate.ci[0] if cell.repeat_rate.ci else "") | csvCell }},{{ (cell.repeat_rate.ci[1] if cell.repeat_rate.ci else "") | csvCell }},{{ cell.repeat_rate.low_n | csvCell }},{{ cell.contamination_rate.rate | csvCell }},{{ (site.url + claim.url) | csvCell }}
-{% endfor %}
+{#- Legacy path: published Claim Report cells (same columns as /registry/reports.csv). -#}
+{%- set rows = ["claim_key,slug,bot,persona,market,repeat,substantive,repeat_rate,contaminated,valid,contamination_rate,low_n"] -%}
+{%- for rpt in published.list -%}
+  {%- set cells = (rpt.payload.resultsByBot.cells) if rpt.payload and rpt.payload.resultsByBot else [] -%}
+  {%- for c in cells -%}
+    {%- set rr = (c.repeat / c.substantive) if c.substantive else "" -%}
+    {%- set cr = (c.contaminated / c.valid) if c.valid else "" -%}
+    {%- set row = [rpt.claimKey | csvCell, rpt.slug | csvCell, c.model | csvCell, c.persona | csvCell, (c.market or "") | csvCell, c.repeat, c.substantive, rr, c.contaminated, c.valid, cr, (1 if c.substantive < 20 else 0)] -%}
+    {%- set rows = (rows.push(row | join(",")), rows) -%}
+  {%- endfor -%}
+{%- endfor -%}
+{{ rows | join("\n") | safe }}

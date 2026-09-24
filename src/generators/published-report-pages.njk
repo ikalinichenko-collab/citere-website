@@ -205,7 +205,7 @@ permalink: "{{ entry.url }}"
     {%- set EV_MAX = 24 %}
     {%- for e in p.evidence %}
       {%- if loop.index <= EV_MAX %}
-      <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}" data-synthetic="true">
+      <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}">
         <div class="meta">
           <span class="who">{{ botMark(logos, R.botSlug(e.model), "sm") }}{{ R.botLabel(e.model) }}</span>
           {%- set em = [] %}{% if e.market %}{% set em = (em.push(e.market), em) %}{% endif %}{% if e.persona %}{% set em = (em.push(R.personaPhrase(e.persona)), em) %}{% endif %}
@@ -233,7 +233,7 @@ permalink: "{{ entry.url }}"
     <p class="rd-notice">Showing the {{ EV_MAX }} most severe of {{ p.evidence | length }} flagged answers. The full set is in the
       <a href="{{ ('/registry/' + report.slug + '.json') | url }}">report data</a> (<a href="{{ ('/registry/' + report.slug + '.csv') | url }}">CSV</a>).</p>
     {%- endif %}
-    <p class="rd-notice" data-notice="synthetic-quotes">Quoted answers are excerpts of what an assistant returned, trimmed to the sentence carrying the claim.</p>
+    <p class="rd-notice">Quoted answers are excerpts of what an assistant returned, trimmed to the sentence carrying the claim.</p>
   {%- endif %}
 </section>
 {%- endif %}

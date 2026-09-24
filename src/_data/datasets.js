@@ -13,38 +13,38 @@ const built = (template) => fs.existsSync(path.join(ROOT, "src", template));
 // and rubric, countermeasure submission content and proof.
 const ENTRIES = [
   {
-    key: "claims-csv", entity: "claims", name: "Claims (CSV)", format: "CSV", header: "claim_id,slug,cluster_id,label,verdict,verdict_date,updated,splice,status,version,grain_of_truth,false_claim,canonical_debunk,markets_tested,languages,first_seen,network,url",
-    description: "One row per claim card: the falsehood, the verdict, how the lie is spliced onto the truth, and the short debunk.",
+    key: "claims-csv", entity: "claims", name: "Claims (CSV)", format: "CSV", header: "claim_id,slug,cluster_id,label,verdict,published_at,splice,bots_tested,answers,countries,repeated_fake,critical,sources_identified,countermeasures_taken,url",
+    description: "One row per published Claim Report: the falsehood, the verdict, how the lie is spliced onto the truth, and the KPI strip.",
     url: "/claims.csv", template: "machine/claims-csv.njk"
   },
   {
     key: "claims-json", entity: "claims", name: "Claims (JSON)", format: "JSON",
-    description: "The same cards with their sources, surface objects and changelog.",
+    description: "The published Claim Report index. Full payloads are at /registry/{slug}.json.",
     url: "/claims.json", template: "machine/claims-json.njk"
   },
   {
     key: "registry-json", entity: "claims", name: "Claim registry (JSON, legacy)", format: "JSON",
-    description: "The whole registry in one file. Superseded by claims.json and cells.json; kept so existing links keep working.",
+    description: "The published Claim Report index in one file. Kept so existing links keep working.",
     url: "/registry.json", template: "machine/registry-json.njk"
   },
   {
-    key: "runs-csv", entity: "runs", name: "Runs (CSV)", format: "CSV", header: "run_id,cluster_id,country,language,market,collected_at,collected_until,claims,models,personas,prompts,variations,repeats,live_prompts,received,valid,quarantined,unresolved,expected,missing,catalog_version,grid_version,judge_version,watchlist_version,judge_validation,comparable_with",
-    description: "One row per run: scope, grid shape, reconciliation, and the frozen catalog, grid, judge and watchlist versions.",
+    key: "runs-csv", entity: "runs", name: "Runs (CSV)", format: "CSV", header: "run_id,cluster_id,markets,collected_at,claims,models,personas,per_run,catalog_version,grid_version,judge_version,watchlist_version,judge_validation,claim_keys",
+    description: "One row per run key frozen in a published Claim Report: scope, versions and the claims that used it.",
     url: "/runs.csv", template: "machine/runs-csv.njk"
   },
   {
     key: "runs-json", entity: "runs", name: "Runs (JSON)", format: "JSON",
-    description: "The same records, with the list of runs each one may be compared with.",
+    description: "The same published run keys as JSON.",
     url: "/runs.json", template: "machine/runs-json.njk"
   },
   {
-    key: "registry-csv", entity: "cells", name: "Metric cells (CSV)", format: "CSV", header: "claim_id,slug,cluster,verdict,splice,run_id,country,language,market,chatbot,persona,is_live,n,substantive,repeat,u_context,refute,dodge,contaminated,critical,repeat_rate,rr_ci_low,rr_ci_high,low_n,contamination_rate,url",
-    description: "The aggregated unit behind every figure on the site: one row per assistant, claim, question type, market and run, with counts and Wilson bounds.",
+    key: "registry-csv", entity: "cells", name: "Metric cells (CSV)", format: "CSV", header: "claim_key,slug,bot,persona,market,repeat,substantive,repeat_rate,contaminated,valid,contamination_rate,low_n",
+    description: "Frozen per-cell figures from every published Claim Report: one row per assistant, claim, question type and market.",
     url: "/registry.csv", template: "machine/registry-csv.njk"
   },
   {
     key: "cells-json", entity: "cells", name: "Metric cells (JSON)", format: "JSON",
-    description: "The same cells with their verdict shares, escalation tiers and cited-domain edges.",
+    description: "The same published cells as JSON.",
     url: "/cells.json", template: "machine/cells-json.njk"
   },
   {
@@ -53,8 +53,8 @@ const ENTRIES = [
     url: "/sources.csv", template: "machine/sources-csv.njk"
   },
   {
-    key: "citations-csv", entity: "registry", name: "Citations (CSV)", format: "CSV", header: "domain,category,network,model_name,market,country,language,claim_id,cluster_id,persona,run_id,collected_at,cited_count,repeat_count,u_context_count,refute_count,dodge_count,critical_count",
-    description: "One row per domain, assistant, market, claim, question type and run, counted once per answer.",
+    key: "citations-csv", entity: "registry", name: "Citations (CSV)", format: "CSV", header: "domain,network,category,chatbot,cited_count,critical_count,url",
+    description: "One row per domain and assistant, from the published Sources Registry.",
     url: "/citations.csv", template: "machine/citations-csv.njk"
   },
   {

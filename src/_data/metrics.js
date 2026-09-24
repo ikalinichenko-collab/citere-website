@@ -11,7 +11,15 @@ const { readJson } = require("../_lib/markdown.cjs");
 const M = require("../_lib/metrics.cjs");
 const { share, significant, LOW_N, spliceGroup } = M;
 
-const store = readJson("data/metrics.json") || { cells: [], dimensions: {}, totals: {} };
+// The seed metrics store is marked demo:true. While the site serves the
+// published Claim Report feed, templates must not read those cells — otherwise
+// turning demo off would still publish fabricated rates via leftover pages and
+// machine exports. Validate still checks the file on disk; this loader simply
+// hides it from the render path.
+const loaded = readJson("data/metrics.json") || { cells: [], dimensions: {}, totals: {} };
+const store = loaded.demo === true
+  ? { cells: [], incidents: [], dimensions: {}, totals: {}, runs: [], low_n: LOW_N, demo: true }
+  : loaded;
 const cells = store.cells || [];
 
 const FORBIDDEN = ["persona", "market", "run"];

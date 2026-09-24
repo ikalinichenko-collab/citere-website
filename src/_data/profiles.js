@@ -16,6 +16,27 @@ const drift = require("./drift.js");
 const sources = require("./sources.js");
 
 const HEADLINE = "P2"; // the news-style question, where contamination peaks
+
+// Live pages use platformsReport / countriesReport (published feed). This module
+// is the seed-metrics path; when that store is hidden, export empties so Eleventy
+// can still load the file without crashing on missing run/market rows.
+if ((metrics.raw && metrics.raw.demo === true) || !(metrics.cells || []).length) {
+  module.exports = {
+    chatbots: [],
+    countries: [],
+    matrix: { persona: HEADLINE, chatbots: [], markets: [], rows: [] },
+    persona: HEADLINE,
+    scheduled: [],
+    headlineGap: null,
+    perBot: [],
+    langPairs: [],
+    silence: null,
+    grain: [],
+    localMirrors: [],
+    criticalTotal: 0
+  };
+} else {
+
 const personas = metrics.dimensions.personas || [];
 const marketKeys = runs.markets;
 
@@ -229,3 +250,5 @@ module.exports = {
   localMirrors: sources.filter((s) => s.markets.length === 1 && s.citedCount),
   criticalTotal: countries.reduce((n, c) => n + c.critical, 0)
 };
+
+} // end seed-metrics branch

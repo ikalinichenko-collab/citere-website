@@ -28,18 +28,19 @@ Cite as: {{ site.org.name }} ({{ site.last_update | year }}), registry of false 
 ## Reports
 {% for report in reports %}
 - [{{ report.title }}]({{ site.url }}{{ report.url }})
+{%- else %}
+- Monthly monitor reports are not published yet. Every finding to date is in the [claim registry]({{ site.url }}/registry/).
 {%- endfor %}
 
 ## Assistants
 
-- [All {{ profiles.chatbots | length }} assistant profiles]({{ site.url }}/platforms/) - repeat-rate, per-market split and countermeasures per product.
+- [All {{ platformsReport.chatbots | length }} assistant profiles]({{ site.url }}/platforms/) - repeat-rate, per-market split and countermeasures per product.
 - [All {{ countriesReport.countries | length }} market profiles]({{ site.url }}/countries/)
 
 ## Data
 
 - [Full text of every claim]({{ site.url }}/llms-full.txt)
-- [Registry as JSON]({{ site.url }}/registry.json) - [observations as CSV]({{ site.url }}/registry.csv)
-- [Benchmarks as JSON]({{ site.url }}/benchmarks.json)
+- [Registry as JSON]({{ site.url }}/registry.json) - [cells as CSV]({{ site.url }}/registry/reports.csv)
 - [Watchlist as CSV]({{ site.url }}/sources.csv) - [as STIX 2.1]({{ site.url }}/sources.stix.json)
 - [Countermeasures as CSV]({{ site.url }}/countermeasures.csv)
 

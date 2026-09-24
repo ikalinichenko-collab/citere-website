@@ -1,21 +1,14 @@
 // Site-wide data. Counters in data/site.json are placeholders: they are
-// recomputed here from data/ on every build and the stored values are ignored
-// (CLAUDE.md section 5.5).
-const fs = require("node:fs");
-const path = require("node:path");
-const { readJson, ROOT } = require("../_lib/markdown.cjs");
+// recomputed here from the published feeds on every build and the stored values
+// are ignored (CLAUDE.md section 5.5).
+const { readJson } = require("../_lib/markdown.cjs");
+const published = require("./published.js");
+const publishedSources = require("./publishedSources.js");
+const countermeasures = require("./countermeasures.js");
+const countriesReport = require("./countriesReport.js");
+const platformsReport = require("./platformsReport.js");
 
 const site = readJson("data/site.json");
-const countermeasures = require("./countermeasures.js");
-const metrics = require("./metrics.js");
-
-const claimDir = path.join(ROOT, "data/claims");
-const claims = fs.existsSync(claimDir)
-  ? fs
-      .readdirSync(claimDir)
-      .filter((f) => f.endsWith(".json"))
-      .map((f) => JSON.parse(fs.readFileSync(path.join(claimDir, f), "utf8")))
-  : [];
 
 // Catalogue §2.4 and §2.6 are internal: a catalog update and a dataset
 // publication are things we did to our own records, not things we sent anyone.
@@ -35,10 +28,15 @@ const median = responseDays.length
   ? Math.round(responseDays[Math.floor(responseDays.length / 2)])
   : null;
 
-const lastUpdate = [site.last_update, ...claims.map((c) => c.updated)].filter(Boolean).sort().pop();
+const index = published.index || [];
+const reports = Object.values(published.reports || {});
+const sumStrip = (field) => index.reduce((n, it) => n + (Number((it.strip || {})[field]) || 0), 0);
 
-const { CHATBOTS } = require("../_lib/labels.cjs");
-const sources = readJson("data/sources.json").domains || [];
+const publishedAt = index.map((r) => r.publishedAt).filter(Boolean).sort();
+const lastUpdate = [site.last_update, ...publishedAt.map((d) => String(d).slice(0, 10))]
+  .filter(Boolean)
+  .sort()
+  .pop();
 
 module.exports = {
   ...site,
@@ -49,18 +47,22 @@ module.exports = {
   productionUrl: `https://${site.domain}`,
   isDemo: site.demo === true,
   counters: {
-    claims: claims.length,
-    clusters: new Set(claims.map((c) => c.cluster)).size,
-    chatbots: (metrics.dimensions.chatbots || []).length || Object.keys(CHATBOTS).length,
-    personas: (metrics.dimensions.personas || []).length || 4,
-    markets: (metrics.dimensions.markets || []).length,
-    runs: (metrics.dimensions.runs || []).length,
-    languages: new Set(claims.flatMap((c) => c.languages || [])).size,
-    domains: sources.length,
-    responses: metrics.totals.responses,
-    quarantined: metrics.totals.quarantined,
-    unresolved: metrics.totals.unresolved,
-    critical: metrics.totals.critical,
+    claims: index.length,
+    clusters: new Set(index.map((r) => String(r.clusterName || ""))).size,
+    chatbots: (platformsReport.chatbots || []).length,
+    personas: 4,
+    markets: (countriesReport.countries || []).length,
+    runs: new Set(
+      reports.flatMap((r) => ((r.payload && r.payload.meta && r.payload.meta.runKeys) || []))
+    ).size,
+    languages: new Set(
+      (countriesReport.countries || []).map((c) => c.language).filter(Boolean)
+    ).size,
+    domains: publishedSources.length,
+    responses: sumStrip("answers"),
+    quarantined: 0,
+    unresolved: 0,
+    critical: sumStrip("critical"),
     countermeasures_sent: sent.length,
     countermeasures_answered: answered.length,
     countermeasures_actioned: actioned.length,

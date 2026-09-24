@@ -39,6 +39,21 @@ const zeroCats = () => Object.fromEntries(WL_CATEGORIES.map((c) => [c, 0]));
 const uniq = (xs) => [...new Set(xs)].sort();
 const mean = (xs) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
 
+// Seed claim cards keep demo:true even after the public site flips site.demo off.
+// The metrics store built from those cards must stay marked demo so templates
+// never publish seed rates as findings.
+function seedClaimCardsPresent() {
+  const dir = path.join(ROOT, "data/claims");
+  if (!fs.existsSync(dir)) return false;
+  return fs.readdirSync(dir).filter((f) => f.endsWith(".json")).some((f) => {
+    try {
+      return read(path.join("data/claims", f)).demo === true;
+    } catch {
+      return false;
+    }
+  });
+}
+
 // RFC 4180: quoted fields carry commas, newlines and doubled quotes. The
 // observation files hold prompt and response text, so a naive split loses the
 // column alignment and silently corrupts every count downstream.
@@ -340,7 +355,7 @@ export function build() {
     .sort((a, b) => b.cited - a.cited || a.domain.localeCompare(b.domain));
 
   const header = {
-    demo: site.demo === true,
+    demo: site.demo === true || seedClaimCardsPresent(),
     generated_from: "data/observations/*.csv",
     low_n: LOW_N,
     watchlist_version: site.watchlist_version || null,

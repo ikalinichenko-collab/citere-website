@@ -5,10 +5,13 @@
 // stored `updated` is newer than the incoming one, and prints a diff summary.
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
 import { join, basename } from "node:path";
+import { fileURLToPath } from "node:url";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+// fileURLToPath, not URL.pathname: on Windows the latter yields "/D:/..." which
+// fs cannot resolve (same fix as scripts/check.mjs).
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const [, , exportDir, ...flags] = process.argv;
 const dryRun = flags.includes("--dry-run");
 

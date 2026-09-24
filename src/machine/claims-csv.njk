@@ -2,8 +2,7 @@
 permalink: /claims.csv
 eleventyExcludeFromCollections: true
 ---
-{#- The claim card, one row per claim. The short debunk is published; prompt
-    text, response text and judge rubric are not (brief §4, "/data"). -#}
-claim_id,slug,cluster_id,label,verdict,verdict_date,updated,splice,status,version,grain_of_truth,false_claim,canonical_debunk,markets_tested,languages,first_seen,network,url
-{% for claim in claims %}{{ claim.id | csvCell }},{{ claim.slug | csvCell }},{{ claim.cluster | csvCell }},{{ claim.label | default("") | csvCell }},{{ claim.verdict | csvCell }},{{ claim.verdict_date | csvCell }},{{ claim.updated | csvCell }},{{ claim.splice | default("") | csvCell }},{{ claim.status_field | default("") | csvCell }},{{ claim.version | default("") | csvCell }},{{ claim.grain_of_truth | csvCell }},{{ claim.false_claim | default(claim.title_en) | csvCell }},{{ claim.canonical_debunk | default("") | csvCell }},{{ claim.markets | join(" ") | csvCell }},{{ claim.languages | join(" ") | csvCell }},{{ claim.origin.first_seen | csvCell }},{{ claim.origin.network | csvCell }},{{ (site.url + claim.url) | csvCell }}
+{#- One row per published Claim Report. Seed claim cards are not exported. -#}
+claim_id,slug,cluster_id,label,verdict,published_at,splice,bots_tested,answers,countries,repeated_fake,critical,sources_identified,countermeasures_taken,url
+{% for r in published.index %}{{ r.claimKey | csvCell }},{{ r.slug | csvCell }},{{ r.clusterName | csvCell }},{{ r.label | csvCell }},{{ r.verdict | csvCell }},{{ r.publishedAt | csvCell }},{{ r.splice | csvCell }},{{ r.strip.botsTested }},{{ r.strip.answers }},{{ r.strip.countries }},{{ r.strip.repeatedFake }},{{ r.strip.critical }},{{ r.strip.sourcesIdentified }},{{ r.strip.countermeasuresTaken }},{{ (site.url + '/registry/' + r.slug + '/') | csvCell }}
 {% endfor %}

@@ -3,7 +3,7 @@ layout: layouts/base.njk
 pageKey: countries
 navKey: countries
 title: "Countries — the full analytical view — Citere"
-description: "The breakdown behind the countries page: coverage, refusals, retrieval, per-assistant and per-claim tables, source locality and the grain-of-truth split."
+description: "The breakdown behind the countries page: coverage, refusals, per-assistant and per-claim tables, source locality and the grain-of-truth split."
 pagination:
   data: build.languages
   alias: lang
@@ -14,103 +14,74 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
 <nav class="crumbs" aria-label="Breadcrumb"><a href="{{ '/' | url }}">Home</a> /
   <a href="{{ '/countries/' | url }}">Countries</a> / <span aria-current="page">Full data</span></nav>
 <div class="phead"><h1>Countries &mdash; the full analytical view</h1>
-  <p class="plead" style="max-width:70ch">The breakdown behind the narrative page: the same pre-computed
-    cells, arranged for someone who needs every figure rather than the reading of it. Nothing here is
+  <p class="plead" style="max-width:70ch">The breakdown behind the narrative page: the same published
+    claim-report cells, arranged for someone who needs every figure rather than the reading of it. Nothing here is
     averaged across question types, markets or runs.</p></div>
 
 <h2 id="coverage" style="margin:26px 0 6px">1. What has been tested where</h2>
-<p class="note" style="margin:0 0 14px">Claims tested per market, with the run and the frozen grid version.
-  Comparisons are only made between markets sharing a grid version.</p>
+<p class="note" style="margin:0 0 14px">Published claims recorded in each market. Figures come only from
+  claims that have a published report.</p>
 <div class="panel"><table>
-  <caption class="visually-hidden">Claims, runs and versions per market</caption>
-  <thead><tr><th scope="col">Market</th><th scope="col" class="num">Claims</th><th scope="col" class="num">Answers</th>
-    <th scope="col">Runs</th><th scope="col">Grid</th><th scope="col">Comparable with</th></tr></thead>
+  <caption class="visually-hidden">Claims and answers per market</caption>
+  <thead><tr><th scope="col">Market</th><th scope="col" class="num">Claims</th><th scope="col" class="num">Answers ({{ countriesReport.persona }})</th>
+    <th scope="col" class="num">Critical</th></tr></thead>
   <tbody>
   {%- for c in countriesReport.countries %}
-    {%- set pooled = metrics.poolOf({ "run": c.run.key, "is_live": false }) %}
     <tr><th scope="row" style="font-weight:400">{{ c.key | flag }} {{ c.name }}</th>
-      <td class="num">{{ c.run.claims_count }}</td>
-      <td class="num">{{ pooled.n }}</td>
-      <td style="color:var(--dim);font-size:12.5px">{{ runs.byMarket[c.market] | length }}</td>
-      <td style="color:var(--dim)">{{ c.run.versions.grid }}</td>
-      <td style="color:var(--dim);font-size:12.5px">{% if c.run.comparable_with | length %}{{ c.run.comparable_with | length }} run(s){% else %}&mdash;{% endif %}</td></tr>
+      <td class="num">{{ c.claims | length }}</td>
+      <td class="num">{{ c.answers }}</td>
+      <td class="num">{{ c.critical }}</td></tr>
   {%- endfor %}
   </tbody></table></div>
 
-{%- for persona in metrics.dimensions.personas %}
-<h2 id="rr-{{ persona }}" style="margin:30px 0 6px">Repeat rate &mdash; {{ persona }} {{ persona | personaLabel }}</h2>
+<h2 id="rr-{{ countriesReport.persona }}" style="margin:30px 0 6px">Repeat rate &mdash; {{ countriesReport.persona }} {{ countriesReport.persona | personaLabel }}</h2>
+<p class="note" style="margin:0 0 14px">News-style questions. Other personas are on each
+  <a href="{{ '/platforms/' | url }}">assistant profile</a> and in the
+  <a href="{{ '/registry/reports.csv' | url }}">published cells CSV</a>.</p>
 <div class="panel"><table>
-  <caption class="visually-hidden">Repeat rate per assistant and market at {{ persona }}</caption>
+  <caption class="visually-hidden">Repeat rate per assistant and market at {{ countriesReport.persona }}</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
     {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
-  {%- for bot in countriesReport.chatbots %}
-    <tr data-persona="{{ persona }}"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in countriesReport.countries %}
-      {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": persona, "is_live": false }) %}
+  {%- for row in countriesReport.matrix.rows %}
+    <tr data-persona="{{ countriesReport.matrix.persona }}"><th scope="row" style="font-weight:400">{{ row.name }}</th>
+      {%- for cell in row.cells %}
       <td class="num"><span class="cellstat{% if cell.repeat_rate.low_n %} lown{% endif %}">{{ cell.repeat_rate.rate | rate }}<small>{{ cell.repeat_rate.ci | ciLabel }} &middot; n={{ cell.repeat_rate.n }}</small></span></td>
       {%- endfor %}</tr>
   {%- endfor %}
   </tbody></table></div>
-{%- endfor %}
 
 <h2 id="silence" style="margin:30px 0 6px">Silence map &mdash; refusals</h2>
-<p class="note" style="margin:0 0 14px">Share of answers that were a refusal or an evasion, at the neutral
-  question. A market that looks clean because assistants do not answer is not clean.</p>
-<div class="panel"><table>
-  <caption class="visually-hidden">Refusal rate per assistant and market at the neutral question</caption>
-  <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
-  <tbody>
-  {%- for bot in countriesReport.chatbots %}
-    <tr data-persona="P1"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in countriesReport.countries %}
-      {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": "P1", "is_live": false }) %}
-      <td class="num"><span class="cellstat">{{ cell.dodge_rate.rate | rate }}<small>n={{ cell.dodge_rate.n }}</small></span></td>
-      {%- endfor %}</tr>
-  {%- endfor %}
-  </tbody></table></div>
-
-<h2 id="retrieval" style="margin:30px 0 6px">How often assistants searched</h2>
-<p class="note" style="margin:0 0 14px">Share of answers containing any citation, at the news-style
-  question. This separates "clean because it never looked" from "looked and stayed clean".</p>
-<div class="panel"><table>
-  <caption class="visually-hidden">Share of answers citing anything, per assistant and market</caption>
-  <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
-  <tbody>
-  {%- for bot in countriesReport.chatbots %}
-    <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ bot.name }}</th>
-      {%- for c in countriesReport.countries %}
-      {%- set cell = metrics.poolOf({ "chatbot": bot.key, "run": c.run.key, "persona": countriesReport.persona, "is_live": false }) %}
-      <td class="num"><span class="cellstat">{{ cell.retrieval_rate.rate | rate }}<small>listed: {{ cell.contamination_rate.rate | rate }}</small></span></td>
-      {%- endfor %}</tr>
-  {%- endfor %}
-  </tbody></table></div>
+<p class="note" style="margin:0 0 14px">Where assistants refuse write-it-up requests more in one market than
+  another. Significant gaps only.</p>
+{%- if countriesReport.silence %}
+<div class="callout" style="margin:0 0 14px" data-persona="P4">{{ countriesReport.silence.bot.name }} refuses
+  <b>{{ countriesReport.silence.x.dodge_rate.rate | rate }}</b> of write-it-up requests in
+  {{ countriesReport.silence.high.name }} against <b>{{ countriesReport.silence.y.dodge_rate.rate | rate }}</b> in
+  {{ countriesReport.silence.low.name }}.</div>
+{%- else %}
+<div class="callout" style="margin:0 0 14px">No significant refusal gap between markets in the published set yet.</div>
+{%- endif %}
 
 <h2 id="claims" style="margin:30px 0 6px">One claim, every market</h2>
-<p class="note" style="margin:0 0 14px">Repeats per claim per market at the news-style question. Single-claim
-  cells at three repeats: direction only.</p>
+<p class="note" style="margin:0 0 14px">Published claims and the markets each was tested in. Per-cell rates
+  are in the report and the cells CSV.</p>
 <div class="panel"><table>
-  <caption class="visually-hidden">Repeats per claim and market</caption>
+  <caption class="visually-hidden">Published claims and markets</caption>
   <thead><tr><th scope="col">{{ 'col.claim' | t }}</th><th scope="col">Splice</th>
-    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    <th scope="col" class="num">Answers</th><th scope="col" class="num">Repeated</th>
+    <th scope="col" class="num">Critical</th><th scope="col">Markets</th></tr></thead>
   <tbody>
-  {%- set testedClaims = claims | whereEq('tested', true) %}
-  {%- for claim in testedClaims | take(25) %}
-    <tr><th scope="row" style="font-weight:400" class="cl"><a href="{{ claim.url | url }}">{{ claim.id }}</a>
-        <small>{{ claim.label }}</small></th>
-      <td><span class="splicebadge sp-{{ claim.splice }}">{{ claim.splice }}</span></td>
-      {%- for c in countriesReport.countries %}
-      {%- set cell = metrics.poolOf({ "claim": claim.id, "run": c.run.key, "persona": countriesReport.persona, "is_live": false }) %}
-      <td class="num">{% if cell.counts.repeat %}<b>{{ cell.counts.repeat }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
-      {%- endfor %}</tr>
+  {%- for r in published.index %}
+    <tr><th scope="row" style="font-weight:400" class="cl"><a href="{{ ('/registry/' + r.slug + '/') | url }}">{{ r.claimKey }}</a>
+        <small>{{ r.label }}</small></th>
+      <td><span class="splicebadge">{{ r.splice }}</span></td>
+      <td class="num">{{ r.strip.answers }}</td>
+      <td class="num">{% if r.strip.repeatedFake %}<b>{{ r.strip.repeatedFake }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
+      <td class="num">{{ r.strip.critical }}</td>
+      <td style="font-size:12.5px;color:var(--dim)">{{ r.strip.countries }}</td></tr>
   {%- endfor %}
-  </tbody></table>
-  {%- if testedClaims | length > 25 %}
-  <div class="summary-line" style="border-top:1px solid var(--line2)">Showing 25 of {{ testedClaims | length }} claims, worst first. Every claim × market cell is in
-    {% if datasets.has['registry-csv'] %}<a href="{{ '/registry.csv' | url }}">the metric-cells CSV</a>{% else %}the metric-cells CSV{% endif %}.</div>
-  {%- endif %}</div>
+  </tbody></table></div>
 
 <h2 id="locality" style="margin:30px 0 6px">Which listed sources are local</h2>
 <p class="note" style="margin:0 0 14px">A domain is local to a market when every recorded citation of it
@@ -148,6 +119,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
   {%- endfor %}
   </tbody></table></div>
 
+{%- if countermeasures.actions | length %}
 <h2 id="countermeasures" style="margin:30px 0 6px">Countermeasures by market</h2>
 <p class="note" style="margin:0 0 14px">Counts by type. No ratio of countermeasures to incidents: the two
   are not comparable across markets with different amounts of testing.</p>
@@ -165,8 +137,9 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
       <td style="font-size:12.5px;color:var(--dim)">{% for a in rows | unique('target') | take(3) %}{{ a.target | defangCopy }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not rows | length %}none yet{% endif %}</td></tr>
   {%- endfor %}
   </tbody></table></div>
+{%- endif %}
 
 <div class="exports" style="margin:26px 0 44px">
   <a href="{{ '/countries/' | url }}">Back to the countries page</a>
-  {%- if datasets.has['registry-csv'] %}<span>&middot;</span><a href="{{ '/registry.csv' | url }}">Every metric cell as CSV</a>{% endif %}
+  <span>&middot;</span><a href="{{ '/registry/reports.csv' | url }}">Every published cell as CSV</a>
 </div>

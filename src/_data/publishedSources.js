@@ -8,8 +8,8 @@
 // the record shape the /sources templates read, and computes nothing about the
 // findings.
 //
-// Kept separate from the demo sources.js so the (still-demo) Chatbots pages that
-// require it (profiles.js) and the demo-metrics citations.csv stay untouched.
+// Kept separate from the legacy seed sources.js so leftover seed loaders stay
+// untouched until they are removed.
 //
 // Empty-safe: no feed → an empty registry, the /sources page shows its empty
 // state and no domain pages are generated (same as published.js).

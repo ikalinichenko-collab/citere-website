@@ -33,8 +33,13 @@ function claimStatus(actions) {
   return null;
 }
 
+// Seed claim cards carry demo:true. Once the published Claim Report feed is
+// live they must not generate pages, feeds or machine exports — those surfaces
+// read data/claim-reports/ instead. Keep the files on disk for validate/metrics
+// rebuilds of the seed grid; do not expose them while site.demo is off.
 const claims = files
   .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")))
+  .filter((claim) => claim.demo !== true)
   .map((claim) => {
     const proseFile = path.join(ROOT, "content/en/claims", `${claim.id}.md`);
     const cells = metrics.select({ claim: claim.id });

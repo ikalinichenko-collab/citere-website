@@ -63,9 +63,8 @@ module.exports = {
       return idx.slice(0, 6);
     },
     // Metric cards from real published totals. Each appears only when it has a
-    // number. The watchlisted-domains and reports-sent cards return in Wave 2,
-    // once the app exports the sources registry and the countermeasures log —
-    // hidden now rather than showing demo figures next to the real ones.
+    // number. Countermeasures stay hidden until the app exports that log — do not
+    // mix an empty/demo log with real claim figures.
     metricCards: (data) => {
       const r = realTotals(data);
       const cards = [];
@@ -76,6 +75,11 @@ module.exports = {
       if (r.responses) {
         cards.push({ value: r.responses, label: "answers recorded and checked",
           sub: `${r.bots} assistants · ${r.personas} ways of asking` });
+      }
+      const domains = (data.publishedSources && data.publishedSources.length) || 0;
+      if (domains) {
+        cards.push({ value: domains, label: domains === 1 ? "watchlisted domain" : "watchlisted domains",
+          sub: "cited while answering about a published claim" });
       }
       return cards;
     },

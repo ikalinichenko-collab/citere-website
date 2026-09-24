@@ -6,10 +6,10 @@
 // sources.byBot. Country metadata (name, language, partners, scheduled) comes
 // from the static data/countries.json. Rates form inside one persona, one
 // market (CM §5.1); two markets differ only when their Wilson intervals do not
-// overlap. Kept separate from profiles.js so the (still-demo) Chatbots pages are
-// untouched.
+// overlap.
 const published = require("./published.js");
 const countriesData = require("./countries.js");
+const { CHATBOTS } = require("../_lib/labels.cjs");
 
 const MODEL_LABEL = {
   "gpt-web": "ChatGPT", "gemini-web": "Gemini", "claude-web": "Claude",
@@ -24,9 +24,9 @@ const PLATFORM_SLUG = {
   "deepseek-web": "deepseek", "google-ai": "google-ai"
 };
 const pslug = (m) => PLATFORM_SLUG[m] || String(m || "");
-// Platform pages that actually exist (still demo-driven); a bot links to its
-// profile only when there is one (google-ai has none yet → no link).
-const PLATFORMS = new Set((require("./profiles.js").chatbots || []).map((p) => String(p.key)));
+// Platform pages that exist for the known product set (plus google-ai, which has
+// no CHATBOTS row yet). Kept off the demo profiles.js path.
+const PLATFORMS = new Set([...Object.keys(CHATBOTS), "google-ai"]);
 const pcodeOf = (p) => String(p || "").split("_")[0];
 const HEADLINE = "P2";
 

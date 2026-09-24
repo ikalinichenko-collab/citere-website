@@ -1,26 +1,26 @@
-// Feed entries: claims and reports, newest first, capped at 50.
-const claims = require("./claims.js");
-const reports = require("./reports.js");
+// Feed entries: published Claim Reports, newest first, capped at 50.
+// Demo seed cards and monitor stubs are not listed once the app feed is live.
+const published = require("./published.js");
 const { VERDICTS } = require("../_lib/labels.cjs");
 
-const items = [
-  ...claims.map((c) => ({
-    kind: "claim",
-    url: c.url,
-    title: `${VERDICTS[c.verdict]}: ${c.title_en}`,
-    summary: `Verdict ${c.verdict} issued ${c.verdict_date}. Recorded in ${c.counts.observations} chatbot answers; repeated by ${c.repeatedBy.length} of ${c.botsTested} assistants. ${c.counts.actions} actions taken.`,
-    published: c.verdict_date,
-    updated: c.updated
-  })),
-  ...reports.map((r) => ({
-    kind: "report",
-    url: r.url,
-    title: r.title,
-    summary: `${r.n_responses} responses from ${(r.chatbots || []).length} assistants across ${(r.countries || []).length} markets.`,
-    published: r.date,
-    updated: r.date
-  }))
-]
+const items = (published.index || [])
+  .map((r) => {
+    const strip = r.strip || {};
+    const verdict = VERDICTS[r.verdict] || String(r.verdict || "").toUpperCase();
+    return {
+      kind: "claim",
+      url: `/registry/${r.slug}/`,
+      title: `${verdict}: ${r.label}`,
+      summary: [
+        `Verdict ${r.verdict}.`,
+        `${strip.answers || 0} recorded answers across ${strip.countries || 0} markets;`,
+        `${strip.repeatedFake || 0} repeated the fake, ${strip.critical || 0} critical.`,
+        `${strip.botsTested || 0} assistants tested.`
+      ].join(" "),
+      published: String(r.publishedAt || "").slice(0, 10),
+      updated: String(r.publishedAt || "").slice(0, 10)
+    };
+  })
   .sort((a, b) => (a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : 0))
   .slice(0, 50);
 

@@ -2,6 +2,5 @@
 permalink: /claims.json
 eleventyExcludeFromCollections: true
 ---
-{#- Claim cards only. Responses are never published; the aggregate is in
-    cells.json (brief §4, "/data"). -#}
-{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"updated":{{ site.last_update | dump | safe }},"count":{{ claims | length }},"claims":[{% for claim in claims %}{{ claim.raw | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}]}
+{#- Published Claim Report index. Full payloads are at /registry/{slug}.json. -#}
+{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"updated":{{ site.last_update | dump | safe }},"count":{{ published.index | length }},"claims":{{ published.index | dump | safe }}}

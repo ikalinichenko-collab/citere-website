@@ -2,8 +2,7 @@
 permalink: /citations.csv
 eleventyExcludeFromCollections: true
 ---
-{#- Sources Registry §9.1: one row per domain x assistant x market x claim x
-    persona x run. Counts of answers, one per answer per domain. -#}
-domain,category,network,model_name,market,country,language,claim_id,cluster_id,persona,run_id,collected_at,cited_count,repeat_count,u_context_count,refute_count,dodge_count,critical_count
-{% for cell in metrics.cells %}{% for domain, e in cell.domains %}{% if e.listed %}{% set s = sources.byDomain[domain] %}{{ domain | csvCell }},{{ (s.category if s else "") | csvCell }},{{ (s.network if s else "") | csvCell }},{{ cell.chatbot | csvCell }},{{ cell.market | csvCell }},{{ cell.country | csvCell }},{{ cell.language | csvCell }},{{ cell.claim | csvCell }},{{ cell.cluster | csvCell }},{{ cell.persona | csvCell }},{{ cell.run | csvCell }},{{ cell.first_seen | csvCell }},{{ e.cited | csvCell }},{{ e.repeat | csvCell }},{{ e.u_context | csvCell }},{{ e.refute | csvCell }},{{ e.dodge | csvCell }},{{ e.critical | csvCell }}
-{% endif %}{% endfor %}{% endfor %}
+{#- Domain × bot citation counts from the published Sources Registry. -#}
+domain,network,category,chatbot,cited_count,critical_count,url
+{% for s in publishedSources %}{% for bot, n in s.byBot %}{{ s.domain | csvCell }},{{ s.network | csvCell }},{{ s.category | csvCell }},{{ bot | csvCell }},{{ n }},{{ s.criticalCount }},{{ (site.url + s.url) | csvCell }}
+{% endfor %}{% endfor %}

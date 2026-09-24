@@ -8,9 +8,9 @@ module.exports = {
     // A real record of each entity, so the page shows the schema rather than
     // describing it. Taken from the same objects the exports are written from.
     samples: (data) => ({
-      claims: data.claims[0] ? data.claims[0].raw : null,
+      claims: (data.published && data.published.index && data.published.index[0]) || null,
       runs: data.runs.all[0] || null,
-      cells: data.metrics.cells[0] || null,
+      cells: (data.publishedCells && data.publishedCells.cells && data.publishedCells.cells[0]) || null,
       registry: (() => {
         const s = data.publishedSources.find((x) => x.citedCount) || data.publishedSources[0];
         return s ? {

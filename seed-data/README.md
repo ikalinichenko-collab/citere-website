@@ -1,20 +1,27 @@
 # Demo dataset for the Citere site
 
-Populates every page of the site so the design can be reviewed fully populated.
+Populates the seed grid so design pages and `npm run metrics` / `npm run validate`
+can still rebuild `data/metrics.json` from observations.
 
-## ⚠ This is demonstration data
+## Status (2026-09)
 
-**Every figure in this package is generated. None of it is a real measurement.**
+The **public site is no longer in demo mode**. Live pages and machine exports
+read the app's published feed:
 
-`data/site.json` carries `"demo": true` and a banner string. The site must render a
-persistent, visible banner on every page while that flag is set, and must not deploy to a
-public domain with the flag on. Delete or overwrite this data with a real Citere export via
-`scripts/import-citere.mjs` before launch.
+- `data/claim-index.json`
+- `data/claim-reports/{slug}.json`
+- `data/sources-registry.json`
 
-The narratives themselves are real, publicly documented Russian disinformation claims, and the
-debunk prose is written to be factually sound at a general level. But the *numbers* — repeat-rates,
-which assistant said what, judge confidences, escalation statuses, dates — are synthetic. Publishing
-them as findings would be exactly the kind of unfalsifiable claim the methodology exists to avoid.
+Seed claim cards (`data/claims/*.json` with `"demo": true`), observation CSVs and
+the derived `metrics.json` stay on disk for validation of the seed grid, but
+`src/_data/claims.js` and `src/_data/metrics.js` hide them from templates while
+they remain marked demo. Do not turn `site.json` `demo` back on without a banner.
+
+## Seed figures are not measurements
+
+Every figure produced by `seed-data/generate_grid.py` is generated. None of it is
+a real measurement. Publishing those numbers as findings would be exactly the
+kind of unfalsifiable claim the methodology exists to avoid.
 
 ## What's inside
 
@@ -29,8 +36,7 @@ data/
   sources.json                  the watchlist, with domain language and exclusions
   countries.json                market metadata, no figures
   platforms.json                bot metadata, no figures
-  countermeasures.json          the public countermeasures log
-  benchmarks.json               the legacy leaderboards, recomputed from the runs
+  countermeasures.json          public countermeasures log (empty until app exports it)
 content/en/claims/*.md          verdict / what is true / where it comes from
 ```
 
@@ -59,4 +65,3 @@ The dataset deliberately contains: quarantined and UNRESOLVED responses, so the 
 path is exercised; citations of domains no watchlist knows, so the Sources Registry queues
 have something in them; a clone named on a claim card but never classified; countermeasures
 covering several claims at once; and drafts that are visibly not actions taken.
-

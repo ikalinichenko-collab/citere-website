@@ -27,7 +27,7 @@ wrap: wrap-narrow
   <div class="m" data-persona="{{ profile.persona }}"><div class="n num">{{ profile.worst.headline.contamination_rate.rate | rate }}</div>
     <div class="l">source-contamination rate</div><div class="s">{{ profile.persona }} &middot; {{ profile.worst.name }} &middot; n={{ profile.worst.headline.contamination_rate.n }}</div></div>
   <div class="m"><div class="n num">{{ profile.claimsRepeated }}</div>
-    <div class="l">claims repeated</div><div class="s">of {{ claims | length }} documented</div></div>
+    <div class="l">claims repeated</div><div class="s">of {{ published.index | length }} documented</div></div>
 </div>
 {%- endif %}
 
