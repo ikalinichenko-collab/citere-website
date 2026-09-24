@@ -81,6 +81,18 @@ module.exports = {
         cards.push({ value: domains, label: domains === 1 ? "watchlisted domain" : "watchlisted domains",
           sub: "cited while answering about a published claim" });
       }
+      // Countermeasures, now that the app exports a real log. Only actions taken
+      // count (catalogue §0: a draft is not an action); hidden while the log is empty.
+      const cm = data.countermeasures || {};
+      const cmTaken = (cm.totals && cm.totals.taken) || 0;
+      if (cmTaken) {
+        const answered = (cm.totals && cm.totals.answered) || 0;
+        cards.push({
+          value: cmTaken,
+          label: cmTaken === 1 ? "countermeasure taken" : "countermeasures taken",
+          sub: answered ? `${answered} answered · on the published claims` : "on the published claims",
+        });
+      }
       return cards;
     },
     // Three summary facts, each one a question a reader arrives with: where is

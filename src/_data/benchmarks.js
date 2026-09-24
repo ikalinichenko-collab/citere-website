@@ -118,6 +118,16 @@ leaderboards.market_repeat = board(markets.map((mkt) => {
   return rc && { key: mkt, label: safeRegion(mkt), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n };
 }).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA);
 
+// Repeat rate by splice — the kind of lie that gets through (CM 5.7). One row per
+// splice type present in the reference run, worst first. `short` is the reader
+// label "A · one fact swapped out"; a composite splice keeps its raw key.
+leaderboards.splice_repeat = board(poolBy(refP2, "splice").filter((g) => g.key).map((g) => {
+  const rc = rateCell(g.repeat, g.substantive);
+  const key = String(g.key);
+  const short = SPLICE_SHORT[key] ? `${key} · ${SPLICE_SHORT[key]}` : (SPLICES[key] || key);
+  return rc && { key: slugify(key), label: short, short, value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n };
+}).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA);
+
 const bots = [...new Set(refCells.map((c) => c.bot))].sort((a, b) => MODEL_ORDER.indexOf(a) - MODEL_ORDER.indexOf(b));
 const heatmapRows = bots.map((bot) => ({
   chatbot: pslug(bot),
