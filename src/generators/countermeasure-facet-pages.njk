@@ -13,6 +13,7 @@ permalink: "{{ entry.url }}"
 
 {% include "partials/countermeasure-filters.njk" %}
 
+{%- set claims = published.claimLinks %}
 {%- set tableActions = activeFacet.actions %}
 {%- set tableTaken = activeFacet.taken %}
 {%- set tableAwaiting = activeFacet.awaiting %}

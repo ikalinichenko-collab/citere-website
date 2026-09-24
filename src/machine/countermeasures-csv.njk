@@ -3,5 +3,5 @@ permalink: /countermeasures.csv
 eleventyExcludeFromCollections: true
 ---
 date,type,target,claim_id,status,response_date,claim_url
-{% for e in countermeasures.actions %}{% set firstId = e.claims | first %}{% set claim = claims | whereEq('id', firstId) | first %}{{ e.date | csvCell }},{{ e.type | csvCell }},{{ e.target | csvCell }},{{ (e.claims | join(";")) | csvCell }},{{ e.status | csvCell }},{{ e.response_date | default("") | csvCell }},{{ (site.url + claim.url) | csvCell if claim else "" }}
+{% for e in countermeasures.actions %}{% set firstId = e.claims | first %}{% set claim = published.claimLinks | whereEq('id', firstId) | first %}{{ e.date | csvCell }},{{ e.type | csvCell }},{{ e.target | csvCell }},{{ (e.claims | join(";")) | csvCell }},{{ e.status | csvCell }},{{ e.response_date | default("") | csvCell }},{{ (site.url + claim.url) | csvCell if claim else "" }}
 {% endfor %}

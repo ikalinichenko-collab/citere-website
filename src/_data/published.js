@@ -100,4 +100,11 @@ const facetEntries = build.languages.flatMap((lang) => {
   ];
 });
 
-module.exports = { index, reports, list, entries, facets, facetEntries };
+// claimKey → its report URL. Surfaces that reference a claim by key (the
+// countermeasures log links each action's claims to their pages) resolve it here
+// instead of the seed `claims` collection, which is empty once demo is off.
+const claimLinks = index
+  .filter((entry) => entry && entry.claimKey && entry.slug)
+  .map((entry) => ({ id: entry.claimKey, url: `/registry/${entry.slug}/` }));
+
+module.exports = { index, reports, list, entries, facets, facetEntries, claimLinks };
