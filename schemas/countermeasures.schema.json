@@ -62,7 +62,10 @@
         },
         "properties": {
           "id": {
-            "type": "string"
+            "type": [
+              "string",
+              "number"
+            ]
           },
           "date": {
             "type": [
@@ -154,7 +157,10 @@
             "type": "string"
           },
           "response_date": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "response_at": {
             "type": "string"
@@ -176,6 +182,38 @@
           },
           "url": {
             "type": "string"
+          },
+          "domain": {
+            "description": "⑤ search-engine complaint: the source domain complained about.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "basis": {
+            "description": "⑤ search-engine complaint: the grounds (network / clone + attribution).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "links": {
+            "description": "① publish: links to the social posts pointing at the fake's page.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "platform": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "what": {
             "type": "string"
