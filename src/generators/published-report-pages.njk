@@ -66,7 +66,7 @@ permalink: "{{ entry.url }}"
     </div>
   </div>
   <div class="hero-r">
-    <h3>Which chatbots repeat it</h3>
+    <h2>Which chatbots repeat it</h2>
     <p class="ssub">Share of answers stating the fake as fact{% if p.meta.countries | length %} · {{ p.meta.countries | length }} {{ "country" if p.meta.countries | length == 1 else "countries" }}{% endif %}{% if personaCount %} · {{ personaCount }} question types{% endif %}</p>
     {%- if not heroBots | length %}<div class="rd-empty">No judged answers yet.</div>
     {%- else %}
