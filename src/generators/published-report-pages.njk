@@ -62,7 +62,7 @@ permalink: "{{ entry.url }}"
         </div>
       </details>
       <a href="#card">Claim card ↓</a>
-      <span class="ref">Claim {{ report.claimKey }}{% if p.meta.trackedSince %} · tracked since <time datetime="{{ p.meta.trackedSince }}">{{ p.meta.trackedSince | displayDate }}</time>{% endif %}</span>
+      <span class="ref">Claim {{ report.claimKey }}{% if p.meta.trackedSince %} · tracked since <time datetime="{{ p.meta.trackedSince }}">{{ p.meta.trackedSince | displayDate }}</time>{% endif %}{% if p.euvs %} · {% if p.euvs.url %}documented by <a href="{{ p.euvs.url }}" rel="nofollow">EUvsDisinfo</a>{% else %}documented by EUvsDisinfo{% endif %}{% endif %}</span>
     </div>
   </div>
   <div class="hero-r">
