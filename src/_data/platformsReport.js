@@ -185,8 +185,16 @@ const chatbots = botUniverse
       .filter((r) => r.cited)
       .sort((a, b) => b.cited - a.cited);
 
-    // No countermeasure log in the feed yet: every rung is available, nothing taken.
-    const ladder = COUNTERMEASURE_LADDER.map((rung) => ({ ...rung, done: [], drafted: [], all: [], state: "available" }));
+    // ④ Disclosures addressed to this bot's developer, matched by the structural
+    // bot key the app exports (not by target-name matching). Only disclosures
+    // carry a bot; the ladder folds them into their rung, so the per-bot page
+    // shows "Disclosure to <developer>" as taken/drafted instead of "nothing sent".
+    const platformActions = countermeasures.actions.filter((a) => a.bot === botModel);
+    const ladder = COUNTERMEASURE_LADDER.map((rung) => {
+      const done = platformActions.filter((a) => a.taken && a.kind === "action" && rung.types.includes(a.type));
+      const drafted = platformActions.filter((a) => !a.taken && a.kind === "action" && rung.types.includes(a.type));
+      return { ...rung, done, drafted, all: [...done, ...drafted], state: done.length ? "done" : "available" };
+    });
 
     return {
       key, model: botModel,
@@ -202,7 +210,7 @@ const chatbots = botUniverse
       repeatedClaims,
       gaps, biggestGap: gaps[0] || null,
       cited, ladder,
-      platformActions: [], countermeasures: botCountermeasures, trend: [],
+      platformActions, countermeasures: botCountermeasures, trend: [],
       hasRetrieval: false,
       drift: drift.byKey[key] || null,
     };

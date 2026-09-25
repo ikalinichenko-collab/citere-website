@@ -48,6 +48,9 @@ function normalise(action, index) {
     typeClass: kind === "remeasurement" ? REMEASUREMENT.cls : typeMeta.cls || "",
     subtypeLabel: (typeMeta.subtypes || {})[subtype] || null,
     target: action.target || null,
+    // ④ Disclosure: the bot product it is about (drone model id, e.g. "grok-web").
+    // Null for every other type. The per-bot platform ladder groups disclosures by it.
+    bot: action.bot || null,
     market: action.market || null,
     claims: action.claim_ids || (action.claim_id ? [action.claim_id] : []),
     status,
