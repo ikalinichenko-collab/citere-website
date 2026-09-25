@@ -14,7 +14,10 @@ const BEHAVIOURS = {
 const STATUSES = {
   submitted: "Submitted", acknowledged: "Acknowledged", actioned: "Actioned",
   no_response: "No response", declined: "Declined", completed: "Completed",
-  live: "Live", published: "Published", receipt_confirmed: "Receipt confirmed"
+  live: "Live", published: "Published", receipt_confirmed: "Receipt confirmed",
+  // Catalogue lifecycle statuses (Escalation Actions), for the ⑤ complaints the
+  // source page now lists.
+  responded: "Responded", closed: "Closed"
 };
 
 const ACTION_TYPES = {

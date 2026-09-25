@@ -15,8 +15,31 @@
 // state and no domain pages are generated (same as published.js).
 const fs = require("node:fs");
 const path = require("node:path");
+const countermeasures = require("./countermeasures.js");
 
 const FEED = path.join(__dirname, "..", "..", "data", "sources-registry.json");
+
+// ⑤ search-engine complaints, grouped by the domain they name. The source page's
+// "Complaints filed" section reads this — a complaint appears the moment it is
+// logged against a domain whose claim is published. Newest first.
+const complaintsByDomain = {};
+for (const a of countermeasures.actions) {
+  if (a.type !== "infra" || !a.domain) continue;
+  (complaintsByDomain[a.domain] ||= []).push({ target: a.target, status: a.status, date: a.date });
+}
+for (const list of Object.values(complaintsByDomain)) list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+// A punchy one-line tag for the source lead, mirroring the demo's "Storm-1516
+// asset". Derived from the folded network token; unclassified domains get none.
+const NETWORK_LABEL = {
+  pravda: "Pravda-network asset",
+  "state-media": "State-media outlet",
+  laundering: "Laundering-network asset",
+  matryoshka: "Matryoshka asset",
+  doppelganger: "Doppelganger asset",
+  "storm-1516": "Storm-1516 asset",
+  outlet: "Disinfo outlet",
+};
 
 function readFeed() {
   try {
@@ -79,9 +102,9 @@ function record(d) {
     category: d.category,
     inWatchlist: d.inWatchlist,
     status: d.status,
-    // Fields the feed does not carry (editorial in the demo): kept null so the
-    // templates fall through their existing guards.
-    label: null,
+    // A derived lead tag (C); the finer editorial fields the demo carried stay
+    // null so the templates fall through their existing guards.
+    label: NETWORK_LABEL[CATEGORY_NETWORK[d.category]] || null,
     note_en: null,
     language: null,
     first_seen: dateOnly(d.firstCitedAt),
@@ -108,9 +131,9 @@ function record(d) {
     claimsInjection: injection.map(claimObj),
     claims: reached.map(claimObj),
     cited_in: reached.map((c) => c.claimKey),
-    // Not in the feed (no complaint log in the pipeline yet).
-    complaints: [],
-    complaintStatus: null,
+    // ⑤ search-engine complaints naming this domain (Escalation Actions log).
+    complaints: complaintsByDomain[d.domain] || [],
+    complaintStatus: (complaintsByDomain[d.domain] || [])[0]?.status ?? null,
     // Article evidence: clean host, dirty article (flagged_articles).
     article_evidence: (d.articles || []).map((a) => ({ url: a.url, status: a.status })),
   };

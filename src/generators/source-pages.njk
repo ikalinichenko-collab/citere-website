@@ -9,11 +9,14 @@ permalink: "{{ entry.url }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
 <div class="phead"><h1 style="font-family:ui-monospace,monospace;font-size:26px">{{ source.defanged }}</h1>
-  <p class="plead">{% if source.label %}<b>{{ source.label }}</b>. {% endif %}Part of the
-    <b>{{ source.network | networkName }}</b> network
-    {%- if source.attribution | length %}, publicly attributed by
-    {% for a in source.attribution %}{% if a.url %}<a href="{{ a.url }}" style="color:var(--accent);font-weight:600">{{ a.org }}</a>{% else %}{{ a.org }}{% endif %}
-    {% if a.date %}({{ a.date | displayDate }}){% endif %}{% if not loop.last %} and {% endif %}{% endfor %}{% endif %}.
+  {%- set named = source.network and source.network not in ["outlet", "other"] %}
+  <p class="plead">
+    {%- if source.label %}<b>{{ source.label }}</b>{% endif %}
+    {%- if named %}{{ ". Part" if source.label else "Part" }} of the <b>{{ source.network | networkName }}</b> network{% endif %}
+    {%- if source.attribution | length %}{% if source.label or named %}, publicly attributed by {% else %}Publicly attributed by {% endif %}
+    {%- for a in source.attribution %} {% if a.url %}<a href="{{ a.url }}" style="color:var(--accent);font-weight:600">{{ a.org }}</a>{% else %}{{ a.org }}{% endif %}
+    {%- if a.date %} ({{ a.date | displayDate }}){% endif %}{% if not loop.last %} and{% endif %}{% endfor %}{% endif %}
+    {%- if source.label or named or source.attribution | length %}.{% endif %}
     {%- if source.first_seen %} We first observed it cited in a chatbot answer on
     <time datetime="{{ source.first_seen | isoDate }}">{{ source.first_seen | displayDate }}</time>.{% endif %}
     {%- if source.note_en %} {{ source.note_en | defangCopy }}{% endif %}</p></div>
@@ -149,7 +152,7 @@ permalink: "{{ entry.url }}"
 <div class="panel">
   {%- for c in source.complaints %}
   <div class="actrow"><div class="what">{{ c.target | defangCopy }}<small>via public abuse contact</small></div>
-    <span class="chip {{ 'ok' if c.status in ['acknowledged','actioned','completed'] else ('wait' if c.status == 'submitted' else '') }}"><span class="dot"></span>{{ c.status | statusLabel }}</span>
+    <span class="chip {{ 'ok' if c.status in ['acknowledged','actioned','completed','responded'] else ('wait' if c.status == 'submitted' else '') }}"><span class="dot"></span>{{ c.status | statusLabel }}</span>
     <div class="when"><time datetime="{{ c.date | isoDate }}">{{ c.date | shortDate }}</time></div></div>
   {%- endfor %}
 </div>
