@@ -8,7 +8,7 @@
   "verdict": "false",
   "splice": "B",
   "version": 2,
-  "publishedAt": "2026-09-24T13:25:48.407Z",
+  "publishedAt": "2026-09-25T05:05:22.230Z",
   "strip": {
     "botsTested": 5,
     "answers": 362,
@@ -16,7 +16,7 @@
     "repeatedFake": 9,
     "critical": 0,
     "sourcesIdentified": 4,
-    "countermeasuresTaken": 0
+    "countermeasuresTaken": 1
   },
   "payload": {
     "axb": {
@@ -38,7 +38,7 @@
     },
     "euvs": {
       "id": "ukraine-obstructs-peace-negotiations",
-      "url": null
+      "url": "https://euvsdisinfo.eu/report/ukraine-obstructs-peace-negotiations/"
     },
     "live": null,
     "meta": {
@@ -50,7 +50,7 @@
         "gpt-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-09-24T13:25:42.506Z",
+      "builtAt": "2026-09-25T05:05:22.294Z",
       "runKeys": [
         "C5_us_en_2026-09-13"
       ],
@@ -81,7 +81,7 @@
       "Ukraine blamed for stalled peace talks",
       "Splice B",
       "active",
-      "scheduled"
+      "in progress"
     ],
     "label": "Ukraine obstructs peace negotiations",
     "strip": {
@@ -91,7 +91,7 @@
       "botsTested": 5,
       "repeatedFake": 9,
       "sourcesIdentified": 4,
-      "countermeasuresTaken": 0
+      "countermeasuresTaken": 1
     },
     "trend": null,
     "origin": null,
@@ -106,15 +106,15 @@
               "citedCount": 2
             }
           ],
-          "domain": "tass.com",
+          "domain": "iz.ru",
           "reached": true,
           "byMarket": [
             {
-              "market": "ES",
+              "market": "US",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -135,15 +135,15 @@
               "citedCount": 2
             }
           ],
-          "domain": "iz.ru",
+          "domain": "tass.com",
           "reached": true,
           "byMarket": [
             {
-              "market": "US",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             }
           ],
@@ -3966,6 +3966,22 @@
     },
     "countermeasures": [
       {
+        "date": "2026-09-25",
+        "kind": "action",
+        "sent": null,
+        "type": "public",
+        "basis": null,
+        "links": null,
+        "domain": null,
+        "market": null,
+        "status": "submitted",
+        "target": "citere.ai",
+        "subtype": "publication",
+        "response": null,
+        "reference": null,
+        "followUpDue": null
+      },
+      {
         "date": null,
         "kind": "action",
         "sent": null,
@@ -3973,8 +3989,10 @@
         "basis": null,
         "links": null,
         "domain": null,
+        "market": null,
         "status": "drafted",
         "target": "",
+        "subtype": null,
         "response": null,
         "reference": null,
         "followUpDue": null

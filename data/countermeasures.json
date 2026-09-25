@@ -1,15 +1,95 @@
 {
   "demo": false,
-  "answered": 0,
+  "answered": 1,
   "median_response_days": null,
   "actions": [
     {
-      "id": 2,
-      "date": "2026-09-24",
+      "id": 3,
+      "date": "2026-09-25",
       "type": "public",
       "kind": "action",
-      "subtype": null,
-      "target": "",
+      "subtype": "publication",
+      "target": "citere.ai",
+      "market": null,
+      "claim_ids": [
+        "C-12-S01"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "/registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/",
+      "public": true
+    },
+    {
+      "id": 6,
+      "date": "2026-09-25",
+      "type": "public",
+      "kind": "action",
+      "subtype": "publication",
+      "target": "citere.ai",
+      "market": null,
+      "claim_ids": [
+        "C11-S01"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "/registry/c11-s01-ukraine-bans-orthodox-church-activities/",
+      "public": true
+    },
+    {
+      "id": 5,
+      "date": "2026-09-25",
+      "type": "public",
+      "kind": "action",
+      "subtype": "publication",
+      "target": "citere.ai",
+      "market": null,
+      "claim_ids": [
+        "E1-S"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "/registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/",
+      "public": true
+    },
+    {
+      "id": 8,
+      "date": "2026-09-25",
+      "type": "public",
+      "kind": "action",
+      "subtype": "publication",
+      "target": "citere.ai",
+      "market": null,
+      "claim_ids": [
+        "C5-S01"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "/registry/c5-s01-ukraine-obstructs-peace-negotiations/",
+      "public": true
+    },
+    {
+      "id": 2,
+      "date": "2026-09-25",
+      "type": "public",
+      "kind": "action",
+      "subtype": "publication",
+      "target": "citere.ai",
       "market": null,
       "claim_ids": [
         "C6-S01"
@@ -24,15 +104,50 @@
       "public": true
     },
     {
-      "id": 3,
-      "date": "2026-09-24",
+      "id": 7,
+      "date": "2026-09-25",
       "type": "public",
       "kind": "action",
       "subtype": null,
-      "target": "",
+      "target": "citere.ai",
       "market": null,
       "claim_ids": [
-        "C-12-S01"
+        "C14-S01"
+      ],
+      "status": "responded",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": [
+        {
+          "url": "https://www.linkedin.com/",
+          "platform": "LinkedIn"
+        },
+        {
+          "url": "https://www.x.com/",
+          "platform": "X"
+        }
+      ],
+      "url": "/registry/c14-s01-russophobia-as-a-19th-century-british-invention/",
+      "public": true
+    },
+    {
+      "id": 9,
+      "date": "2026-09-25",
+      "type": "partner",
+      "kind": "action",
+      "subtype": null,
+      "target": "SPRAVDI",
+      "market": null,
+      "claim_ids": [
+        "C6-S01",
+        "C5-S01",
+        "C14-S01",
+        "E1-S",
+        "C11-S01",
+        "C-12-S01",
+        "C12-S01"
       ],
       "status": "submitted",
       "response_date": null,
@@ -40,7 +155,59 @@
       "domain": null,
       "basis": null,
       "links": null,
-      "url": "/registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/",
+      "url": "",
+      "public": true
+    },
+    {
+      "id": 10,
+      "date": "2026-09-25",
+      "type": "partner",
+      "kind": "action",
+      "subtype": null,
+      "target": "EUvsDisinfo",
+      "market": null,
+      "claim_ids": [
+        "C6-S01",
+        "C5-S01",
+        "C14-S01",
+        "E1-S",
+        "C11-S01",
+        "C-12-S01",
+        "C12-S01"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "",
+      "public": true
+    },
+    {
+      "id": 11,
+      "date": "2026-09-25",
+      "type": "partner",
+      "kind": "action",
+      "subtype": null,
+      "target": "ЦПД",
+      "market": null,
+      "claim_ids": [
+        "C6-S01",
+        "C5-S01",
+        "C14-S01",
+        "E1-S",
+        "C11-S01",
+        "C-12-S01",
+        "C12-S01"
+      ],
+      "status": "submitted",
+      "response_date": null,
+      "follow_up_due": null,
+      "domain": null,
+      "basis": null,
+      "links": null,
+      "url": "",
       "public": true
     },
     {
@@ -61,86 +228,6 @@
       "basis": null,
       "links": null,
       "url": "/registry/c12-s01-nato-and-eu-stoking-baltic-tensions/",
-      "public": true
-    },
-    {
-      "id": 5,
-      "date": "2026-09-24",
-      "type": "public",
-      "kind": "action",
-      "subtype": null,
-      "target": "",
-      "market": null,
-      "claim_ids": [
-        "E1-S"
-      ],
-      "status": "submitted",
-      "response_date": null,
-      "follow_up_due": null,
-      "domain": null,
-      "basis": null,
-      "links": null,
-      "url": "/registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/",
-      "public": true
-    },
-    {
-      "id": 6,
-      "date": "2026-09-24",
-      "type": "public",
-      "kind": "action",
-      "subtype": null,
-      "target": "",
-      "market": null,
-      "claim_ids": [
-        "C11-S01"
-      ],
-      "status": "submitted",
-      "response_date": null,
-      "follow_up_due": null,
-      "domain": null,
-      "basis": null,
-      "links": null,
-      "url": "/registry/c11-s01-ukraine-bans-orthodox-church-activities/",
-      "public": true
-    },
-    {
-      "id": 7,
-      "date": "2026-09-24",
-      "type": "public",
-      "kind": "action",
-      "subtype": null,
-      "target": "",
-      "market": null,
-      "claim_ids": [
-        "C14-S01"
-      ],
-      "status": "submitted",
-      "response_date": null,
-      "follow_up_due": null,
-      "domain": null,
-      "basis": null,
-      "links": null,
-      "url": "/registry/c14-s01-russophobia-as-a-19th-century-british-invention/",
-      "public": true
-    },
-    {
-      "id": 8,
-      "date": "2026-09-24",
-      "type": "public",
-      "kind": "action",
-      "subtype": null,
-      "target": "",
-      "market": null,
-      "claim_ids": [
-        "C5-S01"
-      ],
-      "status": "submitted",
-      "response_date": null,
-      "follow_up_due": null,
-      "domain": null,
-      "basis": null,
-      "links": null,
-      "url": "/registry/c5-s01-ukraine-obstructs-peace-negotiations/",
       "public": true
     },
     {
