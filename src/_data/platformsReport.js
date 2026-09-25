@@ -11,6 +11,7 @@
 // not in the per-cell feed, so the "Searching, and what it found" section is
 // suppressed (hasRetrieval:false) until the feed carries it.
 const published = require("./published.js");
+const countermeasures = require("./countermeasures.js");
 const countriesData = require("./countries.js");
 const sources = require("./publishedSources.js");
 const drift = require("./drift.js");
@@ -161,10 +162,22 @@ const chatbots = botUniverse
 
     // Documented claims this assistant stated as fact in at least one answer.
     const repSlugs = [...new Set(cells.filter((c) => c.bot === botModel && c.repeat > 0).map((c) => c.slug))];
-    const repeatedClaims = repSlugs
+    const repeatedRows = repSlugs
       .map((slug) => published.index.find((r) => r.slug === slug))
-      .filter(Boolean)
+      .filter(Boolean);
+    const repeatedClaims = repeatedRows
       .map((r) => ({ url: `/registry/${r.slug}/`, title_en: r.label, verdict: r.verdict, cluster: r.clusterName }));
+
+    // Countermeasures taken on the claims this assistant repeated. The published
+    // feed keys each action to claimKeys; a bot's repeated claims resolve to their
+    // keys through the same index. Drafts and re-measurements are not actions
+    // taken (catalogue §0), so they do not count. This is a different thing from
+    // the ladder below, which is disclosures directed AT this platform (still
+    // empty until ④ Disclosure-to-platform is built).
+    const repeatedKeys = new Set(repeatedRows.map((r) => r.claimKey).filter(Boolean));
+    const botCountermeasures = countermeasures.actions.filter(
+      (a) => a.taken && (a.claims || []).some((k) => repeatedKeys.has(k)),
+    );
 
     // Listed domains this assistant cited, from the published Sources Registry.
     const cited = sources
@@ -189,7 +202,7 @@ const chatbots = botUniverse
       repeatedClaims,
       gaps, biggestGap: gaps[0] || null,
       cited, ladder,
-      platformActions: [], countermeasures: [], trend: [],
+      platformActions: [], countermeasures: botCountermeasures, trend: [],
       hasRetrieval: false,
       drift: drift.byKey[key] || null,
     };
