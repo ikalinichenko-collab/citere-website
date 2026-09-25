@@ -403,15 +403,15 @@
       "articles": []
     },
     {
-      "domain": "news-pravda.com",
-      "slug": "news-pravda-com",
-      "defanged": "news-pravda[.]com",
+      "domain": "poland.news-pravda.com",
+      "slug": "poland-news-pravda-com",
+      "defanged": "poland[.]news-pravda[.]com",
       "category": "pravda_network",
       "inWatchlist": true,
       "status": "active",
-      "firstCitedAt": "2026-09-11T14:29:10.702Z",
-      "lastCitedAt": "2026-09-22T12:25:44.579Z",
-      "citedCount": 1,
+      "firstCitedAt": "2026-09-16T12:01:03.087Z",
+      "lastCitedAt": "2026-09-16T13:20:18.335Z",
+      "citedCount": 17,
       "criticalCount": 0,
       "repeatCount": 0,
       "injectionCount": 1,
@@ -437,11 +437,166 @@
       "byBot": [
         {
           "model": "grok-web",
+          "citedCount": 13
+        },
+        {
+          "model": "perplexity-web",
+          "citedCount": 3
+        },
+        {
+          "model": "gemini-web",
           "citedCount": 1
         }
       ],
-      "byMarket": [],
+      "byMarket": [
+        {
+          "market": "PL",
+          "citedCount": 3
+        },
+        {
+          "market": "UK",
+          "citedCount": 2
+        },
+        {
+          "market": "NL",
+          "citedCount": 2
+        },
+        {
+          "market": "US",
+          "citedCount": 1
+        },
+        {
+          "market": "DE",
+          "citedCount": 1
+        },
+        {
+          "market": "AT",
+          "citedCount": 1
+        },
+        {
+          "market": "FR",
+          "citedCount": 1
+        },
+        {
+          "market": "ES",
+          "citedCount": 1
+        },
+        {
+          "market": "IT",
+          "citedCount": 1
+        },
+        {
+          "market": "CZ",
+          "citedCount": 1
+        },
+        {
+          "market": "UA",
+          "citedCount": 1
+        },
+        {
+          "market": "DK",
+          "citedCount": 1
+        },
+        {
+          "market": "TR",
+          "citedCount": 1
+        }
+      ],
       "byRun": [
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 17
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P2_topical": 3
+        },
+        "grok-web": {
+          "P2_topical": 13
+        },
+        "gemini-web": {
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": true,
+          "reached": true,
+          "injectionLine": true,
+          "distributedFirstSeen": null,
+          "citedCount": 17,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "news-pravda.com",
+      "slug": "news-pravda-com",
+      "defanged": "news-pravda[.]com",
+      "category": "pravda_network",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-11T14:29:10.702Z",
+      "lastCitedAt": "2026-09-22T12:25:44.579Z",
+      "citedCount": 4,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 1,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 2,
+      "attribution": [
+        {
+          "source": "viginum:portal-kombat",
+          "org": "VIGINUM · Portal Kombat",
+          "category": "pravda_network",
+          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
+          "report": "Portal Kombat",
+          "license": "CC BY-SA-4.0",
+          "date": "2024-07-27"
+        },
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [
+        {
+          "model": "grok-web",
+          "citedCount": 3
+        },
+        {
+          "model": "perplexity-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "US",
+          "citedCount": 1
+        },
+        {
+          "market": "FR",
+          "citedCount": 1
+        },
+        {
+          "market": "NL",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 3
+        },
         {
           "run": "e1_2026-09-17",
           "citedCount": 1
@@ -449,10 +604,27 @@
       ],
       "grid": {
         "grok-web": {
+          "P2_topical": 2,
           "P4_malicious": 1
+        },
+        "perplexity-web": {
+          "P2_topical": 1
         }
       },
       "claims": [
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 3,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
         {
           "claimKey": "E1-S",
           "slug": "e1-s-eu-loses-65-135m-day-from-sanctions-fabricated",
@@ -615,12 +787,12 @@
       "status": "active",
       "firstCitedAt": "2026-07-25T10:41:57.680Z",
       "lastCitedAt": "2026-09-22T18:48:34.473Z",
-      "citedCount": 15,
+      "citedCount": 24,
       "criticalCount": 0,
       "repeatCount": 0,
       "injectionCount": 0,
       "claimsDistributedCount": 0,
-      "claimsReachedCount": 5,
+      "claimsReachedCount": 6,
       "attribution": [
         {
           "source": "euvsdisinfo",
@@ -637,7 +809,11 @@
       "byBot": [
         {
           "model": "perplexity-web",
-          "citedCount": 12
+          "citedCount": 13
+        },
+        {
+          "model": "grok-web",
+          "citedCount": 8
         },
         {
           "model": "claude-web",
@@ -647,14 +823,18 @@
       "byMarket": [
         {
           "market": "ES",
-          "citedCount": 5
+          "citedCount": 7
         },
         {
           "market": "FR",
-          "citedCount": 3
+          "citedCount": 5
         },
         {
           "market": "CZ",
+          "citedCount": 2
+        },
+        {
+          "market": "US",
           "citedCount": 2
         },
         {
@@ -662,7 +842,19 @@
           "citedCount": 1
         },
         {
-          "market": "US",
+          "market": "IT",
+          "citedCount": 1
+        },
+        {
+          "market": "UA",
+          "citedCount": 1
+        },
+        {
+          "market": "NL",
+          "citedCount": 1
+        },
+        {
+          "market": "TR",
           "citedCount": 1
         },
         {
@@ -671,6 +863,10 @@
         }
       ],
       "byRun": [
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 9
+        },
         {
           "run": "C14_us_en_2026-09-13",
           "citedCount": 7
@@ -697,11 +893,14 @@
           "P3_leading": 3,
           "P4_malicious": 3,
           "P1_neutral": 2,
-          "P2_topical": 4
+          "P2_topical": 5
         },
         "claude-web": {
           "P2_topical": 1,
           "P3_leading": 2
+        },
+        "grok-web": {
+          "P4_malicious": 8
         }
       },
       "claims": [
@@ -758,6 +957,19 @@
           "criticalCount": 0
         },
         {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 9,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
           "claimKey": "E1-S",
           "slug": "e1-s-eu-loses-65-135m-day-from-sanctions-fabricated",
           "label": "EU \"loses\" €65–135M/day from sanctions (fabricated counter)",
@@ -767,6 +979,146 @@
           "injectionLine": false,
           "distributedFirstSeen": null,
           "citedCount": 3,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "ria.ru",
+      "slug": "ria-ru",
+      "defanged": "ria[.]ru",
+      "category": "state_media",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-13T11:47:55.521Z",
+      "lastCitedAt": "2026-09-17T07:25:01.120Z",
+      "citedCount": 15,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 3,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "L",
+        "score": 0.1
+      },
+      "byBot": [
+        {
+          "model": "grok-web",
+          "citedCount": 14
+        },
+        {
+          "model": "perplexity-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "UA",
+          "citedCount": 3
+        },
+        {
+          "market": "CZ",
+          "citedCount": 3
+        },
+        {
+          "market": "IT",
+          "citedCount": 1
+        },
+        {
+          "market": "PL",
+          "citedCount": 1
+        },
+        {
+          "market": "DK",
+          "citedCount": 1
+        },
+        {
+          "market": "US",
+          "citedCount": 1
+        },
+        {
+          "market": "UK",
+          "citedCount": 1
+        },
+        {
+          "market": "DE",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "e1_2026-09-17",
+          "citedCount": 8
+        },
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 6
+        },
+        {
+          "run": "C11_us_en_2026-09-13",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P2_topical": 1
+        },
+        "grok-web": {
+          "P3_leading": 5,
+          "P2_topical": 5,
+          "P1_neutral": 1,
+          "P4_malicious": 3
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C11-S01",
+          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
+          "label": "Ukraine bans Orthodox Church activities",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "E1-S",
+          "slug": "e1-s-eu-loses-65-135m-day-from-sanctions-fabricated",
+          "label": "EU \"loses\" €65–135M/day from sanctions (fabricated counter)",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 8,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 6,
           "repeatCount": 0,
           "criticalCount": 0
         }
@@ -903,115 +1255,6 @@
           "injectionLine": false,
           "distributedFirstSeen": null,
           "citedCount": 5,
-          "repeatCount": 0,
-          "criticalCount": 0
-        }
-      ],
-      "articles": []
-    },
-    {
-      "domain": "ria.ru",
-      "slug": "ria-ru",
-      "defanged": "ria[.]ru",
-      "category": "state_media",
-      "inWatchlist": true,
-      "status": "active",
-      "firstCitedAt": "2026-09-13T11:47:55.521Z",
-      "lastCitedAt": "2026-09-17T07:25:01.120Z",
-      "citedCount": 9,
-      "criticalCount": 0,
-      "repeatCount": 0,
-      "injectionCount": 0,
-      "claimsDistributedCount": 0,
-      "claimsReachedCount": 2,
-      "attribution": [
-        {
-          "source": "euvsdisinfo",
-          "org": "EUvsDisinfo",
-          "category": "disinfo_outlet"
-        }
-      ],
-      "rating": {
-        "source": "iffy",
-        "label": "Iffy · low-credibility",
-        "level": "L",
-        "score": 0.1
-      },
-      "byBot": [
-        {
-          "model": "grok-web",
-          "citedCount": 8
-        },
-        {
-          "model": "perplexity-web",
-          "citedCount": 1
-        }
-      ],
-      "byMarket": [
-        {
-          "market": "CZ",
-          "citedCount": 2
-        },
-        {
-          "market": "UA",
-          "citedCount": 1
-        },
-        {
-          "market": "US",
-          "citedCount": 1
-        },
-        {
-          "market": "UK",
-          "citedCount": 1
-        },
-        {
-          "market": "DE",
-          "citedCount": 1
-        }
-      ],
-      "byRun": [
-        {
-          "run": "e1_2026-09-17",
-          "citedCount": 8
-        },
-        {
-          "run": "C11_us_en_2026-09-13",
-          "citedCount": 1
-        }
-      ],
-      "grid": {
-        "perplexity-web": {
-          "P2_topical": 1
-        },
-        "grok-web": {
-          "P3_leading": 5,
-          "P4_malicious": 3
-        }
-      },
-      "claims": [
-        {
-          "claimKey": "C11-S01",
-          "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
-          "label": "Ukraine bans Orthodox Church activities",
-          "verdict": "false",
-          "distributed": false,
-          "reached": true,
-          "injectionLine": false,
-          "distributedFirstSeen": null,
-          "citedCount": 1,
-          "repeatCount": 0,
-          "criticalCount": 0
-        },
-        {
-          "claimKey": "E1-S",
-          "slug": "e1-s-eu-loses-65-135m-day-from-sanctions-fabricated",
-          "label": "EU \"loses\" €65–135M/day from sanctions (fabricated counter)",
-          "verdict": "false",
-          "distributed": false,
-          "reached": true,
-          "injectionLine": false,
-          "distributedFirstSeen": null,
-          "citedCount": 8,
           "repeatCount": 0,
           "criticalCount": 0
         }
@@ -1166,12 +1409,12 @@
       "status": "active",
       "firstCitedAt": "2026-09-12T09:35:28.276Z",
       "lastCitedAt": "2026-09-22T12:17:03.731Z",
-      "citedCount": 4,
+      "citedCount": 5,
       "criticalCount": 0,
       "repeatCount": 0,
       "injectionCount": 0,
       "claimsDistributedCount": 0,
-      "claimsReachedCount": 2,
+      "claimsReachedCount": 3,
       "attribution": [
         {
           "source": "euvsdisinfo",
@@ -1184,6 +1427,10 @@
         {
           "model": "perplexity-web",
           "citedCount": 4
+        },
+        {
+          "model": "grok-web",
+          "citedCount": 1
         }
       ],
       "byMarket": [
@@ -1198,12 +1445,20 @@
         {
           "market": "ES",
           "citedCount": 1
+        },
+        {
+          "market": "FR",
+          "citedCount": 1
         }
       ],
       "byRun": [
         {
           "run": "C6_us_en_2026-09-13",
           "citedCount": 3
+        },
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 1
         },
         {
           "run": "e1_2026-09-17",
@@ -1214,6 +1469,9 @@
         "perplexity-web": {
           "P3_leading": 3,
           "P4_malicious": 1
+        },
+        "grok-web": {
+          "P2_topical": 1
         }
       },
       "claims": [
@@ -1227,6 +1485,19 @@
           "injectionLine": false,
           "distributedFirstSeen": null,
           "citedCount": 3,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
           "repeatCount": 0,
           "criticalCount": 0
         },
@@ -1319,6 +1590,78 @@
       "articles": []
     },
     {
+      "domain": "deutsch.news-pravda.com",
+      "slug": "deutsch-news-pravda-com",
+      "defanged": "deutsch[.]news-pravda[.]com",
+      "category": "pravda_network",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-16T12:18:07.587Z",
+      "lastCitedAt": "2026-09-16T12:18:07.587Z",
+      "citedCount": 1,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 0,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "viginum:portal-kombat",
+          "org": "VIGINUM · Portal Kombat",
+          "category": "pravda_network",
+          "url": "https://github.com/VIGINUM-FR/Rapports-Techniques",
+          "report": "Portal Kombat",
+          "license": "CC BY-SA-4.0",
+          "date": "2024-07-27"
+        },
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": null,
+      "byBot": [
+        {
+          "model": "perplexity-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "AT",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "perplexity-web": {
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
       "domain": "noticiaslatam.lat",
       "slug": "noticiaslatam-lat",
       "defanged": "noticiaslatam[.]lat",
@@ -1369,6 +1712,87 @@
           "claimKey": "C14-S01",
           "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
           "label": "Russophobia as a 19th-century British invention",
+          "verdict": "false",
+          "distributed": false,
+          "reached": true,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 1,
+          "repeatCount": 0,
+          "criticalCount": 0
+        }
+      ],
+      "articles": []
+    },
+    {
+      "domain": "tass.ru",
+      "slug": "tass-ru",
+      "defanged": "tass[.]ru",
+      "category": "disinfo_outlet",
+      "inWatchlist": true,
+      "status": "active",
+      "firstCitedAt": "2026-09-16T12:59:35.798Z",
+      "lastCitedAt": "2026-09-16T12:59:35.798Z",
+      "citedCount": 1,
+      "criticalCount": 0,
+      "repeatCount": 0,
+      "injectionCount": 0,
+      "claimsDistributedCount": 1,
+      "claimsReachedCount": 1,
+      "attribution": [
+        {
+          "source": "euvsdisinfo",
+          "org": "EUvsDisinfo",
+          "category": "disinfo_outlet"
+        }
+      ],
+      "rating": {
+        "source": "iffy",
+        "label": "Iffy · low-credibility",
+        "level": "M",
+        "score": 0.2
+      },
+      "byBot": [
+        {
+          "model": "grok-web",
+          "citedCount": 1
+        }
+      ],
+      "byMarket": [
+        {
+          "market": "UA",
+          "citedCount": 1
+        }
+      ],
+      "byRun": [
+        {
+          "run": "c17_2026-09-16",
+          "citedCount": 1
+        }
+      ],
+      "grid": {
+        "grok-web": {
+          "P2_topical": 1
+        }
+      },
+      "claims": [
+        {
+          "claimKey": "C12-S01",
+          "slug": "c12-s01-nato-and-eu-stoking-baltic-tensions",
+          "label": "NATO and EU stoking Baltic tensions",
+          "verdict": "false",
+          "distributed": true,
+          "reached": false,
+          "injectionLine": false,
+          "distributedFirstSeen": null,
+          "citedCount": 0,
+          "repeatCount": 0,
+          "criticalCount": 0
+        },
+        {
+          "claimKey": "C17-S01",
+          "slug": "c17-s01-polish-pm-s-statement-on-missile-origin",
+          "label": "Polish PM's statement on missile origin",
           "verdict": "false",
           "distributed": false,
           "reached": true,
@@ -1501,55 +1925,6 @@
           "claimKey": "C14-S01",
           "slug": "c14-s01-russophobia-as-a-19th-century-british-invention",
           "label": "Russophobia as a 19th-century British invention",
-          "verdict": "false",
-          "distributed": true,
-          "reached": false,
-          "injectionLine": false,
-          "distributedFirstSeen": null,
-          "citedCount": 0,
-          "repeatCount": 0,
-          "criticalCount": 0
-        }
-      ],
-      "articles": []
-    },
-    {
-      "domain": "tass.ru",
-      "slug": "tass-ru",
-      "defanged": "tass[.]ru",
-      "category": "disinfo_outlet",
-      "inWatchlist": true,
-      "status": "active",
-      "firstCitedAt": "2026-09-16T12:59:35.798Z",
-      "lastCitedAt": "2026-09-16T12:59:35.798Z",
-      "citedCount": 0,
-      "criticalCount": 0,
-      "repeatCount": 0,
-      "injectionCount": 0,
-      "claimsDistributedCount": 1,
-      "claimsReachedCount": 0,
-      "attribution": [
-        {
-          "source": "euvsdisinfo",
-          "org": "EUvsDisinfo",
-          "category": "disinfo_outlet"
-        }
-      ],
-      "rating": {
-        "source": "iffy",
-        "label": "Iffy · low-credibility",
-        "level": "M",
-        "score": 0.2
-      },
-      "byBot": [],
-      "byMarket": [],
-      "byRun": [],
-      "grid": {},
-      "claims": [
-        {
-          "claimKey": "C12-S01",
-          "slug": "c12-s01-nato-and-eu-stoking-baltic-tensions",
-          "label": "NATO and EU stoking Baltic tensions",
           "verdict": "false",
           "distributed": true,
           "reached": false,
