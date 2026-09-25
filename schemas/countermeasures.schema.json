@@ -113,6 +113,13 @@
           "target": {
             "type": "string"
           },
+          "bot": {
+            "description": "④ Disclosure: the bot product id the disclosure is about (e.g. \"grok-web\"); null otherwise.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "market": {
             "type": [
               "string",
