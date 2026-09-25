@@ -9,7 +9,20 @@
 // overlap.
 const published = require("./published.js");
 const countriesData = require("./countries.js");
+const countermeasures = require("./countermeasures.js");
 const { CHATBOTS } = require("../_lib/labels.cjs");
+
+// claimKey → the furthest-along countermeasure status logged for it (an action,
+// not a re-measurement). Drives the per-claim Status chip on the country page.
+const CM_RANK = { drafted: 0, pending_confirmation: 1, submitted: 2, responded: 3, closed: 4, declined: 2 };
+const cmStatusByClaim = {};
+for (const a of countermeasures.actions) {
+  if (a.kind !== "action") continue;
+  for (const k of a.claims || []) {
+    const cur = cmStatusByClaim[k];
+    if (cur == null || (CM_RANK[a.status] ?? -1) > (CM_RANK[cur] ?? -1)) cmStatusByClaim[k] = a.status;
+  }
+}
 
 const MODEL_LABEL = {
   "gpt-web": "ChatGPT", "gemini-web": "Gemini", "claude-web": "Claude",
@@ -29,6 +42,11 @@ const pslug = (m) => PLATFORM_SLUG[m] || String(m || "");
 const PLATFORMS = new Set([...Object.keys(CHATBOTS), "google-ai"]);
 const pcodeOf = (p) => String(p || "").split("_")[0];
 const HEADLINE = "P2";
+
+// Market code → ISO key in countries.json. The data labels the UK market "UK";
+// countries.json keys it "gb". Everything else is just the lower-cased code.
+const ISO_ALIAS = { UK: "gb" };
+const isoOf = (mkt) => ISO_ALIAS[String(mkt).toUpperCase()] || String(mkt).toLowerCase();
 
 function wilson(k, n) {
   if (!n) return null;
@@ -71,7 +89,7 @@ function pool(list) {
 }
 
 const marketKeys = [...new Set(cells.map((c) => c.market).filter(Boolean))];
-const meta = (mkt) => countriesData[String(mkt).toLowerCase()] || {};
+const meta = (mkt) => countriesData[isoOf(mkt)] || {};
 const marketDate = (mkt) => {
   const dates = reports.filter((r) => ((r.payload && r.payload.meta && r.payload.meta.countries) || []).includes(mkt)).map((r) => r.publishedAt).filter(Boolean).sort();
   return dates[dates.length - 1] || "";
@@ -79,7 +97,7 @@ const marketDate = (mkt) => {
 
 // ── Per-market country profiles ─────────────────────────────────────────────
 const countries = marketKeys.map((mkt) => {
-  const iso = String(mkt).toLowerCase();
+  const iso = isoOf(mkt);
   const m = meta(mkt);
   const mCells = cells.filter((c) => c.market === mkt);
   const botKeys = [...new Set(mCells.map((c) => c.bot))].sort((a, b) => MODEL_ORDER.indexOf(a) - MODEL_ORDER.indexOf(b));
@@ -87,8 +105,27 @@ const countries = marketKeys.map((mkt) => {
     const head = pool(mCells.filter((c) => c.bot === bot && c.pcode === HEADLINE));
     return { key: pslug(bot), model: bot, name: modelLabel(bot), url: PLATFORMS.has(pslug(bot)) ? `/platforms/${pslug(bot)}/` : null, ...head };
   }).sort((a, b) => (b.repeat_rate.rate || 0) - (a.repeat_rate.rate || 0));
+  // Bots that repeated each claim in THIS market, across any persona (P2 alone is
+  // near-empty; the country page asks "did any assistant repeat this here").
+  const repeatedBySlug = new Map();
+  for (const c of mCells) {
+    if (!c.repeat) continue;
+    if (!repeatedBySlug.has(c.slug)) repeatedBySlug.set(c.slug, new Set());
+    repeatedBySlug.get(c.slug).add(c.bot);
+  }
   const claimSlugs = [...new Set(mCells.map((c) => c.slug))];
-  const claims = claimSlugs.map((slug) => published.index.find((r) => r.slug === slug)).filter(Boolean);
+  const claims = claimSlugs
+    .map((slug) => published.index.find((r) => r.slug === slug))
+    .filter(Boolean)
+    .map((r) => ({
+      ...r,
+      repeatedBy: [...(repeatedBySlug.get(r.slug) || [])]
+        .sort((a, b) => MODEL_ORDER.indexOf(a) - MODEL_ORDER.indexOf(b))
+        .map((m) => ({ key: pslug(m), name: modelLabel(m) })),
+      cmStatus: cmStatusByClaim[r.claimKey] || null,
+      updated: r.publishedAt || null,
+    }))
+    .sort((a, b) => String(a.claimKey).localeCompare(String(b.claimKey)));
   const collected_at = marketDate(mkt);
   return {
     key: iso, market: mkt, name: m.name || mkt, url: `/countries/${iso}/`,
@@ -178,7 +215,7 @@ const grain = countries.map((country) => {
 
 // Markets on the monitoring list that no published report covers yet.
 const scheduled = Object.entries(countriesData)
-  .filter(([iso, m]) => m && m.status === "scheduled" && !marketKeys.some((k) => String(k).toLowerCase() === iso))
+  .filter(([iso, m]) => m && m.status === "scheduled" && !marketKeys.some((k) => isoOf(k) === iso))
   .map(([iso, m]) => ({ iso, name: m.name || iso, language: m.language || "" }));
 
 // Local mirrors: published sources cited in exactly one market (from the feed).

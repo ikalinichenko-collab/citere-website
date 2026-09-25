@@ -16,7 +16,8 @@ const STATUSES = {
   no_response: "No response", declined: "Declined", completed: "Completed",
   live: "Live", published: "Published", receipt_confirmed: "Receipt confirmed",
   // Catalogue lifecycle statuses (Escalation Actions), for the ⑤ complaints the
-  // source page now lists.
+  // source page lists and the per-claim status the country page shows.
+  drafted: "Drafted", pending_confirmation: "Awaiting confirmation",
   responded: "Responded", closed: "Closed"
 };
 

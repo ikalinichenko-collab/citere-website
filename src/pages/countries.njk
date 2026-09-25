@@ -11,9 +11,8 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
 {%- set doc = copy.en.countries -%}
-<nav class="crumbs" aria-label="Breadcrumb"><a href="{{ '/' | url }}">Home</a> /
-  {%- if navigation.has.benchmarks %} <a href="{{ '/benchmarks/' | url }}">Benchmarks</a> / {% endif %}
-  <span aria-current="page">Countries</span></nav>
+{#- Breadcrumb comes from the base layout's crumbs partial (breadcrumbTrail in
+    countries.11tydata.js); no manual nav here or it renders twice. -#}
 {%- set gap = countriesReport.headlineGap -%}
 <div class="phead">
   {%- if gap %}

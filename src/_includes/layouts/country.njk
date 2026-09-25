@@ -34,19 +34,20 @@ wrap: wrap-narrow
 {%- if profile.claims | length %}
 <h2 id="claims" style="margin:36px 0 12px">Claims recorded in {{ profile.name }}</h2>
 <div class="panel"><table>
-  <caption class="visually-hidden">Published claim reports recorded in answers served to this market</caption>
-  <thead><tr><th scope="col">Claim</th><th scope="col">Verdict</th><th scope="col" class="num">Answers</th>
-    <th scope="col" class="num">Repeated</th><th scope="col" class="num">Critical</th></tr></thead>
+  <caption class="visually-hidden">Published claim reports recorded in answers served to this market, which assistants repeated them here, and what we have done about them</caption>
+  <thead><tr><th scope="col">Claim</th><th scope="col">Verdict</th><th scope="col">Repeated here by</th>
+    <th scope="col">Countermeasure</th><th scope="col" class="num">Updated</th></tr></thead>
   <tbody>
   {%- for r in profile.claims %}
     <tr><th scope="row" style="font-weight:400"><a href="{{ ('/registry/' + r.slug + '/') | url }}">{{ r.label }}</a>
       <span style="color:var(--dimmer)">{{ r.claimKey }}</span></th>
       <td><span class="badge {{ r.verdict | verdictClass }}">{{ r.verdict | verdictLabel }}</span></td>
-      <td class="num">{{ r.strip.answers }}</td>
-      <td class="num">{{ r.strip.repeatedFake }}</td>
-      <td class="num">{% if r.strip.critical %}<b style="color:var(--false)">{{ r.strip.critical }}</b>{% else %}0{% endif %}</td></tr>
+      <td>{% if r.repeatedBy | length %}<div class="stack">{% for b in r.repeatedBy %}{{ botMark(logos, b.key, "sm") }}{% endfor %}</div>{% else %}<span style="color:var(--dimmer)" title="No assistant repeated this claim in this market">&mdash;</span>{% endif %}</td>
+      <td>{% if r.cmStatus %}<span class="chip {{ 'ok' if r.cmStatus in ['responded','closed'] else ('wait' if r.cmStatus == 'submitted' else '') }}"><span class="dot"></span>{{ r.cmStatus | statusLabel }}</span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>
+      <td class="num" style="color:var(--dim)">{% if r.updated %}<time datetime="{{ r.updated | isoDate }}">{{ r.updated | shortDate }}</time>{% endif %}</td></tr>
   {%- endfor %}
   </tbody></table></div>
+<p class="note">&ldquo;Repeated here by&rdquo; is any assistant that stated this claim as fact in this market, across every question type. The countermeasure is the furthest step taken on this claim; a draft is not yet sent.</p>
 {%- endif %}
 
 {%- if profile.partners | length %}
