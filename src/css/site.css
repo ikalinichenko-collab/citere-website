@@ -293,6 +293,15 @@ tbody tr:hover{background:#fafbfd}
 .netchip.pravda{background:#f4eaf7;color:#7a3d95}
 .netchip.doppel{background:#e9f1fb;color:#1e5aa8}
 .netchip.storm{background:#fdeeee;color:#a3211b}
+.netchip.matryoshka{background:#e6f4ec;color:#15704a}
+.netchip.state{background:#fbf0df;color:#935612}
+.netchip.laundering{background:#ececfb;color:#4145b5}
+.netchip.outlet{background:#e4f2f4;color:#0f6a72}
+.attrchip{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--accent-soft);color:#2f4fb0;line-height:1.5}
+.netlegend{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:12px 0 0}
+.netlegend .lbl{font-size:11px;color:var(--dimmer);margin-right:2px}
+.srcreg tbody tr:nth-child(2n){background:#fafbfc}
+.srcreg tbody tr:hover{background:#f1f4f9}
 .actrow{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line2)}
 .actrow:last-child{border-bottom:0}
 .actrow .what{flex:1;font-size:14px;font-weight:560}

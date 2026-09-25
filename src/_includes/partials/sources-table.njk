@@ -2,7 +2,7 @@
     per domain, sorted by citations. Counts only: a share of responses citing a
     domain needs a denominator that lives in the metrics store, not here (SR 5).
     Domains are printed defanged and never linked to. -#}
-<div class="panel"><table>
+<div class="panel"><table class="srcreg">
   <caption class="visually-hidden">{{ tableCaption }}</caption>
   <thead><tr>
     <th scope="col">{{ 'col.domain' | t }}</th><th scope="col">{{ 'col.network' | t }}</th>
@@ -13,11 +13,11 @@
   </tr></thead>
   <tbody>
   {%- for s in tableSources %}
-    <tr>
+    <tr{% if s.criticalCount or s.injectionCount %} style="box-shadow:inset 3px 0 0 var(--false)"{% endif %}>
       <th scope="row" style="font-weight:400"><a href="{{ s.url | url }}"><span class="domain">{{ s.defanged }}</span></a>
         {%- if s.status == "dormant" %} <span class="statuspill st-dormant">dormant</span>{% endif %}</th>
       <td><span class="netchip {{ s.network | networkClass }}">{{ s.network | networkLabel }}</span></td>
-      <td style="color:var(--dim);font-size:12.5px">{% for a in s.attribution | take(2) %}{{ a.org }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+      <td>{% for a in s.attribution | take(2) %}<span class="attrchip">{{ a.org }}</span>{% if not loop.last %} {% endif %}{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endfor %}</td>
       <td class="num"><b>{{ s.citedCount }}</b></td>
       <td class="num">{{ s.citedBy | length }}</td>
       <td class="num">{{ s.markets | length }}</td>
@@ -32,6 +32,11 @@
   <div class="summary-line" style="border-bottom:0;border-top:1px solid var(--line2)">{{ tableFoot | safe }}</div>
   {%- endif %}
 </div>
+{%- set seen = [] %}
+{%- for s in tableSources %}{% if s.network and s.network not in seen %}{% set seen = (seen.push(s.network), seen) %}{% endif %}{% endfor %}
+{%- if seen | length %}
+<p class="netlegend"><span class="lbl">Networks</span>{% for net in seen %}<span class="netchip {{ net | networkClass }}">{{ net | networkLabel }}</span>{% endfor %}</p>
+{%- endif %}
 <p class="note">A citation is counted once per answer per domain, however many times that answer linked to
   it. <b>Source-to-answer</b> counts the claims where this domain both published the falsehood and was cited
   by an assistant answering about it &mdash; the strongest single piece of evidence here.

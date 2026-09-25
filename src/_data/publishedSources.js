@@ -29,12 +29,13 @@ function readFeed() {
 const feed = readFeed();
 
 // The app's blacklist category → the site's network chip token. `disinfo_outlet`
-// (EUvsDisinfo's neutral bucket) and anything unclassified fold onto "other".
+// (EUvsDisinfo's neutral bucket) gets its own "Disinfo outlet" chip rather than
+// folding into "other"; only a truly unclassified (null) category stays "other".
 const CATEGORY_NETWORK = {
   pravda_network: "pravda",
   state_media: "state-media",
   laundering_network: "laundering",
-  disinfo_outlet: "other",
+  disinfo_outlet: "outlet",
 };
 
 // App model token → the site's chatbot slug (CHATBOTS / botName keys), same map

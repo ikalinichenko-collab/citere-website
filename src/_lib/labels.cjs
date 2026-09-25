@@ -23,20 +23,39 @@ const ACTION_TYPES = {
   authority_confirmation: "Authority confirmation", remeasured: "Re-measured"
 };
 
+// Chip label — the short human name printed inside a network chip. Both the fine
+// demo tokens and the live feed's folded tokens (pravda / state-media /
+// laundering / outlet / other) map here, so every chip reads cleanly.
 const NETWORKS = {
-  pravda: "pravda_network", doppelganger: "doppelganger", matryoshka: "matryoshka",
-  "storm-1516": "storm_1516", "state-media": "state_media", laundering: "laundering", other: "other"
+  pravda: "Pravda network", pravda_network: "Pravda network",
+  doppelganger: "Doppelganger",
+  matryoshka: "Matryoshka",
+  "storm-1516": "Storm-1516", storm_1516: "Storm-1516",
+  "state-media": "State media", state_media: "State media",
+  laundering: "Laundering", laundering_network: "Laundering",
+  outlet: "Disinfo outlet",
+  other: "Unclassified",
 };
 
-// Prose form. NETWORKS is the machine label the mockup prints inside a chip.
+// Prose form ("part of the X network"). Lower-case; NETWORKS is the chip label.
 const NETWORK_NAMES = {
   pravda: "Pravda", doppelganger: "Doppelganger", matryoshka: "Matryoshka",
-  "storm-1516": "Storm-1516", "state-media": "state media", laundering: "laundering",
-  other: "other"
+  "storm-1516": "Storm-1516", "state-media": "state media", state_media: "state media",
+  laundering: "laundering", laundering_network: "laundering",
+  outlet: "disinfo outlet", other: "unclassified",
 };
 
-// The mockup tints a network chip only for these three.
-const NETWORK_CLASS = { pravda: "pravda", doppelganger: "doppel", "storm-1516": "storm" };
+// Network → chip tint class. Every token the feed emits is tinted; only the
+// genuinely unclassified "other" falls through to the neutral grey base.
+const NETWORK_CLASS = {
+  pravda: "pravda", pravda_network: "pravda",
+  doppelganger: "doppel",
+  matryoshka: "matryoshka",
+  "storm-1516": "storm", storm_1516: "storm",
+  "state-media": "state", state_media: "state",
+  laundering: "laundering", laundering_network: "laundering",
+  outlet: "outlet",
+};
 
 const CHATBOTS = {
   chatgpt: { name: "ChatGPT", code: "GP", cls: "g1", company: "OpenAI" },
