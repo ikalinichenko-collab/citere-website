@@ -202,12 +202,32 @@ const issues = [...byCM.values()].map((g) => ({
   responses: g.reports.reduce((n, r) => n + ((r.strip && r.strip.answers) || 0), 0)
 })).sort((a, b) => b.month.localeCompare(a.month));
 
-const strip = (leaderboards.chatbot_repeat || []).filter((r) => PLATFORMS.has(r.key));
+// Homepage strip: each assistant at its WORST single market on the news-style
+// persona — the same headline the platform/benchmark pages use — not the shared
+// reference run. Tying it to one run made the strip hostage to whichever market
+// happened to have the most P2 answers (often a 2-sample market), so it read
+// all-zero and dropped bots with no cell there. Every rate still forms inside one
+// market (CM §5.1); the caption says "worst market".
+const stripBots = [...new Set(cells.map((c) => c.bot))].filter((b) => PLATFORMS.has(pslug(b)));
+const strip = stripBots
+  .map((bot) => {
+    let best = null;
+    for (const mkt of [...new Set(cells.filter((c) => c.bot === bot).map((c) => c.market))]) {
+      const l = cells.filter((c) => c.bot === bot && c.market === mkt && c.pcode === PERSONA);
+      const rc = rateCell(sum(l, "repeat"), sum(l, "substantive"));
+      if (rc && rc.rate !== null && (!best || rc.rate > best.value || (rc.rate === best.value && rc.n > best.n))) {
+        best = { key: pslug(bot), label: modelLabel(bot), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n, persona: PERSONA, market: mkt };
+      }
+    }
+    return best;
+  })
+  .filter(Boolean)
+  .sort((a, b) => b.value - a.value || b.n - a.n);
 module.exports = {
   label, marketName, reference: ref && ref.market, personas: PERSONAS, issues, responses: totValid,
   publishedClaims,
   claimScopeNote: `across ${publishedClaims} published ${publishedClaims === 1 ? "claim" : "claims"}${marketName ? ` · ${marketName}, ${label}` : ""}`,
-  stripCaption: `news question (${PERSONA}) · ${marketName}, ${label}`,
+  stripCaption: `each at its worst market · news question (${PERSONA})`,
   headline: headlineGrain && { run_label: `${marketName}, ${label}`, persona: PERSONA, grain_repeated: headlineGrain.with_grain, pure_repeated: headlineGrain.pure, pure_refuted: 1 - headlineGrain.pure, significant: headlineGrain.significant },
   leaderboards, heatmapRows, abxRows, funnel, verdict_split: [], contamination_by_persona: [], grain_of_truth, trend, strip,
   raw: { source: "claim-reports", publishedClaims, reference: ref && `${ref.market}|${ref.runKey}`, persona: PERSONA, label, market: marketName }
