@@ -4,7 +4,14 @@
 const countermeasures = require("./countermeasures.js");
 const { COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES, REMEASUREMENT } = require("../_lib/labels.cjs");
 
-const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+// A non-latin target (e.g. a Cyrillic recipient like "ЦПД") strips down to an
+// empty ascii slug, which would yield "/countermeasures/target//" — a double
+// slash Eleventy collapses, breaking the sitemap. Fall back to a percent-encoded
+// segment so every target keeps a stable, non-empty facet URL.
+const slug = (s) => {
+  const ascii = String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return ascii || encodeURIComponent(String(s).trim());
+};
 
 const TYPES = [
   { type: "type", heading: "Type", values: (a) => [a.displayType],
