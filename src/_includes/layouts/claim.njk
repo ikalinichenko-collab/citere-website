@@ -3,6 +3,7 @@ layout: layouts/base.njk
 wrap: wrap-narrow
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 {#- Claim Report, three layers, in the order of Citere_Claim_Report_Spec.md:
     why is this false, what did the chatbots do with it, show me, where did it
     come from, what are the numbers, what have we done. -#}
@@ -262,7 +263,7 @@ wrap: wrap-narrow
   <tbody>
   {%- for row in claim.marketSummary %}
     <tr data-persona="{{ row.persona }}">
-      <th scope="row" style="font-weight:400">{{ row.country | countryName }}
+      <th scope="row" style="font-weight:400">{{ countryFlag(row.country, 'sm') }} {{ row.country | countryName }}
         <small style="color:var(--dimmer)">{{ row.market | upper }}</small></th>
       <td style="color:var(--dim)">{{ row.language | languageName }}</td>
       <td class="num" style="color:var(--dim)">{{ row.n }}</td>

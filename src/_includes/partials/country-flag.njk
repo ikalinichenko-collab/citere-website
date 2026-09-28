@@ -1,0 +1,10 @@
+{#- Country flag emblem. Renders the SVG asset when present, otherwise the emoji
+    flag so the build never breaks (CLAUDE.md 6, 11.6). Market codes are mapped to
+    the ISO the flag files use (the data labels the UK market "UK"; the file is
+    gb.svg). Decorative: alt="" because the market name always sits beside it. -#}
+{%- macro countryFlag(code, size="sm") -%}
+{%- set iso = code | lower -%}
+{%- if iso == "uk" %}{%- set iso = "gb" -%}{%- endif -%}
+{%- set rel = "assets/flags/" + iso + ".svg" -%}
+{%- if rel | fileExists -%}<img class="flagimg flagimg-{{ size }}" src="{{ ('/' + rel) | url }}" alt="" width="{{ 26 if size == 'lg' else 20 }}" height="{{ 20 if size == 'lg' else 15 }}" loading="lazy" decoding="async">{%- else -%}<span class="flag">{{ code | flag }}</span>{%- endif -%}
+{%- endmacro -%}

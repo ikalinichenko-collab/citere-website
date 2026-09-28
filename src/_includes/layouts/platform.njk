@@ -3,6 +3,7 @@ layout: layouts/base.njk
 wrap: wrap-narrow
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 {%- from "partials/cleansing.njk" import deltaCell, deltaCaveats -%}
 <div class="phead" style="display:flex;align-items:center;gap:16px">
   {{ botMark(logos, profile.key, "lg", true) }}
@@ -35,7 +36,7 @@ wrap: wrap-narrow
 <p class="note" style="margin:0 0 12px">One table per market. Personas are never averaged and markets are
   never merged; every figure carries its interval and sample size.</p>
 {%- for entry in profile.markets %}
-<h3 class="ssub">{{ entry.name }} &middot; {{ entry.language | languageName }}
+<h3 class="ssub">{{ countryFlag(entry.market, 'sm') }} {{ entry.name }} &middot; {{ entry.language | languageName }}
   <span style="color:var(--dimmer);font-weight:400">&middot; <time datetime="{{ entry.run.collected_at | isoDate }}">{{ entry.run.collected_at | shortDate }}</time></span></h3>
 <div class="panel"><table>
   <caption class="visually-hidden">Repeat rate, contamination and refusals for this assistant in {{ entry.name }}, by question type</caption>
@@ -89,7 +90,7 @@ wrap: wrap-narrow
   {%- for entry in profile.markets %}
   {%- for row in entry.personas %}
     <tr data-persona="{{ row.persona }}">
-      <th scope="row" style="font-weight:400">{% if loop.first %}{{ entry.name }}{% endif %}</th>
+      <th scope="row" style="font-weight:400">{% if loop.first %}{{ countryFlag(entry.market, 'sm') }} {{ entry.name }}{% endif %}</th>
       <td class="mono" style="font-size:12px;color:var(--dimmer)">{{ row.persona }} &middot; {{ row.persona | personaLabel }}</td>
       <td class="num">{{ row.verdict_shares.repeat.rate | rate }}</td>
       <td class="num">{{ row.verdict_shares.u_context.rate | rate }}</td>
@@ -117,7 +118,7 @@ wrap: wrap-narrow
   {%- for entry in profile.markets %}
   {%- for row in entry.personas %}
     <tr data-persona="{{ row.persona }}">
-      <th scope="row" style="font-weight:400">{% if loop.first %}{{ entry.name }}{% endif %}</th>
+      <th scope="row" style="font-weight:400">{% if loop.first %}{{ countryFlag(entry.market, 'sm') }} {{ entry.name }}{% endif %}</th>
       <td class="mono" style="font-size:12px;color:var(--dimmer)">{{ row.persona }}</td>
       <td class="num">{{ row.retrieval_rate.rate | rate }}</td>
       <td class="num"><span class="cellstat{% if row.contamination_rate.low_n %} lown{% endif %}">{{ row.contamination_rate.rate | rate }}<small>{{ row.contamination_rate.ci | ciLabel }} &middot; n={{ row.contamination_rate.n }}</small></span></td>

@@ -1,4 +1,5 @@
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 {%- import "partials/report-cards.njk" as rc -%}
 {#- Homepage evidence blocks. Each renders only when its data exists, so the
     page fills in as claims and benchmarks land rather than showing a
@@ -12,18 +13,17 @@
 {% include "partials/metric-cards.njk" %}
 {%- endif %}
 
-{%- if monitoredMarkets | length %}
+{%- if marketCounts.measured %}
 <section>
   <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
     {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
   <p class="lead">A market is a country plus the language people ask in, so we ask in that language.
-    Of the {{ marketCounts.total }} on the list, {{ marketCounts.measured }} have a completed run and carry
-    what it found; {{ marketCounts.queued }} are queued and say so. Austria and Germany are separate markets
-    that share a language.</p>
+    Of the {{ marketCounts.total }} on the list, the {{ marketCounts.measured }} with a completed run are
+    shown here; the rest are queued and appear on the <a href="{{ '/countries/' | url }}">countries page</a>.
+    Austria and Germany are separate markets that share a language.</p>
   <div class="grid4">
-  {%- for c in monitoredMarkets %}
-    {%- if c.url %}
-    <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><span class="flag">{{ c.iso | flag }}</span>
+  {%- for c in monitoredMarkets %}{%- if not c.scheduled and c.url %}
+    <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><span class="flag">{{ countryFlag(c.iso, 'lg') }}</span>
       <h3>{{ c.name }}</h3><div class="stat">{{ c.claims }} {{ c.claims | plural("claim", "claims") }} &middot;
         {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
       {%- if c.rate is not none %}
@@ -31,13 +31,7 @@
         <span>of news answers repeated a claim</span></div>
       {%- endif %}
       <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
-    {%- else %}
-    <div class="cc {{ c.iso }} queued"><div><span class="ccflag"><span class="flag">{{ c.iso | flag }}</span><span class="ccchip">queued</span></span>
-      <h3>{{ c.name }}</h3><div class="stat">{{ c.queued }} {{ c.queued | plural("claim", "claims") }} queued &middot;
-        {{ c.botCount }} assistants &middot; {{ c.language | languageName }}</div></div>
-      <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></div>
-    {%- endif %}
-  {%- endfor %}
+  {%- endif %}{%- endfor %}
   </div>
 </section>
 {%- endif %}

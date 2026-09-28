@@ -1075,3 +1075,15 @@ details.schema>summary{display:inline-flex}
   .tile{min-height:40px;display:inline-flex;align-items:center}
   .filters,.tiles{gap:9px}
 }
+
+/* ---------- country flag emblems ----------
+   Small SVG flags beside market names. Emoji regional-indicator flags do not
+   render as flags on Windows and several browsers, so real assets are used and
+   the emoji is only the missing-file fallback. */
+.flagimg{display:inline-block;vertical-align:middle;border-radius:3px;object-fit:cover;
+  box-shadow:0 0 0 1px rgba(12,18,32,.10)}
+.flagimg-sm{width:20px;height:15px}
+.flagimg-lg{width:26px;height:20px}
+/* On the coloured country cards the mesh ground is dark; a hairline keeps small
+   flags legible against it. */
+.cc .flagimg{box-shadow:0 0 0 1px rgba(255,255,255,.35)}

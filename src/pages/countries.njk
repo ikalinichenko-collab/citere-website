@@ -10,6 +10,7 @@ pagination:
 permalink: "{{ '/countries/' | loc(lang) }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 {%- set doc = copy.en.countries -%}
 {#- Breadcrumb comes from the base layout's crumbs partial (breadcrumbTrail in
     countries.11tydata.js); no manual nav here or it renders twice. -#}
@@ -41,7 +42,7 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 <div class="panel"><table>
   <caption class="visually-hidden">Repeat rate per assistant in each market on news-style questions, each cell with its interval and sample size</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
-    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ c.key | flag }} {{ c.key | upper }}</th>{% endfor %}</tr></thead>
+    {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ countryFlag(c.key, 'sm') }} {{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
   {%- for row in countriesReport.matrix.rows %}
     <tr data-persona="{{ countriesReport.matrix.persona }}">
@@ -144,7 +145,7 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 {%- for c in countriesReport.countries %}
   <div class="panel" style="padding:18px 20px;border-left:4px solid var({{ '--false' if c.confirmed >= 3 else ('--mislead' if c.confirmed else '--ok') }})">
     <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px">
-      <div style="font-size:19px;font-weight:600">{{ c.key | flag }} {{ c.name }}
+      <div style="font-size:19px;font-weight:600">{{ countryFlag(c.key, 'sm') }} {{ c.name }}
         <span style="font-size:13px;color:var(--dimmer);font-weight:400">&middot; {{ c.language | languageName }} &middot;
           <time datetime="{{ c.run.collected_at | isoDate }}">{{ c.run.collected_at | shortDate }}</time></span></div>
       <a href="{{ c.url | url }}" style="font-size:13px;color:var(--accent);font-weight:600">Open the market page &rarr;</a>
@@ -174,7 +175,7 @@ permalink: "{{ '/countries/' | loc(lang) }}"
   <thead><tr><th scope="col">Market</th><th scope="col">Language</th><th scope="col">Status</th></tr></thead>
   <tbody>
   {%- for row in countriesReport.scheduled %}
-    <tr><th scope="row" style="font-weight:400">{{ row.iso | flag }} {{ row.name }}</th>
+    <tr><th scope="row" style="font-weight:400">{{ countryFlag(row.iso, 'sm') }} {{ row.name }}</th>
       <td style="color:var(--dim)">{{ row.language | languageName }}</td>
       <td style="color:var(--dimmer)">scheduled</td></tr>
   {%- endfor %}

@@ -11,6 +11,7 @@ pagination:
 permalink: "{{ '/countries/full/' | loc(lang) }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 <nav class="crumbs" aria-label="Breadcrumb"><a href="{{ '/' | url }}">Home</a> /
   <a href="{{ '/countries/' | url }}">Countries</a> / <span aria-current="page">Full data</span></nav>
 <div class="phead"><h1>Countries &mdash; the full analytical view</h1>
@@ -27,7 +28,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
     <th scope="col" class="num">Critical</th></tr></thead>
   <tbody>
   {%- for c in countriesReport.countries %}
-    <tr><th scope="row" style="font-weight:400">{{ c.key | flag }} {{ c.name }}</th>
+    <tr><th scope="row" style="font-weight:400">{{ countryFlag(c.key, 'sm') }} {{ c.name }}</th>
       <td class="num">{{ c.claims | length }}</td>
       <td class="num">{{ c.answers }}</td>
       <td class="num">{{ c.critical }}</td></tr>

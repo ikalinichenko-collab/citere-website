@@ -22,6 +22,9 @@ module.exports = function (eleventyConfig) {
   // Real vendor logo files, when they have been dropped in. The directory may
   // be empty: bot-mark.njk falls back to the monogram tile.
   eleventyConfig.addPassthroughCopy({ "src/assets/logos": "assets/logos" });
+  // Country flag emblems (public-domain SVGs). Rendered beside market names;
+  // country-flag.njk falls back to the emoji flag if a file is missing.
+  eleventyConfig.addPassthroughCopy({ "src/assets/flags": "assets/flags" });
   eleventyConfig.setUseGitIgnore(false);
   eleventyConfig.ignores.add("**/node_modules/**");
   // design-mockup/ is the approved reference. It is never built or deployed.

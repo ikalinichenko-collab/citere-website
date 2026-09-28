@@ -11,6 +11,7 @@ permalink: "{{ entry.url }}"
 ---
 {%- import "partials/report-macros.njk" as R -%}
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 {%- set s = p.strip -%}
 {%- set cc = p.claimCard -%}
 <article class="report-doc">
@@ -208,8 +209,9 @@ permalink: "{{ entry.url }}"
       <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}">
         <div class="meta">
           <span class="who">{{ botMark(logos, R.botSlug(e.model), "sm") }}{{ R.botLabel(e.model) }}</span>
-          {%- set em = [] %}{% if e.market %}{% set em = (em.push(e.market), em) %}{% endif %}{% if e.persona %}{% set em = (em.push(R.personaPhrase(e.persona)), em) %}{% endif %}
-          {%- if em | length %}<span>{{ em | join(" · ") }}</span>{% endif %}
+          {%- set miso = e.market | lower %}{% if miso == "uk" %}{% set miso = "gb" %}{% endif %}
+          {%- set clang = countries[miso].language if countries[miso] else "" %}
+          {%- if e.market or e.persona %}<span>{% if e.market %}{{ countryFlag(e.market, 'sm') }} {{ e.market }}{% if clang %} · {{ clang | languageName }}{% endif %}{% endif %}{% if e.market and e.persona %} · {% endif %}{% if e.persona %}{{ R.personaPhrase(e.persona) }}{% endif %}</span>{% endif %}
           {%- if e.date %}<span><time datetime="{{ e.date }}">{{ e.date | displayDate }}</time></span>{% endif %}
           <span class="tier">{{ e.tier }}</span>
           {%- if e.reviewStatus == "human-verified" %}<span class="hv">human-verified ✓</span>{% elif e.reviewStatus == "human-corrected" %}<span class="hv">human-corrected ✎</span>{% endif %}
