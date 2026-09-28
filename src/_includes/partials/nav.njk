@@ -7,4 +7,11 @@
         <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       {{ 'search' | t }}<span class="kbd">&#8984;K</span>
     </a>
+    <details class="mobnav">
+      <summary class="burger" aria-label="{{ 'nav.menu' | t }}" role="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </summary>
+      <nav class="mobnav-menu" aria-label="{{ 'nav.main' | t }}">{% for item in navigation.main %}<a href="{{ item.url | loc(lang) | url }}"{% if navKey == item.key %} class="on" aria-current="page"{% endif %}>{{ ('nav.' + item.key) | t | safe }}</a>{% endfor %}<a class="mobnav-search" href="{{ ('/registry/' if navigation.has.registry else '/') | loc(lang) | url }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>{{ 'search' | t }}</a></nav>
+    </details>
   </div></header>

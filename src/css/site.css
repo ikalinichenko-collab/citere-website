@@ -1034,3 +1034,44 @@ details.schema>summary{display:inline-flex}
 #uk:target ~ .phead .lg-uk{display:inline}
 #uk:target ~ .prose-en{display:none}
 #uk:target ~ .prose-uk{display:block}
+
+/* ---------- mobile navigation: CSS-only burger ----------
+   The desktop <nav> and .search are hidden below 980px (see the rule above).
+   .mobnav is a <details> disclosure that replaces them there: no JavaScript,
+   and every destination is still its own URL. Hidden at desktop widths. */
+.mobnav{display:none}
+@media(max-width:980px){
+  .mobnav{display:block;position:relative;flex:none}
+  .mobnav>summary{list-style:none;cursor:pointer;display:grid;place-items:center;
+    width:44px;height:44px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);box-shadow:var(--shadow);color:var(--dim)}
+  .mobnav>summary::-webkit-details-marker{display:none}
+  .mobnav>summary:hover{color:var(--ink)}
+  .mobnav[open]>summary{color:var(--ink);background:var(--bg)}
+  .mobnav-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:230px;
+    display:flex;flex-direction:column;gap:2px;padding:7px;z-index:50;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-md)}
+  .mobnav-menu a{display:flex;align-items:center;gap:9px;min-height:44px;padding:8px 13px;
+    border-radius:8px;font-size:15px;color:var(--dim);font-weight:540}
+  .mobnav-menu a:hover{background:var(--bg);color:var(--ink)}
+  .mobnav-menu a.on{color:var(--ink);font-weight:660}
+  .mobnav-search{border-top:1px solid var(--line2);margin-top:5px;padding-top:12px!important;color:var(--accent)!important}
+  .mobnav-search svg{opacity:.7}
+}
+
+/* ---------- responsive polish (small screens) ----------
+   Fixes flagged in the design audit: contain wide tables inside their panel so
+   the page itself never scrolls sideways; give tap targets room; tighten the
+   generous desktop section rhythm so a phone is not mostly whitespace. */
+@media(max-width:760px){
+  .panel{overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:640px){
+  section{padding:34px 0}
+  .hero{padding:40px 0 24px}
+  .phead{padding:14px 0 22px}
+  .f{min-height:44px;display:inline-flex;align-items:center}
+  .fmenu a{padding:11px 12px}
+  .tile{min-height:40px;display:inline-flex;align-items:center}
+  .filters,.tiles{gap:9px}
+}
