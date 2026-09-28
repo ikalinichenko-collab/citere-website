@@ -224,6 +224,20 @@
           },
           "what": {
             "type": "string"
+          },
+          "sent": {
+            "description": "Analyst one-line summary of what was done/sent (public). Not the submission itself, which is internal.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "reference": {
+            "description": "Public case id: ticket / form / DSA reference. The reply text is correspondence and is never exported.",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       }

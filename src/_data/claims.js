@@ -24,7 +24,7 @@ function claimStatus(actions) {
     return { label: "Re-measured", cls: "ok" };
   }
   const disclosures = actions.filter((a) => a.type === "disclosure" && a.kind === "action");
-  if (disclosures.some((a) => a.taken && !a.response_date && a.status !== "declined")) {
+  if (disclosures.some((a) => a.taken && !a.replied && a.status !== "declined")) {
     return { label: "Awaiting response", cls: "wait" };
   }
   if (disclosures.some((a) => a.taken)) return { label: "Disclosed", cls: "" };
@@ -364,7 +364,7 @@ const claims = files
         critical: all.tiers.critical,
         contaminated: all.contaminated,
         actions: actions.filter((a) => a.taken).length,
-        responses: actions.filter((a) => a.response_date).length
+        responses: actions.filter((a) => a.replied).length
       },
       countermeasures: actions,
       ladder,

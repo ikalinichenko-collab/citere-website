@@ -12,7 +12,7 @@
 // never in the template).
 const { home, crumb } = require("../_lib/crumbs.cjs");
 const { fitTitle, fitDescription, listOf } = require("../_lib/meta.cjs");
-const { MONTHS } = require("../_lib/labels.cjs");
+const { MONTHS, cmStatusLabel } = require("../_lib/labels.cjs");
 
 // The app's web-model slugs → display names and short monograms for the hero
 // bars and bot cards. The site swaps in real logo marks via logos.json in the
@@ -274,9 +274,53 @@ function truthBlock(p, analyst) {
   return { text, src };
 }
 
+// The claim's countermeasures come from the LIVE log (data/countermeasures.json),
+// not the report's frozen snapshot. The log keeps accruing partner notifications,
+// disclosures and responses after a report is published, so a frozen payload
+// under-reports (it held one row while the log had sixteen for this claim). We
+// filter the public log by the report's claim key and shape each row into the
+// columns the table draws; a re-measurement keeps its own kind. If the log has
+// nothing for the claim we fall back to whatever the payload froze. Only public,
+// already-normalised rows reach here (private fields are stripped in the log).
+const shapeCm = (c) => ({
+  date: c.date,
+  type: c.type,
+  kind: c.kind,
+  target: c.target,
+  sent: c.sent || null,
+  domain: c.domain || null,
+  basis: c.basis || null,
+  links: c.links || null,
+  reference: c.reference || c.evidence_package_id || null,
+  // Only the FACT of a reply is public; the reply text is correspondence and is
+  // never carried. `replied` drives the Response column.
+  replied: c.replied === true || c.status === "responded",
+  status: c.status,
+  // Type-aware label so a self-published action never reads "Responded".
+  statusLabel: c.statusLabel || cmStatusLabel(c.type, c.status),
+  followUpDue: c.followUpDue || c.follow_up_due || null,
+});
+function claimCountermeasures(report, log) {
+  const key = report.claimKey;
+  const rows = ((log && log.actions) || []).filter((a) => (a.claims || []).includes(key));
+  if (rows.length) return rows.map(shapeCm);
+  return ((report.payload || {}).countermeasures || []).map(shapeCm);
+}
+// "Countermeasures taken" KPI, live-log first so it matches the block below.
+// Only actions actually taken count (catalogue §0: a draft is not an action;
+// a re-measurement is our own re-run, not something done to a platform).
+function countermeasuresTaken(report, log) {
+  const key = report.claimKey;
+  const rows = ((log && log.actions) || []).filter((a) => (a.claims || []).includes(key));
+  if (rows.length) return rows.filter((a) => a.taken).length;
+  return ((report.payload || {}).strip || {}).countermeasuresTaken || 0;
+}
+
 module.exports = {
   eleventyComputed: {
     marketComparison: (data) => marketComparison(data.entry.report),
+    claimCms: (data) => claimCountermeasures(data.entry.report, data.countermeasures),
+    countermeasuresTaken: (data) => countermeasuresTaken(data.entry.report, data.countermeasures),
     lang: (data) => data.entry.lang,
     report: (data) => data.entry.report,
     brief: (data) => buildBrief(data.entry.report),

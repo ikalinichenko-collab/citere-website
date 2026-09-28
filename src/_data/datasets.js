@@ -68,7 +68,7 @@ const ENTRIES = [
     url: "/sources.stix.json", template: "machine/sources-stix.njk"
   },
   {
-    key: "countermeasures-csv", entity: "countermeasures", name: "Countermeasures (CSV)", format: "CSV", header: "date,type,target,claim_id,status,response_date,claim_url",
+    key: "countermeasures-csv", entity: "countermeasures", name: "Countermeasures (CSV)", format: "CSV", header: "date,type,target,claim_id,status,replied,reference,claim_url",
     description: "The public slice: date, type, target, market, claims and status. Never the submission or the proof.",
     url: "/countermeasures.csv", template: "machine/countermeasures-csv.njk"
   },

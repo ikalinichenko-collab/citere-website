@@ -169,18 +169,34 @@ const COUNTERMEASURE_TYPES = {
 // the type enum.
 const REMEASUREMENT = { key: "remeasurement", label: "Re-measurement", cls: "t-remeasure", parent: "disclosure" };
 
-// Catalogue §1: one lifecycle for every type. "scheduled" is not part of it -
-// a planned re-check is a follow_up_due date on a row that has not been acted
-// on yet.
+// Catalogue §1: one lifecycle for every type, matching the app's status enum
+// (lib/db/src/schema/countermeasures.ts) exactly - drafted → pending_confirmation
+// → submitted → responded → closed | declined. There is no "acknowledged" rung:
+// the app never emits it, so it was a phantom here. "scheduled" is not part of the
+// lifecycle either - a planned re-check is a follow_up_due date on a row that has
+// not been acted on yet.
 const COUNTERMEASURE_STATUSES = {
   drafted: { label: "Drafted", taken: false, cls: "st-drafted" },
   pending_confirmation: { label: "Awaiting confirmation", taken: false, cls: "st-pending" },
   submitted: { label: "Submitted", taken: true, cls: "st-submitted" },
-  acknowledged: { label: "Acknowledged", taken: true, cls: "st-acknowledged" },
   responded: { label: "Responded", taken: true, cls: "st-responded" },
   closed: { label: "Closed", taken: true, cls: "st-closed" },
   declined: { label: "Declined", taken: true, cls: "st-declined" }
 };
+
+// A "response" only makes sense when there is a counterpart to reply. For the
+// self-driven types - things we publish or update ourselves, no external party
+// (catalogue §2.4/2.6, plus a publication and a standing feed) - "submitted"
+// reads as "Published" and "responded" as "Picked up" (someone engaged with it),
+// so a self-publication never carries the nonsensical "Responded to citere.ai".
+const CM_SELF_DRIVEN = new Set(["public", "github", "catalog", "feed"]);
+const CM_STATUS_LABEL_SELF = { submitted: "Published", responded: "Picked up" };
+// The status label to show for a (type, status) pair. Self-driven types override
+// the two counterpart-shaped statuses; everything else uses the catalogue label.
+function cmStatusLabel(type, status) {
+  if (CM_SELF_DRIVEN.has(type) && CM_STATUS_LABEL_SELF[status]) return CM_STATUS_LABEL_SELF[status];
+  return (COUNTERMEASURE_STATUSES[status] || {}).label || status;
+}
 
 // Catalogue §4. Which rungs are prerequisites for which; a page shows what has
 // been reached for a claim and what the next available rung is.
@@ -217,7 +233,10 @@ const LEGACY_STATUS = {
   completed: "closed",
   live: "closed",
   published: "closed",
-  receipt_confirmed: "acknowledged",
+  // "acknowledged"/"receipt_confirmed" have no rung in the app's enum; the
+  // closest true statement is that it was sent and is awaiting a substantive reply.
+  acknowledged: "submitted",
+  receipt_confirmed: "submitted",
   scheduled: "drafted"
 };
 
@@ -228,5 +247,6 @@ module.exports = {
   CHATBOTS, PERSONAS, MONTHS,
   LAYER_A, TIERS, TIER_NOTES, SPLICES, SPLICE_GROUPS, SPLICE_SHORT, SPLICE_LEDE, LAYER_B, WATCHLIST_CATEGORIES, CLAIM_STATUSES,
   COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES, COUNTERMEASURE_LADDER,
-  COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS
+  COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS,
+  CM_SELF_DRIVEN, cmStatusLabel
 };

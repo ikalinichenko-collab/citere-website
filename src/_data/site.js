@@ -14,19 +14,17 @@ const site = readJson("data/site.json");
 // publication are things we did to our own records, not things we sent anyone.
 // A re-measurement is our own re-run and is already excluded by `taken`.
 const INTERNAL = new Set(["catalog", "github"]);
-const ANSWERED = new Set(["acknowledged", "responded", "closed", "declined"]);
+// Aligned with the app's status enum (no "acknowledged"): an action is answered
+// once a counterpart has replied (status "responded") or the exchange closed.
+const ANSWERED = new Set(["responded", "closed", "declined"]);
 
 const sent = countermeasures.actions.filter((e) => e.taken && !INTERNAL.has(e.type));
-const answered = sent.filter((e) => e.response_date || ANSWERED.has(e.status));
+const answered = sent.filter((e) => ANSWERED.has(e.status));
 const actioned = sent.filter((e) => e.status === "responded" || e.status === "closed");
 
-const responseDays = answered
-  .filter((e) => e.response_date)
-  .map((e) => (Date.parse(e.response_date) - Date.parse(e.date)) / 86400000)
-  .sort((a, b) => a - b);
-const median = responseDays.length
-  ? Math.round(responseDays[Math.floor(responseDays.length / 2)])
-  : null;
+// There is no response date in the model (the reply text is internal, only the
+// fact of a reply is public), so a median response time cannot be computed.
+const median = null;
 
 const index = published.index || [];
 const reports = Object.values(published.reports || {});

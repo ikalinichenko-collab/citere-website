@@ -5,7 +5,7 @@
   {%- for a in claim.countermeasures %}
   <div class="actrow">
     <div class="what">{{ a.typeLabel }}{% if a.subtypeLabel %} &middot; {{ a.subtypeLabel }}{% endif %}<small>{{ a.target | defangCopy }}{% if a.market %} &middot; {{ a.market | upper }}{% endif %}</small></div>
-    <span class="chip {{ 'ok' if a.status in ['acknowledged','responded','closed'] else ('wait' if a.status in ['submitted','pending_confirmation'] else '') }}"><span class="dot"></span>{{ a.statusLabel }}{% if a.response_date %} <time datetime="{{ a.response_date | isoDate }}">{{ a.response_date | shortDate }}</time>{% endif %}</span>
+    <span class="chip {{ 'ok' if a.status in ['responded','closed'] else ('wait' if a.status in ['submitted','pending_confirmation'] else '') }}"><span class="dot"></span>{{ a.statusLabel }}</span>
     <div class="when">{% if a.date %}<time datetime="{{ a.date | isoDate }}">{{ a.date | shortDate }}</time>{% else %}<span style="color:var(--dimmer)">not sent</span>{% endif %}</div>
   </div>
   {%- endfor %}

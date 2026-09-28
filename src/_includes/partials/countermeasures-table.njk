@@ -17,7 +17,8 @@
       <span class="cmstatus"><span class="cmpill {{ a.statusClass }}">{{ a.statusLabel }}</span></span>
     </summary>
     <div class="cmdetail">
-      <div><b>What</b><br>{{ a.what | defangCopy | default("Not recorded.") }}</div>
+      <div><b>What</b><br>{{ a.sent | defangCopy | default("Not recorded.") }}
+        {%- if a.reference %}<br><span style="color:var(--dimmer)">Ref: {{ a.reference | defangCopy }}</span>{% endif %}</div>
       <div><b>Evidence package</b><br>
         {%- for id in a.claims %}<a href="{{ (claims | whereEq('id', id) | first).url | url }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
         {%- if not a.claims | length %}<span style="color:var(--dimmer)">no claim attached</span>{% endif %}
@@ -30,11 +31,15 @@
         {%- if a.domain %}Source: {{ a.domain | defang }}{% if a.basis %} &mdash; {{ a.basis }}{% endif %}{% endif %}</div>
       {%- endif %}
       <div><b>Submission and proof</b><br>
-        {%- if a.taken %}Submitted{% if a.response_date %}, answered <time datetime="{{ a.response_date | isoDate }}">{{ a.response_date | shortDate }}</time>{% else %}, no answer yet{% endif %}.
-          Proof of submission is held internally and is not published.
-        {%- elif a.awaitingConfirmation %}<b>Drafted and waiting for a person to approve it.</b> Nothing has
+        {%- if a.awaitingConfirmation %}<b>Drafted and waiting for a person to approve it.</b> Nothing has
           been sent.
         {%- elif a.scheduled %}Scheduled, not yet run.
+        {%- elif a.status == "drafted" %}<b>Draft only.</b> Nothing has been sent, filed or published.
+        {%- elif a.status == "responded" %}Sent, and the recipient replied. The correspondence itself is held
+          internally and is not published.
+        {%- elif a.status == "closed" %}Sent, now closed. Proof of submission is held internally and is not published.
+        {%- elif a.status == "declined" %}Sent, and declined. The correspondence is held internally and is not published.
+        {%- elif a.taken %}Sent, awaiting a reply. Proof of submission is held internally and is not published.
         {%- else %}<b>Draft only.</b> Nothing has been sent, filed or published.{% endif %}</div>
     </div>
   </details>

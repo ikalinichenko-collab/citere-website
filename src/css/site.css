@@ -105,6 +105,9 @@ section{padding:48px 0}
 h2{font-size:25px;letter-spacing:-.028em;font-weight:730;margin:0;color:#080d18}
 .shead a{font-size:13.5px;color:var(--accent);font-weight:600}
 .lead{color:var(--dim);max-width:74ch;margin:-6px 0 22px;font-size:14.8px}
+.rank-headline{max-width:74ch;margin:-2px 0 12px;font-size:16px;line-height:1.5;color:var(--ink);
+  padding:12px 16px;background:var(--accent-soft);border-radius:11px}
+.rank-headline b.num{font-weight:730;color:var(--accent);font-size:19px}
 
 /* ---------- panel / table ---------- */
 .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
@@ -880,6 +883,8 @@ details.schema>summary{display:inline-flex}
 .report-doc .tools a{font-size:12.5px;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--card)}
 .report-doc .tools a:hover{border-color:var(--dimmer);color:var(--ink)}
 .report-doc .tools .ref{font-size:12px;color:var(--dimmer);margin-left:auto}
+.report-doc .tools .ref a{color:var(--accent);border:0;padding:0;background:none;font-weight:600}
+.report-doc .tools .ref a:hover{color:var(--accent);border:0;background:none;text-decoration:underline}
 /* Share / Cite / Export — native <details> popovers, no JS */
 .report-doc .tools details.toolpop{position:relative}
 .report-doc .tools details.toolpop>summary{list-style:none;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--card)}
@@ -987,9 +992,14 @@ details.schema>summary{display:inline-flex}
 .report-doc .evrow .foot b{color:var(--dim)}
 .report-doc .evrow .foot .domain{color:var(--false);font-weight:600}
 .report-doc details.ev-more{margin-top:10px}
-.report-doc details.ev-more>summary{cursor:pointer;list-style:none;font-size:13.5px;font-weight:600;color:var(--accent);padding:8px 0}
+.report-doc details.ev-more>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--accent);padding:7px 13px;border:1px solid var(--line);
+  border-radius:8px;background:var(--card)}
 .report-doc details.ev-more>summary::-webkit-details-marker{display:none}
+.report-doc details.ev-more>summary::after{content:"▾";font-size:11px}
 .report-doc details.ev-more[open]>summary{color:var(--dim)}
+.report-doc details.ev-more[open]>summary::after{content:"▴"}
+.report-doc details.ev-more>summary:hover{border-color:var(--dimmer);color:var(--ink)}
 /* sources panels + reference table */
 .report-doc .srcgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
 .report-doc table.t2{width:100%;border-collapse:collapse;font-size:13.5px;margin:0}

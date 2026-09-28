@@ -52,7 +52,7 @@ A cell built on fewer than {{ metrics.lowN }} answers settles nothing.
 
 | Countermeasure | To | Date | Status |
 |---|---|---|---|
-{% for a in claim.countermeasures %}| {{ a.typeLabel }}{% if a.subtypeLabel %} · {{ a.subtypeLabel }}{% endif %} | {{ a.target | defangCopy }} | {% if a.date %}{{ a.date | displayDate }}{% else %}not sent{% endif %} | {{ a.statusLabel }}{% if a.response_date %} {{ a.response_date | displayDate }}{% endif %} |
+{% for a in claim.countermeasures %}| {{ a.typeLabel }}{% if a.subtypeLabel %} · {{ a.subtypeLabel }}{% endif %} | {{ a.target | defangCopy }} | {% if a.date %}{{ a.date | displayDate }}{% else %}not sent{% endif %} | {{ a.statusLabel }}{% if a.replied %} · replied{% endif %} |
 {% endfor %}
 We publish the fact, date and status of each countermeasure. We do not publish what was submitted, the proof
 of submission, correspondence with platforms, or the names of individuals.

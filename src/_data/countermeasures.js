@@ -10,7 +10,8 @@
 const { readJson } = require("../_lib/markdown.cjs");
 const {
   COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES, COUNTERMEASURE_LADDER,
-  COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS
+  COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS,
+  cmStatusLabel
 } = require("../_lib/labels.cjs");
 
 const raw = readJson("data/countermeasures.json") || {};
@@ -54,19 +55,29 @@ function normalise(action, index) {
     market: action.market || null,
     claims: action.claim_ids || (action.claim_id ? [action.claim_id] : []),
     status,
-    statusLabel: scheduled ? "Scheduled" : meta.label || action.status,
+    // The label is type-aware: a self-driven action (a publication, a dataset,
+    // a catalog/feed update) reads "Published"/"Picked up", never "Responded to
+    // citere.ai" (labels.cjs cmStatusLabel). A re-measurement is scheduled until run.
+    statusLabel: scheduled ? "Scheduled" : cmStatusLabel(type, status),
     statusClass: scheduled ? "st-scheduled" : meta.cls || "",
     // Catalogue §0: nothing leaves Citere without a human click, so a draft is
     // never counted as an action taken. Re-measurements are our own re-runs.
     taken: meta.taken === true && kind === "action",
     awaitingConfirmation: status === "pending_confirmation",
+    // A counterpart has replied once the status reaches "responded". "closed" is
+    // terminal and may follow without a reply, so it does not imply an answer.
+    replied: status === "responded",
     scheduled,
-    response_date: action.response_date || null,
     follow_up_due: followUp,
     evidence_package_id: action.evidence_package_id || null,
     url: action.url || "",
-    // Public detail from the Escalation Actions forms: ① social posts, ⑤ the
-    // complained-about source and grounds. Not submission content — safe to show.
+    // Public detail from the Escalation Actions forms: the one-line "what we did"
+    // summary (`sent`) and the public case id (`reference`); ① social posts, ⑤ the
+    // complained-about source and grounds. The counterpart's reply TEXT is
+    // correspondence and is never carried here (catalogue §1) — only the fact of a
+    // reply, through `replied`/status. Not submission content — safe to show.
+    sent: action.sent || null,
+    reference: action.reference || null,
     links: Array.isArray(action.links) ? action.links : null,
     domain: action.domain || null,
     basis: action.basis || null,
@@ -119,7 +130,9 @@ module.exports = {
     awaitingConfirmation: count((a) => a.awaitingConfirmation),
     remeasurements: count((a) => a.kind === "remeasurement"),
     scheduled: count((a) => a.scheduled),
-    answered: count((a) => Boolean(a.response_date)),
+    // Answered = a counterpart replied (status reached "responded"). There is no
+    // response date in the model, so this is a count of the fact, never the text.
+    answered: count((a) => a.replied),
     targets: new Set(actions.map((a) => a.target).filter(Boolean)).size,
     withheld: all.length - actions.length
   },

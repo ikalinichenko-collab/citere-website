@@ -103,30 +103,45 @@ const refMonth = refCells.length ? refCells.map((c) => c.month).sort().pop() : "
 const label = refMonth ? monthOf(refMonth) : "";
 const marketName = ref ? safeRegion(ref.market) : "";
 
+// The homepage rankings show each entity at the single market where it did WORST
+// on the news question — the highest share it repeated a false claim in any one
+// market. Every rate still forms inside one persona and one market (CM §5.1);
+// runs of the same market pool together, exactly as the bot strip does (see
+// `strip` below). Pooling these boards inside one reference run made them hostage
+// to whichever market happened to carry the most P2 answers — often a 2-sample
+// market with no repeats — so they read all-zero. Ties break toward the larger n.
+const p2Cells = cells.filter((c) => c.pcode === PERSONA);
+function worstByMarket(field) {
+  const keys = [...new Set(p2Cells.map((c) => c[field]).filter((v) => v !== null && v !== undefined && v !== ""))];
+  return keys.map((k) => {
+    let best = null;
+    for (const mkt of [...new Set(p2Cells.filter((c) => c[field] === k).map((c) => c.market))]) {
+      const l = p2Cells.filter((c) => c[field] === k && c.market === mkt);
+      const rc = rateCell(sum(l, "repeat"), sum(l, "substantive"));
+      if (rc && (!best || rc.rate > best.rate || (rc.rate === best.rate && rc.n > best.n))) {
+        best = { rate: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n, market: mkt };
+      }
+    }
+    return best ? { key: k, ...best } : null;
+  }).filter(Boolean);
+}
+
 const leaderboards = {
-  chatbot_repeat: board(poolBy(refP2, "bot").map((g) => { const rc = rateCell(g.repeat, g.substantive); return rc && { key: pslug(g.key), label: modelLabel(g.key), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n }; }).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA),
+  chatbot_repeat: board(worstByMarket("bot").map((g) => ({ key: pslug(g.key), label: modelLabel(g.key), value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n, market: safeRegion(g.market) })).sort((a, b) => b.value - a.value), PERSONA),
   chatbot_contamination: board(poolBy(refP2, "bot").map((g) => { const rc = rateCell(g.contaminated, g.valid); return rc && { key: pslug(g.key), label: modelLabel(g.key), value: rc.rate, n: rc.n }; }).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA),
   cluster_repeat: board(poolBy(refP2, "cluster").map((g) => { const rc = rateCell(g.repeat, g.substantive); return rc && { key: slugify(String(g.key)), label: g.key, value: rc.rate, n: rc.n }; }).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA)
 };
-const markets = [...new Set(cells.map((c) => c.market).filter(Boolean))];
-leaderboards.market_repeat = board(markets.map((mkt) => {
-  const byRun = new Map();
-  for (const c of cells.filter((x) => x.market === mkt && x.pcode === PERSONA)) { const g = byRun.get(c.runKey) || { repeat: 0, substantive: 0 }; g.repeat += c.repeat; g.substantive += c.substantive; byRun.set(c.runKey, g); }
-  const best = [...byRun.values()].sort((a, b) => b.substantive - a.substantive)[0];
-  if (!best) return null;
-  const rc = rateCell(best.repeat, best.substantive);
-  return rc && { key: mkt, label: safeRegion(mkt), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n };
-}).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA);
+// One row per market, pooled over its own runs (CM §5.1 — one market at a time).
+leaderboards.market_repeat = board(worstByMarket("market").map((g) => ({ key: g.key, label: safeRegion(g.key), value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n })).sort((a, b) => b.value - a.value), PERSONA);
 
 // Repeat rate by splice — the kind of lie that gets through (CM 5.7). One row per
-// splice type present in the reference run, worst first. `short` is the reader
-// label "A · one fact swapped out"; a composite splice keeps its raw key.
-leaderboards.splice_repeat = board(poolBy(refP2, "splice").filter((g) => g.key).map((g) => {
-  const rc = rateCell(g.repeat, g.substantive);
+// splice type, each at the market where it worked best, worst first. `short` is
+// the reader label "A · one fact swapped out"; a composite splice keeps its key.
+leaderboards.splice_repeat = board(worstByMarket("splice").map((g) => {
   const key = String(g.key);
   const short = SPLICE_SHORT[key] ? `${key} · ${SPLICE_SHORT[key]}` : (SPLICES[key] || key);
-  return rc && { key: slugify(key), label: short, short, value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n };
-}).filter(Boolean).sort((a, b) => b.value - a.value), PERSONA);
+  return { key: slugify(key), label: short, short, value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n, market: safeRegion(g.market) };
+}).sort((a, b) => b.value - a.value), PERSONA);
 
 const bots = [...new Set(refCells.map((c) => c.bot))].sort((a, b) => MODEL_ORDER.indexOf(a) - MODEL_ORDER.indexOf(b));
 const heatmapRows = bots.map((bot) => ({

@@ -50,18 +50,13 @@ permalink: "{{ entry.url }}"
         </div>
       </details>
       <details class="toolpop">
-        <summary>Cite</summary>
-        <div class="pop">
-          <div class="cite">Citere. ({{ report.publishedAt | year }}). <i>{{ report.label }}</i> (Claim report {{ report.claimKey }}, snapshot v{{ report.version }}). Retrieved from {{ reportUrl }}</div>
-        </div>
-      </details>
-      <details class="toolpop">
         <summary>Export</summary>
         <div class="pop">
           <a href="{{ ('/registry/' + report.slug + '.json') | url }}" download>JSON — full report</a>
           <a href="{{ ('/registry/' + report.slug + '.csv') | url }}" download>CSV — per-bot cells</a>
         </div>
       </details>
+      {%- if "countermeasures" not in hidden %}<a href="#countermeasures">Countermeasures ↓</a>{% endif %}
       <a href="#card">Claim card ↓</a>
       <span class="ref">Claim {{ report.claimKey }}{% if p.meta.trackedSince %} · tracked since <time datetime="{{ p.meta.trackedSince }}">{{ p.meta.trackedSince | displayDate }}</time>{% endif %}{% if p.euvs %} · {% if p.euvs.url %}documented by <a href="{{ p.euvs.url }}" rel="nofollow">EUvsDisinfo</a>{% else %}documented by EUvsDisinfo{% endif %}{% endif %}</span>
     </div>
@@ -91,7 +86,7 @@ permalink: "{{ entry.url }}"
   <div class="kpi"><b class="{{ 'bad' if s.repeatedFake }}">{{ s.repeatedFake }}</b><span>repeated the fake</span></div>
   <div class="kpi"><b class="{{ 'bad' if s.critical }}">{{ s.critical }}</b><span>critical: repeated + cited a listed source</span></div>
   <div class="kpi"><b>{{ s.sourcesIdentified }}</b><span><a href="#sources">disinformation sources identified</a></span></div>
-  <div class="kpi"><b class="{{ 'mute' if not s.countermeasuresTaken }}">{{ s.countermeasuresTaken }}</b><span><a href="#countermeasures">countermeasures taken</a></span></div>
+  <div class="kpi"><b class="{{ 'mute' if not countermeasuresTaken }}">{{ countermeasuresTaken }}</b><span><a href="#countermeasures">countermeasures taken</a></span></div>
 </div>
 
 {# ============================================================ summary / response #}
@@ -203,9 +198,12 @@ permalink: "{{ entry.url }}"
         in the machine export. This keeps the page weight bounded no matter how
         many answers a busy claim flags (CLAUDE.md: bounded HTML, full data in the
         export). -#}
+    {%- set EV_VISIBLE = 7 %}
     {%- set EV_MAX = 24 %}
+    {%- set evShown = (p.evidence | length) if (p.evidence | length) < EV_MAX else EV_MAX %}
     {%- for e in p.evidence %}
       {%- if loop.index <= EV_MAX %}
+      {%- if loop.index == EV_VISIBLE + 1 %}<details class="ev-more"><summary>Show {{ evShown - EV_VISIBLE }} more{% if (p.evidence | length) > EV_MAX %} of {{ p.evidence | length }}{% endif %} flagged answer{{ "" if (evShown - EV_VISIBLE) == 1 else "s" }}</summary>{% endif %}
       <div class="evrow {{ 'crit' if e.tier == 'CRITICAL' }}">
         <div class="meta">
           <span class="who">{{ botMark(logos, R.botSlug(e.model), "sm") }}{{ R.botLabel(e.model) }}</span>
@@ -229,6 +227,7 @@ permalink: "{{ entry.url }}"
         </div>
         {%- endif %}
       </div>
+      {%- if loop.index == evShown and evShown > EV_VISIBLE %}</details>{% endif %}
       {%- endif %}
     {%- endfor %}
     {%- if p.evidence | length > EV_MAX %}
@@ -293,11 +292,11 @@ permalink: "{{ entry.url }}"
 {%- if "countermeasures" not in hidden %}
 <section id="countermeasures" class="flat">
   <h2>Countermeasures</h2>
-  {%- if not p.countermeasures | length %}<div class="rd-empty"><b>No countermeasures taken yet.</b> A platform disclosure is pending. Once a before/after run is linked, the observed change in repeat rate will appear here.</div>
+  {%- if not claimCms | length %}<div class="rd-empty"><b>No countermeasures taken yet.</b> A platform disclosure is pending. Once a before/after run is linked, the observed change in repeat rate will appear here.</div>
   {%- else %}
   <table><caption class="visually-hidden">Countermeasures taken for this claim</caption>
     <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">What was sent</th><th scope="col">Reference</th><th scope="col">Response</th><th scope="col">Status</th></tr></thead>
-    <tbody>{% for c in p.countermeasures %}<tr>
+    <tbody>{% for c in claimCms %}<tr>
       <td>{{ c.date | default("—") }}</td>
       <td>{{ c.type | cmTypeLabel }}{% if c.kind == "remeasurement" %} <small>re-measurement</small>{% endif %}</td>
       <td>{{ c.target }}</td>
@@ -307,9 +306,9 @@ permalink: "{{ entry.url }}"
         {%- if c.links | length %} {% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
         {%- if not c.sent and not c.domain and not (c.links | length) %}—{% endif %}
       </td>
-      <td>{{ c.reference | default("—") }}</td>
-      <td>{{ c.response | default("—") }}</td>
-      <td>{{ c.status | cmStatusLabel }}{% if c.followUpDue %}<small>re-check {{ c.followUpDue | shortDate }}</small>{% endif %}</td>
+      <td>{{ c.reference or "—" }}</td>
+      <td>{% if c.replied %}Replied{% else %}<span class="rd-dim">—</span>{% endif %}</td>
+      <td>{{ c.statusLabel }}{% if c.followUpDue %}<small>re-check {{ c.followUpDue | shortDate }}</small>{% endif %}</td>
     </tr>{% endfor %}</tbody>
   </table>
   {%- endif %}

@@ -52,7 +52,7 @@ permalink: "{{ entry.item.escalationUrl | loc(entry.lang) }}"
       <div class="actrow">
         <div class="what">{{ a.typeLabel }}{% if a.subtypeLabel %} &middot; {{ a.subtypeLabel }}{% endif %}
           <small>{{ a.target | defangCopy }}{% if a.market %} &middot; {{ a.market | upper }}{% endif %}
-            {%- if a.what %} &middot; {{ a.what | defangCopy }}{% endif %}</small></div>
+            {%- if a.sent %} &middot; {{ a.sent | defangCopy }}{% endif %}</small></div>
         <span class="cmpill {{ a.statusClass }}">{{ a.statusLabel }}</span>
         <div class="when">{% if a.date %}<time datetime="{{ a.date | isoDate }}">{{ a.date | shortDate }}</time>{% else %}<span style="color:var(--dimmer)">not sent</span>{% endif %}</div>
       </div>

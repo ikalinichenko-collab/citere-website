@@ -2,6 +2,7 @@
 permalink: /countermeasures.json
 eleventyExcludeFromCollections: true
 ---
-{#- The public slice: date, type, target, market, status. Submission content,
-    proof, contact details and reviewer names are internal only. -#}
-{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"count":{{ countermeasures.actions | length }},"countermeasures":[{% for a in countermeasures.actions %}{"id":{{ a.id | dump | safe }},"date":{{ a.date | dump | safe }},"type":{{ a.type | dump | safe }},"kind":{{ a.kind | dump | safe }},"subtype":{{ a.subtype | dump | safe }},"target":{{ a.target | dump | safe }},"market":{{ a.market | dump | safe }},"claim_ids":{{ a.claims | dump | safe }},"status":{{ a.status | dump | safe }},"taken":{{ "true" if a.taken else "false" }},"response_date":{{ a.response_date | dump | safe }},"follow_up_due":{{ a.follow_up_due | dump | safe }}}{% if not loop.last %},{% endif %}{% endfor %}]}
+{#- The public slice: date, type, target, market, status, whether a reply came
+    (fact only), the public case id and the one-line summary. Submission content,
+    proof, the reply text, contact details and reviewer names are internal only. -#}
+{"publisher":{{ site.org.name | dump | safe }},"license":"https://creativecommons.org/licenses/by/4.0/","demo":{{ "true" if site.isDemo else "false" }},"count":{{ countermeasures.actions | length }},"countermeasures":[{% for a in countermeasures.actions %}{"id":{{ a.id | dump | safe }},"date":{{ a.date | dump | safe }},"type":{{ a.type | dump | safe }},"kind":{{ a.kind | dump | safe }},"subtype":{{ a.subtype | dump | safe }},"target":{{ a.target | dump | safe }},"market":{{ a.market | dump | safe }},"claim_ids":{{ a.claims | dump | safe }},"status":{{ a.status | dump | safe }},"taken":{{ "true" if a.taken else "false" }},"replied":{{ "true" if a.replied else "false" }},"reference":{{ a.reference | dump | safe }},"sent":{{ a.sent | dump | safe }},"follow_up_due":{{ a.follow_up_due | dump | safe }}}{% if not loop.last %},{% endif %}{% endfor %}]}

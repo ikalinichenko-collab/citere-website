@@ -28,7 +28,8 @@ module.exports = {
         return a ? {
           id: a.id, date: a.date, type: a.type, kind: a.kind, subtype: a.subtype,
           target: a.target, market: a.market, claim_ids: a.claims, status: a.status,
-          taken: a.taken, response_date: a.response_date, follow_up_due: a.follow_up_due
+          taken: a.taken, replied: a.replied, sent: a.sent, reference: a.reference,
+          follow_up_due: a.follow_up_due
         } : null;
       })()
     })

@@ -100,7 +100,6 @@ module.exports = {
     // Every card is one persona and one run, and says so (CM 5.1).
     rankingCards: (data) => {
       const lb = data.benchmarks.leaderboards || {};
-      const run = `${data.benchmarks.marketName}, ${data.benchmarks.label}`;
       const cards = [];
       if ((lb.market_repeat || []).length) {
         cards.push({
@@ -117,7 +116,7 @@ module.exports = {
           rows: lb.chatbot_repeat.map((row) => ({ ...row, chatbot: row.key })), idx: true, bar: true,
           title: "Assistants that repeat it most often",
           sub: "news question (P2)",
-          note: `Same questions, same day, put to every assistant. How often each one answered with the false claim — ${run}.`,
+          note: "Each assistant at the single market where it repeated the claim most often. Same claims, asked in each market’s own language.",
           more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
           moreLabel: "All assistants"
         });
@@ -128,12 +127,25 @@ module.exports = {
           idx: false, bar: true,
           title: "The kind of lie that works best",
           sub: "news question (P2)",
-          note: `How the false claim is attached to the truth. An invention gets refuted; a real event with one fact changed gets repeated — ${run}.`,
+          note: "How the false claim is attached to a true fact, each at the market where it worked best. An invention gets refuted; a real event with one detail changed gets repeated.",
           more: data.navigation.has.registry ? "/registry/" : "/methodology/",
           moreLabel: "Claims by type"
         });
       }
       return cards;
+    },
+    // One summary fact above the three rankings: the highest share any single
+    // assistant repeated a false claim in one market, on the news question. Reads
+    // straight off the fixed chatbot leaderboard, so the homepage types no number
+    // (CLAUDE.md 11.1). Null (and the line hides) when there is no ranking yet.
+    rankingHeadline: (data) => {
+      const lb = data.benchmarks.leaderboards || {};
+      const top = (lb.chatbot_repeat || [])[0];
+      if (!top || !top.value) return null;
+      return {
+        value: top.value, label: top.label, market: top.market || data.benchmarks.marketName,
+        claims: data.benchmarks.publishedClaims || 0
+      };
     },
     // Cluster is a field on a claim, used for filtering and for grouping in
     // Benchmarks. It is not navigation, so the homepage no longer offers it as
