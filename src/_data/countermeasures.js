@@ -11,8 +11,22 @@ const { readJson } = require("../_lib/markdown.cjs");
 const {
   COUNTERMEASURE_TYPES, COUNTERMEASURE_STATUSES, COUNTERMEASURE_LADDER,
   COUNTERMEASURE_PRIVATE_FIELDS, REMEASUREMENT, LEGACY_TYPE, LEGACY_SUBTYPE, LEGACY_STATUS,
-  cmStatusLabel
+  cmStatusLabel, CM_SELF_DRIVEN
 } = require("../_lib/labels.cjs");
+
+// The lifecycle as a 4-step track for the row detail: Draft → Sent → Reply →
+// Closed. A self-driven action (a publication, a feed) reads Published/Picked up
+// instead of Sent/Replied; a declined action ends on its own third step. `stage`
+// is how many steps are lit.
+function pipeline(type, status) {
+  const self = CM_SELF_DRIVEN.has(type);
+  if (status === "declined") {
+    return { stage: 2, steps: ["Drafted", self ? "Published" : "Sent", "Declined"] };
+  }
+  const steps = ["Drafted", self ? "Published" : "Sent", self ? "Picked up" : "Replied", "Closed"];
+  const idx = { drafted: 0, pending_confirmation: 0, submitted: 1, responded: 2, closed: 3 };
+  return { stage: idx[status] ?? 0, steps };
+}
 
 const raw = readJson("data/countermeasures.json") || {};
 const TODAY = new Date().toISOString().slice(0, 10);
@@ -67,6 +81,8 @@ function normalise(action, index) {
     // A counterpart has replied once the status reaches "responded". "closed" is
     // terminal and may follow without a reply, so it does not imply an answer.
     replied: status === "responded",
+    // The lifecycle rendered as a small progress track in the row detail.
+    pipeline: scheduled ? null : pipeline(type, status),
     scheduled,
     follow_up_due: followUp,
     evidence_package_id: action.evidence_package_id || null,

@@ -41,6 +41,11 @@
         {%- elif a.status == "declined" %}Sent, and declined. The correspondence is held internally and is not published.
         {%- elif a.taken %}Sent, awaiting a reply. Proof of submission is held internally and is not published.
         {%- else %}<b>Draft only.</b> Nothing has been sent, filed or published.{% endif %}</div>
+      {%- if a.pipeline %}
+      <div class="cmpipe">
+        {%- for step in a.pipeline.steps %}<span class="cmstep{% if loop.index0 <= a.pipeline.stage %} on{% endif %}{% if step == 'Declined' %} bad{% endif %}">{{ step }}</span>{% endfor %}
+      </div>
+      {%- endif %}
     </div>
   </details>
   {%- endfor %}

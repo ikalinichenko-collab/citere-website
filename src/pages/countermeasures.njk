@@ -29,6 +29,19 @@ permalink: "{{ '/countermeasures/' | loc(lang) }}"
 {%- endfor %}
 </div>
 
+{%- set dtypes = countermeasures.types | selectattr('count') | list %}
+{%- if dtypes | length %}
+<div class="cmdist">
+  <div class="cmbar" role="img" aria-label="Countermeasures by type">
+    {%- for t in dtypes %}<span class="{{ t.cls }}" style="flex:{{ t.count }}" title="{{ t.label }}: {{ t.count }}"></span>{% endfor %}
+  </div>
+  <div class="cmlegend">
+    {%- for t in dtypes %}<span><i class="cmdot {{ t.cls }}"></i>{{ t.label }} <b class="num">{{ t.count }}</b></span>{% endfor %}
+    {%- if countermeasures.totals.answered %}<span class="cmresp">Replied so far <b class="num">{{ countermeasures.totals.answered }}</b> of <b class="num">{{ countermeasures.totals.taken }}</b></span>{% endif %}
+  </div>
+</div>
+{%- endif %}
+
 {% include "partials/countermeasure-filters.njk" %}
 
 {%- set claims = published.claimLinks %}
