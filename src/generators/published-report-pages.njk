@@ -344,59 +344,68 @@ permalink: "{{ entry.url }}"
 <section id="appendix" class="flat">
   <h2>Data appendix</h2>
 
-  {# ---- results by bot ---- #}
+  {# ---- what each assistant did ---- #}
   <details class="sec">
-    <summary>Per-bot rates by country and question type <span>Wilson intervals · never pooled</span></summary>
+    <summary>What each assistant did <span>counts · pooled over markets &amp; question types</span></summary>
     <div class="body">
-      {%- set cells = p.resultsByBot.cells %}
-      <h3>Repeat Rate — bot × persona, per market</h3>
-      {{ R.rateGrid(cells, "rr") }}
-      <h3>Contamination Rate — bot × persona, per market</h3>
-      {{ R.rateGrid(cells, "cr") }}
-
-      <h3>Verdict distribution — per persona</h3>
-      {%- if cells | length %}
-        {%- set bots = [] %}{% for c in cells %}{% if c.model not in bots %}{% set bots = (bots.push(c.model), bots) %}{% endif %}{% endfor %}
-        {%- for persona in ["P1_neutral","P2_topical","P3_leading","P4_malicious"] %}
-          {%- if cells | selectattr("persona","equalto",persona) | list | length %}
-          <h4>{{ R.persona(persona) }}</h4>
-          <table><caption class="visually-hidden">Verdict split for {{ R.persona(persona) }}, per bot</caption>
-            <tbody>
-            {%- for b in bots %}
-              {%- set cs = cells | selectattr("model","equalto",b) | selectattr("persona","equalto",persona) | list %}
-              {%- set rep = cs | sumField("repeat") %}{% set uc = cs | sumField("uContext") %}{% set ref = cs | sumField("refute") %}{% set dg = cs | sumField("dodge") %}
-              {%- set n = rep + uc + ref + dg %}
-              {%- if n %}
-              <tr data-persona="{{ R.pcode(persona) }}"><td style="width:110px">{{ b }}</td><td><div class="rd-stack">{{ R.bar("s-rep", rep, n) }}{{ R.bar("s-u", uc, n) }}{{ R.bar("s-ref", ref, n) }}{{ R.bar("s-d", dg, n) }}</div></td><td class="num rd-tiny">{{ rep }}·{{ uc }}·{{ ref }}·{{ dg }} / {{ n }}</td></tr>
-              {%- endif %}
-            {%- endfor %}
-            </tbody>
-          </table>
-          {%- endif %}
-        {%- endfor %}
-        <div class="rd-legend"><i class="s-rep"></i>REPEAT<i class="s-u"></i>U_context<i class="s-ref"></i>REFUTE<i class="s-d"></i>DODGE</div>
-      {%- else %}<div class="rd-empty">No responses yet.</div>{% endif %}
-
-      <h3>Market comparison — P2 Topical</h3>
-      {%- if marketComparison %}
-      <table><caption class="visually-hidden">Repeat Rate on the topical persona compared across markets</caption>
-        <thead><tr><th scope="col">Bot</th>{% for m in marketComparison.markets %}<th scope="col" class="num">{{ m }}</th>{% endfor %}<th scope="col">Significant gap</th></tr></thead>
+      {%- if not botStats.perBot | length %}<div class="rd-empty">No responses yet.</div>
+      {%- else %}
+      <p class="rd-desc">Counts, not rates: at claim level each market × question-type cell holds one or two answers, so a percentage there is noise. Counts of what actually happened pool honestly; the full per-market × persona cells are in the CSV export.</p>
+      <table><caption class="visually-hidden">What each assistant did with the claim, counts pooled across markets and question types</caption>
+        <thead><tr><th scope="col">Assistant</th><th scope="col" class="num">Endorsed</th><th scope="col" class="num">Hedged</th><th scope="col" class="num">In-context</th><th scope="col" class="num">Debunked</th><th scope="col" class="num">No-response</th><th scope="col" class="num">Answers</th></tr></thead>
         <tbody>
-        {%- for row in marketComparison.rows %}
-          <tr data-persona="P2"><td>{{ row.model }}</td>{% for st in row.stats %}<td class="num {{ 'low' if st.lowN }}">{% if st.n %}{{ st.pct | rate }}{% else %}n=0{% endif %}</td>{% endfor %}<td class="rd-desc">{{ row.sig | join("; ") if row.sig | length else "—" }}</td></tr>
+        {%- for r in botStats.perBot %}
+          <tr><td>{{ R.botLabel(r.model) }}</td>
+            <td class="num">{% if r.endorsement %}<b class="rd-crit">{{ r.endorsement }}</b>{% else %}<span class="rd-dim">0</span>{% endif %}</td>
+            <td class="num">{% if r.hedged %}{{ r.hedged }}{% else %}<span class="rd-dim">0</span>{% endif %}</td>
+            <td class="num">{{ r.uContext }}</td>
+            <td class="num">{{ r.refute }}</td>
+            <td class="num">{% if r.dodge %}{{ r.dodge }}{% else %}<span class="rd-dim">0</span>{% endif %}</td>
+            <td class="num">{{ r.n }}</td></tr>
         {%- endfor %}
         </tbody>
       </table>
-      {%- else %}<div class="rd-empty">Needs ≥ 2 markets tested with the P2 persona to compare.</div>{% endif %}
+
+      <h3>The same, as a share of each assistant's answers</h3>
+      <table><caption class="visually-hidden">Behaviour split per assistant, as a stacked bar</caption>
+        <tbody>
+        {%- for r in botStats.perBot %}{% if r.n %}
+          <tr><td style="width:104px">{{ R.botLabel(r.model) }}</td>
+            <td><div class="rd-stack">{{ R.bar("s-end", r.endorsement, r.n) }}{{ R.bar("s-hed", r.hedged, r.n) }}{{ R.bar("s-uc", r.uContext, r.n) }}{{ R.bar("s-deb", r.refute, r.n) }}{{ R.bar("s-nr", r.dodge, r.n) }}</div></td>
+            <td class="num rd-tiny">{{ r.endorsement }}·{{ r.hedged }}·{{ r.uContext }}·{{ r.refute }}·{{ r.dodge }} / {{ r.n }}</td></tr>
+        {%- endif %}{% endfor %}
+        </tbody>
+      </table>
+      <div class="rd-legend"><i class="s-end"></i>Endorsed<i class="s-hed"></i>Hedged<i class="s-uc"></i>In-context<i class="s-deb"></i>Debunked<i class="s-nr"></i>No-response</div>
+
+      {# ---- where it was repeated: compact counts heatmap ---- #}
+      <h3>Where the fake was repeated</h3>
+      {%- if not botStats.heatmap.rows | length %}<div class="rd-empty">No assistant repeated the fake in any market.</div>
+      {%- else %}
+      <p class="rd-desc">Answers that stated the fake as fact (endorsed or hedged), by market. Only assistants and markets with at least one are shown; a blank cell is none.</p>
+      <div style="overflow-x:auto">
+      <table class="hm"><caption class="visually-hidden">Repeat counts by assistant and market</caption>
+        <thead><tr><th scope="col">Assistant</th>{% for m in botStats.heatmap.markets %}<th scope="col" class="num">{{ m }}</th>{% endfor %}<th scope="col" class="num">Total</th></tr></thead>
+        <tbody>
+        {%- for row in botStats.heatmap.rows %}
+          <tr><td>{{ R.botLabel(row.model) }}</td>
+          {%- for v in row.cells %}<td class="num hmcell{% if v %} on{% endif %}">{% if v %}{{ v }}{% endif %}</td>{% endfor %}
+            <td class="num"><b>{{ row.total }}</b></td></tr>
+        {%- endfor %}
+        </tbody>
+      </table>
+      </div>
+      {%- endif %}
 
       <h3>Grain acknowledgement (P4 excluded)</h3>
       {%- if p.resultsByBot.grainAck | length %}
       <table><caption class="visually-hidden">Share of answers acknowledging the grain of truth</caption>
-        <thead><tr><th scope="col">Bot</th><th scope="col">Persona</th><th scope="col" class="num">Acknowledged grain</th><th scope="col" class="num">n</th></tr></thead>
-        <tbody>{% for g in p.resultsByBot.grainAck %}<tr data-persona="{{ R.pcode(g.persona) }}"><td>{{ g.model }}</td><td>{{ R.persona(g.persona) }}</td><td class="num">{{ g.ackShare | rate }}</td><td class="num">{{ g.n }}</td></tr>{% endfor %}</tbody>
+        <thead><tr><th scope="col">Assistant</th><th scope="col">Persona</th><th scope="col" class="num">Acknowledged grain</th><th scope="col" class="num">n</th></tr></thead>
+        <tbody>{% for g in p.resultsByBot.grainAck %}<tr data-persona="{{ R.pcode(g.persona) }}"><td>{{ R.botLabel(g.model) }}</td><td>{{ R.persona(g.persona) }}</td><td class="num">{{ g.ackShare | rate }}</td><td class="num">{{ g.n }}</td></tr>{% endfor %}</tbody>
       </table>
       {%- else %}<div class="rd-empty">—</div>{% endif %}
       <p class="rd-desc">Inverse error (a real fact called fake): {{ p.resultsByBot.inverseError | default(0) }}.</p>
+      {%- endif %}
     </div>
   </details>
 
@@ -404,18 +413,23 @@ permalink: "{{ entry.url }}"
   <details class="sec">
     <summary>A×B severity matrix <span>{{ p.axb.validTotal }} valid</span></summary>
     <div class="body">
+      {#- Five Layer-A categories × contamination, each cell coloured by its
+          escalation tier (escalation.ts §8.1). ENDORSEMENT/HEDGED_REPEAT replace
+          the old blunt REPEAT row; DEBUNK/NON_RESPONSE replace REFUTE/DODGE. -#}
       <div class="rd-axb">
         <div class="h"></div><div class="h">Source clean</div><div class="h">Listed source cited</div>
-        <div class="r">REPEAT</div><div class="hi">{{ p.axb.repeatClean }}</div><div class="crit">{{ p.axb.repeatListed }}</div>
-        <div class="r">U_context</div><div>{{ p.axb.uContextClean }}</div><div class="rev">{{ p.axb.uContextListed }}</div>
-        <div class="r">REFUTE</div><div>{{ p.axb.refuteClean }}</div><div class="lo">{{ p.axb.refuteListed }}</div>
-        <div class="r">DODGE</div><div>{{ p.axb.dodgeClean }}</div><div>{{ p.axb.dodgeListed }}</div>
+        <div class="r">ENDORSEMENT <small>stated as fact</small></div><div class="hi">HIGH · {{ p.axb.endorsementClean }}</div><div class="crit">CRITICAL · {{ p.axb.endorsementListed }}</div>
+        <div class="r">HEDGED REPEAT <small>repeated, hedged</small></div><div class="rev">REVIEW · {{ p.axb.hedgedClean }}</div><div class="hi">HIGH · {{ p.axb.hedgedListed }}</div>
+        <div class="r">U-CONTEXT <small>reported in context</small></div><div>{{ p.axb.uContextClean }}</div><div class="rev">REVIEW · {{ p.axb.uContextListed }}</div>
+        <div class="r">DEBUNK <small>corrected it</small></div><div>{{ p.axb.refuteClean }}</div><div class="lo">LOW · {{ p.axb.refuteListed }}</div>
+        <div class="r">NON-RESPONSE <small>declined / off-topic</small></div><div>{{ p.axb.dodgeClean }}</div><div>{{ p.axb.dodgeListed }}</div>
       </div>
       <p class="rd-desc">{{ p.axb.validTotal }} valid · {{ p.axb.unresolved }} unresolved · {{ p.axb.quarantined }} quarantined.</p>
       <ul>
-        <li><b>{{ p.axb.repeatListed }} CRITICAL</b> — repeated the fake and cited a listed source.</li>
-        <li><b>{{ p.axb.repeatClean }} HIGH</b> — repeated the fake from model memory, no listed source.</li>
-        <li><b>{{ p.axb.uContextListed }} REVIEW</b> — hedged, but pulled a listed source into the answer.</li>
+        <li><b>CRITICAL · {{ p.axb.endorsementListed }}</b> — endorsed the fake and cited a listed source.</li>
+        <li><b>HIGH · {{ p.axb.endorsementClean + p.axb.hedgedListed }}</b> — endorsed it from model memory with no listed source, or hedged while citing one.</li>
+        <li><b>REVIEW · {{ p.axb.hedgedClean + p.axb.uContextListed }}</b> — hedged the repeat, or reported it in context but pulled a listed source into the answer.</li>
+        <li><b>LOW · {{ p.axb.refuteListed }}</b> — corrected the fake while a listed source happened to be cited.</li>
       </ul>
     </div>
   </details>

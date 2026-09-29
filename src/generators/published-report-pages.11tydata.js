@@ -324,9 +324,43 @@ function countermeasuresTaken(report, log) {
   return ((report.payload || {}).strip || {}).countermeasuresTaken || 0;
 }
 
+// Per-bot behaviour counts, pooled across markets and question types. Counts may
+// be summed; a rate may not (CM §5.1), so this returns counts only. Also the
+// compact repeat heatmap: answers that stated the fake as fact (ENDORSEMENT +
+// HEDGED_REPEAT) per bot × market, restricted to the bots and markets where at
+// least one occurred. Done in JS because Nunjucks selectattr("x","equalto",v)
+// does not filter reliably here.
+function botBehaviourStats(p) {
+  const cells = (p.resultsByBot && p.resultsByBot.cells) || [];
+  const bots = [...new Set(cells.map((c) => c.model))];
+  const FIELDS = ["endorsement", "hedged", "uContext", "refute", "dodge"];
+  const rep = (cs) => cs.reduce((n, c) => n + (c.endorsement || 0) + (c.hedged || 0), 0);
+  const perBot = bots
+    .map((model) => {
+      const cs = cells.filter((c) => c.model === model);
+      const o = { model };
+      for (const k of FIELDS) o[k] = cs.reduce((n, c) => n + (c[k] || 0), 0);
+      o.n = FIELDS.reduce((n, k) => n + o[k], 0);
+      o.repeats = o.endorsement + o.hedged;
+      return o;
+    })
+    .sort((a, b) => b.repeats - a.repeats || b.n - a.n || a.model.localeCompare(b.model));
+  const allMarkets = [...new Set(cells.map((c) => c.market))].sort();
+  const hmMarkets = allMarkets.filter((m) => rep(cells.filter((c) => c.market === m)) > 0);
+  const hmRows = bots
+    .map((model) => {
+      const cs = cells.filter((c) => c.model === model);
+      return { model, total: rep(cs), cells: hmMarkets.map((m) => rep(cs.filter((c) => c.market === m))) };
+    })
+    .filter((r) => r.total > 0)
+    .sort((a, b) => b.total - a.total || a.model.localeCompare(b.model));
+  return { perBot, heatmap: { markets: hmMarkets, rows: hmRows } };
+}
+
 module.exports = {
   eleventyComputed: {
     marketComparison: (data) => marketComparison(data.entry.report),
+    botStats: (data) => botBehaviourStats(data.entry.report.payload || {}),
     claimCms: (data) => claimCountermeasures(data.entry.report, data.countermeasures),
     countermeasuresTaken: (data) => countermeasuresTaken(data.entry.report, data.countermeasures),
     lang: (data) => data.entry.lang,
