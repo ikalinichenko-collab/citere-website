@@ -12,7 +12,7 @@
 // never in the template).
 const { home, crumb } = require("../_lib/crumbs.cjs");
 const { fitTitle, fitDescription, listOf } = require("../_lib/meta.cjs");
-const { MONTHS, cmStatusLabel } = require("../_lib/labels.cjs");
+const { MONTHS, cmStatusLabel, CM_SELF_DRIVEN } = require("../_lib/labels.cjs");
 
 // The app's web-model slugs → display names and short monograms for the hero
 // bars and bot cards. The site swaps in real logo marks via logos.json in the
@@ -298,6 +298,14 @@ const shapeCm = (c) => ({
   status: c.status,
   // Type-aware label so a self-published action never reads "Responded".
   statusLabel: c.statusLabel || cmStatusLabel(c.type, c.status),
+  // The status colour chip (st-* classes) the log page already uses; carried so
+  // the report renders the same coloured chip instead of plain text. A self-driven
+  // action that is done (a publication/feed/catalog reading "Published"/"Picked up")
+  // gets the green "done" chip, not the blue "submitted" tint that fits an
+  // outbound disclosure awaiting a reply.
+  statusClass: (CM_SELF_DRIVEN.has(c.type) && (c.status === "submitted" || c.status === "responded"))
+    ? "st-closed"
+    : (c.statusClass || ""),
   followUpDue: c.followUpDue || c.follow_up_due || null,
 });
 function claimCountermeasures(report, log) {

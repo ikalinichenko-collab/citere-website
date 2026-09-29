@@ -273,23 +273,34 @@ permalink: "{{ entry.url }}"
   <h2>Countermeasures</h2>
   {%- if not claimCms | length %}<div class="rd-empty"><b>No countermeasures taken yet.</b> A platform disclosure is pending. Once a before/after run is linked, the observed change in repeat rate will appear here.</div>
   {%- else %}
-  <table><caption class="visually-hidden">Countermeasures taken for this claim</caption>
-    <thead><tr><th scope="col">Date</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">What was sent</th><th scope="col">Reference</th><th scope="col">Response</th><th scope="col">Status</th></tr></thead>
-    <tbody>{% for c in claimCms %}<tr>
-      <td>{{ c.date | default("—") }}</td>
-      <td>{{ c.type | cmTypeLabel }}{% if c.kind == "remeasurement" %} <small>re-measurement</small>{% endif %}</td>
-      <td>{{ c.target }}</td>
-      <td>
-        {%- if c.sent %}{{ c.sent | defangCopy | safe }}{% endif %}
-        {%- if c.domain %} {{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
-        {%- if c.links | length %} {% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
-        {%- if not c.sent and not c.domain and not (c.links | length) %}—{% endif %}
-      </td>
-      <td>{{ c.reference or "—" }}</td>
-      <td>{% if c.replied %}Replied{% else %}<span class="rd-dim">—</span>{% endif %}</td>
-      <td>{{ c.statusLabel }}{% if c.followUpDue %}<small>re-check {{ c.followUpDue | shortDate }}</small>{% endif %}</td>
-    </tr>{% endfor %}</tbody>
-  </table>
+  {%- set replies = claimCms | selectattr("replied") | list | length %}
+  <p class="rd-desc">{{ countermeasuresTaken }} taken{% if replies %} · {{ replies }} with a reply on record{% endif %}. Correspondence content is never published — only the fact and status of each step.</p>
+  {#- A compact activity log: a coloured status chip, the action and who it went
+      to, what was done, and the meta line (date, reference, re-check). Only the
+      fields a row actually carries are shown, so it reads the same at one row or
+      sixteen and never sprawls into empty columns. -#}
+  <ul class="cmlog">
+  {%- for c in claimCms %}
+    <li class="cmrow">
+      <span class="chip {{ c.statusClass }}">{{ c.statusLabel }}</span>
+      <div class="cmbody">
+        <div class="cmhead"><b>{{ c.type | cmTypeLabel }}</b>
+          {%- if c.kind == "remeasurement" %} <span class="cmmuted">re-measurement</span>{% endif %}
+          {%- if c.target %} <span class="rd-dim">·</span> {{ c.target | defangCopy | safe }}
+          {%- elif c.type == "disclosure" %} <span class="cmmuted">(platform not named)</span>{% endif %}
+          {%- if c.replied %} <span class="cmreplied">✓ replied</span>{% endif %}</div>
+        {%- if c.sent %}<div class="cmsub">{{ c.sent | defangCopy | trim | safe }}</div>{% endif %}
+        <div class="cmmeta">
+          {%- if c.date %}<time datetime="{{ c.date }}">{{ c.date | displayDate }}</time>{% else %}<span class="cmmuted">not yet sent</span>{% endif %}
+          {%- if c.reference %} · ref {{ c.reference }}{% endif %}
+          {%- if c.domain %} · {{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
+          {%- if c.links | length %} · {% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
+          {%- if c.followUpDue %} · re-check <time datetime="{{ c.followUpDue }}">{{ c.followUpDue | shortDate }}</time>{% endif %}
+        </div>
+      </div>
+    </li>
+  {%- endfor %}
+  </ul>
   {%- endif %}
 </section>
 {%- endif %}
