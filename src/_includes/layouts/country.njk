@@ -3,6 +3,9 @@ layout: layouts/base.njk
 wrap: wrap-narrow
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{#- Severity tint for a rate cell (0 clean → hot). Cosmetic; the figure and its
+    interval still carry the truth. Opt-in via the hsv* class on .cellstat. -#}
+{%- macro sev(rate) -%}hsv{% if not rate %}0{% elif rate < 0.12 %}1{% elif rate < 0.18 %}2{% else %}3{% endif %}{%- endmacro -%}
 <div class="phead"><h1>Russian disinformation in AI chatbots: {{ profile.name }}</h1>
   <p class="plead">{{ profile.bots | length }} assistants tested in {{ profile.language | languageName }},
     run of <time datetime="{{ profile.run.collected_at | isoDate }}">{{ profile.run.collected_at | displayDate }}</time>.
@@ -20,8 +23,8 @@ wrap: wrap-narrow
   {%- for row in profile.bots %}
     <tr data-persona="{{ profile.persona }}">
       <td class="cl"><span class="markcell">{{ botMark(logos, row.key, "sm", true) }}{% if row.url %}<a href="{{ row.url | url }}">{{ row.name }}</a>{% else %}{{ row.name }}{% endif %}</span></td>
-      <td class="num"><span class="cellstat{% if row.repeat_rate.low_n %} lown{% endif %}">{{ row.repeat_rate.rate | rate }}<small>{{ row.repeat_rate.ci | ciLabel }} &middot; n={{ row.repeat_rate.n }}</small></span></td>
-      <td class="num"><span class="cellstat{% if row.contamination_rate.low_n %} lown{% endif %}">{{ row.contamination_rate.rate | rate }}<small>n={{ row.contamination_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(row.repeat_rate.rate) }}">{{ row.repeat_rate.rate | rate }}<small>{{ row.repeat_rate.ci | ciLabel }} &middot; n={{ row.repeat_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(row.contamination_rate.rate) }}">{{ row.contamination_rate.rate | rate }}<small>n={{ row.contamination_rate.n }}</small></span></td>
       <td class="num"><span class="cellstat">{{ row.dodge_rate.rate | rate }}<small>n={{ row.dodge_rate.n }}</small></span></td>
       <td class="num" style="color:var(--dim)">{{ row.n - row.counts.dodge }} answers</td></tr>
   {%- endfor %}

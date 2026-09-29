@@ -547,6 +547,36 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
    readable and still reads as set aside. */
 .cellstat.lown{background:var(--bg);border-radius:5px;padding:1px 6px;color:var(--dim)}
 .cellstat.lown small{color:var(--dim)}
+/* Opt-in severity tint for a rate cell (0 clean → hot). Any page adds hsv0..hsv3
+   to the .cellstat; defined after .lown so the tint wins over the neutral grey. */
+.cellstat.hsv0,.cellstat.hsv1,.cellstat.hsv2,.cellstat.hsv3{border-radius:6px;padding:2px 8px}
+.cellstat.hsv0{background:var(--ok-bg);color:var(--ok)}
+.cellstat.hsv1{background:var(--mislead-bg);color:var(--mislead)}
+.cellstat.hsv2{background:#fbe4d5;color:#b4520f}
+.cellstat.hsv3{background:var(--false-bg);color:var(--false)}
+.cellstat.hsv0 small,.cellstat.hsv1 small,.cellstat.hsv2 small,.cellstat.hsv3 small{color:inherit;opacity:.7}
+/* Compact cross-market matrix: narrow, centred, colour-tinted cells so ~13 market
+   columns fit; it scrolls inside its own wrapper on narrow screens. */
+.cmx td .cellstat{min-width:0}
+.cmx td.num,.cmx th.num{text-align:center}
+/* Country index "By market" cards (styles lifted out of inline attributes; new
+   class names, so no other page is affected). */
+.mkt-list{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.panel.mkt-card{padding:18px 20px;border-left:4px solid var(--ok)}
+.panel.mkt-card.mkt-hi{border-left-color:var(--false)}
+.panel.mkt-card.mkt-mid{border-left-color:var(--mislead)}
+.mkt-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.mkt-name{font-size:19px;font-weight:600}
+.mkt-name .mkt-sub{font-size:13px;color:var(--dimmer);font-weight:400}
+.mkt-open{font-size:13px;color:var(--accent);font-weight:600}
+.mkt-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.mkt-lbl{font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.mkt-big{font-size:30px;font-weight:600;line-height:1;color:var(--false)}
+.mkt-note{font-size:12.5px;color:var(--dim);margin-top:6px}
+.mkt-val{font-size:12.5px;color:var(--dim)}
+.mkt-bot{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;margin:5px 0}
+.mkt-bot .cellstat{min-width:0;padding:1px 7px}
+@media(max-width:640px){.mkt-cols{grid-template-columns:1fr;gap:12px}}
 /* Chatbot benchmark: tint the rate cells by severity (scoped so the claim-page
    observations table keeps its neutral greying). Low-n stays flagged as a dashed
    outline over the tint, not as flat grey. */

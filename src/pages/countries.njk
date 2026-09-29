@@ -11,6 +11,9 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
 {%- from "partials/country-flag.njk" import countryFlag -%}
+{#- Severity tint for a repeat-rate cell (0 clean → hot). Cosmetic; the figure and
+    its sample size still carry the truth. Opt-in via the hsv* class on .cellstat. -#}
+{%- macro sev(rate) -%}hsv{% if not rate %}0{% elif rate < 0.12 %}1{% elif rate < 0.18 %}2{% else %}3{% endif %}{%- endmacro -%}
 {%- set doc = copy.en.countries -%}
 {#- Breadcrumb comes from the base layout's crumbs partial (breadcrumbTrail in
     countries.11tydata.js); no manual nav here or it renders twice. -#}
@@ -39,22 +42,22 @@ permalink: "{{ '/countries/' | loc(lang) }}"
   they carry no persona. Everything below names one.</p>
 
 <div class="shead"><h2>{{ 'section.sameClaim' | t }}</h2><span style="font-size:13px;color:var(--dimmer)">persona {{ countriesReport.matrix.persona }} &middot; news-style questions &middot; markets are never merged</span></div>
-<div class="panel"><table>
-  <caption class="visually-hidden">Repeat rate per assistant in each market on news-style questions, each cell with its interval and sample size</caption>
+<div class="panel"><div style="overflow-x:auto"><table class="cmx">
+  <caption class="visually-hidden">Repeat rate per assistant in each market on news-style questions, with sample size</caption>
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>
     {%- for c in countriesReport.countries %}<th scope="col" class="num">{{ countryFlag(c.key, 'sm') }} {{ c.key | upper }}</th>{% endfor %}</tr></thead>
   <tbody>
   {%- for row in countriesReport.matrix.rows %}
     <tr data-persona="{{ countriesReport.matrix.persona }}">
       <th scope="row" style="font-weight:400"><span class="markcell">{{ botMark(logos, row.chatbot, "sm", true) }}{{ row.name }}</span></th>
-      {%- for cell in row.cells %}<td class="num"><span class="cellstat{% if cell.repeat_rate.low_n %} lown{% endif %}">{{ cell.repeat_rate.rate | rate }}<small>{{ cell.repeat_rate.ci | ciLabel }} &middot; n={{ cell.repeat_rate.n }}</small></span></td>{% endfor %}
+      {%- for cell in row.cells %}<td class="num">{% if cell.repeat_rate.n %}<span class="cellstat {{ sev(cell.repeat_rate.rate) }}" title="n={{ cell.repeat_rate.n }}">{{ cell.repeat_rate.rate | rate }}</span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>{% endfor %}
     </tr>
   {%- endfor %}
-  </tbody></table></div>
+  </tbody></table></div></div>
 <p class="note" style="margin-bottom:34px">Rows are assistants, columns are markets, and nothing is
-  averaged across either. Two markets differ only when their intervals do not overlap; where they overlap
-  the difference is directional and this page does not claim it. There is no score per market: markets are
-  not ranked, assistants are.</p>
+  averaged across either. Cells are tinted by how often the assistant repeated the claim; the full intervals
+  and per-pair significance are in the comparisons below and in the full analytical view. There is no score
+  per market: markets are not ranked, assistants are.</p>
 
 <h2 style="margin:30px 0 4px">What the cross-market data shows</h2>
 <p class="note" style="margin:0 0 16px">Each block below is a comparison that clears significance. Where the
@@ -68,11 +71,11 @@ permalink: "{{ '/countries/' | loc(lang) }}"
       <th scope="col">Better in</th><th scope="col" class="num">Rate</th><th scope="col" class="num">Ratio</th></tr></thead>
     <tbody>
     {%- for g in countriesReport.perBot %}
-      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ g.bot.name }}</th>
-        <td>{{ g.high.name }}</td>
-        <td class="num"><span class="cellstat">{{ g.high.headline.repeat_rate.rate | rate }}<small>{{ g.high.headline.repeat_rate.ci | ciLabel }}</small></span></td>
-        <td>{{ g.low.name }}</td>
-        <td class="num"><span class="cellstat">{{ g.low.headline.repeat_rate.rate | rate }}<small>{{ g.low.headline.repeat_rate.ci | ciLabel }}</small></span></td>
+      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400"><span class="markcell">{{ botMark(logos, g.bot.key, "sm", true) }}{{ g.bot.name }}</span></th>
+        <td>{{ countryFlag(g.high.iso, 'sm') }} {{ g.high.name }}</td>
+        <td class="num"><span class="cellstat {{ sev(g.high.headline.repeat_rate.rate) }}">{{ g.high.headline.repeat_rate.rate | rate }}<small>{{ g.high.headline.repeat_rate.ci | ciLabel }}</small></span></td>
+        <td>{{ countryFlag(g.low.iso, 'sm') }} {{ g.low.name }}</td>
+        <td class="num"><span class="cellstat {{ sev(g.low.headline.repeat_rate.rate) }}">{{ g.low.headline.repeat_rate.rate | rate }}<small>{{ g.low.headline.repeat_rate.ci | ciLabel }}</small></span></td>
         <td class="num"><b>{{ g.ratio | round(1) }}&times;</b></td></tr>
     {%- endfor %}
     </tbody></table>
@@ -88,16 +91,16 @@ permalink: "{{ '/countries/' | loc(lang) }}"
     {%- if pair.differing %} {{ pair.differing }} of {{ pair.rows | length }} assistants differ
     significantly between them, so the border adds something the language does not.
     {%- else %} None of the {{ pair.rows | length }} assistants differs significantly between them: one
-    German-language web is one contamination surface, and a mirror in that language reaches both
-    countries.{% endif %}</p>
+    {{ pair.a.language | languageName }}-language web is one contamination surface, and a mirror in that
+    language reaches both countries.{% endif %}</p>
   <table><caption class="visually-hidden">Repeat rate in each of the two markets, per assistant</caption>
-    <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th><th scope="col" class="num">{{ pair.a.name }}</th>
-      <th scope="col" class="num">{{ pair.b.name }}</th><th scope="col">Differ</th></tr></thead>
+    <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th><th scope="col" class="num">{{ countryFlag(pair.a.key, 'sm') }} {{ pair.a.name }}</th>
+      <th scope="col" class="num">{{ countryFlag(pair.b.key, 'sm') }} {{ pair.b.name }}</th><th scope="col">Differ</th></tr></thead>
     <tbody>
     {%- for row in pair.rows %}
-      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ row.bot.name }}</th>
-        <td class="num"><span class="cellstat{% if row.a.low_n %} lown{% endif %}">{{ row.a.rate | rate }}<small>{{ row.a.ci | ciLabel }}</small></span></td>
-        <td class="num"><span class="cellstat{% if row.b.low_n %} lown{% endif %}">{{ row.b.rate | rate }}<small>{{ row.b.ci | ciLabel }}</small></span></td>
+      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400"><span class="markcell">{{ botMark(logos, row.bot.key, "sm", true) }}{{ row.bot.name }}</span></th>
+        <td class="num">{% if row.a.n %}<span class="cellstat {{ sev(row.a.rate) }}">{{ row.a.rate | rate }}<small>{{ row.a.ci | ciLabel }}</small></span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>
+        <td class="num">{% if row.b.n %}<span class="cellstat {{ sev(row.b.rate) }}">{{ row.b.rate | rate }}<small>{{ row.b.ci | ciLabel }}</small></span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>
         <td style="color:var(--dim);font-size:12.5px">{{ "yes" if row.significant else "no" }}</td></tr>
     {%- endfor %}
     </tbody></table>
@@ -120,19 +123,22 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 </div>
 
 {%- if countriesReport.grain | length %}
+{%- set grainSig = countriesReport.grain | selectattr("significant") | list | length %}
 <div class="panel" style="padding:18px 20px;margin-bottom:26px">
-  <h3 class="ssub" style="margin-top:0">Fabrications do not travel &mdash; anywhere</h3>
-  <p class="note" style="margin:0 0 10px">Repeat rate on claims built around a real event against pure
-    inventions, in every market. Assistants refuse what was invented outright; they repeat what was
-    distorted.</p>
+  <h3 class="ssub" style="margin-top:0">Grain of truth against pure fabrication, by market</h3>
+  <p class="note" style="margin:0 0 10px">Repeat rate on claims built around a real event (splice A&ndash;C)
+    against pure inventions (splice D), per market, on the news question.
+    {% if grainSig %}{{ grainSig }} of {{ countriesReport.grain | length }} markets show a significant
+    difference between the two.{% else %}No market shows a significant difference between the two at this
+    sample size, so this is reported as directional only.{% endif %}</p>
   <table><caption class="visually-hidden">Repeat rate on grain-of-truth claims against fabrications, per market</caption>
     <thead><tr><th scope="col">Market</th><th scope="col" class="num">Built on a real event</th>
       <th scope="col" class="num">Pure fabrication</th><th scope="col">Difference</th></tr></thead>
     <tbody>
     {%- for row in countriesReport.grain %}
-      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400">{{ row.country.name }}</th>
-        <td class="num"><span class="cellstat">{{ row.grain.rate | rate }}<small>{{ row.grain.ci | ciLabel }} &middot; n={{ row.grain.n }}</small></span></td>
-        <td class="num"><span class="cellstat">{{ row.fabrication.rate | rate }}<small>{{ row.fabrication.ci | ciLabel }} &middot; n={{ row.fabrication.n }}</small></span></td>
+      <tr data-persona="{{ countriesReport.persona }}"><th scope="row" style="font-weight:400"><span class="markcell">{{ countryFlag(row.country.key, 'sm') }}{{ row.country.name }}</span></th>
+        <td class="num">{% if row.grain.n %}<span class="cellstat {{ sev(row.grain.rate) }}">{{ row.grain.rate | rate }}<small>{{ row.grain.ci | ciLabel }} &middot; n={{ row.grain.n }}</small></span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>
+        <td class="num">{% if row.fabrication.n %}<span class="cellstat {{ sev(row.fabrication.rate) }}">{{ row.fabrication.rate | rate }}<small>{{ row.fabrication.ci | ciLabel }} &middot; n={{ row.fabrication.n }}</small></span>{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}</td>
         <td style="color:var(--dim);font-size:12.5px">{{ "significant" if row.significant else "not significant" }}</td></tr>
     {%- endfor %}
     </tbody></table>
@@ -141,26 +147,27 @@ permalink: "{{ '/countries/' | loc(lang) }}"
 
 <h2 style="margin:30px 0 4px">By market</h2>
 <p class="note" style="margin:0 0 16px">Worst first by how many assistants have a confirmed problem there.</p>
-<div style="display:flex;flex-direction:column;gap:12px;margin-bottom:26px">
+<div class="mkt-list">
 {%- for c in countriesReport.countries %}
-  <div class="panel" style="padding:18px 20px;border-left:4px solid var({{ '--false' if c.confirmed >= 3 else ('--mislead' if c.confirmed else '--ok') }})">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px">
-      <div style="font-size:19px;font-weight:600">{{ countryFlag(c.key, 'sm') }} {{ c.name }}
-        <span style="font-size:13px;color:var(--dimmer);font-weight:400">&middot; {{ c.language | languageName }} &middot;
+  <div class="panel mkt-card {{ 'mkt-hi' if c.confirmed >= 3 else ('mkt-mid' if c.confirmed else 'mkt-ok') }}">
+    <div class="mkt-head">
+      <div class="mkt-name">{{ countryFlag(c.key, 'sm') }} {{ c.name }}
+        <span class="mkt-sub">&middot; {{ c.language | languageName }} &middot;
           <time datetime="{{ c.run.collected_at | isoDate }}">{{ c.run.collected_at | shortDate }}</time></span></div>
-      <a href="{{ c.url | url }}" style="font-size:13px;color:var(--accent);font-weight:600">Open the market page &rarr;</a>
+      <a href="{{ c.url | url }}" class="mkt-open">Open the market page &rarr;</a>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
-      <div><div class="l" style="font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Assistants with a confirmed problem</div>
-        <div style="font-size:30px;font-weight:600;line-height:1;color:var(--false)">{{ c.confirmed }} of {{ c.bots | length }}</div>
-        <div style="font-size:12.5px;color:var(--dim);margin-top:6px">{{ c.critical }} critical incidents here</div></div>
-      <div><div class="l" style="font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Worst assistants</div>
+    <div class="mkt-cols">
+      <div><div class="mkt-lbl">Assistants with a confirmed problem</div>
+        <div class="mkt-big">{{ c.confirmed }} of {{ c.bots | length }}</div>
+        <div class="mkt-note">{{ c.critical }} critical incidents here</div></div>
+      <div><div class="mkt-lbl">Worst assistants</div>
         {%- for b in c.bots | take(3) %}
-        <div data-persona="{{ c.persona }}" style="display:grid;grid-template-columns:1fr 58px;gap:8px;align-items:center;font-size:12.5px;margin:4px 0">
-          <span>{{ b.name }}</span><b style="text-align:right">{{ b.repeat_rate.rate | rate }}</b></div>
+        <div class="mkt-bot" data-persona="{{ c.persona }}">
+          <span class="markcell">{{ botMark(logos, b.key, "sm", true) }}{{ b.name }}</span>
+          <span class="cellstat {{ sev(b.repeat_rate.rate) }}">{{ b.repeat_rate.rate | rate }}</span></div>
         {%- endfor %}</div>
-      <div><div class="l" style="font-size:11px;color:var(--dimmer);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Local partners</div>
-        <div style="font-size:12.5px;color:var(--dim)">{% for p in c.partners %}{{ p }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not c.partners | length %}none yet{% endif %}</div></div>
+      <div><div class="mkt-lbl">Local partners</div>
+        <div class="mkt-val">{% for p in c.partners %}{{ p }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not c.partners | length %}none yet{% endif %}</div></div>
     </div>
   </div>
 {%- endfor %}

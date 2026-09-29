@@ -169,8 +169,8 @@ for (const bot of botUniverse) {
     const diff = hi.b.repeat_rate.rate - lo.b.repeat_rate.rate;
     const cand = {
       bot: { key: pslug(bot), name: modelLabel(bot) },
-      high: { name: hi.country.name, headline: { repeat_rate: hi.b.repeat_rate } },
-      low: { name: lo.country.name, headline: { repeat_rate: lo.b.repeat_rate } },
+      high: { name: hi.country.name, iso: hi.country.key, headline: { repeat_rate: hi.b.repeat_rate } },
+      low: { name: lo.country.name, iso: lo.country.key, headline: { repeat_rate: lo.b.repeat_rate } },
       ratio, diff,
     };
     if (!best || diff > best.diff) best = cand;
@@ -187,7 +187,7 @@ for (const a of countries) for (const b of countries) {
   const rows = botUniverse.map((bot) => {
     const x = (a.bots.find((z) => z.model === bot) || {}).repeat_rate || rateCell(0, 0);
     const y = (b.bots.find((z) => z.model === bot) || {}).repeat_rate || rateCell(0, 0);
-    return { bot: { name: modelLabel(bot) }, a: x, b: y, significant: significant(x, y) };
+    return { bot: { key: pslug(bot), name: modelLabel(bot) }, a: x, b: y, significant: significant(x, y) };
   });
   langPairs.push({ a, b, rows, differing: rows.filter((r) => r.significant).length });
 }
