@@ -386,7 +386,7 @@ permalink: "{{ entry.url }}"
       {%- else %}
       <p class="rd-desc">Answers that stated the fake as fact (endorsed or hedged), by market. Only assistants and markets with at least one are shown; a blank cell is none.</p>
       <div style="overflow-x:auto">
-      <table class="hm"><caption class="visually-hidden">Repeat counts by assistant and market</caption>
+      <table class="rd-hm"><caption class="visually-hidden">Repeat counts by assistant and market</caption>
         <thead><tr><th scope="col">Assistant</th>{% for m in botStats.heatmap.markets %}<th scope="col" class="num">{{ m }}</th>{% endfor %}<th scope="col" class="num">Total</th></tr></thead>
         <tbody>
         {%- for row in botStats.heatmap.rows %}

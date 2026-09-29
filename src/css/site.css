@@ -556,7 +556,6 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .benchbots .cellstat.sv2{background:#fbe4d5;color:#b4520f}
 .benchbots .cellstat.sv3{background:var(--false-bg);color:var(--false)}
 .benchbots .cellstat small{color:inherit;opacity:.72}
-.benchbots .cellstat.lown{border:1px dashed currentColor}
 .observations td .cellstat{white-space:nowrap}
 h3.ssub{font-size:13px;font-weight:600;color:var(--dim);margin:22px 0 8px;letter-spacing:.01em}
 
@@ -1058,8 +1057,8 @@ details.schema>summary{display:inline-flex}
 .report-doc .s-uc{background:#e0a800}
 .report-doc .s-deb{background:var(--rd-ok)}
 .report-doc .s-nr{background:#c4c9d2}
-.report-doc table.hm td.hmcell{color:var(--dimmer);text-align:center}
-.report-doc table.hm td.hmcell.on{background:var(--false-bg);color:var(--false);font-weight:650}
+.report-doc table.rd-hm td.hmcell{color:var(--dimmer);text-align:center}
+.report-doc table.rd-hm td.hmcell.on{background:var(--false-bg);color:var(--false);font-weight:650}
 /* collapsible reference blocks (claim card, appendix) */
 .report-doc details.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:10px}
 .report-doc details.sec>summary{cursor:pointer;padding:15px 20px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;list-style:none;color:var(--ink)}

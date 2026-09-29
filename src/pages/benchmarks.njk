@@ -47,7 +47,7 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
 <p class="note" style="margin-top:10px">Both figures are the P2 topical-news persona in the market where the
   assistant does worst, with the market named. Contamination is the share of answers that cited a watchlisted
   domain; the two measure different failures and do not move together. Coverage is still thin: a cell below
-  n={{ metrics.lowN }} is outlined (dashed) as low-confidence and shown for transparency, not asserted. We test the
+  n={{ metrics.lowN }} carries its sample size and is treated as directional, not asserted. We test the
   public consumer interface, not the API. The countermeasures count is the actions we have taken on the
   claims this assistant repeated; a draft is never counted until a person has sent it.</p>
 
