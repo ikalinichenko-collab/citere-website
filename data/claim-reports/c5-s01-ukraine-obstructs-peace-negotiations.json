@@ -8,7 +8,7 @@
   "verdict": "false",
   "splice": "B",
   "version": 2,
-  "publishedAt": "2026-09-25T05:05:22.230Z",
+  "publishedAt": "2026-09-29T14:21:13.501Z",
   "strip": {
     "botsTested": 5,
     "answers": 362,
@@ -50,7 +50,7 @@
         "gpt-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-09-25T05:05:22.294Z",
+      "builtAt": "2026-09-29T14:21:13.552Z",
       "runKeys": [
         "C5_us_en_2026-09-13"
       ],
@@ -172,10 +172,10 @@
               "citedCount": 1
             }
           ],
-          "category": "disinfo_outlet",
+          "category": null,
           "citedCount": 1,
           "distributed": false,
-          "inWatchlist": true,
+          "inWatchlist": false,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
@@ -3966,7 +3966,8 @@
     },
     "countermeasures": [
       {
-        "date": "2026-09-25",
+        "bot": null,
+        "date": "2026-09-29",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -3977,22 +3978,6 @@
         "status": "submitted",
         "target": "citere.ai",
         "subtype": "publication",
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "date": null,
-        "kind": "action",
-        "sent": null,
-        "type": "disclosure",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "drafted",
-        "target": "",
-        "subtype": null,
         "response": null,
         "reference": null,
         "followUpDue": null
