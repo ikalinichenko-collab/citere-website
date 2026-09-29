@@ -52,6 +52,20 @@
 {#- A stacked-bar segment. -#}
 {% macro bar(cls, part, total) %}<i class="{{ cls }}" style="width:{{ (part / total * 100) if total else 0 }}%"></i>{% endmacro %}
 
+{#- A source-classification badge: the app's watchlist category token → a
+    human label and a colour class. Unknown tokens fall through to a neutral
+    chip with underscores softened. Colours are defined under .report-doc .net. -#}
+{%- set SOURCE_CAT = {
+  "pravda_network": {"label":"Pravda network","cls":"cat-pravda"},
+  "state_media": {"label":"State media","cls":"cat-state"},
+  "laundering_network": {"label":"Laundering network","cls":"cat-laundering"},
+  "disinfo_outlet": {"label":"Disinfo outlet","cls":"cat-outlet"}
+} -%}
+{%- macro sourceCat(category) -%}
+{%- set c = SOURCE_CAT[category] -%}
+<span class="net {{ c.cls if c else 'cat-other' }}">{{ c.label if c else (category | default("unclassified") | replace("_", " ")) }}</span>
+{%- endmacro -%}
+
 {#- Repeat-Rate / Contamination-Rate grid: bot × persona, one table per market.
     Each rate cell carries its persona (CLAUDE.md 10 / rule 6). -#}
 {% macro rateGrid(cells, kind) %}

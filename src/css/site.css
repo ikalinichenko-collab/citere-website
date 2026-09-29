@@ -1019,7 +1019,34 @@ details.schema>summary{display:inline-flex}
 .report-doc table.t2 td{padding:9px 8px;border-bottom:1px solid var(--line2);vertical-align:top;background:none}
 .report-doc table.t2 td.domain{font-family:ui-monospace,Menlo,monospace;font-size:12.5px}
 .report-doc table.t2 td.num,.report-doc table.t2 th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.report-doc .net{font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--line2);color:var(--dim)}
+.report-doc .net{font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--line2);color:var(--dim);white-space:nowrap}
+.report-doc .net.cat-pravda{background:var(--false-bg);color:var(--false)}
+.report-doc .net.cat-state{background:#ede9fe;color:#6d28d9}
+.report-doc .net.cat-laundering{background:var(--mislead-bg);color:var(--mislead)}
+.report-doc .net.cat-outlet{background:#e4ecf7;color:#2b57c0}
+.report-doc .net.cat-other{background:var(--line2);color:var(--dim)}
+/* countermeasures activity log */
+.report-doc .cmlog{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column}
+.report-doc .cmrow{display:flex;gap:13px;align-items:flex-start;padding:12px 2px;border-bottom:1px solid var(--line2)}
+.report-doc .cmrow:last-child{border-bottom:0}
+.report-doc .cmrow>.chip{flex:none;margin-top:1px;min-width:104px;justify-content:center}
+.report-doc .cmbody{flex:1;min-width:0}
+.report-doc .cmhead{font-size:14px;color:var(--ink);line-height:1.45}
+.report-doc .cmhead b{font-weight:650}
+.report-doc .cmsub{font-size:13px;color:var(--dim);line-height:1.5;margin-top:2px;max-width:74ch}
+.report-doc .cmmeta{font-size:12px;color:var(--dimmer);margin-top:3px}
+.report-doc .cmmeta time{font-variant-numeric:tabular-nums}
+.report-doc .cmmuted{color:var(--dimmer);font-style:italic}
+.report-doc .cmreplied{color:var(--ok);font-weight:600;font-size:12.5px;white-space:nowrap}
+.report-doc .rd-axb .r small{display:block;font-weight:400;color:var(--dimmer);font-size:10.5px;margin-top:1px}
+/* behaviour split (5 segments) + repeat heatmap */
+.report-doc .s-end{background:var(--false)}
+.report-doc .s-hed{background:#d9822b}
+.report-doc .s-uc{background:#e0a800}
+.report-doc .s-deb{background:var(--rd-ok)}
+.report-doc .s-nr{background:#c4c9d2}
+.report-doc table.hm td.hmcell{color:var(--dimmer);text-align:center}
+.report-doc table.hm td.hmcell.on{background:var(--false-bg);color:var(--false);font-weight:650}
 /* collapsible reference blocks (claim card, appendix) */
 .report-doc details.sec{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:10px}
 .report-doc details.sec>summary{cursor:pointer;padding:15px 20px;font-weight:600;font-size:15px;display:flex;justify-content:space-between;align-items:center;list-style:none;color:var(--ink)}

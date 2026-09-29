@@ -246,44 +246,23 @@ permalink: "{{ entry.url }}"
   <p class="intro">{{ p.sources.distributedCount }} traced from the fake’s origin · {{ p.sources.reachedNotDistributedCount }} found through chatbot citations · <span class="{{ 'rd-crit' if p.sources.injectionCount }}">{{ p.sources.injectionCount }} injection line{{ "" if p.sources.injectionCount == 1 else "s" }}</span> (a domain that both published the fake and was cited by a bot repeating it).</p>
   {%- if not p.sources.rows | length %}<div class="rd-empty">No sources linked to this claim yet — cited domains appear here after a run, and card domains after they are added to the claim.</div>
   {%- else %}
-    {%- set traced = p.sources.rows | selectattr("distributed") | list %}
-    {%- set found = [] %}{% for r in p.sources.rows %}{% if r.reached and not r.distributed %}{% set found = (found.push(r), found) %}{% endif %}{% endfor %}
-    <div class="srcgrid">
-      <div class="pnl">
-        <h3>Traced from the fake’s origin</h3>
-        <p class="ssub">On the claim card</p>
-        {%- if not traced | length %}<div class="rd-empty">None linked to the claim card yet.</div>
-        {%- else %}
-        <table class="t2"><caption class="visually-hidden">Listed sources traced to the fake’s origin</caption>
-          <thead><tr><th scope="col">Domain</th><th scope="col">Network</th><th scope="col">Attributed by</th><th scope="col">Cited</th></tr></thead>
-          <tbody>{% for r in traced %}<tr><td class="domain">{{ r.domain | defang }}</td><td><span class="net">{{ r.category | default("unclassified") }}</span></td><td>{{ r.attributedBy | default("—") }}</td><td class="{{ 'rd-crit' if r.injectionLine }}">{% if r.injectionLine %}injection line{% elif r.citedCount %}{{ r.citedCount }} cited{% if r.repeatCount %}, {{ r.repeatCount }} while repeating{% endif %}{% else %}published, not cited{% endif %}</td></tr>{% endfor %}</tbody>
-        </table>
-        {%- endif %}
-      </div>
-      <div class="pnl">
-        <h3>Found through chatbot citations</h3>
-        <p class="ssub">Not yet on the claim card</p>
-        {%- if not found | length %}<div class="rd-empty">No cited domains outside the claim card.</div>
-        {%- else %}
-        <table class="t2"><caption class="visually-hidden">Listed sources found through citations only</caption>
-          <thead><tr><th scope="col">Domain</th><th scope="col">Network</th><th scope="col" class="num">Cited</th><th scope="col" class="num">While repeating</th></tr></thead>
-          <tbody>{% for r in found %}<tr><td class="domain">{{ r.domain | defang }}</td><td><span class="net">{{ r.category | default("unclassified") }}</span></td><td class="num">{{ r.citedCount }}</td><td class="num {{ 'rd-crit' if r.repeatCount }}">{{ r.repeatCount | default(0) }}</td></tr>{% endfor %}</tbody>
-        </table>
-        {%- endif %}
-      </div>
-    </div>
-    {%- set bots = [] %}{% for r in p.sources.rows %}{% for bb in r.byBot %}{% if bb.model not in bots %}{% set bots = (bots.push(bb.model), bots) %}{% endif %}{% endfor %}{% endfor %}
-    {%- if bots | length %}
-    <details class="sec">
-      <summary>Which bots cited which source <span>{{ p.sources.rows | length }} domain{{ "" if p.sources.rows | length == 1 else "s" }}</span></summary>
-      <div class="body" style="overflow-x:auto">
-        <table class="t2"><caption class="visually-hidden">Which bots cited which domain</caption>
-          <thead><tr><th scope="col">Domain</th>{% for b in bots %}<th scope="col" class="num">{{ R.botLabel(b) }}</th>{% endfor %}</tr></thead>
-          <tbody>{% for r in p.sources.rows %}<tr><td class="domain">{{ r.domain | defang }}</td>{% for b in bots %}{% set n = 0 %}{% for x in r.byBot %}{% if x.model == b %}{% set n = x.citedCount %}{% endif %}{% endfor %}<td class="num {{ 'rd-dim' if not n }}">{{ n }}</td>{% endfor %}</tr>{% endfor %}</tbody>
-        </table>
-      </div>
-    </details>
-    {%- endif %}
+    {#- One table, three views folded together: provenance (on card / found via
+        citations / injection line), the domain's classification and attribution,
+        and which bots cited it. Rows arrive sorted injection → reached → cited. -#}
+    <table class="t2"><caption class="visually-hidden">Listed sources on this claim: where each came from, its classification and attribution, and which bots cited it</caption>
+      <thead><tr><th scope="col">Domain</th><th scope="col">Classification</th><th scope="col">Provenance</th><th scope="col" class="num">Cited</th><th scope="col">Cited by</th></tr></thead>
+      <tbody>
+      {%- for r in p.sources.rows %}
+        <tr>
+          <td class="domain">{{ r.domain | defang }}</td>
+          <td>{{ R.sourceCat(r.category) }}{% if r.attributedBy %} <span style="color:var(--dimmer);font-size:12px">· {{ r.attributedBy }}</span>{% endif %}</td>
+          <td>{% if r.injectionLine %}<span class="rd-crit">injection line</span>{% elif r.distributed %}on claim card{% else %}found via citations{% endif %}</td>
+          <td class="num">{% if r.citedCount %}{{ r.citedCount }}{% if r.repeatCount %} <span class="rd-crit">({{ r.repeatCount }} rep.)</span>{% endif %}{% else %}<span class="rd-dim">0</span>{% endif %}</td>
+          <td>{% if r.byBot | length %}<span style="display:inline-flex;flex-wrap:wrap;gap:5px">{% for x in r.byBot %}<span class="chip">{{ R.botLabel(x.model) }} ×{{ x.citedCount }}</span>{% endfor %}</span>{% else %}<span class="rd-dim">—</span>{% endif %}</td>
+        </tr>
+      {%- endfor %}
+      </tbody>
+    </table>
   {%- endif %}
 </section>
 {%- endif %}
