@@ -546,6 +546,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
    readable and still reads as set aside. */
 .cellstat.lown{background:var(--bg);border-radius:5px;padding:1px 6px;color:var(--dim)}
 .cellstat.lown small{color:var(--dim)}
+/* Chatbot benchmark: tint the rate cells by severity (scoped so the claim-page
+   observations table keeps its neutral greying). Low-n stays flagged as a dashed
+   outline over the tint, not as flat grey. */
+.benchbots .cellstat{border-radius:6px;padding:2px 8px;color:var(--ok)}
+.benchbots .cellstat.sv0{background:var(--ok-bg);color:var(--ok)}
+.benchbots .cellstat.sv1{background:var(--mislead-bg);color:var(--mislead)}
+.benchbots .cellstat.sv2{background:#fbe4d5;color:#b4520f}
+.benchbots .cellstat.sv3{background:var(--false-bg);color:var(--false)}
+.benchbots .cellstat small{color:inherit;opacity:.72}
+.benchbots .cellstat.lown{border:1px dashed currentColor}
 .observations td .cellstat{white-space:nowrap}
 h3.ssub{font-size:13px;font-weight:600;color:var(--dim);margin:22px 0 8px;letter-spacing:.01em}
 

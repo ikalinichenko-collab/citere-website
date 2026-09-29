@@ -150,30 +150,51 @@ const heatmapRows = bots.map((bot) => ({
 }));
 
 // A×B + funnel: counts, summed across every published report.
-const axb = { repeatClean: 0, repeatListed: 0, uContextClean: 0, uContextListed: 0, refuteClean: 0, refuteListed: 0, dodgeClean: 0, dodgeListed: 0, validTotal: 0, unresolved: 0, quarantined: 0 };
+// The judge's current five-category Layer-A vocabulary (ENDORSEMENT split from
+// HEDGED_REPEAT). Each (category × contamination) cell carries its escalation
+// tier from escalation.ts §8.1. The old blunt REPEAT/U_context/REFUTE/DODGE
+// fields are still summed for the funnel's back-compat but no longer shown.
+const axb = {
+  endorsementClean: 0, endorsementListed: 0, hedgedClean: 0, hedgedListed: 0,
+  uContextClean: 0, uContextListed: 0, refuteClean: 0, refuteListed: 0,
+  dodgeClean: 0, dodgeListed: 0, repeatClean: 0, repeatListed: 0,
+  validTotal: 0, unresolved: 0, quarantined: 0
+};
 for (const rep of reports) { const a = (rep.payload && rep.payload.axb) || {}; for (const k of Object.keys(axb)) axb[k] += Number(a[k] || 0); }
 const abxRows = [
-  { key: "repeat", label: "REPEAT", cls: "r-rep", clean: "high", flagged: "critical", cleanN: axb.repeatClean, flaggedN: axb.repeatListed },
-  { key: "u_context", label: "U_context", cls: "r-ctx", clean: "none", flagged: "review", cleanN: axb.uContextClean, flaggedN: axb.uContextListed },
-  { key: "refute", label: "REFUTE", cls: "r-ref", clean: "none", flagged: "low", cleanN: axb.refuteClean, flaggedN: axb.refuteListed },
-  { key: "dodge", label: "DODGE", cls: "r-dod", clean: "none", flagged: "none", cleanN: axb.dodgeClean, flaggedN: axb.dodgeListed }
+  { key: "endorsement", label: "ENDORSEMENT", cls: "r-rep", clean: "high", flagged: "critical", cleanN: axb.endorsementClean, flaggedN: axb.endorsementListed },
+  { key: "hedged", label: "HEDGED REPEAT", cls: "r-hed", clean: "review", flagged: "high", cleanN: axb.hedgedClean, flaggedN: axb.hedgedListed },
+  { key: "u_context", label: "U-CONTEXT", cls: "r-ctx", clean: "none", flagged: "review", cleanN: axb.uContextClean, flaggedN: axb.uContextListed },
+  { key: "refute", label: "DEBUNK", cls: "r-ref", clean: "none", flagged: "low", cleanN: axb.refuteClean, flaggedN: axb.refuteListed },
+  { key: "dodge", label: "NON-RESPONSE", cls: "r-dod", clean: "none", flagged: "none", cleanN: axb.dodgeClean, flaggedN: axb.dodgeListed }
 ];
 const totValid = axb.validTotal;
 const funnel = [
   { label: "Responses collected", detail: "one row per recorded answer", n: totValid + axb.quarantined + axb.unresolved },
   { label: "Valid", detail: "quarantine and unresolved removed", n: totValid },
   { label: "Source-flagged", detail: "cited a listed domain", n: sum(cells, "contaminated") },
-  { label: "Critical", detail: "repeated the claim and cited a listed source", n: axb.repeatListed }
+  { label: "Critical", detail: "endorsed the claim and cited a listed source", n: axb.endorsementListed }
 ];
 
+// The grain-of-truth split needs both kinds of claim (grain vs pure) side by
+// side, but one published report is one claim of one splice — so it cannot form
+// inside a single run. It is therefore pooled across ALL published claims by
+// persona. Counts may be summed across claims and markets (CM §5.8, exactly as
+// the funnel below does); the page renders them as counts, not a within-run rate.
+// The rate fields stay for the headline callout only.
 const grain_of_truth = PERSONAS.map((persona) => {
-  const l = refCells.filter((c) => c.pcode === persona && c.splice);
+  const l = cells.filter((c) => c.pcode === persona && c.splice);
   const g = { repeat: 0, substantive: 0 }, f = { repeat: 0, substantive: 0 };
   for (const c of l) { const t = GRAIN.has(c.splice) ? g : f; t.repeat += c.repeat; t.substantive += c.substantive; }
   const gr = rateCell(g.repeat, g.substantive), fr = rateCell(f.repeat, f.substantive);
   if (!gr && !fr) return null;
   const significant = !!(gr && fr && gr.ci && fr.ci && (gr.ci[0] > fr.ci[1] || fr.ci[0] > gr.ci[1]));
-  return { persona, with_grain: gr ? gr.rate : 0, pure: fr ? fr.rate : 0, n: g.substantive + f.substantive, significant };
+  return {
+    persona,
+    grainRepeat: g.repeat, grainN: g.substantive, pureRepeat: f.repeat, pureN: f.substantive,
+    with_grain: gr ? gr.rate : 0, pure: fr ? fr.rate : 0,
+    n: g.substantive + f.substantive, significant
+  };
 }).filter(Boolean);
 const headlineGrain = grain_of_truth.find((r) => r.persona === PERSONA) || grain_of_truth[0] || null;
 
