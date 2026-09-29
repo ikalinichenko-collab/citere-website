@@ -249,7 +249,7 @@ permalink: "{{ entry.url }}"
     {#- One table, three views folded together: provenance (on card / found via
         citations / injection line), the domain's classification and attribution,
         and which bots cited it. Rows arrive sorted injection → reached → cited. -#}
-    <table class="t2"><caption class="visually-hidden">Listed sources on this claim: where each came from, its classification and attribution, and which bots cited it</caption>
+    <div class="pnl" style="overflow-x:auto"><table class="t2"><caption class="visually-hidden">Listed sources on this claim: where each came from, its classification and attribution, and which bots cited it</caption>
       <thead><tr><th scope="col">Domain</th><th scope="col">Classification</th><th scope="col">Provenance</th><th scope="col" class="num">Cited</th><th scope="col">Cited by</th></tr></thead>
       <tbody>
       {%- for r in p.sources.rows %}
@@ -262,7 +262,7 @@ permalink: "{{ entry.url }}"
         </tr>
       {%- endfor %}
       </tbody>
-    </table>
+    </table></div>
   {%- endif %}
 </section>
 {%- endif %}
