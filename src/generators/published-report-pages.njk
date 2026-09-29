@@ -290,14 +290,16 @@ permalink: "{{ entry.url }}"
           {%- elif c.type == "disclosure" %} <span class="cmmuted">(platform not named)</span>{% endif %}
           {%- if c.replied %} <span class="cmreplied">✓ replied</span>{% endif %}</div>
         {%- if c.sent %}<div class="cmsub">{{ c.sent | defangCopy | trim | safe }}</div>{% endif %}
+        {%- if c.reference or c.domain or c.links | length or c.followUpDue %}
         <div class="cmmeta">
-          {%- if c.date %}<time datetime="{{ c.date }}">{{ c.date | displayDate }}</time>{% else %}<span class="cmmuted">not yet sent</span>{% endif %}
-          {%- if c.reference %} · ref {{ c.reference }}{% endif %}
-          {%- if c.domain %} · {{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
-          {%- if c.links | length %} · {% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
-          {%- if c.followUpDue %} · re-check <time datetime="{{ c.followUpDue }}">{{ c.followUpDue | shortDate }}</time>{% endif %}
+          {%- if c.reference %}ref {{ c.reference }}{% endif %}
+          {%- if c.domain %}{% if c.reference %} · {% endif %}{{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
+          {%- if c.links | length %}{% if c.reference or c.domain %} · {% endif %}{% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
+          {%- if c.followUpDue %}{% if c.reference or c.domain or c.links | length %} · {% endif %}re-check <time datetime="{{ c.followUpDue }}">{{ c.followUpDue | shortDate }}</time>{% endif %}
         </div>
+        {%- endif %}
       </div>
+      <div class="cmdate">{% if c.date %}<time datetime="{{ c.date }}">{{ c.date | displayDate }}</time>{% else %}<span class="cmmuted">not yet sent</span>{% endif %}</div>
     </li>
   {%- endfor %}
   </ul>
