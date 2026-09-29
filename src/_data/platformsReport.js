@@ -60,6 +60,7 @@ for (const rep of reports) {
     cells.push({
       slug: rep.slug, market: String(c.market), bot: c.model, pcode: pcodeOf(c.persona),
       repeat: c.repeat || 0, uContext: c.uContext || 0, refute: c.refute || 0, dodge: c.dodge || 0,
+      endorsement: c.endorsement || 0, hedged: c.hedged || 0,
       substantive: c.substantive || 0, valid: c.valid || 0, contaminated: c.contaminated || 0,
     });
   }
@@ -72,14 +73,16 @@ function pool(list) {
   const S = (f) => list.reduce((s, c) => s + (c[f] || 0), 0);
   const substantive = S("substantive"), valid = S("valid");
   const repeat = S("repeat"), uContext = S("uContext"), refute = S("refute"), dodge = S("dodge");
+  const endorsement = S("endorsement"), hedged = S("hedged");
   const contaminated = S("contaminated");
   return {
     n: valid, substantive, contaminated,
-    counts: { repeat, u_context: uContext, refute, dodge },
+    counts: { repeat, endorsement, hedged, u_context: uContext, refute, dodge },
     repeat_rate: share(repeat, substantive),
     contamination_rate: share(contaminated, valid),
     dodge_rate: share(dodge, valid),
     verdict_shares: {
+      endorsement: share(endorsement, valid), hedged: share(hedged, valid),
       repeat: share(repeat, valid), u_context: share(uContext, valid),
       refute: share(refute, valid), dodge: share(dodge, valid),
     },

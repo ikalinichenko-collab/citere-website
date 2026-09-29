@@ -5,6 +5,9 @@ wrap: wrap-narrow
 {%- from "partials/bot-mark.njk" import botMark -%}
 {%- from "partials/country-flag.njk" import countryFlag -%}
 {%- from "partials/cleansing.njk" import deltaCell, deltaCaveats -%}
+{#- Severity tint for a rate cell (0 clean → hot). Cosmetic; the figure and its
+    interval still carry the truth. Opt-in via the hsv* class on .cellstat. -#}
+{%- macro sev(rate) -%}hsv{% if not rate %}0{% elif rate < 0.12 %}1{% elif rate < 0.18 %}2{% else %}3{% endif %}{%- endmacro -%}
 <div class="phead" style="display:flex;align-items:center;gap:16px">
   {{ botMark(logos, profile.key, "lg", true) }}
   <div><h1 style="font-size:29px;margin:0 0 4px">{{ profile.name }}</h1>
@@ -47,8 +50,8 @@ wrap: wrap-narrow
   {%- for row in entry.personas %}
     <tr data-persona="{{ row.persona }}">
       <th scope="row" class="mono" style="font-size:12px;color:var(--dimmer);font-weight:400">{{ row.persona }} &middot; {{ row.persona | personaLabel }}</th>
-      <td class="num"><span class="cellstat{% if row.repeat_rate.low_n %} lown{% endif %}">{{ row.repeat_rate.rate | rate }}<small>{{ row.repeat_rate.ci | ciLabel }} &middot; n={{ row.repeat_rate.n }}</small></span></td>
-      <td class="num"><span class="cellstat{% if row.contamination_rate.low_n %} lown{% endif %}">{{ row.contamination_rate.rate | rate }}<small>n={{ row.contamination_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(row.repeat_rate.rate) }}">{{ row.repeat_rate.rate | rate }}<small>{{ row.repeat_rate.ci | ciLabel }} &middot; n={{ row.repeat_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(row.contamination_rate.rate) }}">{{ row.contamination_rate.rate | rate }}<small>n={{ row.contamination_rate.n }}</small></span></td>
       <td class="num"><span class="cellstat">{{ row.dodge_rate.rate | rate }}<small>n={{ row.dodge_rate.n }}</small></span></td>
       <td class="num" style="color:var(--dim)">{{ (row.n - row.counts.dodge) }} answers</td>
     </tr>
@@ -67,7 +70,7 @@ wrap: wrap-narrow
     <tr data-persona="{{ profile.persona }}">
       <th scope="row" style="font-weight:400"><time datetime="{{ point.run.collected_at | isoDate }}">{{ point.run.collected_at | displayDate }}</time>
         <span style="color:var(--dimmer)">&middot; {{ point.run.country | countryName }}</span></th>
-      <td class="num"><span class="cellstat{% if point.repeat_rate.low_n %} lown{% endif %}">{{ point.repeat_rate.rate | rate }}<small>{{ point.repeat_rate.ci | ciLabel }} &middot; n={{ point.repeat_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(point.repeat_rate.rate) }}">{{ point.repeat_rate.rate | rate }}<small>{{ point.repeat_rate.ci | ciLabel }} &middot; n={{ point.repeat_rate.n }}</small></span></td>
       <td>{% if not loop.first %}{{ deltaCell(line.change) }}{% endif %}</td>
     </tr>
   {%- endfor %}
@@ -77,32 +80,33 @@ wrap: wrap-narrow
 {%- endif %}
 
 <h2 id="verdicts" style="margin:36px 0 6px">What it did with the claims</h2>
-<p class="note" style="margin:0 0 14px">The four outcomes as shares of every valid answer, one row per
+<p class="note" style="margin:0 0 14px">The five outcomes as shares of every valid answer, one row per
   question type per market. Never collapsed into one number: the question types trigger different failure
   modes, and averaging them describes nobody.</p>
-<div class="panel"><table>
+<div class="panel"><div style="overflow-x:auto"><table>
   <caption class="visually-hidden">Share of answers by outcome, per market and question type</caption>
   <thead><tr><th scope="col">Market</th><th scope="col">{{ 'col.persona' | t }}</th>
-    <th scope="col" class="num">Repeated</th><th scope="col" class="num">Hedged</th>
-    <th scope="col" class="num">Refuted</th><th scope="col" class="num">Refused</th>
-    <th scope="col">Distribution</th></tr></thead>
+    <th scope="col" class="num">Endorsed</th><th scope="col" class="num">Hedged</th>
+    <th scope="col" class="num">In-context</th><th scope="col" class="num">Debunked</th>
+    <th scope="col" class="num">Refused</th><th scope="col">Distribution</th></tr></thead>
   <tbody>
   {%- for entry in profile.markets %}
   {%- for row in entry.personas %}
     <tr data-persona="{{ row.persona }}">
       <th scope="row" style="font-weight:400">{% if loop.first %}{{ countryFlag(entry.market, 'sm') }} {{ entry.name }}{% endif %}</th>
       <td class="mono" style="font-size:12px;color:var(--dimmer)">{{ row.persona }} &middot; {{ row.persona | personaLabel }}</td>
-      <td class="num">{{ row.verdict_shares.repeat.rate | rate }}</td>
+      <td class="num">{{ row.verdict_shares.endorsement.rate | rate }}</td>
+      <td class="num">{{ row.verdict_shares.hedged.rate | rate }}</td>
       <td class="num">{{ row.verdict_shares.u_context.rate | rate }}</td>
       <td class="num">{{ row.verdict_shares.refute.rate | rate }}</td>
       <td class="num">{{ row.verdict_shares.dodge.rate | rate }}</td>
-      <td><span class="vbar"><i class="s-rep" style="width:{{ row.verdict_shares.repeat.rate * 100 }}%"></i><i class="s-ctx" style="width:{{ row.verdict_shares.u_context.rate * 100 }}%"></i><i class="s-ref" style="width:{{ row.verdict_shares.refute.rate * 100 }}%"></i><i class="s-dod" style="width:{{ row.verdict_shares.dodge.rate * 100 }}%"></i></span></td>
+      <td><span class="vbar"><i class="s-rep" style="width:{{ row.verdict_shares.endorsement.rate * 100 }}%"></i><i class="s-hed" style="width:{{ row.verdict_shares.hedged.rate * 100 }}%"></i><i class="s-ctx" style="width:{{ row.verdict_shares.u_context.rate * 100 }}%"></i><i class="s-ref" style="width:{{ row.verdict_shares.refute.rate * 100 }}%"></i><i class="s-dod" style="width:{{ row.verdict_shares.dodge.rate * 100 }}%"></i></span></td>
     </tr>
   {%- endfor %}
   {%- endfor %}
-  </tbody></table></div>
-<p class="note vlegend"><i class="s-rep"></i>repeated <i class="s-ctx"></i>hedged
-  <i class="s-ref"></i>refuted <i class="s-dod"></i>refused</p>
+  </tbody></table></div></div>
+<p class="note vlegend"><i class="s-rep"></i>endorsed <i class="s-hed"></i>hedged
+  <i class="s-ctx"></i>in-context <i class="s-ref"></i>debunked <i class="s-dod"></i>refused</p>
 
 {%- if profile.hasRetrieval %}
 <h2 id="retrieval" style="margin:36px 0 6px">Searching, and what it found</h2>
@@ -121,7 +125,7 @@ wrap: wrap-narrow
       <th scope="row" style="font-weight:400">{% if loop.first %}{{ countryFlag(entry.market, 'sm') }} {{ entry.name }}{% endif %}</th>
       <td class="mono" style="font-size:12px;color:var(--dimmer)">{{ row.persona }}</td>
       <td class="num">{{ row.retrieval_rate.rate | rate }}</td>
-      <td class="num"><span class="cellstat{% if row.contamination_rate.low_n %} lown{% endif %}">{{ row.contamination_rate.rate | rate }}<small>{{ row.contamination_rate.ci | ciLabel }} &middot; n={{ row.contamination_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(row.contamination_rate.rate) }}">{{ row.contamination_rate.rate | rate }}<small>{{ row.contamination_rate.ci | ciLabel }} &middot; n={{ row.contamination_rate.n }}</small></span></td>
     </tr>
   {%- endfor %}
   {%- endfor %}
@@ -146,6 +150,10 @@ wrap: wrap-narrow
   </tbody></table></div>
 {%- endif %}
 
+{# Citation-drift table hidden until industry drift figures cover all tested
+   assistants (currently only 4 of 8). Restore this block once data/citation-drift.json
+   carries every product. The between-run delta caveat above still reads `drift`. #}
+{#-
 <h2 id="drift" style="margin:36px 0 6px">Citation drift</h2>
 <p class="note" style="margin:0 0 14px">The share of the domains an assistant cites that changes from one
   month to the next, for reasons unrelated to anything we or the platform do. This is an external figure,
@@ -154,13 +162,14 @@ wrap: wrap-narrow
   <caption class="visually-hidden">Published month-to-month citation drift by product</caption>
   <thead><tr><th scope="col">Product</th><th scope="col" class="num">Cited domains that change month to month</th></tr></thead>
   <tbody>
-  {%- for p in drift.products %}
+  {% for p in drift.products %}
     <tr{% if p.key == profile.key %} style="font-weight:600"{% endif %}>
-      <th scope="row" style="font-weight:inherit">{{ p.label }}{% if p.key == profile.key %} &mdash; this assistant{% endif %}</th>
+      <th scope="row" style="font-weight:inherit"><span class="markcell">{% if p.key %}{{ botMark(logos, p.key, "sm", true) }}{% endif %}{{ p.label }}{% if p.key == profile.key %} &mdash; this assistant{% endif %}</span></th>
       <td class="num">{{ p.rate | rate }}</td></tr>
-  {%- endfor %}
+  {% endfor %}
   </tbody></table></div>
 <p class="note">Source: {{ drift.source }}. {{ drift.note_en }}</p>
+-#}
 
 {%- if profile.gaps | length %}
 <h2 id="markets" style="margin:36px 0 6px">Where it does worst</h2>
@@ -174,9 +183,9 @@ wrap: wrap-narrow
   {%- for gap in profile.gaps %}
     <tr data-persona="{{ profile.persona }}">
       <th scope="row" style="font-weight:400">{{ gap.high.name }}</th>
-      <td class="num"><span class="cellstat">{{ gap.high.headline.repeat_rate.rate | rate }}<small>{{ gap.high.headline.repeat_rate.ci | ciLabel }} &middot; n={{ gap.high.headline.repeat_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(gap.high.headline.repeat_rate.rate) }}">{{ gap.high.headline.repeat_rate.rate | rate }}<small>{{ gap.high.headline.repeat_rate.ci | ciLabel }} &middot; n={{ gap.high.headline.repeat_rate.n }}</small></span></td>
       <td>{{ gap.low.name }}</td>
-      <td class="num"><span class="cellstat">{{ gap.low.headline.repeat_rate.rate | rate }}<small>{{ gap.low.headline.repeat_rate.ci | ciLabel }} &middot; n={{ gap.low.headline.repeat_rate.n }}</small></span></td>
+      <td class="num"><span class="cellstat {{ sev(gap.low.headline.repeat_rate.rate) }}">{{ gap.low.headline.repeat_rate.rate | rate }}<small>{{ gap.low.headline.repeat_rate.ci | ciLabel }} &middot; n={{ gap.low.headline.repeat_rate.n }}</small></span></td>
       <td class="num"><b>{{ gap.ratio | round(1) }}&times;</b></td></tr>
   {%- endfor %}
   </tbody></table></div>
