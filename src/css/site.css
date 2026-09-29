@@ -293,7 +293,7 @@ tbody tr:hover{background:#fafbfd}
 .hr b{display:block;color:var(--ink);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
   margin-bottom:6px;font-weight:700}
 .domain{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.4px;color:var(--dim)}
-.netchip{font-size:10.5px;font-weight:700;padding:3.5px 8px;border-radius:6px;background:var(--unsup-bg);color:var(--unsup)}
+.netchip{display:inline-block;white-space:nowrap;font-size:10.5px;font-weight:700;padding:3.5px 8px;border-radius:6px;background:var(--unsup-bg);color:var(--unsup)}
 .netchip.pravda{background:#f4eaf7;color:#7a3d95}
 .netchip.doppel{background:#e9f1fb;color:#1e5aa8}
 .netchip.storm{background:#fdeeee;color:#a3211b}

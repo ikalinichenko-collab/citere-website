@@ -8,6 +8,7 @@ wrap: wrap-narrow
 permalink: "{{ entry.url }}"
 ---
 {%- from "partials/bot-mark.njk" import botMark -%}
+{%- from "partials/country-flag.njk" import countryFlag -%}
 <div class="phead"><h1 style="font-family:ui-monospace,monospace;font-size:26px">{{ source.defanged }}</h1>
   {%- set named = source.network and source.network not in ["outlet", "other"] %}
   <p class="plead">
@@ -22,7 +23,8 @@ permalink: "{{ entry.url }}"
     {%- if source.note_en %} {{ source.note_en | defangCopy }}{% endif %}</p></div>
 
 <div class="tiles" style="margin:-8px 0 20px">
-  {%- if source.category %}<span class="tile">{{ source.category | replace("_", " ") }}</span>{% endif %}
+  {%- if source.network and source.network not in ["other", "outlet"] %}<span class="netchip {{ source.network | networkClass }}">{{ source.network | networkLabel }}</span>
+  {%- elif source.category %}<span class="netchip {{ source.network | networkClass }}">{{ source.category | replace("_", " ") }}</span>{% endif %}
   {%- if source.language %}<span class="tile">{{ source.language | upper }}</span>{% endif %}
   {%- if source.first_seen %}<span class="tile">first cited {{ source.first_seen | monthLabel }}</span>{% endif %}
   <span class="tile">{{ source.status }}</span>
@@ -55,8 +57,9 @@ permalink: "{{ entry.url }}"
       <td>{% if source.byClaim[c.id] %}<b style="color:var(--false)">yes</b>{% else %}<span style="color:var(--dimmer)">published, not cited</span>{% endif %}</td></tr>
   {%- endfor %}
   </tbody></table></div>
-<p class="note">A source-to-answer line means this domain published the falsehood <i>and</i> an assistant
-  cited it while answering about that same falsehood.</p>
+<p class="note">A <b>source-to-answer line</b> means this domain published the falsehood <i>and</i> an assistant
+  cited it while answering about that same falsehood &mdash; the strongest single piece of evidence the
+  registry produces.</p>
 {%- endif %}
 
 {%- if source.claimsReachedOnly | length %}
@@ -83,31 +86,13 @@ permalink: "{{ entry.url }}"
   <thead><tr><th scope="col">{{ 'col.chatbot' | t }}</th>{% for p in metrics.dimensions.personas %}<th scope="col" class="num">{{ p }}</th>{% endfor %}<th scope="col" class="num">Total</th></tr></thead>
   <tbody>
   {%- for bot, n in source.byBot %}
-    <tr><th scope="row" style="font-weight:400">{{ bot | botName }}</th>
+    <tr><th scope="row" style="font-weight:400"><span class="markcell">{{ botMark(logos, bot, "sm", true) }}{{ bot | botName }}</span></th>
       {%- for p in metrics.dimensions.personas %}<td class="num" data-persona="{{ p }}" style="color:var(--dim)">{{ source.grid[bot][p] | default(0) }}</td>{% endfor %}
       <td class="num"><b>{{ n }}</b></td></tr>
   {%- endfor %}
   </tbody></table></div>
 <p class="note">Counts of answers, one per answer per domain. Persona columns are never summed into a
   single figure, and a citation count is not a rate: the denominator lives in the metrics store.</p>
-{%- endif %}
-
-{%- if source.claimsInjection | length %}
-<h2 id="injection-lines" style="margin:36px 0 6px">Source-to-answer lines</h2>
-<p class="note" style="margin:0 0 14px">Claims this domain both published and was cited on by an assistant
-  answering about them. This is the strongest single piece of evidence the registry produces.</p>
-<div class="panel"><table>
-  <caption class="visually-hidden">Claims where this domain both carried the falsehood and was cited by an assistant answering about it</caption>
-  <thead><tr><th scope="col">{{ 'col.claim' | t }}</th><th scope="col">{{ 'col.verdict' | t }}</th>
-    <th scope="col" class="num">Citations here</th><th scope="col" class="num">While repeating</th></tr></thead>
-  <tbody>
-  {%- for c in source.claimsInjection %}
-    <tr><th scope="row" style="font-weight:400" class="cl"><a href="{{ c.url | url }}">&ldquo;{{ c.title_en }}&rdquo;</a></th>
-      <td><span class="badge {{ c.verdict | verdictClass }}">{{ c.verdict | verdictLabel }}</span></td>
-      <td class="num">{{ source.byClaim[c.id] | default(0) }}</td>
-      <td class="num"><b style="color:var(--false)">{{ source.verdicts.repeat }}</b></td></tr>
-  {%- endfor %}
-  </tbody></table></div>
 {%- endif %}
 
 {%- if source.citedCount %}
@@ -119,7 +104,7 @@ permalink: "{{ entry.url }}"
     <th scope="col">Share of this domain's citations</th></tr></thead>
   <tbody>
   {%- for market, n in source.byMarket %}
-    <tr><th scope="row" style="font-weight:400">{{ market | upper }}</th>
+    <tr><th scope="row" style="font-weight:400"><span class="markcell">{{ countryFlag(market, "sm") }}{{ market | upper }}</span></th>
       <td class="num">{{ n }}</td>
       <td><span class="barm" style="max-width:220px"><i style="width:{{ n | barWidth(source.citedCount) }}%"></i></span></td></tr>
   {%- endfor %}
@@ -129,6 +114,7 @@ permalink: "{{ entry.url }}"
   {{ source.markets[0] | upper }}.</p>
 {%- endif %}
 
+{%- if source.runs | length > 1 %}
 <h2 id="by-run" style="margin:36px 0 6px">Over time</h2>
 <p class="note" style="margin:0 0 14px">Citations per run. Search-grounded assistants reshuffle their
   sources between runs for reasons unrelated to anything we do, so a movement here is not on its own a
@@ -141,6 +127,10 @@ permalink: "{{ entry.url }}"
     <tr><th scope="row" style="font-weight:400">{{ run }}</th><td class="num">{{ n }}</td></tr>
   {%- endfor %}
   </tbody></table></div>
+{%- else %}
+<p class="note" style="margin-top:36px">Cited within a single run, so there is no trend yet &mdash; a
+  comparison appears once a second comparable run is held.</p>
+{%- endif %}
 {%- else %}
 <h2 id="by-market" style="margin:36px 0 6px">By market</h2>
 <p class="note">No assistant has cited this domain in any run held here. It stays on the watchlist and is
