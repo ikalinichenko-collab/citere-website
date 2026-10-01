@@ -26,21 +26,21 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate
-      # GitHub Pages serves this repo from https://<user>.github.io/citere-site/
-      # until the custom domain is switched on. Set the repository variable
-      # PATH_PREFIX to "/" once sitera.ai serves the site from its root.
-      # CANONICAL_URL is the host that goes into canonical, hreflang and
-      # JSON-LD. On the Pages preview that is the github.io URL, not the
-      # production domain - and while data/site.json carries demo:true,
-      # check.mjs refuses to build demo figures under the production host.
+      # The custom domain citere.ai is live (CNAME), so GitHub Pages serves the
+      # site from the domain root and redirects the github.io subpath to it.
+      # Defaults are therefore the production values; override via the repository
+      # variables PATH_PREFIX / CANONICAL_URL only for a subpath/preview deploy.
+      # CANONICAL_URL is the host that goes into canonical, hreflang and JSON-LD;
+      # while data/site.json carries demo:true, check.mjs refuses to build demo
+      # figures under the production host.
       - run: npm run build
         env:
-          PATH_PREFIX: ${{ vars.PATH_PREFIX || '/citere-site/' }}
-          CANONICAL_URL: ${{ vars.CANONICAL_URL || 'https://vit-koval.github.io/citere-site' }}
+          PATH_PREFIX: ${{ vars.PATH_PREFIX || '/' }}
+          CANONICAL_URL: ${{ vars.CANONICAL_URL || 'https://citere.ai' }}
       - run: npm run check
         env:
-          PATH_PREFIX: ${{ vars.PATH_PREFIX || '/citere-site/' }}
-          CANONICAL_URL: ${{ vars.CANONICAL_URL || 'https://vit-koval.github.io/citere-site' }}
+          PATH_PREFIX: ${{ vars.PATH_PREFIX || '/' }}
+          CANONICAL_URL: ${{ vars.CANONICAL_URL || 'https://citere.ai' }}
       # CLAUDE.md 10: Lighthouse >= 95 in all four categories on the homepage,
       # one claim page, the registry and one report. npm run lighthouse builds
       # its own copy into _site-lighthouse/ at the root prefix (where the
