@@ -15,8 +15,8 @@ permalink: "{{ '/' | loc(lang) }}"
 {% set side = "r" %}{% include "partials/hero-mesh.njk" %}
 
   <div class="hero">
-    {%- if site.current_run and site.current_run.label %}
-    <span class="pill"><span class="live"></span>{{ site.current_run.label }}{% if site.current_run.markets %} &middot; {{ site.current_run.markets }}{% endif %}</span>
+    {%- if figures.badAnswers %}
+    <span class="pill pill-alert"><span class="live"></span><b class="num">{{ figures.badAnswers }}</b> answers repeated a false claim</span>
     {%- endif %}
     <h1>{{ doc.data.h1 | fill(figures) }}</h1>
     <p class="sub">{{ doc.data.lead | fill(figures) | mdInline | safe }}</p>

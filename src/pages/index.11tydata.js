@@ -20,6 +20,10 @@ function realTotals(data) {
     claims: index.length,
     clusters: new Set(index.map((it) => String(it.clusterName))).size,
     responses: sum("answers"),
+    // Total answers that repeated a false claim as fact — a raw count summed over
+    // every claim, bot, market and question type. A count is always summable
+    // (CM §5.8), so this one headline number needs no persona attached.
+    repeated: sum("repeatedFake"),
     critical: sum("critical"),
     // Fall back to the widest per-report count if the full reports are not loaded.
     bots: bots.size || index.reduce((m, it) => Math.max(m, Number((it.strip || {}).botsTested) || 0), 0),
@@ -34,6 +38,7 @@ module.exports = {
       const r = realTotals(data);
       return {
         claims: `${r.claims} documented false ${r.claims === 1 ? "claim" : "claims"}`,
+        badAnswers: r.repeated,
         chatbots: r.bots,
         // Languages are not carried on the report feed yet; still from site config.
         languages: data.site.counters.languages,
@@ -68,9 +73,13 @@ module.exports = {
     metricCards: (data) => {
       const r = realTotals(data);
       const cards = [];
-      if (r.claims) {
-        cards.push({ value: r.claims, label: `false ${r.claims === 1 ? "claim" : "claims"} documented`,
-          sub: `across ${r.clusters} ${r.clusters === 1 ? "topic" : "topics"}` });
+      // Lead card: the count of answers that repeated a false claim, rendered in
+      // the FALSE red. A raw count (CM §5.8), so it carries no persona; the claim
+      // count the old card showed moves into this one's subline.
+      if (r.repeated) {
+        cards.push({ value: r.repeated, label: "answers repeated a false claim",
+          sub: `out of ${r.responses} checked · across ${r.claims} ${r.claims === 1 ? "claim" : "claims"}`,
+          alert: true, colour: "var(--false)" });
       }
       if (r.responses) {
         cards.push({ value: r.responses, label: "answers recorded and checked",
@@ -96,16 +105,18 @@ module.exports = {
       return cards;
     },
     // Three summary facts, each one a question a reader arrives with: where is
-    // it worst, which assistant is worst, and what kind of lie gets through.
-    // Every card is one persona and one run, and says so (CM 5.1).
+    // it worst, which assistant is worst, and what kind of lie gets through. The
+    // homepage pools every question type into one figure (homeBoards), so each
+    // card's subline says the rate is pooled across all four ways of asking — the
+    // honest label for a cross-persona figure the data pages never compute.
     rankingCards: (data) => {
-      const lb = data.benchmarks.leaderboards || {};
+      const lb = data.benchmarks.homeBoards || {};
       const cards = [];
       if ((lb.market_repeat || []).length) {
         cards.push({
           rows: lb.market_repeat, flag: true, idx: true, bar: true,
           title: "Countries where the claims get through",
-          sub: "news question (P2)",
+          sub: "pooled across all four ways of asking",
           note: "Share of answers that stated a false claim as fact. The same claims everywhere, asked in each country\u2019s own language.",
           more: data.navigation.has.countries ? "/countries/" : "/benchmarks/",
           moreLabel: "All countries"
@@ -115,8 +126,8 @@ module.exports = {
         cards.push({
           rows: lb.chatbot_repeat.map((row) => ({ ...row, chatbot: row.key })), idx: true, bar: true,
           title: "Assistants that repeat it most often",
-          sub: "news question (P2)",
-          note: "Each assistant at the single market where it repeated the claim most often. Same claims, asked in each market’s own language.",
+          sub: "pooled across all four ways of asking",
+          note: "Each assistant's share across every question type and market. Same claims, asked in each market’s own language.",
           more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
           moreLabel: "All assistants"
         });
@@ -126,8 +137,8 @@ module.exports = {
           rows: lb.splice_repeat.map((row) => ({ ...row, label: row.short || row.label })),
           idx: false, bar: true,
           title: "The kind of lie that works best",
-          sub: "news question (P2)",
-          note: "How the false claim is attached to a true fact, each at the market where it worked best. An invention gets refuted; a real event with one detail changed gets repeated.",
+          sub: "pooled across all four ways of asking",
+          note: "How the false claim is attached to a true fact. An invention gets refuted; a real event with one detail changed gets repeated.",
           more: data.navigation.has.registry ? "/registry/" : "/methodology/",
           moreLabel: "Claims by type"
         });
@@ -135,15 +146,15 @@ module.exports = {
       return cards;
     },
     // One summary fact above the three rankings: the highest share any single
-    // assistant repeated a false claim in one market, on the news question. Reads
-    // straight off the fixed chatbot leaderboard, so the homepage types no number
+    // assistant repeated a false claim, pooled across all four question types.
+    // Reads straight off the pooled chatbot board, so the homepage types no number
     // (CLAUDE.md 11.1). Null (and the line hides) when there is no ranking yet.
     rankingHeadline: (data) => {
-      const lb = data.benchmarks.leaderboards || {};
+      const lb = data.benchmarks.homeBoards || {};
       const top = (lb.chatbot_repeat || [])[0];
       if (!top || !top.value) return null;
       return {
-        value: top.value, label: top.label, market: top.market || data.benchmarks.marketName,
+        value: top.value, label: top.label,
         claims: data.benchmarks.publishedClaims || 0
       };
     },
@@ -164,8 +175,12 @@ module.exports = {
       const measured = (cr.countries || []).map((c) => ({
         iso: String(c.key),
         name: String(c.name),
-        rate: c.worst && c.worst.repeat_rate ? c.worst.repeat_rate.rate : null,
-        ratePersona: c.persona,
+        // Pooled across every assistant and all four question types — the same
+        // definition the "Countries where the claims get through" ranking uses, so
+        // a country shows one consistent number in both places (not the old
+        // worst-single-assistant P2 figure).
+        rate: c.pooledRepeat === null || c.pooledRepeat === undefined ? null : c.pooledRepeat,
+        ratePersona: null,
         language: String(c.language || ""),
         scheduled: false,
         url: data.navigation.has.countries ? c.url : null,
@@ -174,7 +189,10 @@ module.exports = {
         queued: 0,
         botCount: (c.bots || []).length,
         bots: (c.bots || []).slice(0, 6).map((b) => String(b.key)),
-      }));
+      }))
+        // Worst market first, matching the ranking card's order (a null rate,
+        // i.e. no substantive answers, sorts last among the measured).
+        .sort((a, b) => (b.rate || 0) - (a.rate || 0));
       const scheduled = (cr.scheduled || []).map((s) => ({
         iso: String(s.iso),
         name: String(s.name),

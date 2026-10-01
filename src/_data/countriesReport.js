@@ -136,6 +136,12 @@ const countries = marketKeys.map((mkt) => {
     answers: pool(mCells.filter((c) => c.pcode === HEADLINE)).n,
     repeatRate: pool(mCells.filter((c) => c.pcode === HEADLINE)).repeat_rate.rate || 0,
     n: pool(mCells.filter((c) => c.pcode === HEADLINE)).n,
+    // Pooled over EVERY assistant and EVERY question type (P1–P4): the homepage's
+    // "average share by country" figure, identical to benchmarks homeBoards.
+    // market_repeat. Only the homepage market cards read this; the country pages
+    // keep the per-persona HEADLINE figures above.
+    pooledRepeat: pool(mCells).repeat_rate.rate,
+    pooledN: pool(mCells).n,
     bots, worst: bots[0] || null, claims,
   };
 }).sort((a, b) => b.confirmed - a.confirmed || (b.worst && b.worst.repeat_rate.rate || 0) - (a.worst && a.worst.repeat_rate.rate || 0));

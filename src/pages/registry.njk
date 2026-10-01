@@ -23,7 +23,7 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 
 <div class="metrics" style="grid-template-columns:repeat(5,1fr);margin:0 0 26px">
 {%- for tile in publishedTiles %}
-  <div class="m"><div class="n num"{% if tile.tone == "bad" %} style="color:var(--false)"{% endif %}>{{ tile.value }}</div>
+  <div class="m"><div class="n num"{% if tile.colour %} style="color:{{ tile.colour }}"{% endif %}>{{ tile.value }}</div>
     <div class="l">{{ tile.label }}</div></div>
 {%- endfor %}
 </div>

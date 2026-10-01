@@ -4,6 +4,6 @@
     {%- if card.spark %}
     <svg class="spark" width="52" height="22" viewBox="0 0 52 22" aria-hidden="true"><path d="{{ card.spark }}" stroke="{{ card.colour }}" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
     {%- endif %}
-    <div class="n num">{{ card.value }}</div><div class="l">{{ card.label }}</div><div class="s">{{ card.sub }}</div></div>
+    <div class="n num"{% if card.alert and card.colour %} style="color:{{ card.colour }}"{% endif %}>{{ card.value }}</div><div class="l">{{ card.label }}</div><div class="s">{{ card.sub }}</div></div>
   {%- endfor %}
 </div>

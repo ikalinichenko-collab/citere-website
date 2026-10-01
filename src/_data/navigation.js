@@ -3,9 +3,21 @@
 // step of the build order can ship a dead link (CLAUDE.md 10, 11.6).
 const fs = require("node:fs");
 const path = require("node:path");
-const { ROOT } = require("../_lib/markdown.cjs");
+const { ROOT, readJson } = require("../_lib/markdown.cjs");
 
 const built = (template) => template === null || fs.existsSync(path.join(ROOT, "src", template));
+
+// The /monitor/ page exists as a shell, so template-existence alone would always
+// surface "Reports" in the nav. Gate it on there actually being a monthly report:
+// the link (and the homepage "Latest report" button, via has.reports) appears
+// only once the first monitor report is published, and the stub stays hidden.
+const hasMonitorReports = (() => {
+  try { return ((readJson("data/reports.json") || {}).reports || []).length > 0; }
+  catch { return false; }
+})();
+
+// A link is live when its page is built AND any extra condition it carries holds.
+const avail = (item) => built(item.template) && (item.when === undefined || item.when);
 
 const P = {
   registry: "pages/registry.njk",
@@ -29,12 +41,12 @@ const P = {
   security: "machine/security.njk"
 };
 
-const entry = (key, label, url, template, shared) => ({ key, label, url, template, shared });
+const entry = (key, label, url, template, shared, when) => ({ key, label, url, template, shared, when });
 
 const MAIN = [
   entry("registry", "Registry", "/registry/", P.registry),
   entry("benchmarks", "Benchmarks", "/benchmarks/", P.benchmarks),
-  entry("reports", "Reports", "/monitor/", P.reports),
+  entry("reports", "Reports", "/monitor/", P.reports, false, hasMonitorReports),
   entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
   entry("sources", "Sources", "/sources/", P.sources),
   entry("countermeasures", "Countermeasures", "/countermeasures/", P.countermeasures),
@@ -48,7 +60,7 @@ const FOOTER = [
     links: [
       entry("claimRegistry", "Claim registry", "/registry/", P.registry),
       entry("benchmarks", "Benchmarks", "/benchmarks/", P.benchmarks),
-      entry("reports", "Reports", "/monitor/", P.reports),
+      entry("reports", "Reports", "/monitor/", P.reports, false, hasMonitorReports),
       entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
       entry("countries", "Countries", "/countries/", P.countries),
       entry("sources", "Sources", "/sources/", P.sources),
@@ -86,13 +98,13 @@ const LEGAL = [
   entry("security", "security.txt", "/.well-known/security.txt", P.security, true)
 ];
 
-const live = (list) => list.filter((item) => built(item.template));
+const live = (list) => list.filter(avail);
 
 module.exports = {
   main: live(MAIN),
   footer: FOOTER.map((col) => ({ ...col, links: live(col.links) })).filter((col) => col.links.length),
   legal: live(LEGAL),
   has: Object.fromEntries(
-    [...MAIN, ...FOOTER.flatMap((c) => c.links), ...LEGAL].map((i) => [i.key, built(i.template)])
+    [...MAIN, ...FOOTER.flatMap((c) => c.links), ...LEGAL].map((i) => [i.key, avail(i)])
   )
 };

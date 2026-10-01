@@ -25,16 +25,17 @@ module.exports = {
     // site. Empty-safe: no feed → publishedReports is [] and the page shows its
     // empty state.
     publishedReports: () => published.index,
-    // Count tiles only — nothing here is a rate, so nothing needs a persona.
+    // Count tiles only — nothing here is a rate, so nothing needs a persona. The
+    // lead tiles are the findings a reader cares about, not the catalogue size:
+    // how many answers repeated a lie, how many times we acted, how severe it got.
     publishedTiles: () => {
       const idx = published.index;
       const sum = (field) => idx.reduce((n, r) => n + ((r.strip && r.strip[field]) || 0), 0);
-      const clusters = new Set(idx.map((r) => r.clusterName)).size;
       return [
-        { value: clusters, label: clusters === 1 ? "cluster" : "clusters" },
-        { value: idx.length, label: "claims published" },
-        { value: sum("critical"), label: "critical incidents", tone: "bad" },
-        { value: sum("sourcesIdentified"), label: "sources identified" },
+        { value: sum("repeatedFake"), label: "answers repeated a false claim", colour: "var(--mislead)" },
+        { value: sum("countermeasuresTaken"), label: "countermeasures taken", colour: "var(--ok)" },
+        { value: sum("critical"), label: "critical incidents", colour: "var(--false)" },
+        { value: sum("sourcesIdentified"), label: "sources identified", colour: "var(--accent)" },
         { value: sum("answers"), label: "answers examined" }
       ];
     },

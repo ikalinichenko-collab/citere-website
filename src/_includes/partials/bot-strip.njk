@@ -1,9 +1,9 @@
 {%- from "partials/bot-mark.njk" import botMark -%}
 <div class="strip">
-  <p class="cap">How often each assistant stated a false claim as fact &middot; {{ benchmarks.stripCaption }}</p>
+  <p class="cap">How often each assistant repeated a false claim &middot; {{ benchmarks.stripCaption }}</p>
   <div class="bots">
   {%- for row in benchmarks.strip %}
-    <a class="bot" href="{{ (('/platforms/' + row.key + '/') if navigation.has.chatbots else '/benchmarks/') | url }}" data-persona="{{ row.persona }}">
+    <a class="bot" href="{{ (('/platforms/' + row.key + '/') if navigation.has.chatbots else '/benchmarks/') | url }}">
       {{ botMark(logos, row.key, "md", true) }}{{ row.key | botName }}<span class="r num">{{ row.value | rate }}</span></a>
   {%- endfor %}
   </div>

@@ -238,24 +238,40 @@ const issues = [...byCM.values()].map((g) => ({
   responses: g.reports.reduce((n, r) => n + ((r.strip && r.strip.answers) || 0), 0)
 })).sort((a, b) => b.month.localeCompare(a.month));
 
-// Homepage strip: each assistant at its WORST single market on the news-style
-// persona — the same headline the platform/benchmark pages use — not the shared
-// reference run. Tying it to one run made the strip hostage to whichever market
-// happened to have the most P2 answers (often a 2-sample market), so it read
-// all-zero and dropped bots with no cell there. Every rate still forms inside one
-// market (CM §5.1); the caption says "worst market".
+// ── Homepage "overall" view (all four question types pooled) ───────────────
+// The homepage deliberately departs from the per-persona rule the data pages
+// keep (CM §5.1). Its job is one headline figure a visitor reads at a glance, so
+// the strip and the three rank boards below pool EVERY question type (P1–P4) and
+// every market into a single rate per entity. Counts are always summable
+// (CM §5.8); here we pool the rate too and every caption says it is pooled across
+// all four ways of asking. The Benchmarks, Country and Platform pages still use
+// the within-persona boards above — nothing here touches them.
+function poolAllBy(field) {
+  const keys = [...new Set(cells.map((c) => c[field]).filter((v) => v !== null && v !== undefined && v !== ""))];
+  return keys.map((k) => {
+    const l = cells.filter((c) => c[field] === k);
+    const rc = rateCell(sum(l, "repeat"), sum(l, "substantive"));
+    return rc ? { key: k, rate: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n } : null;
+  }).filter(Boolean);
+}
+const homeBoards = {
+  chatbot_repeat: board(poolAllBy("bot").filter((g) => PLATFORMS.has(pslug(g.key))).map((g) => ({ key: pslug(g.key), label: modelLabel(g.key), value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n })).sort((a, b) => b.value - a.value), null),
+  market_repeat: board(poolAllBy("market").map((g) => ({ key: g.key, label: safeRegion(g.key), value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n })).sort((a, b) => b.value - a.value), null),
+  splice_repeat: board(poolAllBy("splice").map((g) => {
+    const key = String(g.key);
+    const short = SPLICE_SHORT[key] ? `${key} · ${SPLICE_SHORT[key]}` : (SPLICES[key] || key);
+    return { key: slugify(key), label: short, short, value: g.rate, n: g.n, ci: g.ci, low_n: g.low_n };
+  }).sort((a, b) => b.value - a.value), null)
+};
+
+// The bot strip reads the same pooled view: each assistant's overall share across
+// every question type and market, worst first.
 const stripBots = [...new Set(cells.map((c) => c.bot))].filter((b) => PLATFORMS.has(pslug(b)));
 const strip = stripBots
   .map((bot) => {
-    let best = null;
-    for (const mkt of [...new Set(cells.filter((c) => c.bot === bot).map((c) => c.market))]) {
-      const l = cells.filter((c) => c.bot === bot && c.market === mkt && c.pcode === PERSONA);
-      const rc = rateCell(sum(l, "repeat"), sum(l, "substantive"));
-      if (rc && rc.rate !== null && (!best || rc.rate > best.value || (rc.rate === best.value && rc.n > best.n))) {
-        best = { key: pslug(bot), label: modelLabel(bot), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n, persona: PERSONA, market: mkt };
-      }
-    }
-    return best;
+    const l = cells.filter((c) => c.bot === bot);
+    const rc = rateCell(sum(l, "repeat"), sum(l, "substantive"));
+    return rc ? { key: pslug(bot), label: modelLabel(bot), value: rc.rate, n: rc.n, ci: rc.ci, low_n: rc.low_n } : null;
   })
   .filter(Boolean)
   .sort((a, b) => b.value - a.value || b.n - a.n);
@@ -263,7 +279,8 @@ module.exports = {
   label, marketName, reference: ref && ref.market, personas: PERSONAS, issues, responses: totValid,
   publishedClaims,
   claimScopeNote: `across ${publishedClaims} published ${publishedClaims === 1 ? "claim" : "claims"}${marketName ? ` · ${marketName}, ${label}` : ""}`,
-  stripCaption: `each at its worst market · news question (${PERSONA})`,
+  stripCaption: `pooled across all four ways of asking · ${publishedClaims} published ${publishedClaims === 1 ? "claim" : "claims"}`,
+  homeBoards,
   headline: headlineGrain && { run_label: `${marketName}, ${label}`, persona: PERSONA, grain_repeated: headlineGrain.with_grain, pure_repeated: headlineGrain.pure, pure_refuted: 1 - headlineGrain.pure, significant: headlineGrain.significant },
   leaderboards, heatmapRows, abxRows, funnel, verdict_split: [], contamination_by_persona: [], grain_of_truth, trend, strip,
   raw: { source: "claim-reports", publishedClaims, reference: ref && `${ref.market}|${ref.runKey}`, persona: PERSONA, label, market: marketName }

@@ -27,8 +27,8 @@
       <h3>{{ c.name }}</h3><div class="stat">{{ c.claims }} {{ c.claims | plural("claim", "claims") }} &middot;
         {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
       {%- if c.rate is not none %}
-      <div class="ccrate" data-persona="{{ c.ratePersona }}"><b class="num">{{ c.rate | rate }}</b>
-        <span>of news answers repeated a claim</span></div>
+      <div class="ccrate"><b class="num">{{ c.rate | rate }}</b>
+        <span>of answers repeated a claim · all four ways of asking</span></div>
       {%- endif %}
       <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
   {%- endif %}{%- endfor %}
@@ -52,13 +52,13 @@
   <div class="shead"><h2>{{ 'section.rankings' | t }}</h2>
     {%- if navigation.has.benchmarks %}<a href="{{ '/benchmarks/' | url }}">{{ 'action.allRankings' | t }} &rarr;</a>{% endif %}</div>
   {%- if rankingHeadline %}
-  <p class="rank-headline" data-persona="P2">Worst case so far: one assistant stated a false claim as fact in
-    <b class="num">{{ rankingHeadline.value | rate }}</b> of its news answers
-    ({{ rankingHeadline.label }}, {{ rankingHeadline.market }}) &mdash; the news question (P2).</p>
+  <p class="rank-headline">Worst case so far: one assistant stated a false claim as fact in
+    <b class="num">{{ rankingHeadline.value | rate }}</b> of its answers
+    ({{ rankingHeadline.label }}) &mdash; pooled across all four ways of asking.</p>
   {%- endif %}
-  <p class="lead">The same claims read three ways: the overall share by country, then each assistant
-    and each kind of lie at the single market where it did worst. Every figure is the share of news
-    answers (P2) that stated a false claim as fact. Question types are never averaged together.</p>
+  <p class="lead">The same claims read three ways: the share by country, then each assistant and each
+    kind of lie. Every figure is the share of answers that stated a false claim as fact, pooled across
+    all four ways of asking &mdash; one headline number, not the per-question rate the data pages report.</p>
   <div class="grid3">
   {%- for card in rankingCards %}
     {%- set lbRows = card.rows %}{% set lbTitle = card.title %}{% set lbSub = card.sub %}

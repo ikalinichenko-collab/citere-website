@@ -44,6 +44,12 @@ nav a.on{color:var(--ink);font-weight:650}
   border-radius:999px;padding:7px 15px 7px 12px;font-size:13px;color:var(--dim);font-weight:550;
   margin-bottom:26px;box-shadow:var(--shadow)}
 .live{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(18,122,74,.13)}
+/* Neutral chip like the demo's: only the count is red, and the dot pulses. */
+.pill-alert .num{color:var(--false);font-weight:720;letter-spacing:-.01em}
+.pill-alert .live{background:var(--false);box-shadow:0 0 0 4px rgba(196,41,29,.13);
+  animation:livePulse 2.4s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.4}}
+@media(prefers-reduced-motion:reduce){.pill-alert .live{animation:none}}
 h1{font-size:clamp(33px,4.6vw,52px);line-height:1.06;letter-spacing:-.036em;margin:0 auto 20px;
   font-weight:760;max-width:17ch;color:#080d18}
 .sub{font-size:19px;line-height:1.58;color:var(--dim);max-width:65ch;margin:0 auto 30px;font-weight:420}
@@ -133,7 +139,8 @@ tbody tr:hover{background:#fafbfd}
 .mini{width:22px;height:22px;border-radius:6.5px;display:grid;place-items:center;font-size:9.5px;
   font-weight:800;color:#fff;box-shadow:0 0 0 2px #fff}
 .mini+.mini{margin-left:-6px}
-.rmeta{font-size:12.8px;color:var(--dim);font-weight:680;font-variant-numeric:tabular-nums}
+.rmeta{font-size:12.8px;color:var(--dim);font-weight:680;font-variant-numeric:tabular-nums;
+  min-width:46px;text-align:right;flex:none}
 .barm{width:40px;height:5px;border-radius:3px;background:var(--line);overflow:hidden;flex:none}
 .barm i{display:block;height:100%;background:var(--false);border-radius:3px}
 
@@ -1070,6 +1077,11 @@ details.schema>summary{display:inline-flex}
   background:var(--card);border:1px solid var(--line);border-radius:12px;padding:2px 18px}
 .report-doc .cmrow{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line2)}
 .report-doc .cmrow:last-child{border-bottom:0}
+.report-doc .cmloghead{display:flex;gap:13px;align-items:baseline;padding:11px 0 9px;border-bottom:1px solid var(--line);
+  font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--dimmer);font-weight:660}
+.report-doc .cmloghead>span:first-child{flex:none;min-width:104px}
+.report-doc .cmloghead>span:nth-child(2){flex:1;min-width:0}
+.report-doc .cmloghead>span:last-child{flex:none;white-space:nowrap;text-align:right}
 .report-doc .cmrow>.chip{flex:none;margin-top:1px;min-width:104px;justify-content:center}
 .report-doc .cmbody{flex:1;min-width:0}
 .report-doc .cmdate{flex:none;color:var(--dimmer);font-size:12px;white-space:nowrap;margin-top:2px;text-align:right;font-variant-numeric:tabular-nums}

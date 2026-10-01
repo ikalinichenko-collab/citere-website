@@ -280,6 +280,9 @@ permalink: "{{ entry.url }}"
       fields a row actually carries are shown, so it reads the same at one row or
       sixteen and never sprawls into empty columns. -#}
   <ul class="cmlog">
+    <li class="cmloghead" aria-hidden="true">
+      <span>Status</span><span>Action &amp; who it reached</span><span>Date</span>
+    </li>
   {%- for c in claimCms %}
     <li class="cmrow">
       <span class="chip {{ c.statusClass }}">{{ c.statusLabel }}</span>
@@ -352,7 +355,11 @@ permalink: "{{ entry.url }}"
     <div class="body">
       {%- if not botStats.perBot | length %}<div class="rd-empty">No responses yet.</div>
       {%- else %}
-      <p class="rd-desc">Counts, not rates: at claim level each market × question-type cell holds one or two answers, so a percentage there is noise. Counts of what actually happened pool honestly; the full per-market × persona cells are in the CSV export.</p>
+      <p class="rd-desc">What each assistant actually did with this claim, added up across every market and every way we asked.
+        <b>Endorsed</b> = stated it as fact; <b>Hedged</b> = repeated it with a caveat; <b>In-context</b> = mentioned it while
+        explaining it is disputed; <b>Debunked</b> = corrected it; <b>No-response</b> = declined or went off-topic. These are
+        plain counts, not percentages: for one claim each market-and-question cell holds only one or two answers, so a
+        percentage would swing wildly on a single reply. The full cell-by-cell breakdown is in the CSV export.</p>
       <table><caption class="visually-hidden">What each assistant did with the claim, counts pooled across markets and question types</caption>
         <thead><tr><th scope="col">Assistant</th><th scope="col" class="num">Endorsed</th><th scope="col" class="num">Hedged</th><th scope="col" class="num">In-context</th><th scope="col" class="num">Debunked</th><th scope="col" class="num">No-response</th><th scope="col" class="num">Answers</th></tr></thead>
         <tbody>
@@ -369,6 +376,8 @@ permalink: "{{ entry.url }}"
       </table>
 
       <h3>The same, as a share of each assistant's answers</h3>
+      <p class="rd-desc">The same five outcomes as a share of each assistant's own answers, so one that answered many times can
+        be compared fairly with one that answered few. Each bar reads left to right in the legend order below.</p>
       <table><caption class="visually-hidden">Behaviour split per assistant, as a stacked bar</caption>
         <tbody>
         {%- for r in botStats.perBot %}{% if r.n %}
@@ -384,7 +393,7 @@ permalink: "{{ entry.url }}"
       <h3>Where the fake was repeated</h3>
       {%- if not botStats.heatmap.rows | length %}<div class="rd-empty">No assistant repeated the fake in any market.</div>
       {%- else %}
-      <p class="rd-desc">Answers that stated the fake as fact (endorsed or hedged), by market. Only assistants and markets with at least one are shown; a blank cell is none.</p>
+      <p class="rd-desc">How many answers stated the fake as fact (endorsed or hedged), broken down by market. Only assistants and markets with at least one repeat appear here; a blank cell means none.</p>
       <div style="overflow-x:auto">
       <table class="rd-hm"><caption class="visually-hidden">Repeat counts by assistant and market</caption>
         <thead><tr><th scope="col">Assistant</th>{% for m in botStats.heatmap.markets %}<th scope="col" class="num">{{ m }}</th>{% endfor %}<th scope="col" class="num">Total</th></tr></thead>
@@ -400,13 +409,16 @@ permalink: "{{ entry.url }}"
       {%- endif %}
 
       <h3>Grain acknowledgement (P4 excluded)</h3>
+      <p class="rd-desc">Some false claims twist a real fact. This shows how often each assistant recognised that true part
+        while still rejecting the false conclusion built on it. The stress-test prompt (P4) is left out, because it is
+        written to push the claim and would skew the picture.</p>
       {%- if p.resultsByBot.grainAck | length %}
       <table><caption class="visually-hidden">Share of answers acknowledging the grain of truth</caption>
         <thead><tr><th scope="col">Assistant</th><th scope="col">Persona</th><th scope="col" class="num">Acknowledged grain</th><th scope="col" class="num">n</th></tr></thead>
         <tbody>{% for g in p.resultsByBot.grainAck %}<tr data-persona="{{ R.pcode(g.persona) }}"><td>{{ R.botLabel(g.model) }}</td><td>{{ R.persona(g.persona) }}</td><td class="num">{{ g.ackShare | rate }}</td><td class="num">{{ g.n }}</td></tr>{% endfor %}</tbody>
       </table>
       {%- else %}<div class="rd-empty">—</div>{% endif %}
-      <p class="rd-desc">Inverse error (a real fact called fake): {{ p.resultsByBot.inverseError | default(0) }}.</p>
+      <p class="rd-desc"><b>Inverse error</b> — the opposite mistake, a genuinely true fact the assistant wrongly called fake: {{ p.resultsByBot.inverseError | default(0) }}.</p>
       {%- endif %}
     </div>
   </details>
