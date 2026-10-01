@@ -21,8 +21,12 @@ const TYPES = [
     label: (v) => (COUNTERMEASURE_STATUSES[v] || {}).label || v, key: (v) => v },
   { type: "target", heading: "Target", values: (a) => (a.target ? [a.target] : []),
     label: (v) => v, key: slug },
+  // A ① publish market can be several locale tags ("US-EN, DE-DE") joined by the
+  // exporter, so the key must be URL-safe (the raw value carries a comma + space).
+  // Case is preserved so existing single-tag facet URLs ("US-EN") stay stable.
   { type: "market", heading: "Country", values: (a) => (a.market ? [a.market] : []),
-    label: (v) => v.toUpperCase(), key: (v) => v },
+    label: (v) => v.toUpperCase(),
+    key: (v) => String(v).replace(/[^A-Za-z0-9-]+/g, "-").replace(/^-+|-+$/g, "") || encodeURIComponent(String(v).trim()) },
   { type: "claim", heading: "Claim", values: (a) => a.claims, label: (v) => v, key: (v) => v.toLowerCase() }
 ];
 
