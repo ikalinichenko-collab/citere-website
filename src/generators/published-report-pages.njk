@@ -249,7 +249,7 @@ permalink: "{{ entry.url }}"
   {%- macro urow(r) %}
         <tr>
           <td class="domain" style="word-break:break-all">{{ r.url | replace("https://", "") | replace("http://", "") | replace(".", "[.]") }}</td>
-          <td class="mono" style="color:var(--dim)">{{ r.host }}</td>
+          <td class="mono" style="color:var(--dim)">{{ r.host | defang }}</td>
           <td>{% if r.status == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:#ef4444">blacklist</span>{% endif %}</td>
           <td class="num">{{ r.citedCount }}</td>
           <td class="num">{% if r.repeatCount %}<b class="rd-crit">{{ r.repeatCount }}</b>{% else %}<span class="rd-dim">0</span>{% endif %}</td>
