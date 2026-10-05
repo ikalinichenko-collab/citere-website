@@ -1,5 +1,6 @@
 ---
 layout: layouts/base.njk
+wrap: wrap-wide
 pageKey: sources
 navKey: sources
 crumbKey: crumb.sources
@@ -29,6 +30,10 @@ permalink: "{{ '/sources/' | loc(lang) }}"
 {%- endfor %}
 </div>
 
+<h2 style="margin:28px 0 6px">Website domains</h2>
+<p class="note" style="margin:0 0 12px">Websites the chatbots cited. <b>blacklist</b> — a confirmed
+  disinformation domain; <b>candidate</b> — a domain seen repeating a false claim, not yet reviewed. Most
+  cited first.</p>
 {%- set tableSources = publishedSources %}
 {%- set tableCaption = "Identified domains, most cited first" %}
 {%- set tableFoot = "All " + (publishedSources | length) + " domains identified in published claims" %}
@@ -57,9 +62,12 @@ permalink: "{{ '/sources/' | loc(lang) }}"
       <td class="num" style="color:var(--dimmer)">{% if p.lastCitedAt %}<time datetime="{{ p.lastCitedAt | isoDate }}">{{ p.lastCitedAt | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
     </tr>
 {%- endmacro %}
-<h2 id="platforms" style="margin:36px 0 8px">Social platform channels
-  <span style="font-weight:500;color:var(--dimmer);font-size:13px">channel-level, never the whole platform</span></h2>
-<div class="panel"><table class="srcreg">
+<h2 id="platforms" style="margin:36px 0 6px">Social-media channels</h2>
+<p class="note" style="margin:0 0 12px">Channels the chatbots cited on Telegram, X, Facebook, VK and the
+  like. Matched at the <b>channel</b> level (e.g. <span class="mono">t.me/rybar</span>), never the whole
+  platform. Same split: <b>blacklist</b> — a known channel; <b>candidate</b> — awaiting review.</p>
+<div class="panel"><div style="overflow-x:auto">
+  <table class="srcreg">
   <caption class="visually-hidden">Social platform channels cited in published claims</caption>
   {{ phead() }}
   <tbody>
@@ -76,10 +84,7 @@ permalink: "{{ '/sources/' | loc(lang) }}"
     </table>
   </details>
   {%- endif %}
-</div>
-<p class="note">Social platforms (Telegram, X, Facebook, VK…) are matched at the <b>channel</b> level
-  (e.g. <span class="mono">t.me/rybar</span>), never blocked as a whole host. <b>blacklist</b> = a known
-  channel; <b>candidate</b> = a channel seen repeating a claim, awaiting review.</p>
+</div></div>
 {%- endif %}
 
 <div class="exports" style="margin:18px 0 44px">

@@ -29,7 +29,8 @@
       <td class="num" style="color:var(--dimmer)">{% if s.citedCount and s.lastCitedAt %}<time datetime="{{ s.lastCitedAt | isoDate }}">{{ s.lastCitedAt | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
     </tr>
 {%- endmacro %}
-<div class="panel"><table class="srcreg">
+<div class="panel"><div style="overflow-x:auto">
+  <table class="srcreg">
   <caption class="visually-hidden">{{ tableCaption }}</caption>
   {{ shead() }}
   <tbody>
@@ -46,6 +47,7 @@
     </table>
   </details>
   {%- endif %}
+  </div>
   {%- if tableFoot %}
   <div class="summary-line" style="border-bottom:0;border-top:1px solid var(--line2)">{{ tableFoot | safe }}</div>
   {%- endif %}

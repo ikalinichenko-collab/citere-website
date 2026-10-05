@@ -14,6 +14,8 @@ body{margin:0;background:var(--bg);color:var(--ink);
   font-feature-settings:"cv05","cv11","ss01"}
 .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
 .wrap-narrow{max-width:920px;margin:0 auto;padding:0 28px}
+/* Data-heavy pages (sources, chatbot profile) — wider so many-column tables fit. */
+.wrap-wide{max-width:1380px;margin:0 auto;padding:0 28px}
 a{color:inherit;text-decoration:none}
 .num{font-variant-numeric:tabular-nums}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
