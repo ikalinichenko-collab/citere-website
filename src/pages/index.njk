@@ -42,15 +42,6 @@ permalink: "{{ '/' | loc(lang) }}"
 </div></section>
 {%- endif %}
 
-<section><div class="band">
-  <h2>{{ doc.sections['band'].title }}</h2>
-  {{ doc.sections['band'].html | prefixLinks | defangCopy | safe }}
-  {%- if quoteFigures %}
-  <div class="quote">In {{ quoteFigures.run_label }}, chatbots refuted pure inventions <b>{{ quoteFigures.pure_refuted | rate }}</b> of the time — and
-    repeated the claims built on a grain of truth in <b>{{ quoteFigures.grain_repeated | rate }}</b> of answers.</div>
-  {%- endif %}
-</div></section>
-
 <section>
   <div class="shead"><h2>{{ 'section.howItWorks' | t }}</h2><a href="{{ '/methodology/' | url }}">Methodology &rarr;</a></div>
   <p class="lead">Six steps, from the first question we put to an assistant to the re-measurement four

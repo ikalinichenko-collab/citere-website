@@ -315,6 +315,10 @@ tbody tr:hover{background:#fafbfd}
 .netlegend .lbl{font-size:11px;color:var(--dimmer);margin-right:2px}
 .srcreg tbody tr:nth-child(2n){background:#fafbfc}
 .srcreg tbody tr:hover{background:#f1f4f9}
+/* Many columns (domain·status·network·…·last cited) — tighten so they fit the
+   default content width without the panel clipping the last column. */
+.srcreg th,.srcreg td{padding:9px 11px;font-size:13.2px}
+.srcreg th{font-size:10px}
 .actrow{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line2)}
 .actrow:last-child{border-bottom:0}
 .actrow .what{flex:1;font-size:14px;font-weight:560}
