@@ -16,7 +16,7 @@
     "repeatedFake": 1,
     "critical": 0,
     "sourcesIdentified": 4,
-    "countermeasuresTaken": 1
+    "countermeasuresTaken": 4
   },
   "payload": {
     "axb": {
@@ -50,7 +50,7 @@
         "perplexity-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-09-29T14:21:27.242Z",
+      "builtAt": "2026-10-05T13:23:09.014Z",
       "runKeys": [
         "n2_2026-09-24"
       ],
@@ -91,7 +91,7 @@
       "botsTested": 5,
       "repeatedFake": 1,
       "sourcesIdentified": 4,
-      "countermeasuresTaken": 1
+      "countermeasuresTaken": 4
     },
     "trend": null,
     "origin": null,
@@ -142,15 +142,15 @@
               "citedCount": 2
             },
             {
-              "market": "NL",
-              "citedCount": 2
-            },
-            {
               "market": "UA",
               "citedCount": 2
             },
             {
               "market": "DK",
+              "citedCount": 2
+            },
+            {
+              "market": "NL",
               "citedCount": 2
             },
             {
@@ -256,6 +256,2246 @@
           "distributedFirstSeen": null
         }
       ],
+      "count": 8,
+      "domainUrls": [
+        {
+          "url": "https://sputnikglobe.com/20260804/western-cash-wont-help-ukraine-dodge-energy-collapse---expert-1124537493.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 12
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 12,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260910/zelensky-regime-brought-ukraines-looming-winter-energy-collapse-down-on-itself-1124712844.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 12
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 12,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/keyword_energy/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 9
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 9,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 8
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 8,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260123/ukraine-struck-russian-energy-targets-first-and-now-faces-blowback-1123515852.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 8
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 8,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/common_fact_check/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 6
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 6,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/analysis/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 5
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 5,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/tag_energy_crisis/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 5
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 5,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/product_electricity/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 4
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 4,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260814/energy-strikes-weaken-ukraines-war-machine-but-elites-would-rather-freeze-people-than-surrender-1124578970.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/geo_Ukraine/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/keyword_power/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/opinion--analysis/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news-pravda.com/ukraine/2024/11/24/875901.html",
+          "host": "news-pravda.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260814/ukraine-needs-at-least-one-year-to-repair-high-capacity-power-plants---us-intel-1124576754.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260820/zaporozhye-nuclear-power-plant-switches-to-backup-power-supply-due-to-loss-of-external-power-supply-1124607354.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260918/russias-fsb-nabs-ukrainian-agent-plotting-to-bomb-gas-pipeline-in-kabardino-balkaria-1124754352.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260923/russian-forces-rain-barrage-of-strikes-on-ukrainian-defense--energy-facilities-1124773899.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260924/fire-breaks-out-at-starlink-station-connecting-ukraine-to-satellite-internet-1124779972.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260924/russia-hits-kiev-facility-producing-components-for-uav-prepares-robotic-systems-1124779504.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/organization_Sputnik/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://noticiaslatam.lat/keyword_energetica/",
+          "host": "noticiaslatam.lat",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260212/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260615/ukrainian-strikes-on-energodar-set-another-record--rosatom-ceo-1124313287.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260709/ukraines-energy-collapse-may-be-one-missile-barrage-away-1124423808.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260822/zaporozhye-nuclear-power-plant-operating-on-backup-power-for-3-consecutive-days--1124614206.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260831/ukraine-doing-everything-to-make-situation-at--zaporozhye-nuclear-power-plant-worse---rosatom-head-1124649385.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260908/grossi-thanks-russia-ukraine-for-ceasefire-to-repair-znpp-power-supply-1124694119.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260920/russian-strikes-leave-ukraines-biggest-steel-producers-offline--report-1124765284.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260922/fresh-russian-strikes-hit-ukrainian-logistic-centers-and-ports-in-odessa--1124773007.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260922/russia-rains-crushing-tsirkon-missile-barrage-on-ukrainian-facilities--1124770669.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/20260923/russia-hits-key-internet-traffic-facilities-of-ukraine-defense-ministry-in-kiev-1124777530.html",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/event_energy/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/interviews/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/keyword_strikes/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://sputnikglobe.com/news/",
+          "host": "sputnikglobe.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.rt.com/news/646004-eu-worst-energy-crisis-dmitriev/",
+          "host": "rt.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/11/14/ukraine-energy-crisis-corruption-western-aid/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 40
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            },
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 5
+            },
+            {
+              "market": "IT",
+              "citedCount": 4
+            },
+            {
+              "market": "CZ",
+              "citedCount": 4
+            },
+            {
+              "market": "NL",
+              "citedCount": 4
+            },
+            {
+              "market": "TR",
+              "citedCount": 4
+            },
+            {
+              "market": "ES",
+              "citedCount": 3
+            },
+            {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
+              "market": "UK",
+              "citedCount": 3
+            },
+            {
+              "market": "DE",
+              "citedCount": 3
+            },
+            {
+              "market": "AT",
+              "citedCount": 3
+            },
+            {
+              "market": "PL",
+              "citedCount": 3
+            },
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            }
+          ],
+          "citedCount": 43,
+          "repeatCount": 1
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/07/now-on-the-1657th-day-ukraines-crews-restored-power-to-over-900000-homes-last-week-as-russia-keeps-striking-grid-before-winter/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 18
+            },
+            {
+              "model": "perplexity-web",
+              "citedCount": 5
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
+              "market": "IT",
+              "citedCount": 3
+            },
+            {
+              "market": "ES",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "DE",
+              "citedCount": 2
+            },
+            {
+              "market": "PL",
+              "citedCount": 2
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            },
+            {
+              "market": "DK",
+              "citedCount": 2
+            },
+            {
+              "market": "TR",
+              "citedCount": 2
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 23,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/02/09/ukraine-power-crisis-corruption/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 18
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "NL",
+              "citedCount": 3
+            },
+            {
+              "market": "ES",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 18,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/12/04/stop-stealing-ex-ukrenergo-boss-mindichgate-interview/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 14
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "DE",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 14,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/01/russia-strikes-ukraine-winter-resilience-plans/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 6
+            },
+            {
+              "model": "grok-web",
+              "citedCount": 4
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
+              "market": "IT",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 10,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/ukraine-russia-oil-refinery-attacks-moscow-b3023829.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 10
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 2
+            },
+            {
+              "market": "TR",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 10,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/04/16/ukraine-winter-energy-rethink-2026/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 8
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 8,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.euractiv.com/news/ukraine-grid-on-brink-of-collapse-despite-surge-in-eu-support/",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 7
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 7,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/03/06/ukraine-energy-economy-march-2026/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 3
+            },
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 3
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 6,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.thetimes.com/world/russia-ukraine-war/article/zelensky-blames-ex-energy-chief-for-failure-to-protect-power-grid-db3g335l9",
+          "host": "thetimes.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 4
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 5,
+          "repeatCount": 1
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/11/14/ukraine-energy-crisis-corruption-western-aid/?utm_source=gemini",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 4
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 4,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/ukraine-energy-minister-corruption-scandal-operation-midas-b2922467.html?utm_source=gemini",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 4
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 4,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/10/30/ukraine-jails-energy-chief/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/11/03/ukraine-energy-battleground/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/01/23/let-them-freeze-russian-state-tv-gloats-over-moscows-energy-strikes-blames-kyiv/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/07/russia-burns-occupied-zaporizhzhia-nuclear-plants-last-resort-generators-as-everyday-power-ukraine-says/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/russia-ukraine-war-gas-explosion-kursk-sudzha-b2719306.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/11/15/100m-stolen-from-ukraines-nuclear-proves-the-choice-soviet-monopolies-moscow-corrupts-or-green-systems-it-cant/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "NL",
+              "citedCount": 2
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/12/06/ukraine-corruption-zelensky-supervisory-boards-energoatom/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/07/29/russia-and-ukraine-justify-their-strikes-the-same-way-only-one-justification-holds-up/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/tags/energy-infrastructure/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/ukraine-russia-war-live-boris-johnson-putin-train-drone-attack-b3049598.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euractiv.com/es/news/red-electrica-ucrania-al-borde-colapso-a-pesar-renovada-ayuda-europea/",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euractiv.com/fr/news/le-reseau-electrique-ukrainien-au-bord-de-leffondrement-malgre-le-soutien-de-lue/?utm_source=gemini",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/?p=370579",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2019/07/26/disinformation-space-oddity-moon-landing-ukraine-russophobia-among-weeks-propaganda-narratives/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/04/05/frontline-report-russia-breaks-energy-ceasefire-after-staged-sabotage-while-ukraine-retaliates-striking-military-airbases/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/10/24/frontline-report-2025-10-23/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/11/20/russian-strikes-on-ukraines-energy-grid-follow-systematic-pattern/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2025/12/15/russias-5000-november-strikes-push-ukraines-power-grid-toward-total-eastern-blackout/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/01/16/every-ukrainian-power-plant-has-been-damaged-by-russian-strikes/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/04/10/ukraine-water-infrastructure-winter-2026/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/08/russian-occupied-nuclear-plant-ran-on-diesel-for-almost-three-weeks-ukraine-ended-that-and-the-uns-nuclear-watchdog-calls-it-a-crucial-step-against-an-accident/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/20/ukraine-to-store-fuel-in-hungary/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://euromaidanpress.com/2026/09/22/ukraine-offers-russia-deal-stop-hitting-our-power-and-we-stop-hitting-your-refineries-us-will-pass-it-to-moscow/",
+          "host": "euromaidanpress.com",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "TR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.euractiv.com/news/latvia-shuts-down-russias-propaganda-website-sputnik/",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.euractiv.com/news/russia-hits-ukraine-power-grid-with-massive-attack/?utm_source=gemini",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.euractiv.com/news/ukraine-ministers-resign-over-major-corruption-scandals/",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 1
+        },
+        {
+          "url": "https://www.euractiv.com/news/ukraine-ministers-resign-over-major-corruption-scandals/?utm_source=gemini",
+          "host": "euractiv.com",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/russia-ukraine-energy-grid-attacks-soviet-b2906585.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/ukraine-russia-war-live-putin-general-drone-attacks-refineries-b3051626.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.independent.co.uk/news/world/europe/ukraine-zelensky-corruption-scandal-minister-resignation-b2864287.html",
+          "host": "independent.co.uk",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 1
+        },
+        {
+          "url": "https://www.thetimes.com/world/russia-ukraine-war/article/energy-corruption-leaves-ukrainians-facing-a-deadly-freeze-9b9tb7gwx",
+          "host": "thetimes.com",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "candidate",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 1
+        }
+      ],
+      "platformUrls": [],
       "injectionCount": 1,
       "distributedCount": 1,
       "reachedNotDistributedCount": 3
@@ -4215,6 +6455,57 @@
         "status": "submitted",
         "target": "citere.ai",
         "subtype": "publication",
+        "response": null,
+        "reference": null,
+        "followUpDue": null
+      },
+      {
+        "bot": null,
+        "date": "2026-09-30",
+        "kind": "action",
+        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
+        "type": "partner",
+        "basis": null,
+        "links": null,
+        "domain": null,
+        "market": null,
+        "status": "submitted",
+        "target": "ЦПД",
+        "subtype": null,
+        "response": null,
+        "reference": null,
+        "followUpDue": null
+      },
+      {
+        "bot": null,
+        "date": "2026-09-30",
+        "kind": "action",
+        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
+        "type": "partner",
+        "basis": null,
+        "links": null,
+        "domain": null,
+        "market": null,
+        "status": "submitted",
+        "target": "SPRAVDI",
+        "subtype": null,
+        "response": null,
+        "reference": null,
+        "followUpDue": null
+      },
+      {
+        "bot": null,
+        "date": "2026-09-30",
+        "kind": "action",
+        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
+        "type": "partner",
+        "basis": null,
+        "links": null,
+        "domain": null,
+        "market": null,
+        "status": "submitted",
+        "target": "EUvsDisinfo",
+        "subtype": null,
         "response": null,
         "reference": null,
         "followUpDue": null
