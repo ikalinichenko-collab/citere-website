@@ -16,7 +16,7 @@
     "repeatedFake": 2,
     "critical": 0,
     "sourcesIdentified": 3,
-    "countermeasuresTaken": 4
+    "countermeasuresTaken": 1
   },
   "payload": {
     "axb": {
@@ -49,7 +49,7 @@
         "perplexity-web"
       ],
       "perRun": "4 personas × 4 bots × 1 repeats",
-      "builtAt": "2026-10-05T13:23:05.964Z",
+      "builtAt": "2026-10-05T16:34:46.912Z",
       "runKeys": [
         "c-12_2026-09-15"
       ],
@@ -90,7 +90,7 @@
       "botsTested": 4,
       "repeatedFake": 2,
       "sourcesIdentified": 3,
-      "countermeasuresTaken": 4
+      "countermeasuresTaken": 1
     },
     "trend": null,
     "origin": null,
@@ -168,7 +168,7 @@
           "distributedFirstSeen": null
         }
       ],
-      "count": 5,
+      "count": 4,
       "domainUrls": [
         {
           "url": "https://english.pravda.ru/news/world/168450-leipzig-airport-taurus-provocation/",
@@ -289,160 +289,7 @@
           "repeatCount": 1
         }
       ],
-      "platformUrls": [
-        {
-          "url": "https://www.instagram.com/p/DcwKldJlbkN/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 4
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 4
-            }
-          ],
-          "citedCount": 4,
-          "repeatCount": 1
-        },
-        {
-          "url": "https://www.instagram.com/p/DcvX6ELoBwA/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 2
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 2
-            }
-          ],
-          "citedCount": 2,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/Dc0VprTEQeg/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/DcdObcYtdrg/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/Dcx8kX3F_Sm/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/DcyK0BxiMc8/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/DcyPwRbgj64/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "DE",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://www.instagram.com/p/DdGhTdyAeW7/",
-          "host": "instagram.com/p",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 0
-        }
-      ],
+      "platformUrls": [],
       "injectionCount": 0,
       "distributedCount": 1,
       "reachedNotDistributedCount": 2
@@ -3612,57 +3459,6 @@
         "status": "submitted",
         "target": "citere.ai",
         "subtype": "publication",
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "ЦПД",
-        "subtype": null,
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "SPRAVDI",
-        "subtype": null,
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "EUvsDisinfo",
-        "subtype": null,
         "response": null,
         "reference": null,
         "followUpDue": null

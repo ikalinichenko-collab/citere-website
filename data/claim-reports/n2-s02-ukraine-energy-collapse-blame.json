@@ -16,7 +16,7 @@
     "repeatedFake": 1,
     "critical": 0,
     "sourcesIdentified": 4,
-    "countermeasuresTaken": 4
+    "countermeasuresTaken": 1
   },
   "payload": {
     "axb": {
@@ -50,7 +50,7 @@
         "perplexity-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-05T13:23:09.014Z",
+      "builtAt": "2026-10-05T16:34:49.631Z",
       "runKeys": [
         "n2_2026-09-24"
       ],
@@ -91,7 +91,7 @@
       "botsTested": 5,
       "repeatedFake": 1,
       "sourcesIdentified": 4,
-      "countermeasuresTaken": 4
+      "countermeasuresTaken": 1
     },
     "trend": null,
     "origin": null,
@@ -310,11 +310,11 @@
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 1
             }
           ],
@@ -373,11 +373,11 @@
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 1
             }
           ],
@@ -518,11 +518,11 @@
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 1
             }
           ],
@@ -1297,11 +1297,11 @@
               "citedCount": 4
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 4
             },
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 4
             },
             {
@@ -1764,11 +1764,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             },
             {
@@ -1861,11 +1861,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             },
             {
@@ -6455,57 +6455,6 @@
         "status": "submitted",
         "target": "citere.ai",
         "subtype": "publication",
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "ЦПД",
-        "subtype": null,
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "SPRAVDI",
-        "subtype": null,
-        "response": null,
-        "reference": null,
-        "followUpDue": null
-      },
-      {
-        "bot": null,
-        "date": "2026-09-30",
-        "kind": "action",
-        "sent": "New disinformation claims this week:\n• NATO and EU sponsor terrorism — /registry/c-13-s01-nato-and-eu-sponsor-terrorism/\n• Ursula von der Leyen usurping EU powers — /registry/b1-s02-ursula-von-der-leyen-usurping-eu-powers/\n• The West is forcing Armenia to sever ties with Russia — /registry/c6-s01-the-west-is-forcing-armenia-to-sever-ties/\n• EU sanctions grounded firefighting helicopters causing Iberian wildfires — /registry/c16-s01-eu-sanctions-grounded-firefighting-helicopters-causing-iberian-wildfires/\n• Ukraine energy collapse blame — /registry/n2-s02-ukraine-energy-collapse-blame/\n• EU plans cyberattacks on Russian elections — /registry/n1-s04-eu-plans-cyberattacks-on-russian-elections/\n• Western strategy to dismember Russia — /registry/n1-s01-western-strategy-to-dismember-russia/\n• EU \"loses\" €65–135M/day from sanctions (fabricated counter) — /registry/e1-s-eu-loses-65-135m-day-from-sanctions-fabricated/\n• NATO and EU stoking Baltic tensions — /registry/c12-s01-nato-and-eu-stoking-baltic-tensions/\n• Russophobia as a 19th-century British invention — /registry/c14-s01-russophobia-as-a-19th-century-british-invention/\n• Ukraine bans Orthodox Church activities — /registry/c11-s01-ukraine-bans-orthodox-church-activities/\n• Ukraine obstructs peace negotiations — /registry/c5-s01-ukraine-obstructs-peace-negotiations/\n• Drone provocation staged by Ukraine and Western elites — /registry/c-12-s01-drone-provocation-staged-by-ukraine-and-western-elites/\n\nNew flagged sources this week:\n• news[.]am (disinfo_outlet)",
-        "type": "partner",
-        "basis": null,
-        "links": null,
-        "domain": null,
-        "market": null,
-        "status": "submitted",
-        "target": "EUvsDisinfo",
-        "subtype": null,
         "response": null,
         "reference": null,
         "followUpDue": null
