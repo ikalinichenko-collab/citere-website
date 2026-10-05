@@ -134,20 +134,22 @@ wrap: wrap-narrow
 
 {%- if profile.cited | length %}
 <h2 id="sources" style="margin:36px 0 6px">Sources it cites</h2>
-<p class="note" style="margin:0 0 14px">Listed domains this assistant cited, from the sources registry.
-  Counted once per answer per domain. Domains are printed defanged and never linked.</p>
-<div class="panel"><table>
+<p class="note" style="margin:0 0 14px">Domains this assistant cited. <b>blacklist</b> — a confirmed
+  disinformation domain; <b>candidate</b> — seen repeating a false claim, not yet reviewed. Counted once per
+  answer per domain; printed defanged and never linked.</p>
+<div class="panel"><div style="overflow-x:auto"><table>
   <caption class="visually-hidden">Listed domains cited by this assistant</caption>
-  <thead><tr><th scope="col">{{ 'col.domain' | t }}</th><th scope="col">{{ 'col.network' | t }}</th>
+  <thead><tr><th scope="col">{{ 'col.domain' | t }}</th><th scope="col">Status</th><th scope="col">{{ 'col.network' | t }}</th>
     <th scope="col" class="num">Cited by this assistant</th><th scope="col" class="num">Critical incidents</th></tr></thead>
   <tbody>
   {%- for row in profile.cited %}
     <tr><th scope="row" style="font-weight:400"><span class="domain">{{ row.source.defanged }}</span></th>
+      <td>{% if row.source.listStatus == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:var(--false)">blacklist</span>{% endif %}</td>
       <td><span class="netchip {{ row.source.network | networkClass }}">{{ row.source.network | networkLabel }}</span></td>
       <td class="num">{{ row.cited }}</td>
       <td class="num">{% if row.source.criticalCount %}<b style="color:var(--false)">{{ row.source.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td></tr>
   {%- endfor %}
-  </tbody></table></div>
+  </tbody></table></div></div>
 {%- endif %}
 
 {%- if profile.citedPlatforms | length %}

@@ -185,7 +185,7 @@ const chatbots = botUniverse
 
     // Listed domains this assistant cited, from the published Sources Registry.
     const cited = sources
-      .map((s) => ({ source: { defanged: s.defanged, network: s.network, criticalCount: s.criticalCount }, cited: s.byBot[key] || 0 }))
+      .map((s) => ({ source: { defanged: s.defanged, network: s.network, criticalCount: s.criticalCount, listStatus: s.listStatus }, cited: s.byBot[key] || 0 }))
       .filter((r) => r.cited)
       .sort((a, b) => b.cited - a.cited);
 
