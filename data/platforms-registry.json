@@ -1,0 +1,38 @@
+{
+  "version": "global-v1",
+  "updated": "2026-10-05T00:00:00.000Z",
+  "platforms": [
+    {
+      "channel": "t.me/rybar",
+      "platform": "t.me",
+      "slug": "t-me-rybar",
+      "defanged": "t[.]me/rybar",
+      "listStatus": "blacklist",
+      "category": "social_channel",
+      "citedCount": 12,
+      "repeatCount": 7,
+      "criticalCount": 1,
+      "claimsReachedCount": 3,
+      "byBot": [{ "model": "gpt-web", "citedCount": 8 }, { "model": "grok-web", "citedCount": 4 }],
+      "byMarket": [{ "market": "DE", "citedCount": 6 }, { "market": "FR", "citedCount": 6 }],
+      "firstCitedAt": "2026-09-10T00:00:00.000Z",
+      "lastCitedAt": "2026-09-28T00:00:00.000Z"
+    },
+    {
+      "channel": "x.com/someaccount",
+      "platform": "x.com",
+      "slug": "x-com-someaccount",
+      "defanged": "x[.]com/someaccount",
+      "listStatus": "candidate",
+      "category": "social_channel",
+      "citedCount": 4,
+      "repeatCount": 2,
+      "criticalCount": 0,
+      "claimsReachedCount": 1,
+      "byBot": [],
+      "byMarket": [],
+      "firstCitedAt": "2026-09-20T00:00:00.000Z",
+      "lastCitedAt": "2026-09-25T00:00:00.000Z"
+    }
+  ]
+}

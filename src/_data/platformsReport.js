@@ -14,6 +14,7 @@ const published = require("./published.js");
 const countermeasures = require("./countermeasures.js");
 const countriesData = require("./countries.js");
 const sources = require("./publishedSources.js");
+const platforms = require("./publishedPlatforms.js");
 const drift = require("./drift.js");
 const { share, significant } = require("../_lib/metrics.cjs");
 const { CHATBOTS, COUNTERMEASURE_LADDER } = require("../_lib/labels.cjs");
@@ -188,6 +189,14 @@ const chatbots = botUniverse
       .filter((r) => r.cited)
       .sort((a, b) => b.cited - a.cited);
 
+    // Platform channels this assistant cited (ch.2). Candidates carry no per-bot
+    // breakdown, so only blacklisted channels surface here — a per-bot profile
+    // shows confirmed listed sources, not tentative ones.
+    const citedPlatforms = platforms
+      .map((pf) => ({ channel: pf.channel, platform: pf.platform, defanged: pf.defanged, criticalCount: pf.criticalCount, cited: (pf.byBot || {})[key] || 0 }))
+      .filter((r) => r.cited)
+      .sort((a, b) => b.cited - a.cited);
+
     // ④ Disclosures addressed to this bot's developer, matched by the structural
     // bot key the app exports (not by target-name matching). Only disclosures
     // carry a bot; the ladder folds them into their rung, so the per-bot page
@@ -212,7 +221,7 @@ const chatbots = botUniverse
       claimsRepeated: repeatedClaims.length,
       repeatedClaims,
       gaps, biggestGap: gaps[0] || null,
-      cited, ladder,
+      cited, citedPlatforms, ladder,
       platformActions, countermeasures: botCountermeasures, trend: [],
       hasRetrieval: false,
       drift: drift.byKey[key] || null,

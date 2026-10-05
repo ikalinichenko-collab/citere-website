@@ -243,26 +243,39 @@ permalink: "{{ entry.url }}"
 {%- if "sources" not in hidden %}
 <section id="sources" class="flat">
   <h2>Disinformation sources identified</h2>
-  <p class="intro">{{ p.sources.distributedCount }} traced from the fake’s origin · {{ p.sources.reachedNotDistributedCount }} found through chatbot citations · <span class="{{ 'rd-crit' if p.sources.injectionCount }}">{{ p.sources.injectionCount }} injection line{{ "" if p.sources.injectionCount == 1 else "s" }}</span> (a domain that both published the fake and was cited by a bot repeating it).</p>
-  {%- if not p.sources.rows | length %}<div class="rd-empty">No sources linked to this claim yet — cited domains appear here after a run, and card domains after they are added to the claim.</div>
-  {%- else %}
-    {#- One table, three views folded together: provenance (on card / found via
-        citations / injection line), the domain's classification and attribution,
-        and which bots cited it. Rows arrive sorted injection → reached → cited. -#}
-    <div class="pnl" style="overflow-x:auto"><table class="t2"><caption class="visually-hidden">Listed sources on this claim: where each came from, its classification and attribution, and which bots cited it</caption>
-      <thead><tr><th scope="col">Domain</th><th scope="col">Classification</th><th scope="col">Provenance</th><th scope="col" class="num">Cited</th><th scope="col">Cited by</th></tr></thead>
-      <tbody>
-      {%- for r in p.sources.rows %}
+  <p class="intro">The specific URLs cited for this claim whose host or channel is <b>blacklisted</b> or a review <b>candidate</b>. {{ p.sources.count }} source{{ "" if p.sources.count == 1 else "s" }} identified. URLs are defanged and never linked.</p>
+  {%- set URL_VISIBLE = 15 %}
+  {%- macro uhead(col2) %}<thead><tr><th scope="col">URL</th><th scope="col">{{ col2 }}</th><th scope="col">Status</th><th scope="col" class="num">Cited</th><th scope="col" class="num">While repeating</th></tr></thead>{%- endmacro %}
+  {%- macro urow(r) %}
         <tr>
-          <td class="domain">{{ r.domain | defang }}</td>
-          <td>{{ R.sourceCat(r.category) }}{% if r.attributedBy %} <span style="color:var(--dimmer);font-size:12px">· {{ r.attributedBy }}</span>{% endif %}</td>
-          <td>{% if r.injectionLine %}<span class="rd-crit">injection line</span>{% elif r.distributed %}on claim card{% else %}found via citations{% endif %}</td>
-          <td class="num">{% if r.citedCount %}{{ r.citedCount }}{% if r.repeatCount %} <span class="rd-crit">({{ r.repeatCount }} rep.)</span>{% endif %}{% else %}<span class="rd-dim">0</span>{% endif %}</td>
-          <td>{% if r.byBot | length %}<span style="display:inline-flex;flex-wrap:wrap;gap:5px">{% for x in r.byBot %}<span class="chip">{{ R.botLabel(x.model) }} ×{{ x.citedCount }}</span>{% endfor %}</span>{% else %}<span class="rd-dim">—</span>{% endif %}</td>
+          <td class="domain" style="word-break:break-all">{{ r.url | replace("https://", "") | replace("http://", "") | replace(".", "[.]") }}</td>
+          <td class="mono" style="color:var(--dim)">{{ r.host }}</td>
+          <td>{% if r.status == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:#ef4444">blacklist</span>{% endif %}</td>
+          <td class="num">{{ r.citedCount }}</td>
+          <td class="num">{% if r.repeatCount %}<b class="rd-crit">{{ r.repeatCount }}</b>{% else %}<span class="rd-dim">0</span>{% endif %}</td>
         </tr>
-      {%- endfor %}
-      </tbody>
-    </table></div>
+  {%- endmacro %}
+  {%- macro utable(rows, col2) %}
+    <div class="pnl" style="overflow-x:auto"><table class="t2">{{ uhead(col2) }}<tbody>
+      {%- for r in rows %}{% if loop.index <= URL_VISIBLE %}{{ urow(r) }}{% endif %}{% endfor %}
+      </tbody></table>
+      {%- if rows | length > URL_VISIBLE %}
+      <details class="ev-more" style="margin-top:8px"><summary>Show {{ (rows | length) - URL_VISIBLE }} more of {{ rows | length }}</summary>
+        <table class="t2" style="margin-top:6px">{{ uhead(col2) }}<tbody>{%- for r in rows %}{% if loop.index > URL_VISIBLE %}{{ urow(r) }}{% endif %}{% endfor %}</tbody></table>
+      </details>
+      {%- endif %}
+    </div>
+  {%- endmacro %}
+  {%- if not (p.sources.domainUrls | length) and not (p.sources.platformUrls | length) %}<div class="rd-empty">No blacklisted or candidate URLs cited for this claim yet.</div>
+  {%- else %}
+    {%- if p.sources.domainUrls | length %}
+    <h3 class="ssub">Domains ({{ p.sources.domainUrls | length }})</h3>
+    {{ utable(p.sources.domainUrls, "Host") }}
+    {%- endif %}
+    {%- if p.sources.platformUrls | length %}
+    <h3 class="ssub">Platform channels ({{ p.sources.platformUrls | length }})</h3>
+    {{ utable(p.sources.platformUrls, "Channel") }}
+    {%- endif %}
   {%- endif %}
 </section>
 {%- endif %}

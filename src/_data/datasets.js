@@ -53,6 +53,11 @@ const ENTRIES = [
     url: "/sources.csv", template: "machine/sources-csv.njk"
   },
   {
+    key: "platforms-csv", entity: "registry", name: "Platform channels (CSV)", format: "CSV", header: "platform,channel,status,citations,cited_by,markets,claims_reached,critical,first_seen,last_cited",
+    description: "One row per social-platform channel (t.me/rybar, …) cited in published claims, blacklist or review candidate.",
+    url: "/platforms.csv", template: "machine/platforms-csv.njk"
+  },
+  {
     key: "citations-csv", entity: "registry", name: "Citations (CSV)", format: "CSV", header: "domain,network,category,chatbot,cited_count,critical_count,url",
     description: "One row per domain and assistant, from the published Sources Registry.",
     url: "/citations.csv", template: "machine/citations-csv.njk"

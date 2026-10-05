@@ -34,22 +34,56 @@ permalink: "{{ '/sources/' | loc(lang) }}"
 {%- set tableFoot = "All " + (publishedSources | length) + " domains identified in published claims" %}
 {% include "partials/sources-table.njk" %}
 
-{%- if articleEvidence | length %}
-<h2 id="article-evidence" style="margin:36px 0 8px">Article evidence
-  <span style="font-weight:500;color:var(--dimmer);font-size:13px">clean host, dirty article</span></h2>
-<div class="callout">These are specific URLs on an otherwise allowlisted domain that were cited in a
-  REPEAT answer. A log of evidence, not a rule — the host itself is never blacklisted for one bad article.</div>
-<div class="panel">
-  {%- for item in articleEvidence %}
-  <div class="actrow">
-    <div class="what mono" style="font-size:12.6px;color:var(--dim);font-weight:400">{{ item.url | defangCopy }}</div>
-    <span class="chip {{ 'ok' if item.status == 'confirmed' else 'wait' }}"><span class="dot"></span>{{ item.status | replace("_", " ") }}</span>
-  </div>
-  {%- endfor %}
+{%- if publishedPlatforms | length %}
+{%- set PLAT_VISIBLE = 20 %}
+{%- macro phead() %}
+  <thead><tr>
+    <th scope="col">Platform</th><th scope="col">Channel</th><th scope="col">Status</th>
+    <th scope="col" class="num">Cited</th><th scope="col" class="num">Assistants</th>
+    <th scope="col" class="num">Markets</th><th scope="col" class="num">Claims reached</th>
+    <th scope="col" class="num">Critical</th><th scope="col">Last cited</th>
+  </tr></thead>
+{%- endmacro %}
+{%- macro prow(p) %}
+    <tr{% if p.criticalCount %} style="box-shadow:inset 3px 0 0 var(--false)"{% endif %}>
+      <td class="mono" style="color:var(--dim)">{{ p.platform }}</td>
+      <th scope="row" style="font-weight:400"><span class="domain">{{ p.defanged }}</span></th>
+      <td>{% if p.listStatus == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:var(--false)">blacklist</span>{% endif %}</td>
+      <td class="num"><b>{{ p.citedCount }}</b></td>
+      <td class="num">{{ p.citedBy | length }}</td>
+      <td class="num">{{ p.markets | length }}</td>
+      <td class="num">{{ p.claimsReachedCount }}</td>
+      <td class="num">{% if p.criticalCount %}<b style="color:var(--false)">{{ p.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
+      <td class="num" style="color:var(--dimmer)">{% if p.lastCitedAt %}<time datetime="{{ p.lastCitedAt | isoDate }}">{{ p.lastCitedAt | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
+    </tr>
+{%- endmacro %}
+<h2 id="platforms" style="margin:36px 0 8px">Social platform channels
+  <span style="font-weight:500;color:var(--dimmer);font-size:13px">channel-level, never the whole platform</span></h2>
+<div class="panel"><table class="srcreg">
+  <caption class="visually-hidden">Social platform channels cited in published claims</caption>
+  {{ phead() }}
+  <tbody>
+  {%- for p in publishedPlatforms %}{% if loop.index <= PLAT_VISIBLE %}{{ prow(p) }}{% endif %}{% endfor %}
+  </tbody></table>
+  {%- if publishedPlatforms | length > PLAT_VISIBLE %}
+  <details class="src-more" style="margin:8px 12px 2px">
+    <summary style="cursor:pointer;font-size:12.5px;color:var(--dim)">Show {{ (publishedPlatforms | length) - PLAT_VISIBLE }} more of {{ publishedPlatforms | length }}</summary>
+    <table class="srcreg" style="margin-top:8px">
+      {{ phead() }}
+      <tbody>
+      {%- for p in publishedPlatforms %}{% if loop.index > PLAT_VISIBLE %}{{ prow(p) }}{% endif %}{% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {%- endif %}
 </div>
+<p class="note">Social platforms (Telegram, X, Facebook, VK…) are matched at the <b>channel</b> level
+  (e.g. <span class="mono">t.me/rybar</span>), never blocked as a whole host. <b>blacklist</b> = a known
+  channel; <b>candidate</b> = a channel seen repeating a claim, awaiting review.</p>
 {%- endif %}
 
 <div class="exports" style="margin:18px 0 44px">
   {%- if datasets.has['sources-csv'] %}<a href="{{ '/sources.csv' | url }}">{{ 'action.downloadCsv' | t }}</a><span>&middot;</span>{% endif %}
+  {%- if datasets.has['platforms-csv'] %}<a href="{{ '/platforms.csv' | url }}">Platforms (CSV)</a><span>&middot;</span>{% endif %}
   {%- if datasets.has['sources-stix'] %}<a href="{{ '/sources.stix.json' | url }}">STIX 2.1</a><span>&middot;</span>{% endif %}
   <a href="{{ '/methodology/' | url }}">How the watchlist is built</a></div>

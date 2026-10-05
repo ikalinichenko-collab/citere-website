@@ -1,21 +1,23 @@
 {#- The sources registry table (Sources Registry Business Logic 10.1). One row
     per domain, sorted by citations. Counts only: a share of responses citing a
     domain needs a denominator that lives in the metrics store, not here (SR 5).
-    Domains are printed defanged and never linked to. -#}
-<div class="panel"><table class="srcreg">
-  <caption class="visually-hidden">{{ tableCaption }}</caption>
+    Domains are printed defanged and never linked to. Long lists truncate to the
+    top N with the rest behind a native "show more" disclosure. -#}
+{%- set SRC_VISIBLE = 20 %}
+{%- macro shead() %}
   <thead><tr>
-    <th scope="col">{{ 'col.domain' | t }}</th><th scope="col">{{ 'col.network' | t }}</th>
+    <th scope="col">{{ 'col.domain' | t }}</th><th scope="col">Status</th><th scope="col">{{ 'col.network' | t }}</th>
     <th scope="col">Attributed by</th><th scope="col" class="num">Cited</th>
     <th scope="col" class="num">Assistants</th><th scope="col" class="num">Markets</th>
     <th scope="col" class="num">Claims reached</th><th scope="col" class="num">Source-to-answer</th>
     <th scope="col" class="num">Critical</th><th scope="col">Last cited</th>
   </tr></thead>
-  <tbody>
-  {%- for s in tableSources %}
+{%- endmacro %}
+{%- macro srow(s) %}
     <tr{% if s.criticalCount or s.injectionCount %} style="box-shadow:inset 3px 0 0 var(--false)"{% endif %}>
       <th scope="row" style="font-weight:400"><a href="{{ s.url | url }}"><span class="domain">{{ s.defanged }}</span></a>
         {%- if s.status == "dormant" %} <span class="statuspill st-dormant">dormant</span>{% endif %}</th>
+      <td>{% if s.listStatus == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:var(--false)">blacklist</span>{% endif %}</td>
       <td><span class="netchip {{ s.network | networkClass }}">{{ s.network | networkLabel }}</span></td>
       <td>{% for a in s.attribution | take(2) %}<span class="attrchip">{{ a.org }}</span>{% if not loop.last %} {% endif %}{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endfor %}</td>
       <td class="num"><b>{{ s.citedCount }}</b></td>
@@ -26,8 +28,24 @@
       <td class="num">{% if s.criticalCount %}<b style="color:var(--false)">{{ s.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td>
       <td class="num" style="color:var(--dimmer)">{% if s.citedCount and s.lastCitedAt %}<time datetime="{{ s.lastCitedAt | isoDate }}">{{ s.lastCitedAt | shortDate }}</time>{% else %}&mdash;{% endif %}</td>
     </tr>
-  {%- endfor %}
+{%- endmacro %}
+<div class="panel"><table class="srcreg">
+  <caption class="visually-hidden">{{ tableCaption }}</caption>
+  {{ shead() }}
+  <tbody>
+  {%- for s in tableSources %}{% if loop.index <= SRC_VISIBLE %}{{ srow(s) }}{% endif %}{% endfor %}
   </tbody></table>
+  {%- if tableSources | length > SRC_VISIBLE %}
+  <details class="src-more" style="margin:8px 12px 2px">
+    <summary style="cursor:pointer;font-size:12.5px;color:var(--dim)">Show {{ (tableSources | length) - SRC_VISIBLE }} more of {{ tableSources | length }}</summary>
+    <table class="srcreg" style="margin-top:8px">
+      {{ shead() }}
+      <tbody>
+      {%- for s in tableSources %}{% if loop.index > SRC_VISIBLE %}{{ srow(s) }}{% endif %}{% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {%- endif %}
   {%- if tableFoot %}
   <div class="summary-line" style="border-bottom:0;border-top:1px solid var(--line2)">{{ tableFoot | safe }}</div>
   {%- endif %}

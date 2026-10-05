@@ -101,6 +101,9 @@ function record(d) {
     network: CATEGORY_NETWORK[d.category] || "other",
     category: d.category,
     inWatchlist: d.inWatchlist,
+    // ch.2: blacklist (on an active rule) vs candidate (review queue). Older
+    // feeds without the field read as blacklist (their rows were all watchlist).
+    listStatus: d.listStatus || "blacklist",
     status: d.status,
     // A derived lead tag (C); the finer editorial fields the demo carried stay
     // null so the templates fall through their existing guards.

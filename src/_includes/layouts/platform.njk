@@ -150,6 +150,24 @@ wrap: wrap-narrow
   </tbody></table></div>
 {%- endif %}
 
+{%- if profile.citedPlatforms | length %}
+<h2 id="platforms-cited" style="margin:30px 0 6px">Platform channels it cites</h2>
+<p class="note" style="margin:0 0 14px">Blacklisted social channels (Telegram, X, Facebook, VK…) this assistant
+  cited, at the channel level. Counted once per answer per channel. Channels are printed defanged and never linked.</p>
+<div class="panel"><table>
+  <caption class="visually-hidden">Blacklisted platform channels cited by this assistant</caption>
+  <thead><tr><th scope="col">Platform</th><th scope="col">Channel</th>
+    <th scope="col" class="num">Cited by this assistant</th><th scope="col" class="num">Critical incidents</th></tr></thead>
+  <tbody>
+  {%- for row in profile.citedPlatforms %}
+    <tr><td class="mono" style="color:var(--dim)">{{ row.platform }}</td>
+      <th scope="row" style="font-weight:400"><span class="domain">{{ row.defanged }}</span></th>
+      <td class="num">{{ row.cited }}</td>
+      <td class="num">{% if row.criticalCount %}<b style="color:var(--false)">{{ row.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td></tr>
+  {%- endfor %}
+  </tbody></table></div>
+{%- endif %}
+
 {# Citation-drift table hidden until industry drift figures cover all tested
    assistants (currently only 4 of 8). Restore this block once data/citation-drift.json
    carries every product. The between-run delta caveat above still reads `drift`. #}

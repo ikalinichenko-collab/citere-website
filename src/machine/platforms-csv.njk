@@ -1,0 +1,7 @@
+---
+permalink: /platforms.csv
+eleventyExcludeFromCollections: true
+---
+platform,channel,status,citations,cited_by,markets,claims_reached,critical,first_seen,last_cited
+{% for p in publishedPlatforms %}{{ p.platform | csvCell }},{{ p.channel | csvCell }},{{ p.listStatus | csvCell }},{{ p.citedCount | csvCell }},{{ p.citedBy | join(" ") | csvCell }},{{ p.markets | join(" ") | csvCell }},{{ p.claimsReachedCount | csvCell }},{{ p.criticalCount | csvCell }},{{ p.firstCitedAt | default("") | csvCell }},{{ p.lastCitedAt | default("") | csvCell }}
+{% endfor %}
