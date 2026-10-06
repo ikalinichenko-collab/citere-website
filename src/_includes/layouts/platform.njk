@@ -133,23 +133,40 @@ wrap: wrap-narrow
 {%- endif %}
 
 {%- if profile.cited | length %}
+{%- set CITED_VISIBLE = 20 %}
+{%- macro citedHead() %}
+  <thead><tr><th scope="col">{{ 'col.domain' | t }}</th><th scope="col">Status</th><th scope="col">{{ 'col.network' | t }}</th>
+    <th scope="col" class="num">Cited by this assistant</th><th scope="col" class="num">Critical incidents</th></tr></thead>
+{%- endmacro %}
+{%- macro citedRow(row) %}
+    <tr><th scope="row" style="font-weight:400"><span class="domain">{{ row.source.defanged }}</span></th>
+      <td>{% if row.source.listStatus == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:var(--false)">blacklist</span>{% endif %}</td>
+      <td><span class="netchip {{ row.source.network | networkClass }}">{{ row.source.network | networkLabel }}</span></td>
+      <td class="num">{{ row.cited }}</td>
+      <td class="num">{% if row.source.criticalCount %}<b style="color:var(--false)">{{ row.source.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td></tr>
+{%- endmacro %}
 <h2 id="sources" style="margin:36px 0 6px">Sources it cites</h2>
 <p class="note" style="margin:0 0 14px">Domains this assistant cited. <b>blacklist</b> — a confirmed
   disinformation domain; <b>candidate</b> — seen repeating a false claim, not yet reviewed. Counted once per
   answer per domain; printed defanged and never linked.</p>
 <div class="panel"><div style="overflow-x:auto"><table>
   <caption class="visually-hidden">Listed domains cited by this assistant</caption>
-  <thead><tr><th scope="col">{{ 'col.domain' | t }}</th><th scope="col">Status</th><th scope="col">{{ 'col.network' | t }}</th>
-    <th scope="col" class="num">Cited by this assistant</th><th scope="col" class="num">Critical incidents</th></tr></thead>
+  {{ citedHead() }}
   <tbody>
-  {%- for row in profile.cited %}
-    <tr><th scope="row" style="font-weight:400"><span class="domain">{{ row.source.defanged }}</span></th>
-      <td>{% if row.source.listStatus == "candidate" %}<span class="statuspill" style="background:rgba(234,179,8,.15);color:#eab308">candidate</span>{% else %}<span class="statuspill" style="background:rgba(239,68,68,.15);color:var(--false)">blacklist</span>{% endif %}</td>
-      <td><span class="netchip {{ row.source.network | networkClass }}">{{ row.source.network | networkLabel }}</span></td>
-      <td class="num">{{ row.cited }}</td>
-      <td class="num">{% if row.source.criticalCount %}<b style="color:var(--false)">{{ row.source.criticalCount }}</b>{% else %}<span style="color:var(--dimmer)">0</span>{% endif %}</td></tr>
-  {%- endfor %}
-  </tbody></table></div></div>
+  {%- for row in profile.cited %}{% if loop.index <= CITED_VISIBLE %}{{ citedRow(row) }}{% endif %}{% endfor %}
+  </tbody></table>
+  {%- if profile.cited | length > CITED_VISIBLE %}
+  <details class="src-more" style="margin:8px 12px 2px">
+    <summary style="cursor:pointer;font-size:12.5px;color:var(--dim)">Show {{ (profile.cited | length) - CITED_VISIBLE }} more of {{ profile.cited | length }}</summary>
+    <table style="margin-top:8px">
+      {{ citedHead() }}
+      <tbody>
+      {%- for row in profile.cited %}{% if loop.index > CITED_VISIBLE %}{{ citedRow(row) }}{% endif %}{% endfor %}
+      </tbody>
+    </table>
+  </details>
+  {%- endif %}
+  </div></div>
 {%- endif %}
 
 {%- if profile.citedPlatforms | length %}

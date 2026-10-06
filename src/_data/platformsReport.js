@@ -184,10 +184,16 @@ const chatbots = botUniverse
     );
 
     // Listed domains this assistant cited, from the published Sources Registry.
+    // Blacklist (confirmed) domains sort ahead of candidates; within each group,
+    // by citation count.
     const cited = sources
       .map((s) => ({ source: { defanged: s.defanged, network: s.network, criticalCount: s.criticalCount, listStatus: s.listStatus }, cited: s.byBot[key] || 0 }))
       .filter((r) => r.cited)
-      .sort((a, b) => b.cited - a.cited);
+      .sort((a, b) => {
+        const aCand = a.source.listStatus === "candidate" ? 1 : 0;
+        const bCand = b.source.listStatus === "candidate" ? 1 : 0;
+        return aCand - bCand || b.cited - a.cited;
+      });
 
     // Platform channels this assistant cited (ch.2). Candidates carry no per-bot
     // breakdown, so only blacklisted channels surface here — a per-bot profile
