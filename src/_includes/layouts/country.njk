@@ -53,9 +53,4 @@ wrap: wrap-narrow
 <p class="note">&ldquo;Repeated here by&rdquo; is any assistant that stated this claim as fact in this market, across every question type. The countermeasure is the furthest step taken on this claim; a draft is not yet sent.</p>
 {%- endif %}
 
-{%- if profile.partners | length %}
-<h2 id="partners" style="margin:36px 0 12px">{{ 'section.localPartners' | t }}</h2>
-<div class="prose" style="max-width:none"><p>We share findings for this market with
-  {% for p in profile.partners %}{{ p }}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}{% endfor %}.</p></div>
-{%- endif %}
 <div style="height:40px"></div>
