@@ -1,5 +1,5 @@
 {
-  "reportId": 22,
+  "reportId": 54,
   "claimId": 30,
   "claimKey": "C11-S01",
   "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
@@ -7,15 +7,15 @@
   "clusterName": "Religious policy in Ukraine",
   "verdict": "false",
   "splice": "A",
-  "version": 2,
-  "publishedAt": "2026-09-29T14:21:15.400Z",
+  "version": 4,
+  "publishedAt": "2026-10-08T15:03:32.357Z",
   "strip": {
     "botsTested": 5,
     "answers": 388,
     "countries": 13,
     "repeatedFake": 1,
     "critical": 0,
-    "sourcesIdentified": 3,
+    "sourcesIdentified": 12,
     "countermeasuresTaken": 1
   },
   "payload": {
@@ -26,13 +26,13 @@
       "dodgeListed": 0,
       "hedgedClean": 0,
       "quarantined": 0,
-      "refuteClean": 254,
+      "refuteClean": 227,
       "repeatClean": 1,
       "hedgedListed": 0,
-      "refuteListed": 0,
+      "refuteListed": 27,
       "repeatListed": 0,
-      "uContextClean": 128,
-      "uContextListed": 2,
+      "uContextClean": 102,
+      "uContextListed": 28,
       "endorsementClean": 1,
       "endorsementListed": 0
     },
@@ -50,7 +50,7 @@
         "claude-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-06T07:23:29.021Z",
+      "builtAt": "2026-10-08T15:03:34.712Z",
       "runKeys": [
         "C11_us_en_2026-09-13"
       ],
@@ -90,7 +90,7 @@
       "countries": 13,
       "botsTested": 5,
       "repeatedFake": 1,
-      "sourcesIdentified": 3,
+      "sourcesIdentified": 12,
       "countermeasuresTaken": 1
     },
     "trend": null,
@@ -99,6 +99,371 @@
     "claimId": 30,
     "sources": {
       "rows": [
+        {
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 9
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 9
+            }
+          ],
+          "domain": "mid.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 4
+            },
+            {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "UK",
+              "citedCount": 2
+            },
+            {
+              "market": "IT",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 18,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 16
+            }
+          ],
+          "domain": "news.church.ua",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 4
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            },
+            {
+              "market": "CZ",
+              "citedCount": 2
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 16,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 8
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "domain": "cne.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
+              "market": "UK",
+              "citedCount": 2
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 9,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 3
+            },
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "domain": "uoj.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 5,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 4
+            }
+          ],
+          "domain": "orthodox.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 4,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 2
+            }
+          ],
+          "domain": "russiancouncil.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "laundering_network",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            }
+          ],
+          "domain": "fsspx.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "facta.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "rt.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
         {
           "byBot": [
             {
@@ -131,20 +496,20 @@
               "citedCount": 1
             }
           ],
-          "domain": "rt.com",
+          "domain": "news.online.ua",
           "reached": true,
           "byMarket": [
             {
-              "market": "ES",
+              "market": "UA",
               "citedCount": 1
             }
           ],
-          "category": "state_media",
+          "category": "disinfo_outlet",
           "citedCount": 1,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -165,8 +530,527 @@
           "distributedFirstSeen": null
         }
       ],
-      "count": 6,
+      "count": 16,
       "domainUrls": [
+        {
+          "url": "https://news.church.ua/2022/05/27/postanova-soboru-ukrajinskoji-pravoslavnoji-cerkvi-vid-27-travnya-2022-roku/?utm_source=chatgpt.com",
+          "host": "news.church.ua",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 9
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 3
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 9,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://mid.ru/en/foreign_policy/reports/1993260/",
+          "host": "mid.ru",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 5
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 7,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://cne.news/article/4449-this-is-what-awaits-the-ukrainian-orthodox-church-once-a-ban-is-fully-implemented",
+          "host": "cne.news",
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 5
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 5,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://cne.news/article/4395-ukrainian-parliament-passes-ban-on-ukrainian-orthodox-church",
+          "host": "cne.news",
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 3
+            },
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 4,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://denmark.mid.ru/da/press-centre/nyheder/om_kievs_systematisk_kampagne_mod_den_ukrainske_ortodokse_kirke_/",
+          "host": "denmark.mid.ru",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            },
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 3
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news.church.ua/2026/07/10/sud-vidkriv-provadzhennya-za-pozovom-kijivskoji-mitropoliji-do-kabinetu-ministriv-cherez-nezakonne-stvorennya-dess/?utm_source=chatgpt.com",
+          "host": "news.church.ua",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://orthodox.news/weeklynews/weekly-review-of-orthodox-church-news/?utm_source=chatgpt.com",
+          "host": "orthodox.news",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://uoj.news/news/uoc-secures-procedural-victory-in-ongoing-liquidation-case/",
+          "host": "uoj.news",
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 3
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 2
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 3,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://fsspx.news/en/news/ukraine-reactions-ban-ukrainian-orthodox-church-47098",
+          "host": "fsspx.news",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://madagascar.mid.ru/upload/iblock/7a4/1cak9wb69v3c0v4sm4etzkes1cg3jzyn.pdf",
+          "host": "madagascar.mid.ru",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 2
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://mid.ru/en/foreign_policy/reports/2134826/",
+          "host": "mid.ru",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news.church.ua/2025/08/16/kijivska-mitropoliya-napravila-list-do-dess-shhodo-pitan-derzhavnoji-politiki-po-vidnoshennyu-do-upc/?utm_source=chatgpt.com",
+          "host": "news.church.ua",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://orthodox.news/weeklynews/2026-09-05-weekly-review-of-orthodox-church-news/?utm_source=chatgpt.com",
+          "host": "orthodox.news",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://russiancouncil.ru/en/analytics-and-comments/analytics/the-law-banning-the-uoc-can-religious-policy-coexist-with-freedom-of-religion/",
+          "host": "russiancouncil.ru",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://uoj.news/news/dess-seeks-to-liquidate-uoc-rovenky-eparchy-in-court/",
+          "host": "uoj.news",
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 2,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://mid.ru/en/foreign_policy/humanitarian_cooperation/1993260/",
+          "host": "mid.ru",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UK",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://mid.ru/fr/foreign_policy/humanitarian_cooperation/1898457/",
+          "host": "mid.ru",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://mid.ru/pt/foreign_policy/news/1898484/?lang=es",
+          "host": "mid.ru",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news.church.ua/?utm_source=chatgpt.com",
+          "host": "news.church.ua",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news.church.ua/2026/04/30/apelyacijnij-sud-skasuvav-visnovok-religijeznavchoji-ekspertizi-statutu-upc-zobov%CA%BCyazav-dess-jiji-pererobiti/?utm_source=chatgpt.com",
+          "host": "news.church.ua",
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://news.online.ua/kiyivska-mitropoliia-upc-viznana-afiliiovanoiu-z-zaboronenoiu-v-ukrayini-rpc-iaki-naslidki-896532/",
+          "host": "news.online.ua",
+          "byBot": [
+            {
+              "model": "claude-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
         {
           "url": "https://ria.ru/20260911/upts-2117045770.html",
           "host": "ria.ru",
@@ -180,6 +1064,44 @@
           "byMarket": [
             {
               "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://turkey.mid.ru/en/press_center/news/report_of_the_foreign_ministry_of_the_russian_federation_illegal_actions_by_the_kiev_regime_targetin/",
+          "host": "turkey.mid.ru",
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            }
+          ],
+          "citedCount": 1,
+          "repeatCount": 0
+        },
+        {
+          "url": "https://www.facta.news/antibufale/parlamento-ucraino-cristianesimo",
+          "host": "facta.news",
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "status": "blacklist",
+          "byMarket": [
+            {
+              "market": "IT",
               "citedCount": 1
             }
           ],
@@ -204,52 +1126,6 @@
           ],
           "citedCount": 1,
           "repeatCount": 0
-        },
-        {
-          "url": "https://www.qha.com.tr/ukrayna/ukrayna-parlamentosu-rus-ortodoks-kilisesini-yasaklayan-yasa-tasarisini-kabul-etti-493456",
-          "host": "qha.com.tr",
-          "byBot": [
-            {
-              "model": "gemini-web",
-              "citedCount": 2
-            },
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 3
-            }
-          ],
-          "citedCount": 3,
-          "repeatCount": 0
-        },
-        {
-          "url": "https://gazeteoksijen.com/dunya/rus-ortodoks-kilisesi-lideri-kiliseye-duzenlenen-ukrayna-saldirisini-kinadi-287023",
-          "host": "gazeteoksijen.com",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            },
-            {
-              "model": "gemini-web",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 2
-            }
-          ],
-          "citedCount": 2,
-          "repeatCount": 1
         },
         {
           "url": "https://modern.az/tr/analitik/783846/moskova-eskisinden-daha-sert-sartlar-kostu-rus-siyaset-bilimci/",
@@ -288,31 +1164,12 @@
           ],
           "citedCount": 1,
           "repeatCount": 1
-        },
-        {
-          "url": "https://www.qha.com.tr/haberleri/ukrayna-ortodoks-kilisesi",
-          "host": "qha.com.tr",
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "status": "candidate",
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 1
-            }
-          ],
-          "citedCount": 1,
-          "repeatCount": 1
         }
       ],
       "platformUrls": [],
       "injectionCount": 0,
       "distributedCount": 1,
-      "reachedNotDistributedCount": 2
+      "reachedNotDistributedCount": 11
     },
     "claimKey": "C11-S01",
     "evidence": [
@@ -577,7 +1434,7 @@
           "uContext": 2,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 1,
@@ -731,7 +1588,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -885,7 +1742,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -955,7 +1812,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -969,7 +1826,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -997,7 +1854,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1025,7 +1882,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1151,7 +2008,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1221,7 +2078,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1277,7 +2134,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1319,7 +2176,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1361,7 +2218,7 @@
           "uContext": 2,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 2
         },
         {
           "dodge": 0,
@@ -1501,7 +2358,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1627,7 +2484,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1711,7 +2568,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1739,7 +2596,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1781,7 +2638,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1809,7 +2666,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -1991,7 +2848,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2033,7 +2890,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2411,7 +3268,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2537,7 +3394,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2565,7 +3422,7 @@
           "uContext": 2,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 2
         },
         {
           "dodge": 0,
@@ -2719,7 +3576,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2733,7 +3590,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2887,7 +3744,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2943,7 +3800,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2985,7 +3842,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -2999,7 +3856,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 2
         },
         {
           "dodge": 0,
@@ -3013,7 +3870,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3027,7 +3884,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3055,7 +3912,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3069,7 +3926,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3097,7 +3954,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3293,7 +4150,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3307,7 +4164,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3335,7 +4192,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3405,7 +4262,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 2
         },
         {
           "dodge": 0,
@@ -3461,7 +4318,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3573,7 +4430,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3601,7 +4458,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3685,7 +4542,7 @@
           "uContext": 0,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3713,7 +4570,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3741,7 +4598,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 1,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3755,7 +4612,7 @@
           "uContext": 2,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3783,7 +4640,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3867,7 +4724,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3951,7 +4808,7 @@
           "uContext": 2,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -3993,7 +4850,7 @@
           "uContext": 1,
           "endorsement": 0,
           "substantive": 2,
-          "contaminated": 0
+          "contaminated": 1
         },
         {
           "dodge": 0,
@@ -4191,19 +5048,36 @@
     },
     "whatThisShows": {
       "failureModes": "google-ai repeated it from memory, without a listed source. gemini-web, perplexity-web, gpt-web, claude-web did not repeat it.",
-      "injectionLine": "Listed sources were cited in 2 of 388 answers, but no answer both repeated the fake and cited one."
+      "injectionLine": "Listed sources were cited in 55 of 388 answers, but no answer both repeated the fake and cited one."
     },
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-09-29",
+        "date": "2026-10-08",
         "kind": "action",
         "sent": null,
         "type": "public",
         "basis": null,
-        "links": null,
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/citereai/",
+            "platform": "LinkedIn"
+          },
+          {
+            "url": "https://x.com/citere_ai",
+            "platform": "X"
+          },
+          {
+            "url": "https://www.facebook.com/citereai/",
+            "platform": "Facebook"
+          },
+          {
+            "url": "t.me/citere_ai_monitor",
+            "platform": "Telegram"
+          }
+        ],
         "domain": null,
-        "market": null,
+        "market": "US-EN, UK-EN, DE-DE, AT-DE, FR-FR, ES-ES, IT-IT, PL-PL, CZ-CS, UA-UA, DK-DA, NL-NL, TR-TR",
         "status": "submitted",
         "target": "citere.ai",
         "subtype": "publication",
@@ -4214,10 +5088,7 @@
     ]
   },
   "analyst": {
-    "summary": "The false claim asserts that in the summer of 2024, the Ukrainian parliament passed a law prohibiting all activities of the Ukrainian Orthodox Church. This narrative suggests a complete ban on the church's operations within Ukraine. It misrepresents the actual legislative action, which targeted organizations affiliated with Russian influence. The claim distorts the context and intent of the real event.",
-    "headline": "Google-AI told users the fake claim 'Ukraine bans Orthodox Church activities'.",
-    "response": "In August 2024, Ukraine's parliament passed legislation specifically targeting religious organizations affiliated with Russian influence, such as the Ukrainian Orthodox Church of the Moscow Patriarchate (UOC-MP). This action aimed to address concerns about foreign interference and national security. The claim that the Ukrainian Orthodox Church was entirely banned is a distortion of this event, as the law focused on specific affiliations rather than a blanket prohibition. Evidence supporting this includes official legislative records and statements clarifying the law's intent.\n\nOut of 388 chatbot responses analyzed, one repeated the false claim. Google-AI was the only bot to repeat the claim, doing so from memory, with a repeat rate of 0.8% among its 127 persona-specific responses. None of the bots cited listed propaganda sources while repeating the claim. Other bots, including Gemini-Web, Perplexity-Web, GPT-Web, and Claude-Web, did not repeat the claim in any of their responses. This analysis highlights the importance of monitoring AI-generated content for accuracy and reliability.",
-    "overrides": {},
-    "ledeContext": "In August 2024, Ukraine enacted legislation targeting churches affiliated with Russian influence, specifically the Ukrainian Orthodox Church of the Moscow Patriarchate. The claim that the Ukrainian parliament banned all activities of the Ukrainian Orthodox Church is a fabrication attached to it. Google-AI repeated the fake claim from memory. Other bots, including Gemini-Web, Perplexity-Web, GPT-Web, and Claude-Web, did not repeat it."
+    "headline": "1 of 388 answers repeated the fake. Google AI Overviews repeated it from memory — the fake is inside the models, not arriving through search.",
+    "ledeContext": "In August 2024, Ukraine passed a law banning churches affiliated with Russia, specifically targeting the Ukrainian Orthodox Church of the Moscow Patriarchate (UOC-MP), which is linked to Russian influence. The claim that barring the Ukrainian Orthodox Church from carrying out any activity is a fabrication attached to it. Google AI Overviews repeated it from memory. Gemini, Perplexity, ChatGPT, Claude did not repeat it."
   }
 }
