@@ -310,7 +310,7 @@ permalink: "{{ entry.url }}"
         <div class="cmmeta">
           {%- if c.reference %}ref {{ c.reference }}{% endif %}
           {%- if c.domain %}{% if c.reference %} · {% endif %}{{ c.domain | defang }}{% if c.basis %} — {{ c.basis }}{% endif %}{% endif %}
-          {%- if c.links | length %}{% if c.reference or c.domain %} · {% endif %}{% for l in c.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
+          {%- if c.links | length %}{% if c.reference or c.domain %} · {% endif %}{% for l in c.links %}<a href="{{ l.url | extHref }}">{{ l.platform }}</a>{% if not loop.last %} · {% endif %}{% endfor %}{% endif %}
           {%- if c.followUpDue %}{% if c.reference or c.domain or c.links | length %} · {% endif %}re-check <time datetime="{{ c.followUpDue }}">{{ c.followUpDue | shortDate }}</time>{% endif %}
         </div>
         {%- endif %}

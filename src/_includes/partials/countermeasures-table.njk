@@ -27,7 +27,7 @@
       {%- if a.url or a.links | length or a.domain %}
       <div><b>Links</b><br>
         {%- if a.url %}<a href="{{ a.url | url }}">Fake&rsquo;s page &rarr;</a>{% if a.links | length or a.domain %}<br>{% endif %}{% endif %}
-        {%- if a.links | length %}{% for l in a.links %}<a href="{{ l.url }}">{{ l.platform }}</a>{% if not loop.last %} &middot; {% endif %}{% endfor %}{% if a.domain %}<br>{% endif %}{% endif %}
+        {%- if a.links | length %}{% for l in a.links %}<a href="{{ l.url | extHref }}">{{ l.platform }}</a>{% if not loop.last %} &middot; {% endif %}{% endfor %}{% if a.domain %}<br>{% endif %}{% endif %}
         {%- if a.domain %}Source: {{ a.domain | defang }}{% if a.basis %} &mdash; {{ a.basis }}{% endif %}{% endif %}</div>
       {%- endif %}
       <div><b>Submission and proof</b><br>

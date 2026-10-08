@@ -236,12 +236,24 @@ module.exports = function (eleventyConfig) {
       return (JSON.parse(file).domains || []).map((d) => d.domain).sort((a, b) => b.length - a.length);
     } catch { return []; }
   })();
+  // Trailing lookahead rejects a word char OR a subdomain dot (".com.ua"), but
+  // NOT a sentence-ending period ("rt.com. Next…") — that case left a watchlisted
+  // domain printed raw at the end of a clause and tripped the undefang guard.
   const watchlistRe = watchlist.length
-    ? new RegExp(`(?<![\\w[.])(${watchlist.map((d) => d.replace(/\./g, "\\.")).join("|")})(?![\\w.])`, "g")
+    ? new RegExp(`(?<![\\w[.])(${watchlist.map((d) => d.replace(/\./g, "\\.")).join("|")})(?!\\w)(?!\\.\\w)`, "g")
     : null;
   eleventyConfig.addFilter("defangCopy", (html) =>
     watchlistRe ? String(html || "").replace(watchlistRe, (m) => m.replace(/\./g, "[.]")) : String(html || "")
   );
+
+  // A scheme-less external URL (e.g. the social "t.me/handle" the app stores) is
+  // read by the link checker as an internal path and reported dead. Give it a
+  // scheme so the browser leaves the site and the checker treats it as external.
+  eleventyConfig.addFilter("extHref", (u) => {
+    const s = String(u || "").trim();
+    if (!s) return s;
+    return /^(https?:|mailto:|tel:)/i.test(s) ? s : "https://" + s.replace(/^\/+/, "");
+  });
 
   // ---- structured data ---------------------------------------------------
   // Strips nulls, empties and unresolved {{TODO}} values so JSON-LD never
