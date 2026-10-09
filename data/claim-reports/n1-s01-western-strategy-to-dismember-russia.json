@@ -1,5 +1,5 @@
 {
-  "reportId": 69,
+  "reportId": 87,
   "claimId": 41,
   "claimKey": "N1-S01",
   "slug": "n1-s01-western-strategy-to-dismember-russia",
@@ -7,8 +7,8 @@
   "clusterName": "The West's designs on Russia — encirclement, sabotage and dismemberment",
   "verdict": "false",
   "splice": "D",
-  "version": 2,
-  "publishedAt": "2026-10-08T15:03:46.604Z",
+  "version": 3,
+  "publishedAt": "2026-10-09T11:44:25.651Z",
   "strip": {
     "botsTested": 4,
     "answers": 312,
@@ -49,7 +49,7 @@
         "google-ai"
       ],
       "perRun": "4 personas × 4 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:47.004Z",
+      "builtAt": "2026-10-09T11:44:26.275Z",
       "runKeys": [
         "n1_2026-09-22"
       ],
@@ -125,11 +125,11 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -277,15 +277,15 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
+              "model": "google-ai",
               "citedCount": 1
             }
           ],
-          "domain": "rbc.ru",
+          "domain": "news.com.au",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "PL",
               "citedCount": 1
             }
           ],
@@ -294,7 +294,7 @@
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -331,7 +331,32 @@
               "citedCount": 1
             }
           ],
-          "domain": "vesti.ru",
+          "domain": "newsweek.pl",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "rbc.ru",
           "reached": true,
           "byMarket": [
             {
@@ -339,7 +364,7 @@
               "citedCount": 1
             }
           ],
-          "category": "state_media",
+          "category": "disinfo_outlet",
           "citedCount": 1,
           "distributed": false,
           "inWatchlist": true,
@@ -381,57 +406,17 @@
               "citedCount": 1
             }
           ],
-          "domain": "newsweek.pl",
+          "domain": "vesti.ru",
           "reached": true,
           "byMarket": [
             {
-              "market": "PL",
+              "market": "UA",
               "citedCount": 1
             }
           ],
-          "category": "disinfo_outlet",
+          "category": "state_media",
           "citedCount": 1,
           "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.com.au",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [],
-          "domain": "tass.ru",
-          "reached": false,
-          "byMarket": [],
-          "category": "disinfo_outlet",
-          "citedCount": 0,
-          "distributed": true,
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
@@ -471,6 +456,21 @@
         },
         {
           "byBot": [],
+          "domain": "kp.ru",
+          "reached": false,
+          "byMarket": [],
+          "category": "disinfo_outlet",
+          "citedCount": 0,
+          "distributed": true,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [],
           "domain": "news.ru",
           "reached": false,
           "byMarket": [],
@@ -486,7 +486,7 @@
         },
         {
           "byBot": [],
-          "domain": "kp.ru",
+          "domain": "tass.ru",
           "reached": false,
           "byMarket": [],
           "category": "disinfo_outlet",
@@ -522,6 +522,10 @@
               "citedCount": 1
             },
             {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
               "market": "CZ",
               "citedCount": 1
             },
@@ -540,10 +544,6 @@
             {
               "market": "TR",
               "citedCount": 1
-            },
-            {
-              "market": "IT",
-              "citedCount": 1
             }
           ],
           "citedCount": 8,
@@ -561,11 +561,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -892,15 +892,15 @@
               "citedCount": 1
             },
             {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
               "market": "IT",
               "citedCount": 1
             },
             {
               "market": "DK",
-              "citedCount": 1
-            },
-            {
-              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -919,11 +919,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "UA",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "UA",
               "citedCount": 1
             }
           ],
@@ -4258,12 +4258,29 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
         "basis": null,
-        "links": null,
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/citereai/",
+            "platform": "LinkedIn"
+          },
+          {
+            "url": "https://x.com/citere_ai",
+            "platform": "X"
+          },
+          {
+            "url": "https://www.facebook.com/citereai/",
+            "platform": "Facebook"
+          },
+          {
+            "url": "https://t.me/citere_ai_monitor/",
+            "platform": "Telegram"
+          }
+        ],
         "domain": null,
         "market": "US-EN, UK-EN, DE-DE, AT-DE, FR-FR, ES-ES, IT-IT, PL-PL, CZ-CS, UA-UA, DK-DA, NL-NL, TR-TR",
         "status": "submitted",

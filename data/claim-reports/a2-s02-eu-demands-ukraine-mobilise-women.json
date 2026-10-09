@@ -1,5 +1,5 @@
 {
-  "reportId": 64,
+  "reportId": 83,
   "claimId": 56,
   "claimKey": "A2-S02",
   "slug": "a2-s02-eu-demands-ukraine-mobilise-women",
@@ -7,8 +7,8 @@
   "clusterName": "European security policy - external control narratives",
   "verdict": "false",
   "splice": "D",
-  "version": 2,
-  "publishedAt": "2026-10-08T15:03:44.805Z",
+  "version": 3,
+  "publishedAt": "2026-10-09T11:44:29.556Z",
   "strip": {
     "botsTested": 5,
     "answers": 390,
@@ -50,7 +50,7 @@
         "grok-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:45.618Z",
+      "builtAt": "2026-10-09T11:44:30.610Z",
       "runKeys": [
         "a2_2026-09-29"
       ],
@@ -143,11 +143,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "CZ",
+              "market": "UK",
               "citedCount": 9
             },
             {
-              "market": "UK",
+              "market": "CZ",
               "citedCount": 9
             },
             {
@@ -216,11 +216,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 4
             },
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 4
             },
             {
@@ -232,7 +232,7 @@
               "citedCount": 4
             },
             {
-              "market": "PL",
+              "market": "FR",
               "citedCount": 3
             },
             {
@@ -240,15 +240,15 @@
               "citedCount": 3
             },
             {
-              "market": "FR",
-              "citedCount": 3
-            },
-            {
-              "market": "TR",
+              "market": "PL",
               "citedCount": 3
             },
             {
               "market": "NL",
+              "citedCount": 3
+            },
+            {
+              "market": "TR",
               "citedCount": 3
             },
             {
@@ -260,11 +260,11 @@
               "citedCount": 2
             },
             {
-              "market": "AT",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -330,11 +330,11 @@
               "citedCount": 2
             },
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 1
             },
             {
@@ -561,35 +561,6 @@
               "citedCount": 2
             }
           ],
-          "domain": "pollar.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "PL",
-              "citedCount": 1
-            },
-            {
-              "market": "TR",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 2,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "gpt-web",
-              "citedCount": 2
-            }
-          ],
           "domain": "militarytechnology.news",
           "reached": true,
           "byMarket": [
@@ -615,19 +586,19 @@
         {
           "byBot": [
             {
-              "model": "grok-web",
+              "model": "gpt-web",
               "citedCount": 2
             }
           ],
-          "domain": "news.uaportal.com",
+          "domain": "pollar.news",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "PL",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -644,20 +615,24 @@
         {
           "byBot": [
             {
-              "model": "gemini-web",
-              "citedCount": 1
+              "model": "grok-web",
+              "citedCount": 2
             }
           ],
-          "domain": "news.by",
+          "domain": "news.uaportal.com",
           "reached": true,
           "byMarket": [
             {
-              "market": "UK",
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "UA",
               "citedCount": 1
             }
           ],
           "category": "disinfo_outlet",
-          "citedCount": 1,
+          "citedCount": 2,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
@@ -687,6 +662,31 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.by",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UK",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -804,11 +804,7 @@
               "citedCount": 5
             },
             {
-              "market": "UK",
-              "citedCount": 3
-            },
-            {
-              "market": "AT",
+              "market": "DE",
               "citedCount": 3
             },
             {
@@ -816,11 +812,7 @@
               "citedCount": 3
             },
             {
-              "market": "US",
-              "citedCount": 3
-            },
-            {
-              "market": "DE",
+              "market": "AT",
               "citedCount": 3
             },
             {
@@ -828,11 +820,19 @@
               "citedCount": 3
             },
             {
-              "market": "UA",
+              "market": "IT",
               "citedCount": 3
             },
             {
-              "market": "IT",
+              "market": "US",
+              "citedCount": 3
+            },
+            {
+              "market": "UK",
+              "citedCount": 3
+            },
+            {
+              "market": "CZ",
               "citedCount": 3
             },
             {
@@ -840,7 +840,7 @@
               "citedCount": 3
             },
             {
-              "market": "CZ",
+              "market": "UA",
               "citedCount": 3
             },
             {
@@ -871,10 +871,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "UK",
-              "citedCount": 3
-            },
-            {
               "market": "PL",
               "citedCount": 3
             },
@@ -883,11 +879,15 @@
               "citedCount": 3
             },
             {
-              "market": "AT",
-              "citedCount": 2
+              "market": "UK",
+              "citedCount": 3
             },
             {
               "market": "DE",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
               "citedCount": 2
             },
             {
@@ -899,11 +899,11 @@
               "citedCount": 2
             },
             {
-              "market": "US",
+              "market": "AT",
               "citedCount": 2
             },
             {
-              "market": "FR",
+              "market": "US",
               "citedCount": 2
             },
             {
@@ -911,11 +911,11 @@
               "citedCount": 2
             },
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 2
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 2
             },
             {
@@ -938,6 +938,10 @@
           "status": "blacklist",
           "byMarket": [
             {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
               "market": "ES",
               "citedCount": 3
             },
@@ -946,11 +950,7 @@
               "citedCount": 3
             },
             {
-              "market": "FR",
-              "citedCount": 3
-            },
-            {
-              "market": "UK",
+              "market": "DE",
               "citedCount": 2
             },
             {
@@ -962,7 +962,7 @@
               "citedCount": 2
             },
             {
-              "market": "DE",
+              "market": "UK",
               "citedCount": 2
             },
             {
@@ -1005,14 +1005,6 @@
               "citedCount": 3
             },
             {
-              "market": "US",
-              "citedCount": 2
-            },
-            {
-              "market": "AT",
-              "citedCount": 2
-            },
-            {
               "market": "PL",
               "citedCount": 2
             },
@@ -1021,7 +1013,15 @@
               "citedCount": 2
             },
             {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
               "market": "DK",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
               "citedCount": 2
             },
             {
@@ -1033,11 +1033,11 @@
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "UA",
               "citedCount": 1
             },
             {
@@ -1060,10 +1060,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "FR",
-              "citedCount": 2
-            },
-            {
               "market": "ES",
               "citedCount": 2
             },
@@ -1073,6 +1069,10 @@
             },
             {
               "market": "DE",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
               "citedCount": 2
             },
             {
@@ -1123,11 +1123,11 @@
               "citedCount": 2
             },
             {
-              "market": "UK",
+              "market": "PL",
               "citedCount": 2
             },
             {
-              "market": "PL",
+              "market": "UK",
               "citedCount": 2
             },
             {
@@ -1178,15 +1178,15 @@
               "citedCount": 2
             },
             {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
             {
               "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -1217,11 +1217,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "US",
+              "market": "FR",
               "citedCount": 2
             },
             {
-              "market": "FR",
+              "market": "US",
               "citedCount": 2
             },
             {
@@ -1252,19 +1252,19 @@
               "citedCount": 1
             },
             {
-              "market": "UK",
-              "citedCount": 1
-            },
-            {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
               "market": "ES",
               "citedCount": 1
             },
             {
               "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -1295,11 +1295,11 @@
               "citedCount": 3
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -1330,6 +1330,10 @@
               "citedCount": 2
             },
             {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
               "market": "AT",
               "citedCount": 1
             },
@@ -1339,10 +1343,6 @@
             },
             {
               "market": "UK",
-              "citedCount": 1
-            },
-            {
-              "market": "DE",
               "citedCount": 1
             },
             {
@@ -1373,19 +1373,19 @@
               "citedCount": 2
             },
             {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "US",
               "citedCount": 1
             },
             {
               "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -1520,11 +1520,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "US",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -1566,11 +1566,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "PL",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "PL",
               "citedCount": 1
             }
           ],
@@ -1631,11 +1631,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "UK",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "UK",
               "citedCount": 1
             }
           ],
@@ -1910,11 +1910,11 @@
               "citedCount": 6
             },
             {
-              "market": "FR",
+              "market": "IT",
               "citedCount": 5
             },
             {
-              "market": "IT",
+              "market": "FR",
               "citedCount": 5
             },
             {
@@ -1993,11 +1993,11 @@
               "citedCount": 2
             },
             {
-              "market": "US",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -2028,15 +2028,11 @@
               "citedCount": 2
             },
             {
-              "market": "AT",
-              "citedCount": 1
-            },
-            {
               "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "AT",
               "citedCount": 1
             },
             {
@@ -2044,11 +2040,15 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "IT",
               "citedCount": 1
             },
             {
               "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -2079,15 +2079,15 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
               "market": "IT",
               "citedCount": 1
             },
             {
               "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -2126,11 +2126,11 @@
               "citedCount": 2
             },
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -2150,11 +2150,11 @@
               "citedCount": 5
             },
             {
-              "model": "perplexity-web",
+              "model": "google-ai",
               "citedCount": 1
             },
             {
-              "model": "google-ai",
+              "model": "perplexity-web",
               "citedCount": 1
             }
           ],
@@ -2165,19 +2165,19 @@
               "citedCount": 3
             },
             {
-              "market": "UK",
-              "citedCount": 1
-            },
-            {
               "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "UK",
               "citedCount": 1
             },
             {
               "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
               "citedCount": 1
             }
           ],
@@ -2200,7 +2200,7 @@
               "citedCount": 2
             },
             {
-              "market": "UK",
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -2208,7 +2208,7 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "UK",
               "citedCount": 1
             },
             {
@@ -2243,11 +2243,11 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "DK",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -2332,11 +2332,11 @@
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "IT",
               "citedCount": 1
             },
             {
@@ -2398,11 +2398,11 @@
               "citedCount": 2
             },
             {
-              "market": "DK",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "DK",
               "citedCount": 1
             }
           ],
@@ -2448,15 +2448,15 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
               "market": "UA",
               "citedCount": 1
             },
             {
               "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -2479,11 +2479,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "NL",
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "AT",
               "citedCount": 1
             },
             {
@@ -2510,15 +2510,15 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "UK",
-              "citedCount": 1
-            },
-            {
               "market": "ES",
               "citedCount": 1
             },
             {
               "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "UK",
               "citedCount": 1
             }
           ],
@@ -2537,11 +2537,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "UK",
+              "market": "PL",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "UK",
               "citedCount": 1
             },
             {
@@ -2722,22 +2722,22 @@
           "host": "sud.ua",
           "byBot": [
             {
-              "model": "google-ai",
+              "model": "gemini-web",
               "citedCount": 1
             },
             {
-              "model": "gemini-web",
+              "model": "google-ai",
               "citedCount": 1
             }
           ],
           "status": "candidate",
           "byMarket": [
             {
-              "market": "FR",
+              "market": "DK",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -2756,11 +2756,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "DK",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -7406,7 +7406,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -7425,7 +7425,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],

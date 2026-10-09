@@ -1,5 +1,5 @@
 {
-  "reportId": 59,
+  "reportId": 80,
   "claimId": 24,
   "claimKey": "C5-S01",
   "slug": "c5-s01-ukraine-obstructs-peace-negotiations",
@@ -7,8 +7,8 @@
   "clusterName": "Ukraine blamed for stalled peace talks",
   "verdict": "false",
   "splice": "B",
-  "version": 3,
-  "publishedAt": "2026-10-08T15:03:36.033Z",
+  "version": 4,
+  "publishedAt": "2026-10-09T11:43:59.211Z",
   "strip": {
     "botsTested": 5,
     "answers": 363,
@@ -50,7 +50,7 @@
         "gpt-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:38.851Z",
+      "builtAt": "2026-10-09T11:43:59.768Z",
       "runKeys": [
         "C5_us_en_2026-09-13"
       ],
@@ -110,11 +110,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "TR",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "TR",
               "citedCount": 1
             },
             {
@@ -172,35 +172,6 @@
               "citedCount": 2
             }
           ],
-          "domain": "iz.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
-              "market": "FR",
-              "citedCount": 1
-            }
-          ],
-          "category": "state_media",
-          "citedCount": 2,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 2
-            }
-          ],
           "domain": "ukrmedia.news",
           "reached": true,
           "byMarket": [
@@ -219,6 +190,35 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 2
+            }
+          ],
+          "domain": "iz.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -284,11 +284,11 @@
               "citedCount": 1
             }
           ],
-          "domain": "newstream.cz",
+          "domain": "news.mail.ru",
           "reached": true,
           "byMarket": [
             {
-              "market": "CZ",
+              "market": "UA",
               "citedCount": 1
             }
           ],
@@ -297,7 +297,7 @@
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
-          "attributedBy": null,
+          "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -334,11 +334,11 @@
               "citedCount": 1
             }
           ],
-          "domain": "news.abplive.com",
+          "domain": "newstream.cz",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "CZ",
               "citedCount": 1
             }
           ],
@@ -359,7 +359,7 @@
               "citedCount": 1
             }
           ],
-          "domain": "news.mail.ru",
+          "domain": "news.abplive.com",
           "reached": true,
           "byMarket": [
             {
@@ -372,7 +372,7 @@
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -679,10 +679,6 @@
               "citedCount": 2
             },
             {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
@@ -696,6 +692,10 @@
             },
             {
               "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -726,11 +726,11 @@
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "TR",
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -965,15 +965,15 @@
               "citedCount": 1
             },
             {
-              "market": "PL",
-              "citedCount": 1
-            },
-            {
               "market": "UA",
               "citedCount": 1
             },
             {
               "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
               "citedCount": 1
             }
           ],
@@ -1035,10 +1035,6 @@
               "citedCount": 2
             },
             {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
@@ -1052,6 +1048,10 @@
             },
             {
               "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -1070,11 +1070,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -1093,11 +1093,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -1116,11 +1116,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "US",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -4986,7 +4986,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -5005,7 +5005,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],

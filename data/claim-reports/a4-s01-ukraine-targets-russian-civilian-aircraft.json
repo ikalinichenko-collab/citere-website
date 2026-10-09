@@ -1,5 +1,5 @@
 {
-  "reportId": 65,
+  "reportId": 92,
   "claimId": 54,
   "claimKey": "A4-S01",
   "slug": "a4-s01-ukraine-targets-russian-civilian-aircraft",
@@ -7,8 +7,8 @@
   "clusterName": "Civilian protection in Ukraine",
   "verdict": "false",
   "splice": "D",
-  "version": 2,
-  "publishedAt": "2026-10-08T15:03:59.960Z",
+  "version": 3,
+  "publishedAt": "2026-10-09T11:44:06.368Z",
   "strip": {
     "botsTested": 4,
     "answers": 312,
@@ -49,7 +49,7 @@
         "perplexity-web"
       ],
       "perRun": "4 personas × 4 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:04:00.825Z",
+      "builtAt": "2026-10-09T11:44:06.995Z",
       "runKeys": [
         "a4_2026-10-01"
       ],
@@ -109,19 +109,23 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "NL",
-              "citedCount": 1
-            },
-            {
-              "market": "PL",
-              "citedCount": 1
-            },
-            {
               "market": "TR",
               "citedCount": 1
             },
             {
               "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -137,19 +141,7 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
-              "citedCount": 1
-            },
-            {
-              "market": "ES",
-              "citedCount": 1
-            },
-            {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             },
             {
@@ -157,7 +149,15 @@
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
               "citedCount": 1
             }
           ],
@@ -178,36 +178,11 @@
               "citedCount": 1
             }
           ],
-          "domain": "newsmaxpolska.pl",
+          "domain": "news.un.org",
           "reached": true,
           "byMarket": [
             {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "gemini-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "ground.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -249,40 +224,15 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
+              "model": "gemini-web",
               "citedCount": 1
             }
           ],
-          "domain": "news.un.org",
+          "domain": "ground.news",
           "reached": true,
           "byMarket": [
             {
-              "market": "FR",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "newstream.cz",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "CZ",
+              "market": "UA",
               "citedCount": 1
             }
           ],
@@ -308,56 +258,6 @@
           "byMarket": [
             {
               "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "gpt-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "newswav.com",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "domain": "sg.news.yahoo.com",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -403,11 +303,111 @@
               "citedCount": 1
             }
           ],
+          "domain": "newstream.cz",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "newswav.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
           "domain": "newsbit.nl",
           "reached": true,
           "byMarket": [
             {
               "market": "NL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "newsmaxpolska.pl",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "domain": "sg.news.yahoo.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -486,7 +486,7 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "IT",
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -502,7 +502,7 @@
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "IT",
               "citedCount": 1
             },
             {
@@ -510,7 +510,7 @@
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "NL",
               "citedCount": 1
             },
             {
@@ -526,11 +526,11 @@
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -549,7 +549,7 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "IT",
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -561,11 +561,11 @@
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "NL",
               "citedCount": 1
             },
             {
@@ -581,11 +581,11 @@
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -604,7 +604,7 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "IT",
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -616,11 +616,11 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "TR",
               "citedCount": 1
             },
             {
@@ -651,7 +651,7 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "IT",
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -667,11 +667,11 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "TR",
               "citedCount": 1
             },
             {
@@ -714,15 +714,15 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
               "market": "DE",
               "citedCount": 1
             },
             {
               "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -822,11 +822,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "FR",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -845,11 +845,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "FR",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -914,11 +914,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "IT",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "IT",
               "citedCount": 1
             }
           ],
@@ -1638,15 +1638,15 @@
               "citedCount": 1
             },
             {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "DE",
               "citedCount": 1
             },
             {
               "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -1766,11 +1766,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -1835,11 +1835,11 @@
           "status": "candidate",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -5137,7 +5137,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -5156,7 +5156,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],

@@ -1,5 +1,5 @@
 {
-  "reportId": 54,
+  "reportId": 75,
   "claimId": 30,
   "claimKey": "C11-S01",
   "slug": "c11-s01-ukraine-bans-orthodox-church-activities",
@@ -7,8 +7,8 @@
   "clusterName": "Religious policy in Ukraine",
   "verdict": "false",
   "splice": "A",
-  "version": 4,
-  "publishedAt": "2026-10-08T15:03:32.357Z",
+  "version": 5,
+  "publishedAt": "2026-10-09T11:43:42.491Z",
   "strip": {
     "botsTested": 5,
     "answers": 388,
@@ -50,7 +50,7 @@
         "claude-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:34.712Z",
+      "builtAt": "2026-10-09T11:43:43.249Z",
       "runKeys": [
         "C11_us_en_2026-09-13"
       ],
@@ -122,15 +122,15 @@
               "citedCount": 3
             },
             {
-              "market": "US",
-              "citedCount": 2
-            },
-            {
               "market": "UK",
               "citedCount": 2
             },
             {
               "market": "IT",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
               "citedCount": 2
             },
             {
@@ -211,11 +211,11 @@
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "DK",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -330,15 +330,15 @@
           "reached": true,
           "byMarket": [
             {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
               "market": "FR",
               "citedCount": 1
             },
             {
               "market": "NL",
-              "citedCount": 1
-            },
-            {
-              "market": "DE",
               "citedCount": 1
             },
             {
@@ -417,31 +417,6 @@
         {
           "byBot": [
             {
-              "model": "gemini-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "facta.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "claude-web",
               "citedCount": 1
             }
@@ -460,6 +435,31 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gemini-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "facta.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -603,15 +603,15 @@
               "citedCount": 1
             },
             {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
               "market": "AT",
               "citedCount": 1
             },
             {
               "market": "DE",
-              "citedCount": 1
-            },
-            {
-              "market": "DK",
               "citedCount": 1
             }
           ],
@@ -5053,7 +5053,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -5072,7 +5072,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],

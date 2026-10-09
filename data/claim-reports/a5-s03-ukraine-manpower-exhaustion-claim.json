@@ -1,5 +1,5 @@
 {
-  "reportId": 73,
+  "reportId": 93,
   "claimId": 60,
   "claimKey": "A5-S03",
   "slug": "a5-s03-ukraine-manpower-exhaustion-claim",
@@ -7,8 +7,8 @@
   "clusterName": "A5",
   "verdict": "false",
   "splice": "D",
-  "version": 2,
-  "publishedAt": "2026-10-08T15:03:50.286Z",
+  "version": 3,
+  "publishedAt": "2026-10-09T11:44:10.782Z",
   "strip": {
     "botsTested": 5,
     "answers": 390,
@@ -50,7 +50,7 @@
         "gemini-web"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:51.147Z",
+      "builtAt": "2026-10-09T11:44:11.702Z",
       "runKeys": [
         "a5_2026-10-06"
       ],
@@ -142,6 +142,18 @@
               "citedCount": 6
             },
             {
+              "market": "NL",
+              "citedCount": 5
+            },
+            {
+              "market": "TR",
+              "citedCount": 5
+            },
+            {
+              "market": "CZ",
+              "citedCount": 5
+            },
+            {
               "market": "ES",
               "citedCount": 5
             },
@@ -150,27 +162,15 @@
               "citedCount": 5
             },
             {
-              "market": "CZ",
-              "citedCount": 5
-            },
-            {
-              "market": "TR",
-              "citedCount": 5
-            },
-            {
-              "market": "NL",
-              "citedCount": 5
-            },
-            {
-              "market": "DE",
-              "citedCount": 4
-            },
-            {
               "market": "IT",
               "citedCount": 4
             },
             {
               "market": "PL",
+              "citedCount": 4
+            },
+            {
+              "market": "DE",
               "citedCount": 4
             }
           ],
@@ -207,19 +207,15 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
-              "citedCount": 5
-            },
-            {
               "market": "TR",
               "citedCount": 5
             },
             {
-              "market": "AT",
-              "citedCount": 3
+              "market": "DE",
+              "citedCount": 5
             },
             {
-              "market": "UA",
+              "market": "NL",
               "citedCount": 3
             },
             {
@@ -231,11 +227,15 @@
               "citedCount": 3
             },
             {
-              "market": "NL",
+              "market": "IT",
               "citedCount": 3
             },
             {
-              "market": "IT",
+              "market": "UA",
+              "citedCount": 3
+            },
+            {
+              "market": "AT",
               "citedCount": 3
             },
             {
@@ -276,24 +276,16 @@
               "citedCount": 3
             },
             {
+              "market": "UK",
+              "citedCount": 2
+            },
+            {
               "market": "FR",
               "citedCount": 2
             },
             {
               "market": "AT",
               "citedCount": 2
-            },
-            {
-              "market": "UK",
-              "citedCount": 2
-            },
-            {
-              "market": "DE",
-              "citedCount": 1
-            },
-            {
-              "market": "US",
-              "citedCount": 1
             },
             {
               "market": "DK",
@@ -317,6 +309,14 @@
             },
             {
               "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -349,14 +349,6 @@
               "citedCount": 2
             },
             {
-              "market": "DE",
-              "citedCount": 1
-            },
-            {
-              "market": "US",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
@@ -374,6 +366,14 @@
             },
             {
               "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -402,16 +402,12 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
-              "citedCount": 2
-            },
-            {
               "market": "TR",
               "citedCount": 2
             },
             {
-              "market": "AT",
-              "citedCount": 1
+              "market": "DE",
+              "citedCount": 2
             },
             {
               "market": "NL",
@@ -423,6 +419,10 @@
             },
             {
               "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -509,35 +509,6 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
-              "citedCount": 2
-            }
-          ],
-          "domain": "tass.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            },
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 2,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "google-ai",
               "citedCount": 1
             },
@@ -567,19 +538,19 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
+              "model": "grok-web",
               "citedCount": 2
             }
           ],
-          "domain": "news.cgtn.com",
+          "domain": "intelli.news",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -596,19 +567,19 @@
         {
           "byBot": [
             {
-              "model": "grok-web",
+              "model": "perplexity-web",
               "citedCount": 2
             }
           ],
-          "domain": "intelli.news",
+          "domain": "news.cgtn.com",
           "reached": true,
           "byMarket": [
             {
-              "market": "AT",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             }
           ],
@@ -655,19 +626,23 @@
           "byBot": [
             {
               "model": "perplexity-web",
-              "citedCount": 1
+              "citedCount": 2
             }
           ],
-          "domain": "gazeta.ru",
+          "domain": "tass.ru",
           "reached": true,
           "byMarket": [
             {
               "market": "UA",
               "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
             }
           ],
           "category": "disinfo_outlet",
-          "citedCount": 1,
+          "citedCount": 2,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
@@ -683,7 +658,32 @@
               "citedCount": 1
             }
           ],
-          "domain": "news.ru",
+          "domain": "cz24.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "gazeta.ru",
           "reached": true,
           "byMarket": [
             {
@@ -729,331 +729,6 @@
         {
           "byBot": [
             {
-              "model": "gpt-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "rbc.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "ukrmedia.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "DK",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.un.org",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "ES",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "vesti.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "state_media",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "cz24.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.rambler.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "ria.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "state_media",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "rg.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "state_media",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.online.ua",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.usni.org",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.pn",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "newswav.com",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "news.de",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "DE",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "google-ai",
               "citedCount": 1
             }
@@ -1079,15 +754,15 @@
         {
           "byBot": [
             {
-              "model": "grok-web",
+              "model": "perplexity-web",
               "citedCount": 1
             }
           ],
-          "domain": "news.uaportal.com",
+          "domain": "news.de",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -1133,6 +808,206 @@
               "citedCount": 1
             }
           ],
+          "domain": "news.online.ua",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.pn",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.rambler.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.uaportal.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.un.org",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "news.usni.org",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "CZ",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "newswav.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
           "domain": "newsweek.com.ar",
           "reached": true,
           "byMarket": [
@@ -1147,6 +1022,81 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "gpt-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "rbc.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "PL",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "rg.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "ria.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -1172,6 +1122,56 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "ukrmedia.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "vesti.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -1329,11 +1329,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -1494,11 +1494,11 @@
               "citedCount": 1
             },
             {
-              "market": "CZ",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "CZ",
               "citedCount": 1
             },
             {
@@ -1750,11 +1750,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "FR",
+              "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -2115,11 +2115,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -2131,11 +2131,11 @@
           "host": "areion24.news",
           "byBot": [
             {
-              "model": "google-ai",
+              "model": "perplexity-web",
               "citedCount": 1
             },
             {
-              "model": "perplexity-web",
+              "model": "google-ai",
               "citedCount": 1
             }
           ],
@@ -3081,10 +3081,6 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
-              "citedCount": 1
-            },
-            {
               "market": "FR",
               "citedCount": 1
             },
@@ -3094,6 +3090,10 @@
             },
             {
               "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -7332,7 +7332,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -7351,7 +7351,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],

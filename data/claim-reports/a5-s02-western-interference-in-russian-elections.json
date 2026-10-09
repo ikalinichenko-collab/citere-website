@@ -1,5 +1,5 @@
 {
-  "reportId": 68,
+  "reportId": 89,
   "claimId": 59,
   "claimKey": "A5-S02",
   "slug": "a5-s02-western-interference-in-russian-elections",
@@ -7,8 +7,8 @@
   "clusterName": "A5",
   "verdict": "false",
   "splice": "D",
-  "version": 2,
-  "publishedAt": "2026-10-08T15:03:56.819Z",
+  "version": 3,
+  "publishedAt": "2026-10-09T11:44:32.483Z",
   "strip": {
     "botsTested": 5,
     "answers": 390,
@@ -50,7 +50,7 @@
         "google-ai"
       ],
       "perRun": "4 personas × 5 bots × 1 repeats",
-      "builtAt": "2026-10-08T15:03:57.582Z",
+      "builtAt": "2026-10-09T11:44:33.514Z",
       "runKeys": [
         "a5_2026-10-06"
       ],
@@ -118,15 +118,7 @@
               "citedCount": 3
             },
             {
-              "market": "DE",
-              "citedCount": 2
-            },
-            {
-              "market": "TR",
-              "citedCount": 2
-            },
-            {
-              "market": "CZ",
+              "market": "DK",
               "citedCount": 2
             },
             {
@@ -134,19 +126,11 @@
               "citedCount": 2
             },
             {
+              "market": "CZ",
+              "citedCount": 2
+            },
+            {
               "market": "US",
-              "citedCount": 2
-            },
-            {
-              "market": "FR",
-              "citedCount": 2
-            },
-            {
-              "market": "DK",
-              "citedCount": 2
-            },
-            {
-              "market": "NL",
               "citedCount": 2
             },
             {
@@ -154,15 +138,31 @@
               "citedCount": 2
             },
             {
+              "market": "NL",
+              "citedCount": 2
+            },
+            {
               "market": "PL",
               "citedCount": 2
             },
             {
-              "market": "AT",
-              "citedCount": 1
+              "market": "TR",
+              "citedCount": 2
+            },
+            {
+              "market": "DE",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
+              "citedCount": 2
             },
             {
               "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -199,11 +199,7 @@
               "citedCount": 2
             },
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
-              "market": "ES",
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -211,7 +207,11 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -252,11 +252,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "ES",
+              "market": "UK",
               "citedCount": 5
             },
             {
-              "market": "UK",
+              "market": "ES",
               "citedCount": 5
             },
             {
@@ -280,7 +280,7 @@
               "citedCount": 3
             },
             {
-              "market": "TR",
+              "market": "US",
               "citedCount": 2
             },
             {
@@ -288,19 +288,19 @@
               "citedCount": 2
             },
             {
-              "market": "US",
-              "citedCount": 2
-            },
-            {
               "market": "PL",
               "citedCount": 2
             },
             {
-              "market": "DE",
-              "citedCount": 1
+              "market": "TR",
+              "citedCount": 2
             },
             {
               "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -325,19 +325,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
-              "citedCount": 4
-            },
-            {
               "market": "FR",
               "citedCount": 4
             },
             {
-              "market": "AT",
-              "citedCount": 4
-            },
-            {
-              "market": "DK",
+              "market": "DE",
               "citedCount": 4
             },
             {
@@ -345,11 +337,19 @@
               "citedCount": 4
             },
             {
-              "market": "TR",
-              "citedCount": 3
+              "market": "DK",
+              "citedCount": 4
+            },
+            {
+              "market": "AT",
+              "citedCount": 4
             },
             {
               "market": "UA",
+              "citedCount": 3
+            },
+            {
+              "market": "TR",
               "citedCount": 3
             },
             {
@@ -402,19 +402,11 @@
               "citedCount": 5
             },
             {
-              "market": "NL",
-              "citedCount": 3
-            },
-            {
-              "market": "TR",
+              "market": "UK",
               "citedCount": 3
             },
             {
               "market": "CZ",
-              "citedCount": 3
-            },
-            {
-              "market": "UK",
               "citedCount": 3
             },
             {
@@ -430,15 +422,23 @@
               "citedCount": 3
             },
             {
+              "market": "NL",
+              "citedCount": 3
+            },
+            {
+              "market": "TR",
+              "citedCount": 3
+            },
+            {
               "market": "PL",
               "citedCount": 2
             },
             {
-              "market": "AT",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -463,10 +463,6 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 3
-            },
-            {
               "market": "US",
               "citedCount": 3
             },
@@ -475,11 +471,11 @@
               "citedCount": 3
             },
             {
-              "market": "AT",
-              "citedCount": 2
+              "market": "TR",
+              "citedCount": 3
             },
             {
-              "market": "NL",
+              "market": "UK",
               "citedCount": 2
             },
             {
@@ -487,11 +483,15 @@
               "citedCount": 2
             },
             {
-              "market": "FR",
+              "market": "NL",
               "citedCount": 2
             },
             {
-              "market": "UK",
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
+              "market": "FR",
               "citedCount": 2
             },
             {
@@ -536,19 +536,19 @@
               "citedCount": 3
             },
             {
-              "market": "AT",
-              "citedCount": 3
-            },
-            {
               "market": "US",
               "citedCount": 3
             },
             {
-              "market": "NL",
-              "citedCount": 2
+              "market": "AT",
+              "citedCount": 3
             },
             {
               "market": "ES",
+              "citedCount": 2
+            },
+            {
+              "market": "NL",
               "citedCount": 2
             },
             {
@@ -557,14 +557,6 @@
             },
             {
               "market": "CZ",
-              "citedCount": 1
-            },
-            {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
-              "market": "TR",
               "citedCount": 1
             },
             {
@@ -578,10 +570,95 @@
             {
               "market": "DK",
               "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
             }
           ],
           "category": "state_media",
           "citedCount": 21,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 7
+            },
+            {
+              "model": "gpt-web",
+              "citedCount": 7
+            },
+            {
+              "model": "perplexity-web",
+              "citedCount": 5
+            }
+          ],
+          "domain": "mid.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 3
+            },
+            {
+              "market": "FR",
+              "citedCount": 3
+            },
+            {
+              "market": "US",
+              "citedCount": 2
+            },
+            {
+              "market": "UA",
+              "citedCount": 2
+            },
+            {
+              "market": "NL",
+              "citedCount": 2
+            },
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            }
+          ],
+          "category": "state_media",
+          "citedCount": 19,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
@@ -633,7 +710,11 @@
               "citedCount": 2
             },
             {
-              "market": "FR",
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
               "citedCount": 1
             },
             {
@@ -641,11 +722,7 @@
               "citedCount": 1
             },
             {
-              "market": "IT",
-              "citedCount": 1
-            },
-            {
-              "market": "NL",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -662,92 +739,15 @@
         {
           "byBot": [
             {
-              "model": "gpt-web",
-              "citedCount": 7
-            },
-            {
-              "model": "grok-web",
-              "citedCount": 7
-            },
-            {
-              "model": "perplexity-web",
-              "citedCount": 5
-            }
-          ],
-          "domain": "mid.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "FR",
-              "citedCount": 3
-            },
-            {
-              "market": "ES",
-              "citedCount": 3
-            },
-            {
-              "market": "NL",
-              "citedCount": 2
-            },
-            {
-              "market": "US",
-              "citedCount": 2
-            },
-            {
-              "market": "UA",
-              "citedCount": 2
-            },
-            {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
-              "market": "DE",
-              "citedCount": 1
-            },
-            {
-              "market": "AT",
-              "citedCount": 1
-            },
-            {
-              "market": "UK",
-              "citedCount": 1
-            },
-            {
-              "market": "CZ",
-              "citedCount": 1
-            },
-            {
-              "market": "IT",
-              "citedCount": 1
-            },
-            {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "state_media",
-          "citedCount": 19,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "google-ai",
               "citedCount": 13
             },
             {
-              "model": "perplexity-web",
+              "model": "gemini-web",
               "citedCount": 2
             },
             {
-              "model": "gemini-web",
+              "model": "perplexity-web",
               "citedCount": 2
             }
           ],
@@ -759,6 +759,14 @@
               "citedCount": 3
             },
             {
+              "market": "CZ",
+              "citedCount": 2
+            },
+            {
+              "market": "PL",
+              "citedCount": 2
+            },
+            {
               "market": "NL",
               "citedCount": 2
             },
@@ -771,18 +779,6 @@
               "citedCount": 2
             },
             {
-              "market": "CZ",
-              "citedCount": 2
-            },
-            {
-              "market": "PL",
-              "citedCount": 2
-            },
-            {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "ES",
               "citedCount": 1
             },
@@ -792,6 +788,10 @@
             },
             {
               "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -816,14 +816,6 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 2
-            },
-            {
-              "market": "AT",
-              "citedCount": 2
-            },
-            {
               "market": "CZ",
               "citedCount": 2
             },
@@ -840,15 +832,23 @@
               "citedCount": 2
             },
             {
+              "market": "TR",
+              "citedCount": 2
+            },
+            {
+              "market": "AT",
+              "citedCount": 2
+            },
+            {
               "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "IT",
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -889,7 +889,7 @@
               "citedCount": 3
             },
             {
-              "market": "DE",
+              "market": "UK",
               "citedCount": 2
             },
             {
@@ -897,12 +897,8 @@
               "citedCount": 2
             },
             {
-              "market": "UK",
+              "market": "DE",
               "citedCount": 2
-            },
-            {
-              "market": "NL",
-              "citedCount": 1
             },
             {
               "market": "ES",
@@ -910,6 +906,10 @@
             },
             {
               "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "NL",
               "citedCount": 1
             }
           ],
@@ -934,10 +934,6 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 2
-            },
-            {
               "market": "FR",
               "citedCount": 2
             },
@@ -946,7 +942,11 @@
               "citedCount": 2
             },
             {
-              "market": "AT",
+              "market": "TR",
+              "citedCount": 2
+            },
+            {
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -954,7 +954,7 @@
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -979,19 +979,15 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
-              "citedCount": 2
-            },
-            {
               "market": "ES",
               "citedCount": 2
             },
             {
-              "market": "TR",
-              "citedCount": 1
+              "market": "DE",
+              "citedCount": 2
             },
             {
-              "market": "AT",
+              "market": "UA",
               "citedCount": 1
             },
             {
@@ -999,7 +995,11 @@
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -1028,19 +1028,19 @@
               "citedCount": 3
             },
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
-              "market": "DE",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
             {
               "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -1050,47 +1050,6 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "perplexity-web",
-              "citedCount": 4
-            },
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "ground.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "NL",
-              "citedCount": 2
-            },
-            {
-              "market": "FR",
-              "citedCount": 1
-            },
-            {
-              "market": "AT",
-              "citedCount": 1
-            },
-            {
-              "market": "PL",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 5,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -1139,6 +1098,47 @@
         {
           "byBot": [
             {
+              "model": "perplexity-web",
+              "citedCount": 4
+            },
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "ground.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "NL",
+              "citedCount": 2
+            },
+            {
+              "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "FR",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 5,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
               "model": "grok-web",
               "citedCount": 4
             }
@@ -1147,7 +1147,11 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
+              "market": "UA",
+              "citedCount": 1
+            },
+            {
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -1155,11 +1159,7 @@
               "citedCount": 1
             },
             {
-              "market": "UA",
-              "citedCount": 1
-            },
-            {
-              "market": "PL",
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -1184,10 +1184,6 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "DK",
               "citedCount": 1
             },
@@ -1197,6 +1193,10 @@
             },
             {
               "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -1221,85 +1221,19 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "AT",
-              "citedCount": 1
-            },
-            {
               "market": "UA",
               "citedCount": 1
             },
             {
               "market": "PL",
               "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 3,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 3
-            }
-          ],
-          "domain": "ura.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 1
             },
-            {
-              "market": "ES",
-              "citedCount": 1
-            },
-            {
-              "market": "US",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 3,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "EUvsDisinfo",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 3
-            }
-          ],
-          "domain": "sputniknews.com",
-          "reached": true,
-          "byMarket": [
             {
               "market": "AT",
               "citedCount": 1
-            },
-            {
-              "market": "DK",
-              "citedCount": 1
-            },
-            {
-              "market": "IT",
-              "citedCount": 1
             }
           ],
-          "category": "state_media",
+          "category": "disinfo_outlet",
           "citedCount": 3,
           "distributed": false,
           "inWatchlist": true,
@@ -1320,7 +1254,7 @@
           "reached": true,
           "byMarket": [
             {
-              "market": "DE",
+              "market": "UK",
               "citedCount": 1
             },
             {
@@ -1328,7 +1262,7 @@
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "DE",
               "citedCount": 1
             }
           ],
@@ -1346,39 +1280,10 @@
           "byBot": [
             {
               "model": "grok-web",
-              "citedCount": 2
+              "citedCount": 3
             }
           ],
-          "domain": "news-pravda.com",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "DE",
-              "citedCount": 1
-            },
-            {
-              "market": "IT",
-              "citedCount": 1
-            }
-          ],
-          "category": "pravda_network",
-          "citedCount": 2,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": "VIGINUM · Portal Kombat",
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 2
-            }
-          ],
-          "domain": "news.rambler.ru",
+          "domain": "sputniknews.com",
           "reached": true,
           "byMarket": [
             {
@@ -1386,12 +1291,16 @@
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "AT",
               "citedCount": 1
             }
           ],
-          "category": "disinfo_outlet",
-          "citedCount": 2,
+          "category": "state_media",
+          "citedCount": 3,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
@@ -1403,28 +1312,32 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
-              "citedCount": 1
-            },
-            {
-              "model": "google-ai",
-              "citedCount": 1
+              "model": "grok-web",
+              "citedCount": 3
             }
           ],
-          "domain": "spanish.news.cn",
+          "domain": "ura.news",
           "reached": true,
           "byMarket": [
             {
               "market": "ES",
-              "citedCount": 2
+              "citedCount": 1
+            },
+            {
+              "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
+              "citedCount": 1
             }
           ],
           "category": "disinfo_outlet",
-          "citedCount": 2,
+          "citedCount": 3,
           "distributed": false,
           "inWatchlist": true,
           "repeatCount": 0,
-          "attributedBy": null,
+          "attributedBy": "EUvsDisinfo",
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -1462,6 +1375,118 @@
           "byBot": [
             {
               "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "domain": "news-pravda.com",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
+              "citedCount": 1
+            }
+          ],
+          "category": "pravda_network",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "VIGINUM · Portal Kombat",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 2
+            }
+          ],
+          "domain": "news.rambler.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            },
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "spanish.news.cn",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "ES",
+              "citedCount": 2
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 2,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "perplexity-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "asiaplus.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
               "citedCount": 1
             }
           ],
@@ -1479,6 +1504,31 @@
           "inWatchlist": true,
           "repeatCount": 0,
           "attributedBy": "EUvsDisinfo",
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "grok-web",
+              "citedCount": 1
+            }
+          ],
+          "domain": "europeantimes.news",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "US",
+              "citedCount": 1
+            }
+          ],
+          "category": "disinfo_outlet",
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
           "criticalCount": 0,
           "injectionLine": false,
           "distributedFirstSeen": null
@@ -1511,65 +1561,15 @@
         {
           "byBot": [
             {
-              "model": "google-ai",
-              "citedCount": 1
-            }
-          ],
-          "domain": "vk.ru",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "UA",
-              "citedCount": 1
-            }
-          ],
-          "category": null,
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": false,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "grok-web",
               "citedCount": 1
             }
           ],
-          "domain": "newstream.cz",
+          "domain": "informazione.news",
           "reached": true,
           "byMarket": [
             {
-              "market": "CZ",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
-              "model": "grok-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "europeantimes.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "US",
+              "market": "IT",
               "citedCount": 1
             }
           ],
@@ -1611,31 +1611,6 @@
         {
           "byBot": [
             {
-              "model": "gpt-web",
-              "citedCount": 1
-            }
-          ],
-          "domain": "urgent.news",
-          "reached": true,
-          "byMarket": [
-            {
-              "market": "TR",
-              "citedCount": 1
-            }
-          ],
-          "category": "disinfo_outlet",
-          "citedCount": 1,
-          "distributed": false,
-          "inWatchlist": true,
-          "repeatCount": 0,
-          "attributedBy": null,
-          "criticalCount": 0,
-          "injectionLine": false,
-          "distributedFirstSeen": null
-        },
-        {
-          "byBot": [
-            {
               "model": "grok-web",
               "citedCount": 1
             }
@@ -1661,15 +1636,15 @@
         {
           "byBot": [
             {
-              "model": "perplexity-web",
+              "model": "grok-web",
               "citedCount": 1
             }
           ],
-          "domain": "asiaplus.news",
+          "domain": "newstream.cz",
           "reached": true,
           "byMarket": [
             {
-              "market": "UA",
+              "market": "CZ",
               "citedCount": 1
             }
           ],
@@ -1711,15 +1686,15 @@
         {
           "byBot": [
             {
-              "model": "grok-web",
+              "model": "gpt-web",
               "citedCount": 1
             }
           ],
-          "domain": "informazione.news",
+          "domain": "urgent.news",
           "reached": true,
           "byMarket": [
             {
-              "market": "IT",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -1727,6 +1702,31 @@
           "citedCount": 1,
           "distributed": false,
           "inWatchlist": true,
+          "repeatCount": 0,
+          "attributedBy": null,
+          "criticalCount": 0,
+          "injectionLine": false,
+          "distributedFirstSeen": null
+        },
+        {
+          "byBot": [
+            {
+              "model": "google-ai",
+              "citedCount": 1
+            }
+          ],
+          "domain": "vk.ru",
+          "reached": true,
+          "byMarket": [
+            {
+              "market": "UA",
+              "citedCount": 1
+            }
+          ],
+          "category": null,
+          "citedCount": 1,
+          "distributed": false,
+          "inWatchlist": false,
           "repeatCount": 0,
           "attributedBy": null,
           "criticalCount": 0,
@@ -1772,11 +1772,11 @@
               "citedCount": 2
             },
             {
-              "market": "ES",
+              "market": "PL",
               "citedCount": 2
             },
             {
-              "market": "PL",
+              "market": "ES",
               "citedCount": 2
             },
             {
@@ -1831,15 +1831,15 @@
               "citedCount": 2
             },
             {
-              "market": "ES",
-              "citedCount": 2
-            },
-            {
               "market": "IT",
               "citedCount": 2
             },
             {
               "market": "PL",
+              "citedCount": 2
+            },
+            {
+              "market": "ES",
               "citedCount": 2
             },
             {
@@ -1878,10 +1878,6 @@
               "citedCount": 2
             },
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "AT",
               "citedCount": 1
             },
@@ -1894,10 +1890,6 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
-              "citedCount": 1
-            },
-            {
               "market": "IT",
               "citedCount": 1
             },
@@ -1907,6 +1899,10 @@
             },
             {
               "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -1923,6 +1919,10 @@
             },
             {
               "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -1941,10 +1941,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "AT",
               "citedCount": 1
             },
@@ -1961,10 +1957,6 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
-              "citedCount": 1
-            },
-            {
               "market": "IT",
               "citedCount": 1
             },
@@ -1974,6 +1966,10 @@
             },
             {
               "market": "PL",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -1990,6 +1986,10 @@
             },
             {
               "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -2087,11 +2087,11 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "PL",
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -2142,11 +2142,11 @@
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "IT",
               "citedCount": 1
             },
             {
@@ -2189,15 +2189,15 @@
               "citedCount": 1
             },
             {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
               "market": "IT",
               "citedCount": 1
             },
             {
               "market": "NL",
-              "citedCount": 1
-            },
-            {
-              "market": "ES",
               "citedCount": 1
             },
             {
@@ -2209,11 +2209,11 @@
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -2264,7 +2264,7 @@
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "CZ",
               "citedCount": 1
             },
             {
@@ -2272,7 +2272,7 @@
               "citedCount": 1
             },
             {
-              "market": "CZ",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -2291,10 +2291,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "AT",
               "citedCount": 1
             },
@@ -2304,10 +2300,6 @@
             },
             {
               "market": "FR",
-              "citedCount": 1
-            },
-            {
-              "market": "DK",
               "citedCount": 1
             },
             {
@@ -2323,11 +2315,19 @@
               "citedCount": 1
             },
             {
+              "market": "DK",
+              "citedCount": 1
+            },
+            {
               "market": "CZ",
               "citedCount": 1
             },
             {
               "market": "NL",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -2346,11 +2346,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "AT",
+              "market": "NL",
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "AT",
               "citedCount": 1
             },
             {
@@ -2362,10 +2362,6 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
@@ -2374,15 +2370,19 @@
               "citedCount": 1
             },
             {
+              "market": "ES",
+              "citedCount": 1
+            },
+            {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
               "market": "US",
               "citedCount": 1
             },
             {
               "market": "UA",
-              "citedCount": 1
-            },
-            {
-              "market": "CZ",
               "citedCount": 1
             }
           ],
@@ -2413,15 +2413,15 @@
               "citedCount": 1
             },
             {
-              "market": "DK",
-              "citedCount": 1
-            },
-            {
               "market": "IT",
               "citedCount": 1
             },
             {
               "market": "UK",
+              "citedCount": 1
+            },
+            {
+              "market": "DK",
               "citedCount": 1
             },
             {
@@ -2449,11 +2449,11 @@
               "citedCount": 4
             },
             {
-              "model": "perplexity-web",
+              "model": "gemini-web",
               "citedCount": 2
             },
             {
-              "model": "gemini-web",
+              "model": "perplexity-web",
               "citedCount": 2
             }
           ],
@@ -2495,10 +2495,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "NL",
               "citedCount": 1
             },
@@ -2515,6 +2511,10 @@
               "citedCount": 1
             },
             {
+              "market": "CZ",
+              "citedCount": 1
+            },
+            {
               "market": "US",
               "citedCount": 1
             },
@@ -2523,7 +2523,7 @@
               "citedCount": 1
             },
             {
-              "market": "CZ",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -2585,11 +2585,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "UK",
+              "market": "IT",
               "citedCount": 2
             },
             {
-              "market": "IT",
+              "market": "UK",
               "citedCount": 2
             },
             {
@@ -2597,11 +2597,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -2745,7 +2745,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "IT",
+              "citedCount": 1
+            },
+            {
+              "market": "US",
               "citedCount": 1
             },
             {
@@ -2753,11 +2757,7 @@
               "citedCount": 1
             },
             {
-              "market": "IT",
-              "citedCount": 1
-            },
-            {
-              "market": "US",
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -2784,11 +2784,11 @@
               "citedCount": 1
             },
             {
-              "market": "IT",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "IT",
               "citedCount": 1
             },
             {
@@ -2819,6 +2819,10 @@
               "citedCount": 1
             },
             {
+              "market": "AT",
+              "citedCount": 1
+            },
+            {
               "market": "FR",
               "citedCount": 1
             },
@@ -2828,10 +2832,6 @@
             },
             {
               "market": "US",
-              "citedCount": 1
-            },
-            {
-              "market": "AT",
               "citedCount": 1
             }
           ],
@@ -2854,11 +2854,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "FR",
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "ES",
               "citedCount": 1
             },
             {
@@ -2889,11 +2889,11 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -2955,11 +2955,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
+              "market": "AT",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "TR",
               "citedCount": 1
             },
             {
@@ -3052,10 +3052,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "FR",
               "citedCount": 1
             },
@@ -3065,6 +3061,10 @@
             },
             {
               "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -3087,11 +3087,11 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "UA",
               "citedCount": 1
             },
             {
-              "market": "UA",
+              "market": "FR",
               "citedCount": 1
             },
             {
@@ -3114,11 +3114,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
+              "market": "NL",
               "citedCount": 1
             },
             {
-              "market": "NL",
+              "market": "TR",
               "citedCount": 1
             },
             {
@@ -3149,7 +3149,7 @@
               "citedCount": 1
             },
             {
-              "market": "FR",
+              "market": "AT",
               "citedCount": 1
             },
             {
@@ -3157,7 +3157,7 @@
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -3207,10 +3207,6 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "UK",
               "citedCount": 1
             },
@@ -3220,6 +3216,10 @@
             },
             {
               "market": "US",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -3497,15 +3497,15 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "ES",
               "citedCount": 1
             },
             {
               "market": "CZ",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -3582,11 +3582,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "AT",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -3609,11 +3609,11 @@
               "citedCount": 1
             },
             {
-              "market": "US",
+              "market": "CZ",
               "citedCount": 1
             },
             {
-              "market": "CZ",
+              "market": "US",
               "citedCount": 1
             }
           ],
@@ -3663,11 +3663,11 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "AT",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "ES",
               "citedCount": 1
             }
           ],
@@ -3686,15 +3686,15 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
-              "citedCount": 1
-            },
-            {
               "market": "DE",
               "citedCount": 1
             },
             {
               "market": "DK",
+              "citedCount": 1
+            },
+            {
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -4250,11 +4250,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "NL",
+              "market": "DE",
               "citedCount": 1
             },
             {
-              "market": "DE",
+              "market": "NL",
               "citedCount": 1
             }
           ],
@@ -4369,11 +4369,11 @@
           "status": "blacklist",
           "byMarket": [
             {
-              "market": "TR",
+              "market": "UK",
               "citedCount": 1
             },
             {
-              "market": "UK",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -7060,7 +7060,7 @@
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "AT",
               "citedCount": 1
             },
             {
@@ -7068,11 +7068,11 @@
               "citedCount": 1
             },
             {
-              "market": "PL",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "PL",
               "citedCount": 1
             },
             {
@@ -11144,7 +11144,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-08",
+        "date": "2026-10-09",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -11163,7 +11163,7 @@
             "platform": "Facebook"
           },
           {
-            "url": "t.me/citere_ai_monitor",
+            "url": "https://t.me/citere_ai_monitor/",
             "platform": "Telegram"
           }
         ],
