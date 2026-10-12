@@ -197,6 +197,42 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("abs", (v) => Math.abs(Number(v)));
   eleventyConfig.addFilter("take", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("plural", (count, one, many) => (Number(count) === 1 ? one : many));
+  // A countermeasure's publish market is one or more locale tags joined by the
+  // exporter ("US-EN, DE-DE"); the log's mini-grid needs them as a list, and each
+  // cell shows the region half ("US-EN" → "US"). socMono maps a share channel to
+  // its text monogram (no icon fonts — CLAUDE.md §2).
+  eleventyConfig.addFilter("cmMarkets", (value) =>
+    String(value || "").split(",").map((s) => s.trim()).filter(Boolean));
+  eleventyConfig.addFilter("locRegion", (value) => String(value || "").split("-")[0]);
+  // Canonical market columns for the log's mini-grid: first-appearance union of
+  // the tags across the rows shown (most rows carry all markets in the exporter's
+  // order, so the first full row seeds the order).
+  eleventyConfig.addFilter("cmMarketColumns", (actions) => {
+    const seen = [];
+    for (const a of actions || [])
+      for (const m of String(a.market || "").split(",").map((s) => s.trim()).filter(Boolean))
+        if (!seen.includes(m)) seen.push(m);
+    return seen;
+  });
+  // The log groups consecutive actions by date (the rows arrive newest-first), so
+  // a date is printed once. Each item keeps its 1-based position for the # column.
+  eleventyConfig.addFilter("cmDateGroups", (actions) => {
+    const groups = [];
+    let cur = null;
+    (actions || []).forEach((a, i) => {
+      const key = a.date || null;
+      if (!cur || cur.date !== key) { cur = { date: key, items: [] }; groups.push(cur); }
+      cur.items.push({ action: a, n: i + 1 });
+    });
+    for (const g of groups) g.count = g.items.length;
+    return groups;
+  });
+  const SOC_MONO = { LinkedIn: "in", X: "X", Twitter: "X", Facebook: "f", Telegram: "TG" };
+  eleventyConfig.addFilter("socMono", (value) => SOC_MONO[value] || String(value || "").slice(0, 2));
+  // Brand glyph → the id of its <symbol> in the log's inline SVG sprite. Empty for
+  // an unknown channel, which falls back to the text monogram.
+  const SOC_ICON = { LinkedIn: "soc-linkedin", X: "soc-x", Twitter: "soc-x", Facebook: "soc-facebook", Telegram: "soc-telegram" };
+  eleventyConfig.addFilter("socIcon", (value) => SOC_ICON[value] || "");
   eleventyConfig.addFilter("unique", (arr) => [...new Set([].concat(arr || []))]);
   eleventyConfig.addFilter("whereEq", (arr, key, value) =>
     (arr || []).filter((item) => {

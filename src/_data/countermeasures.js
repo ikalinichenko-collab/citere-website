@@ -150,6 +150,12 @@ module.exports = {
     // response date in the model, so this is a count of the fact, never the text.
     answered: count((a) => a.replied),
     targets: new Set(actions.map((a) => a.target).filter(Boolean)).size,
+    // Distinct individual markets and social channels across the log — a market
+    // cell is a comma-joined locale list, so it is split before counting.
+    marketsCovered: new Set(
+      actions.flatMap((a) => String(a.market || "").split(",").map((s) => s.trim()).filter(Boolean))
+    ).size,
+    channels: new Set(actions.flatMap((a) => (a.links || []).map((l) => l.platform).filter(Boolean))).size,
     withheld: all.length - actions.length
   },
   // Kept for the current page copy until /countermeasures is rebuilt at step 4.

@@ -1,57 +1,118 @@
 {#- The countermeasures log (CLAUDE_CODE_BRIEF §4, Countermeasures Catalogue §1).
-    One row per action, newest first. A row opens to its evidence package and
-    its proof, and a draft is visibly not an action taken: the agent prepares,
-    a person confirms, and only then is anything sent (catalogue §0). -#}
+    Redesigned per docs/"Countermeasures — redesigned log": a row leads with the
+    claim, the markets it covered are a mini-grid, the publication channels sit
+    inline as brand icons. Rows group under their date; the date header is itself a
+    <details>, so it folds its actions away — the latest date opens by default.
+    Everything is native <details>, so the log works without any JavaScript
+    (CLAUDE.md §2), and a draft is visibly not an action taken (catalogue §0).
+    Shared by the main log, the facet pages and the per-claim escalation report, so
+    every value is derived from the action row itself — titles come from the global
+    published.claimLinks. The union and the date grouping are filters, because this
+    nunjucks cannot assign to a namespace member inside the loop. -#}
+{%- set cols = tableActions | cmMarketColumns %}
 <div class="panel">
-  <div class="summary-line"><b>{{ tableActions | length }}</b> {{ tableActions | length | plural("action", "actions") }} logged
-    <span>&middot;</span><b>{{ tableTaken }}</b> taken<span>&middot;</span>
-    <b>{{ tableAwaiting }}</b> awaiting confirmation</div>
-  {%- for a in tableActions %}
-  <details class="cmrow">
-    <summary>
-      <span class="cmdate">{% if a.date %}<time datetime="{{ a.date | isoDate }}">{{ a.date | shortDate }}</time>{% else %}<span style="color:var(--dimmer)">not sent</span>{% endif %}</span>
-      <span class="cmtype"><i class="cmdot {{ a.typeClass }}"></i>{{ a.typeLabel }}{% if a.subtypeLabel %}<small>{{ a.subtypeLabel }}</small>{% endif %}</span>
-      <span class="cmtarget">{{ a.target | defangCopy }}</span>
-      <span class="cmmarket">{% if a.market %}{{ a.market | upper }}{% else %}<span style="color:var(--dimmer)">global</span>{% endif %}</span>
-      <span class="cmclaims">{% for id in a.claims %}{{ id }}{% if not loop.last %}, {% endif %}{% endfor %}</span>
-      <span class="cmstatus"><span class="cmpill {{ a.statusClass }}">{{ a.statusLabel }}</span></span>
+  {#- Brand glyphs declared once; each channel below is a <use> reference, so 22
+      rows cost four <symbol>s, not 88 inline SVGs. -#}
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+    <symbol id="soc-linkedin" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0z"/></symbol>
+    <symbol id="soc-x" viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23zm-1.16 17.52h1.83L7.08 4.13H5.12z"/></symbol>
+    <symbol id="soc-facebook" viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8v8.44C19.61 23.08 24 18.09 24 12.07z"/></symbol>
+    <symbol id="soc-telegram" viewBox="0 0 24 24"><path d="M23.91 3.79L20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.54.56-1.1.56l.39-5.56 10.11-9.14c.44-.39-.1-.6-.68-.22L6.9 13.1l-5.45-1.7c-1.18-.37-1.2-1.19.25-1.76l21.3-8.21c.99-.36 1.85.22 1.53 1.72z"/></symbol>
+  </defs></svg>
+  <div style="overflow-x:auto"><div style="min-width:860px">
+  <div class="cmhead">
+    <span>#</span><span>Claim</span><span>Type</span><span>Markets</span><span>Stage</span><span>Channels</span><span></span>
+  </div>
+  {%- for g in tableActions | cmDateGroups %}
+  <details class="cmgroup"{% if loop.first %} open{% endif %}>
+    <summary class="cmgroup-sum">
+      <svg class="cmgchev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      <span class="cmg-date">{% if g.date %}<time datetime="{{ g.date | isoDate }}">{{ g.date | displayDate }}</time>{% else %}Not sent{% endif %}</span>
+      <span class="cmg-n">{{ g.count }} {{ g.count | plural("action", "actions") }}</span>
     </summary>
-    <div class="cmdetail">
-      <div><b>What</b><br>{{ a.sent | defangCopy | default("Not recorded.") }}
-        {%- if a.reference %}<br><span style="color:var(--dimmer)">Ref: {{ a.reference | defangCopy }}</span>{% endif %}</div>
-      <div><b>Evidence package</b><br>
-        {%- for id in a.claims %}<a href="{{ (claims | whereEq('id', id) | first).url | url }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
-        {%- if not a.claims | length %}<span style="color:var(--dimmer)">no claim attached</span>{% endif %}
-        <br>{% if a.market %}Country: {{ a.market | upper }}{% else %}Scope: global{% endif %}
-        {%- if a.follow_up_due %}<br>Follow-up due <time datetime="{{ a.follow_up_due | isoDate }}">{{ a.follow_up_due | shortDate }}</time>{% endif %}</div>
-      {%- if a.url or a.links | length or a.domain %}
-      <div><b>Links</b><br>
-        {%- if a.url %}<a href="{{ a.url | url }}">Fake&rsquo;s page &rarr;</a>{% if a.links | length or a.domain %}<br>{% endif %}{% endif %}
-        {%- if a.links | length %}{% for l in a.links %}<a href="{{ l.url | extHref }}">{{ l.platform }}</a>{% if not loop.last %} &middot; {% endif %}{% endfor %}{% if a.domain %}<br>{% endif %}{% endif %}
-        {%- if a.domain %}Source: {{ a.domain | defang }}{% if a.basis %} &mdash; {{ a.basis }}{% endif %}{% endif %}</div>
-      {%- endif %}
-      <div><b>Submission and proof</b><br>
-        {%- if a.awaitingConfirmation %}<b>Drafted and waiting for a person to approve it.</b> Nothing has
-          been sent.
-        {%- elif a.scheduled %}Scheduled, not yet run.
-        {%- elif a.status == "drafted" %}<b>Draft only.</b> Nothing has been sent, filed or published.
-        {%- elif a.status == "responded" %}Sent, and the recipient replied. The correspondence itself is held
-          internally and is not published.
-        {%- elif a.status == "closed" %}Sent, now closed. Proof of submission is held internally and is not published.
-        {%- elif a.status == "declined" %}Sent, and declined. The correspondence is held internally and is not published.
-        {%- elif a.taken %}Sent, awaiting a reply. Proof of submission is held internally and is not published.
-        {%- else %}<b>Draft only.</b> Nothing has been sent, filed or published.{% endif %}</div>
-      {%- if a.pipeline %}
-      <div class="cmpipe">
-        {%- for step in a.pipeline.steps %}<span class="cmstep{% if loop.index0 <= a.pipeline.stage %} on{% endif %}{% if step == 'Declined' %} bad{% endif %}">{{ step }}</span>{% endfor %}
+    <div class="cmgroup-body">
+    {%- for row in g.items %}
+    {%- set a = row.action %}
+    {%- set cl = published.claimLinks | whereEq('id', a.claims[0]) | first %}
+    {%- set cells = a.market | cmMarkets %}
+    {%- set selfDriven = a.typeClass in ['t-public','t-github','t-catalog','t-feed'] %}
+    <details class="cmrow">
+      <summary>
+        <span class="cmnum">{% if row.n < 10 %}0{% endif %}{{ row.n }}</span>
+        {%- if a.claims | length %}
+        <a class="cmclaim" href="{{ (cl.url if cl else a.url) | url }}">
+          <span class="cmclaim-t">{{ cl.title if cl else a.claims | join(", ") }}</span>
+          <span class="cmclaim-id">{{ a.claims | join(", ") }}{% if a.subtypeLabel %} · {{ a.subtypeLabel }}{% endif %}</span>
+        </a>
+        {%- else %}
+        <span class="cmclaim"><span class="cmclaim-t" style="color:var(--dimmer);font-weight:400">No claim attached</span></span>
+        {%- endif %}
+        <span><span class="cmtag {{ a.typeClass }}">{{ a.typeLabel }}</span></span>
+        <span>
+          {%- if cells | length %}
+          <span class="cmgrid" title="{{ cells | length }} of {{ cols | length }} markets">
+            {%- for code in cols %}<span class="cmcell{% if code in cells %} on{% endif %}">{{ code | locRegion }}</span>{% endfor %}
+          </span>
+          {%- else %}<span class="cmpub" style="font-size:12px">Global</span>{% endif %}
+        </span>
+        <span class="cmstage{% if a.taken %} ok{% endif %}">
+          {%- if a.taken %}<span class="cmcheck"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{% endif %}{{ a.statusLabel }}
+        </span>
+        <span class="cmsocs">
+          {%- if a.links | length %}{% for l in a.links %}{% set icon = l.platform | socIcon %}<a class="cmsoc" href="{{ l.url | extHref }}" aria-label="{{ l.platform }}">{% if icon %}<svg><use href="#{{ icon }}"></use></svg>{% else %}{{ l.platform | socMono }}{% endif %}</a>{% endfor %}{% else %}<span style="color:var(--dimmer)">&mdash;</span>{% endif %}
+        </span>
+        <svg class="cmchev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+      </summary>
+      <div class="cmdetail">
+        <div>
+          <b>Evidence package</b>
+          {%- for id in a.claims %}{% set link = published.claimLinks | whereEq('id', id) | first %}<a class="cmlink" href="{{ (link.url if link else a.url) | url }}">Open {{ id }} &rarr;</a>{% endfor %}
+          {%- if not a.claims | length %}<span class="cmmute">No claim attached</span>{% endif %}
+          {%- if a.target %}<span class="cmmute">{% if selfDriven %}Published on{% else %}Sent to{% endif %} {{ a.target | defangCopy }}</span>{% endif %}
+          {%- if a.follow_up_due %}<span class="cmmute">Follow-up due <time datetime="{{ a.follow_up_due | isoDate }}">{{ a.follow_up_due | shortDate }}</time></span>{% endif %}
+        </div>
+        <div>
+          <b>Markets measured</b>
+          {%- if not cells | length %}<span class="cmmute">Global &mdash; every market this claim was tested in</span>
+          {%- elif cells | length == cols | length %}<span class="cmpub">All {{ cols | length }} markets measured for this claim.</span>
+          {%- else %}<span class="cmchips">{% for code in cells %}<span class="cmchip">{{ code }}</span>{% endfor %}</span>{% endif %}
+        </div>
+        <div>
+          {%- if selfDriven %}
+          <b>Publication</b>
+          <span class="cmpub">{{ a.typeLabel }}{% if a.target %} on {{ a.target | defangCopy }}{% endif %}{% if a.date %} on <time datetime="{{ a.date | isoDate }}">{{ a.date | shortDate }}</time>{% endif %}{% if a.links | length %}, shared to {% for l in a.links %}{{ l.platform }}{% if loop.revindex0 == 1 %} and {% elif not loop.last %}, {% endif %}{% endfor %}{% endif %}.</span>
+          {%- else %}
+          <b>Submission and proof</b>
+          <span class="cmpub">
+          {%- if a.sent %}{{ a.sent | defangCopy }}<br>{% endif %}
+          {%- if a.awaitingConfirmation %}<b>Drafted and waiting for a person to approve it.</b> Nothing has been sent.
+          {%- elif a.scheduled %}Scheduled, not yet run.
+          {%- elif a.status == "drafted" %}<b>Draft only.</b> Nothing has been sent, filed or published.
+          {%- elif a.status == "responded" %}Sent, and the recipient replied. The correspondence itself is held internally and is not published.
+          {%- elif a.status == "closed" %}Sent, now closed. Proof of submission is held internally and is not published.
+          {%- elif a.status == "declined" %}Sent, and declined. The correspondence is held internally and is not published.
+          {%- elif a.taken %}Sent, awaiting a reply. Proof of submission is held internally and is not published.
+          {%- else %}<b>Draft only.</b> Nothing has been sent, filed or published.{% endif %}
+          {%- if a.reference %}<br><span class="cmmute">Ref: {{ a.reference | defangCopy }}</span>{% endif %}
+          {%- if a.domain %}<br>Source: {{ a.domain | defang }}{% if a.basis %} &mdash; {{ a.basis }}{% endif %}{% endif %}
+          </span>
+          {%- endif %}
+        </div>
+        {%- if a.pipeline and not selfDriven %}
+        <div class="cmpipe">
+          {%- for step in a.pipeline.steps %}<span class="cmstep{% if loop.index0 <= a.pipeline.stage %} on{% endif %}{% if step == 'Declined' %} bad{% endif %}">{{ step }}</span>{% endfor %}
+        </div>
+        {%- endif %}
       </div>
-      {%- endif %}
+    </details>
+    {%- endfor %}
     </div>
   </details>
   {%- endfor %}
   {%- if not tableActions | length %}
   <div class="summary-line" style="color:var(--dimmer)">No actions match this filter.</div>
   {%- endif %}
+  </div></div>
 </div>
 <p class="note">We publish the fact, date, target and status of each countermeasure. We do not publish what
   was submitted, the proof of submission, correspondence with a platform, or the names of individuals.

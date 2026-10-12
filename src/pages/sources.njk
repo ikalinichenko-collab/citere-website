@@ -22,9 +22,9 @@ permalink: "{{ '/sources/' | loc(lang) }}"
 
 {% include "partials/source-filters.njk" %}
 
-<div class="metrics" style="grid-template-columns:repeat(5,1fr);margin:0 0 22px">
+<div class="metrics" style="grid-template-columns:repeat(4,1fr);margin:0 0 22px">
 {%- for tile in sourceTiles %}
-  <div class="m"><div class="n num"{% if tile.tone == "bad" %} style="color:var(--false)"{% endif %}>{{ tile.value }}</div>
+  <div class="m"><div class="n num"{% if tile.colour %} style="color:{{ tile.colour }}"{% endif %}>{{ tile.value }}</div>
     <div class="l">{{ tile.label }}</div></div>
 {%- endfor %}
 </div>

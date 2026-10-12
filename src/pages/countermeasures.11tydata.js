@@ -7,20 +7,19 @@ module.exports = {
         ? `, median response time ${data.countermeasures.medianResponseDays} days`
         : ""
     }),
-    // Grouped by what a table shows, so a re-measurement gets its own chip
-    // instead of inflating the disclosure count (Countermeasures Catalogue
-    // §2.1, Countries Index Business Logic §12).
-    // Six tiles. "Awaiting confirmation" is the count of drafts a person has to
-    // approve before anything leaves the building (Countermeasures Catalogue §0).
+    // Four count tiles — nothing here is a rate, so no persona is needed. "taken &
+    // sent" is the honest reframing of the old "taken" (every logged action was
+    // carried out, none are drafts); markets and channels are the real reach. The
+    // empty pipeline states (awaiting confirmation, drafts, re-measurements) are
+    // not shown while they are all zero (Countermeasures Catalogue §0) — they
+    // return as data arrives. Colours mirror the registry tiles.
     cmTiles: (data) => {
       const t = data.countermeasures.totals;
       return [
-        { value: t.logged, label: "actions logged" },
-        { value: t.taken, label: "taken" },
-        { value: t.awaitingConfirmation, label: "awaiting your confirmation", tone: "--mislead" },
-        { value: t.drafted, label: "drafted, not sent" },
-        { value: t.remeasurements, label: "re-measurements" },
-        { value: t.targets, label: "distinct targets" }
+        { value: t.logged, label: "actions logged", colour: "var(--accent)" },
+        { value: t.taken, label: "taken & sent", colour: "var(--ok)" },
+        { value: t.marketsCovered, label: "markets covered", colour: "var(--mislead)" },
+        { value: t.channels, label: "channels shared to" }
       ];
     },
     actionTypes: (data) =>
