@@ -4,6 +4,13 @@
       <div class="fcol fbrand">
         <div class="logo">{{ site.org.name }}</div>
         <p>{{ 'footer.blurb' | t }}</p>
+        {%- if site.org.links | length %}
+        <div class="fsoc">
+          {%- for l in site.org.links %}
+          <a href="{{ l.url | extHref }}" aria-label="{{ l.label }}" rel="me noopener">{% set icon = l.label | socIcon %}{% if icon %}<svg aria-hidden="true" focusable="false"><use href="#{{ icon }}"></use></svg>{% else %}{{ l.label | socMono }}{% endif %}</a>
+          {%- endfor %}
+        </div>
+        {%- endif %}
       </div>
       {%- for col in navigation.footer %}
       <div class="fcol"><h2>{{ col.headingKey | t | safe }}</h2>

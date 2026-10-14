@@ -23,7 +23,7 @@ const P = {
   registry: "pages/registry.njk",
   benchmarks: "pages/benchmarks.njk",
   reports: "pages/monitor.njk",
-  chatbots: "pages/platforms.njk",
+  chatbots: "generators/platform-pages.njk",
   countries: "pages/countries.njk",
   sources: "pages/sources.njk",
   countermeasures: "pages/countermeasures.njk",
@@ -60,7 +60,6 @@ const FOOTER = [
     links: [
       entry("claimRegistry", "Claim registry", "/registry/", P.registry),
       entry("benchmarks", "Benchmarks", "/benchmarks/", P.benchmarks),
-      entry("reports", "Reports", "/monitor/", P.reports, false, hasMonitorReports),
       entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
       entry("countries", "Countries", "/countries/", P.countries),
       entry("sources", "Sources", "/sources/", P.sources),

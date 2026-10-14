@@ -8,7 +8,7 @@ eleventyExcludeFromCollections: true
 {% if site.isDemo %}
 WARNING: this build carries demonstration data. Every figure is generated for design review and is not a real measurement. Do not cite these numbers.
 {% endif %}
-We test the consumer interfaces of ChatGPT, Gemini, Grok, Claude, Copilot, Perplexity, DeepSeek and Le Chat in the countries Russia targets. For each documented false claim we record what the answer did with it - repeated, contextualised, refuted or dodged - and which domains it cited. Results are reported per persona and never averaged.
+We test the consumer interfaces of {% for c in platformsReport.chatbots %}{{ c.name }}{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}{% endfor %} in the countries Russia targets. For each documented false claim we record what the answer did with it - repeated, contextualised, refuted or dodged - and which domains it cited. Results are reported per persona and never averaged.
 
 Currently published: {{ site.counters.claims }} documented claims, {{ site.counters.responses }} recorded answers, {{ site.counters.domains }} watchlisted domains, {{ site.counters.countermeasures_total }} logged actions. Updated {{ site.last_update | displayDate }}. All data CC BY 4.0.
 

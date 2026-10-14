@@ -337,6 +337,11 @@ footer{border-top:1px solid var(--line);margin-top:34px;padding:34px 0 60px;font
 .fcol a:hover{color:var(--ink)}
 .fbrand .logo{margin-bottom:12px}
 .fbrand p{margin:0;font-size:13.2px;color:var(--dimmer);line-height:1.6;max-width:34ch}
+.fsoc{display:flex;gap:8px;margin-top:14px}
+.fsoc a{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;
+  border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--dim)}
+.fsoc a svg{width:15px;height:15px;fill:currentColor;display:block}
+.fsoc a:hover{border-color:var(--accent);color:var(--accent)}
 .fbot{border-top:1px solid var(--line2);padding-top:18px;display:flex;flex-wrap:wrap;gap:16px;
   align-items:center;justify-content:space-between}
 .fbot .legal{display:flex;gap:16px;flex-wrap:wrap}

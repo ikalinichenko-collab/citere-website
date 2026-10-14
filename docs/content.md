@@ -14,7 +14,7 @@
 
 **3. Утверждение → доказательство рядом.** Ни одна фраза с оценкой не стоит без цифры, даты или ссылки в том же абзаце. «Contamination is real» ничего не значит; «23 of 698 responses cited Kremlin-linked domains» — значит.
 
-**4. Конкретное вместо общего.** Не «AI chatbots», а «ChatGPT, Gemini, Grok, Claude, Copilot, Perplexity, DeepSeek, Le Chat». Не «we work with partners», а названия. Не «regularly», а «every month».
+**4. Конкретное вместо общего.** Не «AI chatbots», а «ChatGPT, Gemini, Grok, Claude, Google AI Overviews, Perplexity». Не «we work with partners», а названия. Не «regularly», а «every month».
 
 **5. Глагол вперёд.** Что мы *делаем*, а не кем мы *являемся*. «We test», «we trace», «we publish» — не «Citere is a platform that…».
 
@@ -81,7 +81,7 @@ Browse the registry · Read the latest report · Download the data · See the es
 > Do AI chatbots repeat Russian disinformation about Ukraine?
 
 **Ответ (подзаголовок, 2 предложения):**
-> Sometimes — and we measure exactly when. We test ChatGPT, Gemini, Grok, Claude, Copilot, Perplexity, DeepSeek and Le Chat with the questions people actually ask, record every time they repeat a known false claim, report it, and check whether it changes.
+> Sometimes — and we measure exactly when. We test ChatGPT, Gemini, Grok, Claude, Google AI Overviews and Perplexity with the questions people actually ask, record every time they repeat a known false claim, report it, and check whether it changes.
 
 **Три числа (живые):**
 `{{claims}}` false claims documented · `{{responses}}` chatbot answers analysed · `{{escalations}}` reports sent to platforms
@@ -126,7 +126,7 @@ Browse the registry · Read the latest report · Download the data · See the es
 **Escalations:** `{{sent}}` reports sent · `{{answered}}` responses · `{{actioned}}` confirmed changes → See the escalation log
 
 **Before and after:**
-> `{{claim_title}}` — repeated by `{{x}}` of 8 chatbots on `{{d1}}`; by `{{y}}` of 8 on `{{d2}}`, after we reported it. → See the claim
+> `{{claim_title}}` — repeated by `{{x}}` of 6 chatbots on `{{d1}}`; by `{{y}}` of 6 on `{{d2}}`, after we reported it. → See the claim
 
 **Where our data is used** — список ссылок. *Не выводится, пока пуст.*
 
@@ -155,7 +155,7 @@ Browse the registry · Read the latest report · Download the data · See the es
 ### Meta
 
 - Title: `Do AI chatbots repeat Russian disinformation about Ukraine? — Citere`
-- Description: `Citere tests ChatGPT, Gemini, Grok, Claude, Copilot, Perplexity, DeepSeek and Le Chat for Russian disinformation about Ukraine, reports what it finds to the platforms, and measures whether it changes. Open data.`
+- Description: `Citere tests ChatGPT, Gemini, Grok, Claude, Google AI Overviews and Perplexity for Russian disinformation about Ukraine, reports what it finds to the platforms, and measures whether it changes. Open data.`
 
 ---
 
@@ -221,7 +221,7 @@ Browse the registry · Read the latest report · Download the data · See the es
 | Domain complaint | Registrar of `{{domain}}` | 09 Oct 2026 | Submitted |
 | Shared with | Centre for Countering Disinformation (RNBO) | 24 Sep 2026 | Receipt confirmed |
 | Published by | VoxCheck | 01 Oct 2026 | Published → link |
-| Re-measured | 8 chatbots | 24 Oct 2026 | Completed |
+| Re-measured | 6 chatbots | 24 Oct 2026 | Completed |
 
 > We publish what we did, to whom, and when. We do not publish correspondence or the names of individuals at platforms.
 
@@ -238,7 +238,7 @@ Browse the registry · Read the latest report · Download the data · See the es
 ## Часть G. Остальные страницы — первые абзацы
 
 **Reports `/monitor/`**
-> Each month we publish how eight public AI chatbots handled documented false claims about Ukraine: repeat-rate and source-contamination rate per chatbot, per country and per question type, with confidence intervals and model versions. Every report comes with its dataset and a DOI.
+> Each month we publish how six public AI chatbots handled documented false claims about Ukraine: repeat-rate and source-contamination rate per chatbot, per country and per question type, with confidence intervals and model versions. Every report comes with its dataset and a DOI.
 
 **Chatbots `/platforms/`**
 > One page per chatbot: how it handles Russian disinformation about Ukraine today, how that has changed month by month, which specific claims it repeated, and every report we sent to its maker with the response.

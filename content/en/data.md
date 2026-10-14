@@ -16,4 +16,4 @@ Aggregated data is published under CC BY 4.0 — reuse it freely with attributio
 
 ## Machine access
 
-Each claim page is available as <span class="mono">.json</span> and <span class="mono">.md</span> at the same URL. The registry has an RSS and a JSON Feed. A <span class="mono">llms.txt</span> and <span class="mono">llms-full.txt</span> are published at the site root.
+Each claim page is available as <span class="mono">.json</span> and <span class="mono">.csv</span> at the same URL. The registry has an RSS and a JSON Feed. A <span class="mono">llms.txt</span> and <span class="mono">llms-full.txt</span> are published at the site root.

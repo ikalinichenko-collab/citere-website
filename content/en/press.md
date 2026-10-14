@@ -16,7 +16,7 @@ lead: >
 
 **One line:** Citere is a Ukrainian research company that tests public AI chatbots for Russian disinformation about Ukraine, reports what it finds to the platforms, and measures whether it changes.
 
-**Paragraph:** Citere monitors eight consumer AI assistants across four markets and languages, documenting when they repeat known false claims about Ukraine and which sources they cite. Findings are published as an open registry, reported to platform trust-and-safety teams and shared with Ukrainian institutions and European fact-checkers, and re-measured four weeks later.
+**Paragraph:** Citere tests six consumer AI surfaces — ChatGPT, Gemini, Grok, Claude, Google AI Overviews and Perplexity — across more than a dozen of Ukraine's partner-country markets and their languages. It documents when they repeat known false claims about Ukraine and which sources they cite. Findings are published as an open registry, reported to platform trust-and-safety teams, shared with Ukrainian institutions and European fact-checkers, and re-measured four weeks later.
 
 ## Assets
 
