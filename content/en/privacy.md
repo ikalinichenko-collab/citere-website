@@ -32,4 +32,4 @@ The site is served through a content delivery network, which processes request m
 
 ## Your rights
 
-Because we hold no personal data beyond email correspondence, most access and erasure requests are trivially satisfied. Write to **privacy@citere.ai** and we will confirm what, if anything, we hold.
+Because we hold no personal data beyond email correspondence, most access and erasure requests are trivially satisfied. Write to **hq@citere.ai** and we will confirm what, if anything, we hold.

@@ -41,4 +41,4 @@ These terms are governed by the law of Ukraine.
 
 ## 9. Contact
 
-Questions about these terms: **legal@citere.ai**
+Questions about these terms: **hq@citere.ai**

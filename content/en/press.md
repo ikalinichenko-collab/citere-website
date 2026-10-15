@@ -2,7 +2,7 @@
 h1: Press &amp; Media
 lead: >
   Everything on this site is free to quote and reuse under CC BY 4.0. If you need context, a check
-  on a figure, or an interview, write to **press@citere.ai** — we usually reply within a working day.
+  on a figure, or an interview, write to **hq@citere.ai** — we usually reply within a working day.
 ---
 
 ## Using our data
@@ -30,4 +30,4 @@ Listed here once published. We link to coverage whether or not it is favourable 
 
 ## Contact
 
-**press@citere.ai** · for urgent enquiries around a publication deadline, say so in the subject line.
+**hq@citere.ai** · for urgent enquiries around a publication deadline, say so in the subject line.

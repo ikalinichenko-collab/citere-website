@@ -49,26 +49,16 @@
         "email": {
           "type": "object",
           "required": [
-            "research",
-            "platforms",
-            "press",
-            "corrections"
+            "hq",
+            "integration"
           ],
           "additionalProperties": false,
           "properties": {
-            "research": {
+            "hq": {
               "type": "string",
               "format": "email"
             },
-            "platforms": {
-              "type": "string",
-              "format": "email"
-            },
-            "press": {
-              "type": "string",
-              "format": "email"
-            },
-            "corrections": {
+            "integration": {
               "type": "string",
               "format": "email"
             }

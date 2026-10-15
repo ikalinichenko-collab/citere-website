@@ -47,14 +47,14 @@ An evidence-based picture of what leading AI models say about a topic, and a pat
 | | |
 |---|---|
 | Brand | Citere |
-| Legal entity | SITERA LLC (ТОВ «СІТЕРА») |
+| Legal entity | Citere LLC ТОВ СІТЕРА |
 | Country of registration | Ukraine |
 | Headquarters | Kharkiv, Ukraine |
 | Founded | 2026 |
 | Team size | 10+ |
 | Legal regime | Diia.City resident since May 2026 |
 | Website | citere.ai |
-| Contact | vitaly@citere.ai |
+| Contact | hq@citere.ai |
 
 ## Independence and funding
 
@@ -66,9 +66,7 @@ If we get something wrong, we fix the page, date the change, and list it in that
 
 ## Contact {#contact}
 
-- **research@citere.ai** — researchers, data requests, collaboration
-- **platforms@citere.ai** — trust & safety teams responding to a report
-- **press@citere.ai** — media enquiries
-- **corrections@citere.ai** — report an error on this site
+- **hq@citere.ai** — all enquiries: research, data requests, platform reports, media and corrections
+- **citere.integration@gmail.com** — alternate contact
 
 A <span class="mono">security.txt</span> is published at the site root for vulnerability reports.
