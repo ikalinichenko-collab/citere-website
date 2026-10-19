@@ -42,9 +42,9 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 {%- if published.facets.clusters | length or published.facets.splices | length %}
 {{ rc.filters(published.facets, lang, "") }}
 {%- endif %}
-<h2 style="margin:26px 0 12px">All {{ publishedReports | length }} published reports, worst first</h2>
+<h2 style="margin:26px 0 12px">All {{ publishedReports | length }} published reports, newest first</h2>
 {{ rc.cards(publishedReports, lang) }}
-<p class="note">Worst first by critical incidents. A count is a count: a rate needs one persona, one market and one run, and those live on each report's own page.</p>
+<p class="note">Newest published first. A count is a count: a rate needs one persona, one market and one run, and those live on each report's own page.</p>
 {%- else %}
 <div class="howread" style="margin-top:26px"><div class="hr"><b>Registry</b>No claim reports have been published yet. Reports appear here once the monitoring pipeline freezes and publishes them.</div></div>
 {%- endif %}

@@ -21,10 +21,14 @@ module.exports = {
         updated: newest ? displayDate(newest) : "—"
       };
     },
-    // The index now lists the published Claim Reports the app has frozen for the
-    // site. Empty-safe: no feed → publishedReports is [] and the page shows its
-    // empty state.
-    publishedReports: () => published.index,
+    // The index lists the published Claim Reports the app has frozen for the
+    // site. Rendered newest-published first — a fresh copy, sorted by publish
+    // date descending, so the shared index order is left untouched. Empty-safe:
+    // no feed → publishedReports is [] and the page shows its empty state.
+    publishedReports: () =>
+      [...published.index].sort((a, b) =>
+        String(b.publishedAt || "").localeCompare(String(a.publishedAt || ""))
+      ),
     // Count tiles only — nothing here is a rate, so nothing needs a persona. The
     // lead tiles are the findings a reader cares about, not the catalogue size:
     // how many answers repeated a lie, how many times we acted, how severe it got.
