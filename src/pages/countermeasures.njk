@@ -51,5 +51,5 @@ permalink: "{{ '/countermeasures/' | loc(lang) }}"
 {% include "partials/countermeasures-table.njk" %}
 
 <div class="exports" style="margin:18px 0 40px">
-  {%- if datasets.has['countermeasures-csv'] %}<a href="{{ '/countermeasures.csv' | url }}">{{ 'action.downloadLog' | t }}</a><span>&middot;</span>{% endif %}
-  <a href="{{ '/methodology/' | url }}">What we do not publish</a></div>
+  {%- if datasets.has['countermeasures-csv'] %}<a href="{{ '/countermeasures.csv' | url }}">{{ 'action.downloadLog' | t }}</a>{% endif %}
+</div>

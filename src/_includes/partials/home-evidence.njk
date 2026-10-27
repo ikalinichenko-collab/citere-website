@@ -17,10 +17,12 @@
 <section>
   <div class="shead"><h2>{{ 'section.markets' | t }}</h2>
     {%- if navigation.has.countries %}<a href="{{ '/countries/' | url }}">{{ 'action.allCountries' | t }} &rarr;</a>{% endif %}</div>
-  <p class="lead">A market is a country plus the language people ask in, so we ask in that language.
-    Of the {{ marketCounts.total }} on the list, the {{ marketCounts.measured }} with a completed run are
-    shown here; the rest are queued and appear on the <a href="{{ '/countries/' | url }}">countries page</a>.
-    Austria and Germany are separate markets that share a language.</p>
+  <p class="lead">We test AI assistants in {{ marketCounts.total }} countries, each in the language people
+    there actually use. That shows whether the same false claim gets a different answer in a different
+    language. The {{ marketCounts.measured }} countries with a completed run are shown here; the rest are
+    queued and appear on the <a href="{{ '/countries/' | url }}">countries page</a>. Differences between
+    countries are often small &mdash; open a country page for the detail. Austria and Germany share a
+    language but count separately.</p>
   <div class="grid4">
   {%- for c in monitoredMarkets %}{%- if not c.scheduled and c.url %}
     <a class="cc {{ c.iso }}" href="{{ c.url | url }}"><div><span class="flag">{{ countryFlag(c.iso, 'lg') }}</span>
@@ -28,7 +30,7 @@
         {{ c.answers }} answers &middot; {{ c.language | languageName }}</div></div>
       {%- if c.rate is not none %}
       <div class="ccrate"><b class="num">{{ c.rate | rate }}</b>
-        <span>of answers repeated a claim · all four ways of asking</span></div>
+        <span>of answers stated it as fact · all four ways of asking</span></div>
       {%- endif %}
       <div class="bots-mini">{% for b in c.bots %}{{ botMark(logos, b, "sm") }}{% endfor %}</div></a>
   {%- endif %}{%- endfor %}
@@ -58,8 +60,9 @@
   {%- endif %}
   <p class="lead">The same claims read three ways: the share by country, then each assistant and each
     kind of lie. Every figure is the share of answers that stated a false claim as fact, pooled across
-    all four ways of asking &mdash; one headline number, not the per-question rate the data pages report.</p>
-  <div class="grid3">
+    all four ways of asking &mdash; one headline number, not the per-question rate the data pages report.
+    These are shares from our own tests, not a measure of an assistant's overall accuracy.</p>
+  <div class="grid3 rank-home">
   {%- for card in rankingCards %}
     {%- set lbRows = card.rows %}{% set lbTitle = card.title %}{% set lbSub = card.sub %}
     {%- set lbNote = card.note %}
