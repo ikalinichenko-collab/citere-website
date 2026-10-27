@@ -60,9 +60,15 @@ An evidence-based picture of what leading AI models say about a topic, and a pat
 
 We are self-funded and have no contractual relationship with any of the AI platforms we test. We share findings with Ukrainian state institutions and with European fact-checking and research organisations free of charge, and we do so independently of any commercial discussion.
 
-## Corrections policy {#corrections}
+## Corrections and updates {#corrections}
 
-If we get something wrong, we fix the page, date the change, and list it in that page's changelog. Corrections are never made silently. If a correction changes a verdict, we say so at the top of the page and notify anyone we sent the original finding to.
+We treat this site as an evidence record, so its history has to be visible. Two kinds of change are logged here, and neither is ever made silently.
+
+**Corrections — when we get something wrong.** We fix the page, date the change, and list it in that page's changelog. If the fix changes a verdict, we say so at the top of the page and tell everyone we had sent the original finding to.
+
+**Updates — when new measurement arrives.** Four weeks after a disclosure we re-run the same questions and publish the before and after. A page can change because the model changed, not because we erred, so these are marked as re-measurements, never as corrections.
+
+Every change of either kind appears in the changelog on the page it affects, and in the site feeds (RSS and JSON).
 
 ## Contact {#contact}
 

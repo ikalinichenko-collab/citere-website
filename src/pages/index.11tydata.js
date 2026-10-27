@@ -1,3 +1,16 @@
+const { SPLICE_SHORT } = require("../_lib/labels.cjs");
+
+// Turn a splice board label into letter-free reader words for the homepage.
+// A single splice arrives as "A · one fact swapped out" (drop the code); a
+// composite like "B/C" has no short, so expand each letter via SPLICE_SHORT.
+function spliceWords(row) {
+  const s = String(row.short || row.label || "");
+  const text = s.includes(" · ")
+    ? s.split(" · ")[1]
+    : s.split("/").map((k) => SPLICE_SHORT[k.trim()] || k.trim()).join(" + ");
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 // The homepage blocks fill in as their data lands: the strip, metric cards,
 // findings table, rankings, case study and markets grid each render only when
 // the data behind them exists (CLAUDE.md 6, 11.6).
@@ -77,7 +90,7 @@ module.exports = {
       // the FALSE red. A raw count (CM §5.8), so it carries no persona; the claim
       // count the old card showed moves into this one's subline.
       if (r.repeated) {
-        cards.push({ value: r.repeated, label: "answers repeated a false claim",
+        cards.push({ value: r.repeated, label: "answers stated a false claim as fact",
           sub: `out of ${r.responses} checked · across ${r.claims} ${r.claims === 1 ? "claim" : "claims"}`,
           alert: true, colour: "var(--false)" });
       }
@@ -115,8 +128,8 @@ module.exports = {
       if ((lb.market_repeat || []).length) {
         cards.push({
           rows: lb.market_repeat, flag: true, idx: true, bar: true,
-          title: "Countries where the claims get through",
-          sub: "pooled across all four ways of asking",
+          title: "Where the claims spread most",
+          sub: "pooled across all question types",
           note: "Share of answers that stated a false claim as fact. The same claims everywhere, asked in each country\u2019s own language.",
           more: data.navigation.has.countries ? "/countries/" : "/benchmarks/",
           moreLabel: "All countries"
@@ -126,7 +139,7 @@ module.exports = {
         cards.push({
           rows: lb.chatbot_repeat.map((row) => ({ ...row, chatbot: row.key })), idx: true, bar: true,
           title: "Assistants that repeat it most often",
-          sub: "pooled across all four ways of asking",
+          sub: "pooled across all question types",
           note: "Each assistant's share across every question type and market. Same claims, asked in each market’s own language.",
           more: data.navigation.has.chatbots ? "/platforms/" : "/benchmarks/",
           moreLabel: "All assistants"
@@ -134,11 +147,11 @@ module.exports = {
       }
       if ((lb.splice_repeat || []).length) {
         cards.push({
-          rows: lb.splice_repeat.map((row) => ({ ...row, label: row.short || row.label })),
+          rows: lb.splice_repeat.map((row) => ({ ...row, label: spliceWords(row) })),
           idx: false, bar: true,
-          title: "The kind of lie that works best",
-          sub: "pooled across all four ways of asking",
-          note: "How the false claim is attached to a true fact. An invention gets refuted; a real event with one detail changed gets repeated.",
+          title: "Which kind of false claim spreads most",
+          sub: "pooled across all question types",
+          note: "How the false claim is attached to a true fact — from a pure invention to a real event with a single detail changed.",
           more: data.navigation.has.registry ? "/registry/" : "/methodology/",
           moreLabel: "Claims by type"
         });
@@ -217,10 +230,10 @@ module.exports = {
       return { total: rows.length, measured, queued: rows.length - measured };
     },
     trustCards: (data) => [
-      { key: "trust-method", href: "/methodology/", label: "Methodology", on: data.navigation.has.methodology },
-      { key: "trust-data", href: "/data/", label: "Data", on: data.navigation.has.data },
-      { key: "trust-actions", href: "/countermeasures/", label: "Countermeasures", on: data.navigation.has.countermeasures },
-      { key: "trust-corrections", href: "/about/#corrections", label: "Corrections", on: data.navigation.has.about }
+      { key: "trust-method", href: "/methodology/", label: "See the method", on: data.navigation.has.methodology },
+      { key: "trust-data", href: "/data/", label: "Browse the data", on: data.navigation.has.dataDownloads },
+      { key: "trust-actions", href: "/countermeasures/", label: "See the log", on: data.navigation.has.countermeasures },
+      { key: "trust-corrections", href: "/about/#corrections", label: "How corrections work", on: data.navigation.has.about }
     ].map((c) => (c.on ? c : { ...c, href: null }))
   }
 };

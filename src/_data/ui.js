@@ -62,9 +62,9 @@ const en = {
   "claim.showing": "Showing", "claim.of": "of", "claim.recordedAnswers": "recorded answers",
   "claim.everyAnswerJson": "Every answer as JSON",
 
-  "section.latestFindings": "What we found", "section.rankings": "Who repeats it, and what gets through",
+  "section.latestFindings": "What we found", "section.rankings": "How AI assistants respond to false claims",
   "section.markets": "Where we test", "section.usedBy": "Our data is used by",
-  "section.howItWorks": "From a question to a fix", "section.whyTrust": "How you can check us",
+  "section.howItWorks": "From the question to the published evidence", "section.whyTrust": "How you can check us",
   "section.leaderboards": "Leaderboards", "section.signature": "Signature measurements",
   "section.keyFindings": "Key findings", "section.resultsByChatbot": "Results by chatbot",
   "section.limitations": "Limitations", "section.byQuestionType": "By question type",
@@ -141,9 +141,9 @@ const uk = {
   "claim.showing": "Показано", "claim.of": "з", "claim.recordedAnswers": "зафіксованих відповідей",
   "claim.everyAnswerJson": "Усі відповіді у JSON",
 
-  "section.latestFindings": "Що ми знайшли", "section.rankings": "Хто повторює і що проходить",
+  "section.latestFindings": "Що ми знайшли", "section.rankings": "Як ШІ-асистенти реагують на неправдиві твердження",
   "section.markets": "Де ми тестуємо", "section.usedBy": "Наші дані використовують",
-  "section.howItWorks": "Від запитання до виправлення", "section.whyTrust": "Як нас перевірити",
+  "section.howItWorks": "Від запитання до опублікованих доказів", "section.whyTrust": "Як нас перевірити",
   "section.leaderboards": "Рейтинги", "section.signature": "Ключові виміри",
   "section.keyFindings": "Ключові висновки", "section.resultsByChatbot": "Результати за чат-ботами",
   "section.limitations": "Обмеження", "section.byQuestionType": "За типом питання",

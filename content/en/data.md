@@ -1,9 +1,11 @@
 ---
 h1: Data and downloads
 lead: >
-  Everything on this site is available as data, by entity: claims, runs, metric cells, the sources
-  registry, and the countermeasures log. Each is published as CSV and JSON under CC BY 4.0, and each
-  section below shows a real record from the table rather than describing it.
+  Every figure on this site comes from the files below. Download any of them and reuse them freely
+  under CC BY 4.0, with credit. They are grouped into five tables — the claims, the test runs, the
+  measurements behind the charts, the websites assistants cited, and the actions we took. Each section
+  shows a real record rather than describing it. If you only want the headline results, start with
+  **Claims**.
 ---
 
 ## How to cite {#cite}
@@ -12,7 +14,7 @@ Citere ({{ year }}). *AI Chatbot Disinformation Monitor — claim registry, {{ v
 
 ## Licence
 
-Aggregated data is published under CC BY 4.0 — reuse it freely with attribution. The published unit is the metric cell, not the individual answer: raw response text is available to researchers on request, and we ask for a short description of the work.
+Everything here is CC BY 4.0 — reuse it freely, just credit Citere. The smallest thing we publish is an aggregated count (a metric cell), never an individual chatbot answer. Researchers who need the raw response text can write to us with a short description of the work.
 
 ## Machine access
 

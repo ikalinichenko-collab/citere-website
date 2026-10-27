@@ -1,47 +1,46 @@
 ---
-h1: We detect, attribute and remediate Russia's {{ budget }} propaganda.
+h1: Do AI chatbots spread Russian disinformation about Ukraine?
 lead: >
-  Citere protects enterprises and governments from Russian narrative attacks inside every major LLM by
-  detecting when a model repeats a Kremlin narrative, attributing it to the network that seeded it, and
-  remediating it.
+  Russia's 2026 budget sets aside **{{ budget }}** for state media. We test whether those claims surface in
+  ChatGPT, Gemini, Grok and other AI assistants, then publish the evidence.
 ---
 
-## Detect {#step-detect}
+## We ask the questions {#step-detect}
 
-We ask each chatbot the questions people ask about Ukraine, from neutral to hostile, and record what it does with a documented false claim.
+We ask each assistant the questions people ask about Ukraine. We record what it does with a documented false claim.
 
-## Trace {#step-trace}
+## We check the sources {#step-trace}
 
-We extract every source cited and match it against a versioned watchlist of domains.
+We take every source the assistant cited and match it against our versioned watchlist of domains.
 
-## Publish {#step-publish}
+## We publish the finding {#step-publish}
 
-Each claim gets a permanent page: verdict, evidence, what is genuinely true underneath.
+Each claim gets a permanent page: our verdict, the evidence, and what is genuinely true underneath.
 
-## Report {#step-report}
+## We report it {#step-report}
 
-Findings go to platform trust-and-safety; domains to registrars, hosts and CERT partners.
+We send findings to the platforms, and listed domains to registrars, hosts and CERT partners.
 
-## Confirm {#step-confirm}
+## We confirm with partners {#step-confirm}
 
 We share everything with Ukrainian institutions and fact-checkers, and link their findings.
 
-## Re-measure {#step-remeasure}
+## We test again {#step-remeasure}
 
 Four weeks later we run the identical questions and publish the before and after.
 
-## We show our method {#trust-method}
+## How we test {#trust-method}
 
 Every verdict and number links to how it was produced.
 
-## We publish the data {#trust-data}
+## Download the data {#trust-data}
 
-CSV and JSON under CC BY 4.0, with a DOI per release.
+CSV and JSON under CC BY 4.0, free to download and reuse.
 
-## We log our actions {#trust-actions}
+## Actions taken {#trust-actions}
 
 Every report sent and every answer received, dated.
 
-## We correct in the open {#trust-corrections}
+## Corrections and updates {#trust-corrections}
 
 Errors are fixed on the page and listed in the changelog.

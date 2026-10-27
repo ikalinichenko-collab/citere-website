@@ -14,7 +14,7 @@ const built = (template) => fs.existsSync(path.join(ROOT, "src", template));
 const ENTRIES = [
   {
     key: "claims-csv", entity: "claims", name: "Claims (CSV)", format: "CSV", header: "claim_id,slug,cluster_id,label,verdict,published_at,splice,bots_tested,answers,countries,repeated_fake,critical,sources_identified,countermeasures_taken,url",
-    description: "One row per published Claim Report: the falsehood, the verdict, how the lie is spliced onto the truth, and the KPI strip.",
+    description: "One row per published claim: the falsehood, the verdict, how the lie is built on a true fact, and the headline counts.",
     url: "/claims.csv", template: "machine/claims-csv.njk"
   },
   {
@@ -86,15 +86,15 @@ const ENTRIES = [
 
 const ENTITIES = [
   { key: "claims", name: "Claims",
-    blurb: "Every claim's public card: the falsehood, the real facts an assistant may state without repeating it, the short debunk with its sources, how the lie is built, and where it spread." },
-  { key: "runs", name: "Runs",
-    blurb: "Metadata for every data-collection run: cluster, country, language, date, the frozen versions and the shape of the prompt grid. No prompt text." },
-  { key: "cells", name: "Metric cells",
-    blurb: "The aggregated unit behind every figure on the site: one assistant, one claim, one question type, one market, one run, with counts and confidence bounds. Individual answers are not published, only this aggregate." },
-  { key: "registry", name: "Sources registry",
-    blurb: "Domains, their citations, and the source-to-answer lines where a domain both published a falsehood and was cited by an assistant answering about it." },
-  { key: "countermeasures", name: "Countermeasures",
-    blurb: "The public slice of the countermeasures log: date, type, target, market and status. Submission content and proof of submission are internal only." }
+    blurb: "One row per false claim we tested: the claim itself, our verdict, the real fact it twists, our short debunk with sources, and where it spread." },
+  { key: "runs", name: "Test runs",
+    blurb: "One row per round of testing: which claims it covered, the country and language, the date, and the exact model and tool versions we froze for it. No prompt text." },
+  { key: "cells", name: "Measurements",
+    blurb: "The building block behind every chart on the site — one assistant, one claim, one way of asking, one country, one run, with the counts and a margin of error. We publish these aggregates, never the individual answers." },
+  { key: "registry", name: "Sources",
+    blurb: "The websites assistants cited while answering, how often, and the cases where a site both published a falsehood and was then cited by an assistant answering about it." },
+  { key: "countermeasures", name: "Actions we took",
+    blurb: "What we did about each finding: the date, the type, who it went to, the market and the status. The submission itself and its proof stay internal." }
 ];
 
 const live = ENTRIES.filter((e) => built(e.template)).map((e) => ({ ...e, shared: true }));
