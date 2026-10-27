@@ -31,10 +31,10 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 <div class="howread">
   <div class="hr"><b>Verdict</b>FALSE — fabricated. MISLEADING — a real fact stretched into a false
     conclusion. UNSUPPORTED — presented as established, no evidence either way.</div>
-  <div class="hr"><b>Splice</b>How the lie is attached to the truth. A — one attribute swapped.
-    B — a true premise, an illegitimate conclusion. C — true once, presented as current or systemic.
+  <div class="hr"><b>Splice</b>How the lie is attached to the truth. A — one fact swapped out.
+    B — a true fact used for a false conclusion. C — true once, presented as current.
     D — invented outright, placed in a real story.</div>
-  <div class="hr"><b>Critical</b>An answer that repeated the claim <i>and</i> cited a listed source.
+  <div class="hr"><b>Critical</b>An answer that stated the claim as fact <i>and</i> cited a listed source.
     Counts, not rates: a rate needs one persona, one market and one run.</div>
 </div>
 
@@ -44,14 +44,13 @@ permalink: "{{ '/registry/' | loc(lang) }}"
 {%- endif %}
 <h2 style="margin:26px 0 12px">All {{ publishedReports | length }} published reports, newest first</h2>
 {{ rc.cards(publishedReports, lang) }}
-<p class="note">Newest published first. A count is a count: a rate needs one persona, one market and one run, and those live on each report's own page.</p>
+<p class="note">Newest published first. The figures here are counts — a rate needs one persona, one market and one run, so those live on each report's own page.</p>
 {%- else %}
 <div class="howread" style="margin-top:26px"><div class="hr"><b>Registry</b>No claim reports have been published yet. Reports appear here once the monitoring pipeline freezes and publishes them.</div></div>
 {%- endif %}
 
 <div class="exports">
-  {%- if publishedReports | length %}<a href="{{ '/registry/reports.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span>
-  <a href="{{ '/registry/reports.csv' | url }}">{{ 'action.downloadCsv' | t }}</a><span>&middot;</span>{% endif %}
-  {%- if navigation.has.rss %}<a href="{{ '/feed.xml' | url }}">RSS</a><span>&middot;</span>{% endif %}
-  <a href="{{ '/data/#cite' | url }}">{{ 'action.citeRegistry' | t }}</a>
+  {%- if publishedReports | length %}<a href="{{ '/registry/reports.json' | url }}">{{ 'claim.getJson' | t }}</a><span>&middot;</span><a href="{{ '/registry/reports.csv' | url }}">{{ 'action.downloadCsv' | t }}</a>{% endif %}
+  {%- if publishedReports | length and navigation.has.rss %}<span>&middot;</span>{% endif %}
+  {%- if navigation.has.rss %}<a href="{{ '/feed.xml' | url }}">RSS</a>{% endif %}
 </div>

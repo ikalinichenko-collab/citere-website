@@ -47,7 +47,6 @@ const MAIN = [
   entry("registry", "Registry", "/registry/", P.registry),
   entry("benchmarks", "Benchmarks", "/benchmarks/", P.benchmarks),
   entry("reports", "Reports", "/monitor/", P.reports, false, hasMonitorReports),
-  entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
   entry("sources", "Sources", "/sources/", P.sources),
   entry("countermeasures", "Countermeasures", "/countermeasures/", P.countermeasures),
   entry("methodology", "Methodology", "/methodology/", P.methodology),
