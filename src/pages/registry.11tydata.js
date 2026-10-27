@@ -36,7 +36,7 @@ module.exports = {
       const idx = published.index;
       const sum = (field) => idx.reduce((n, r) => n + ((r.strip && r.strip[field]) || 0), 0);
       return [
-        { value: sum("repeatedFake"), label: "answers repeated a false claim", colour: "var(--mislead)" },
+        { value: sum("repeatedFake"), label: "answers stated a false claim as fact", colour: "var(--mislead)" },
         { value: sum("countermeasuresTaken"), label: "countermeasures taken", colour: "var(--ok)" },
         { value: sum("critical"), label: "critical incidents", colour: "var(--false)" },
         { value: sum("sourcesIdentified"), label: "sources identified", colour: "var(--accent)" },

@@ -47,14 +47,13 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
 <p class="note" style="margin-top:10px">Both figures are the P2 topical-news persona in the market where the
   assistant does worst, with the market named. Contamination is the share of answers that cited a watchlisted
   domain; the two measure different failures and do not move together. Coverage is still thin: a cell below
-  n={{ metrics.lowN }} carries its sample size and is treated as directional, not asserted. We test the
+  n={{ metrics.lowN }} shows its sample size and is treated as a hint, not a firm result. We test the
   public consumer interface, not the API. The countermeasures count is the actions we have taken on the
   claims this assistant repeated; a draft is never counted until a person has sent it.</p>
 
-<div class="callout" style="margin-top:26px"><b>The rest of this page is a shell.</b> A benchmark issue is one
-  cluster over one month, and the full issue is not specified yet. What is settled below is the coverage of
-  each issue, the grain-of-truth split, and the A&times;B matrix. Everything per-market lives on the pages
-  that own it &mdash; each market and each claim.</div>
+<div class="callout" style="margin-top:26px"><b>This page is the cross-cutting view.</b> What it gathers is the
+  coverage of each benchmark issue, the grain-of-truth split, and the A&times;B matrix. The detail for each
+  market and each claim lives on its own page, so nothing here is merged across markets.</div>
 
 <h2 id="issues" style="margin:30px 0 6px">Issues</h2>
 <p class="note" style="margin:0 0 14px">One issue per cluster per month. An issue holds every run of that
@@ -75,10 +74,9 @@ permalink: "{{ '/benchmarks/' | loc(lang) }}"
 
 <h2 id="grain" style="margin:30px 0 6px">The grain-of-truth split</h2>
 <p class="note" style="margin:0 0 14px">Claims built on a real event against claims invented outright, by
-  question type &mdash; counts of answers that stated the fake as fact, over answers given. Pooled across all
-  published claims and markets (counts, not a within-run rate), because one claim is one kind of lie and the
-  split needs both. The split runs on how the lie is spliced onto the truth, not on whether a claim has a
-  grain-of-truth field: after the field rules were tightened that field is filled even for pure fabrications.</p>
+  question type &mdash; the count of answers that stated the fake as fact, over the answers given. Pooled
+  across all published claims and markets (counts, not a within-run rate), because one claim is only one kind
+  of lie and the split needs both kinds side by side.</p>
 <div class="panel"><table>
   <caption class="visually-hidden">Answers that stated the fake as fact on claims built on a real event against pure fabrications, by question type</caption>
   <thead><tr><th scope="col">{{ 'col.persona' | t }}</th><th scope="col" class="num">Real event underneath</th>

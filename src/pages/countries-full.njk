@@ -19,7 +19,7 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
     claim-report cells, arranged for someone who needs every figure rather than the reading of it. Nothing here is
     averaged across question types, markets or runs.</p></div>
 
-<h2 id="coverage" style="margin:26px 0 6px">1. What has been tested where</h2>
+<h2 id="coverage" style="margin:26px 0 6px">What has been tested where</h2>
 <p class="note" style="margin:0 0 14px">Published claims recorded in each market. Figures come only from
   claims that have a published report.</p>
 <div class="panel"><table>
@@ -107,6 +107,9 @@ permalink: "{{ '/countries/full/' | loc(lang) }}"
   {%- endif %}</div>
 
 <h2 id="grain" style="margin:30px 0 6px">Grain-of-truth split by market</h2>
+<p class="note" style="margin:0 0 14px">Repeat rate at the {{ countriesReport.persona }} news question: how
+  often each market's answers stated a false claim as fact, split by whether the claim was built on a real
+  event or invented outright. "Significant" means the two confidence intervals do not overlap.</p>
 <div class="panel"><table>
   <caption class="visually-hidden">Repeat rate on claims built on a real event against pure fabrications, per market</caption>
   <thead><tr><th scope="col">Market</th><th scope="col" class="num">Real event underneath</th>
