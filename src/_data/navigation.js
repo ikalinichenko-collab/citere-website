@@ -59,7 +59,6 @@ const FOOTER = [
     links: [
       entry("claimRegistry", "Claim registry", "/registry/", P.registry),
       entry("benchmarks", "Benchmarks", "/benchmarks/", P.benchmarks),
-      entry("chatbots", "Chatbots", "/platforms/", P.chatbots),
       entry("countries", "Countries", "/countries/", P.countries),
       entry("sources", "Sources", "/sources/", P.sources),
       entry("countermeasuresLog", "Countermeasures", "/countermeasures/", P.countermeasures)
@@ -70,7 +69,6 @@ const FOOTER = [
     links: [
       entry("methodology", "Methodology", "/methodology/", P.methodology),
       entry("dataDownloads", "Data &amp; downloads", "/data/", P.data),
-      entry("howToCite", "How to cite", "/data/#cite", P.data),
       entry("rss", "RSS", "/feed.xml", P.feed, true),
       entry("jsonFeed", "JSON Feed", "/feed.json", P.feedJson, true),
       entry("llms", "llms.txt", "/llms.txt", P.llms, true)
@@ -82,7 +80,6 @@ const FOOTER = [
       entry("about", "About", "/about/", P.about),
       entry("mission", "Mission", "/mission/", P.mission),
       entry("manifesto", "Manifesto", "/manifesto/", P.manifesto),
-      entry("press", "Press &amp; Media", "/press/", P.press),
       entry("corrections", "Corrections", "/about/#corrections", P.about),
       entry("contact", "Contact", "/about/#contact", P.about)
     ]
@@ -92,7 +89,6 @@ const FOOTER = [
 const LEGAL = [
   entry("terms", "Terms", "/terms/", P.terms),
   entry("privacy", "Privacy", "/privacy/", P.privacy),
-  entry("press", "Press &amp; Media", "/press/", P.press),
   entry("security", "security.txt", "/.well-known/security.txt", P.security, true)
 ];
 
@@ -102,7 +98,13 @@ module.exports = {
   main: live(MAIN),
   footer: FOOTER.map((col) => ({ ...col, links: live(col.links) })).filter((col) => col.links.length),
   legal: live(LEGAL),
-  has: Object.fromEntries(
-    [...MAIN, ...FOOTER.flatMap((c) => c.links), ...LEGAL].map((i) => [i.key, avail(i)])
-  )
+  has: {
+    ...Object.fromEntries(
+      [...MAIN, ...FOOTER.flatMap((c) => c.links), ...LEGAL].map((i) => [i.key, avail(i)])
+    ),
+    // "Chatbots" was removed from the nav and footer, but the platform profiles
+    // are still built and still reached from the homepage bot strip and the
+    // heatmap — so has.chatbots tracks the template, not its nav membership.
+    chatbots: built(P.chatbots)
+  }
 };

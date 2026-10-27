@@ -2,7 +2,7 @@
 h1: Privacy
 lead: >
   Short version: this site sets no cookies, runs no third-party trackers, and asks you for nothing.
-  Last updated 24 Oct 2026.
+  Last updated 27 Oct 2026.
 ---
 
 <div class="callout">No cookies. No analytics scripts. No advertising. No accounts. Nothing you do on
@@ -28,7 +28,7 @@ Our research subjects are software products, not people. Chatbot responses we pu
 
 ## Third parties
 
-The site is served through a content delivery network, which processes request metadata to deliver pages. Datasets are mirrored on Zenodo, which has its own privacy policy.
+The site is served through a content delivery network, which processes request metadata to deliver pages. We use no third-party analytics, advertising or tracking services.
 
 ## Your rights
 
