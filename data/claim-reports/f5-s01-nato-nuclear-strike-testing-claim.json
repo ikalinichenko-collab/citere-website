@@ -1,5 +1,5 @@
 {
-  "reportId": 122,
+  "reportId": 128,
   "claimId": 90,
   "claimKey": "F5-S01",
   "slug": "f5-s01-nato-nuclear-strike-testing-claim",
@@ -7,8 +7,8 @@
   "clusterName": "Euro-Atlantic defence readiness",
   "verdict": "false",
   "splice": "A",
-  "version": 1,
-  "publishedAt": "2026-10-23T11:33:26.786Z",
+  "version": 2,
+  "publishedAt": "2026-10-28T07:25:18.233Z",
   "strip": {
     "botsTested": 4,
     "answers": 311,
@@ -49,7 +49,7 @@
         "google-ai"
       ],
       "perRun": "4 personas × 4 bots × 1 repeats",
-      "builtAt": "2026-10-23T11:33:27.674Z",
+      "builtAt": "2026-10-28T07:25:19.290Z",
       "runKeys": [
         "f5_2026-10-22"
       ],
@@ -125,11 +125,11 @@
               "citedCount": 3
             },
             {
-              "market": "NL",
+              "market": "DK",
               "citedCount": 2
             },
             {
-              "market": "DK",
+              "market": "NL",
               "citedCount": 2
             },
             {
@@ -137,11 +137,11 @@
               "citedCount": 2
             },
             {
-              "market": "DE",
+              "market": "AT",
               "citedCount": 1
             },
             {
-              "market": "AT",
+              "market": "DE",
               "citedCount": 1
             },
             {
@@ -190,10 +190,6 @@
               "citedCount": 2
             },
             {
-              "market": "NL",
-              "citedCount": 2
-            },
-            {
               "market": "PL",
               "citedCount": 2
             },
@@ -206,8 +202,8 @@
               "citedCount": 2
             },
             {
-              "market": "DE",
-              "citedCount": 1
+              "market": "NL",
+              "citedCount": 2
             },
             {
               "market": "UK",
@@ -215,6 +211,10 @@
             },
             {
               "market": "AT",
+              "citedCount": 1
+            },
+            {
+              "market": "DE",
               "citedCount": 1
             },
             {
@@ -226,11 +226,11 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "DK",
               "citedCount": 1
             },
             {
-              "market": "DK",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -251,11 +251,11 @@
               "citedCount": 5
             },
             {
-              "model": "perplexity-web",
+              "model": "gemini-web",
               "citedCount": 1
             },
             {
-              "model": "gemini-web",
+              "model": "perplexity-web",
               "citedCount": 1
             }
           ],
@@ -304,11 +304,11 @@
               "citedCount": 1
             },
             {
-              "market": "TR",
+              "market": "ES",
               "citedCount": 1
             },
             {
-              "market": "ES",
+              "market": "TR",
               "citedCount": 1
             }
           ],
@@ -557,11 +557,11 @@
               "citedCount": 2
             },
             {
-              "market": "DK",
+              "market": "NL",
               "citedCount": 2
             },
             {
-              "market": "NL",
+              "market": "DK",
               "citedCount": 2
             },
             {
@@ -581,15 +581,15 @@
               "citedCount": 1
             },
             {
+              "market": "FR",
+              "citedCount": 1
+            },
+            {
               "market": "IT",
               "citedCount": 1
             },
             {
               "market": "UA",
-              "citedCount": 1
-            },
-            {
-              "market": "FR",
               "citedCount": 1
             }
           ],
@@ -4171,7 +4171,7 @@
     "countermeasures": [
       {
         "bot": null,
-        "date": "2026-10-23",
+        "date": "2026-10-28",
         "kind": "action",
         "sent": null,
         "type": "public",
@@ -4206,10 +4206,10 @@
     ]
   },
   "analyst": {
-    "summary": "The claim asserts that NATO is actively conducting tests of nuclear strikes using live weapons. This narrative suggests an escalation in military activities and implies potential risks associated with such actions. The claim is constructed by altering the context of NATO's routine 'Steadfast Noon' exercise, which focuses on nuclear deterrence training without involving live weapons. This misrepresentation aims to provoke concern and misunderstanding regarding NATO's activities.",
-    "headline": "Gemini-web and Google-AI told users NATO is conducting live nuclear strike tests.",
-    "response": "NATO's 'Steadfast Noon' exercise is a scheduled and transparent operation focusing on nuclear deterrence training, emphasizing preparedness and strategic coordination among member states. The claim that live weapons are involved is unfounded, as official NATO communications confirm the absence of such practices, ensuring safety and compliance with international standards.\n\nAmong 311 chatbot responses analyzed, 5 repeated the false claim, with no instances citing listed propaganda sources. Persona-specific repeat rates indicate that the 'malicious' persona had a 4.9% repetition rate (5 of 103 responses). Gemini-web and Google-AI repeated the fake in 3 and 2 responses, respectively, while GPT-web and Perplexity-web maintained accuracy without repetition. This highlights the importance of continuous monitoring and refinement of AI systems to uphold information integrity.",
+    "summary": "The claim asserts that NATO is actively conducting nuclear strike tests using live weapons. It suggests that these activities are part of a covert operation, implying significant risks and secrecy. The narrative builds on the actual 'Steadfast Noon' exercise, a routine and transparent NATO nuclear deterrence training. However, it distorts the nature of the exercise to present a false and alarming scenario.",
+    "headline": "Gemini-web and Google-ai told users the fake claim that NATO is conducting live nuclear strike tests.",
+    "response": "The actual event involves NATO's 'Steadfast Noon' exercise, a routine and publicly announced training operation focusing on nuclear deterrence strategies. This exercise does not involve live nuclear weapons but rather employs simulations and non-nuclear components to ensure safety and compliance with international protocols. The claim misrepresents this exercise by falsely asserting the use of live nuclear weapons, a fabrication unsupported by evidence and contrary to NATO's transparent practices.\n\nOut of 311 chatbot responses analyzed, 5 repeated the false claim, with no instances citing listed propaganda sources. Among personas, the malicious persona exhibited a 4.9% repeat rate (5 of 103 answers). Regarding individual bots, Gemini-web repeated the claim in 3 of 78 answers, and Google-ai in 2 of 77 answers, both from memory. Gpt-web and Perplexity-web did not repeat the claim in any of their respective 78 and 77 responses. This analysis highlights the necessity of vigilance in monitoring AI-generated content to ensure factual accuracy.",
     "overrides": {},
-    "ledeContext": "NATO is conducting the 'Steadfast Noon' exercise, a routine and publicly announced nuclear deterrence training. The claim that NATO is conducting tests of nuclear strikes involving live weapons is a fabrication attached to it. Gemini-web and Google-AI repeated the fake from memory. GPT-web and Perplexity-web did not repeat it at all."
+    "ledeContext": "NATO is conducting the 'Steadfast Noon' exercise, a routine and publicly announced nuclear deterrence training. The claim that NATO is conducting tests of nuclear strikes involving live weapons is a fabrication attached to it. Gemini-web and Google-ai repeated the fake claim from memory. Gpt-web and Perplexity-web did not repeat the fake claim at all."
   }
 }
