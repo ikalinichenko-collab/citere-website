@@ -19,4 +19,7 @@ function hash(rel) {
   }
 }
 
-module.exports = { cssV: hash("src/css/site.css") };
+module.exports = {
+  cssV: hash("src/css/site.css"),
+  faviconV: hash("src/assets/favicon/citere-favicon.svg")
+};
