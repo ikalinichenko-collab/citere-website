@@ -22,7 +22,7 @@ permalink: "{{ '/' | loc(lang) }}"
     <p class="sub">{{ doc.data.lead | fill(figures) | mdInline | safe }}</p>
     {%- set rb = site.external_figures.russia_propaganda_budget %}
     {%- if rb %}
-    <p class="note">{{ rb.display }} covers {{ rb.what }} (<a href="{{ rb.url }}">{{ rb.source }}</a>). External figure, not a Citere measurement.</p>
+    <p class="note">{{ rb.display }} covers {{ rb.what }} ({% if rb.url %}<a href="{{ rb.url }}">{{ rb.source }}</a>{% else %}{{ rb.source }}{% endif %}). External figure, not a Citere measurement.</p>
     {%- endif %}
     <div class="cta">
       {%- if navigation.has.registry %}<a class="btn btn-p" href="{{ '/registry/' | url }}">{{ 'action.browseRegistry' | t }}</a>{% endif %}
